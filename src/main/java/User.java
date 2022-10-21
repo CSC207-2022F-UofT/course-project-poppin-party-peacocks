@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-
+//test
 public class User {
 
     private String currency;
