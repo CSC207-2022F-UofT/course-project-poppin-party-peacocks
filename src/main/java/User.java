@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 //test
 public class User {
 
@@ -7,14 +5,15 @@ public class User {
     private String name;
     private String password;
 
-    private listOfWishlist listwishlist;
-
+    private ListOfWishlists wishlists;
+    private static final String[] currencyBank = {"USD", "CAD", "YUAN"};
 
 
     public User(String name, String password){
         this.name = name;
         this.password = password;
         this.currency = "CAD";
+        wishlists = new ListOfWishlists();
     }
 
 
@@ -24,19 +23,15 @@ public class User {
 
     public void setName(String newName){
         this.name = newName;
-
     }
 
-    public boolean changeCurrency(String newcurr){
-        String[] currencyBank = {"USD", "CAD", "YUAN"};
+    public boolean changeCurrency(String newCurr){
         for (String currency: currencyBank){
-            if (currency.equals(newcurr)){
-                this.currency = newcurr;
+            if (currency.equals(newCurr)){
+                this.currency = newCurr;
                 return true;
             }
         }
         return false;
     }
-
-
 }

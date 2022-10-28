@@ -1,11 +1,9 @@
 import java.util.*;
 
-public class listOfWishlist {
+public class ListOfWishlists {
 
     ArrayList<Wishlist> listWishlist;
-    public listOfWishlist(){
+    public ListOfWishlists(){
         this.listWishlist = new ArrayList<Wishlist>();
-
-
     }
 }
