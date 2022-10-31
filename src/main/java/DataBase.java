@@ -1,10 +1,13 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.Scanner;
 
 public class DataBase {
+    public static String getUserFilePath() {
+        return "src/main/database/users.txt";
+    }
     public static void createFile(String fileName) {
         try {
             File file = new File(fileName);
@@ -17,25 +20,41 @@ public class DataBase {
     }
 
     public static boolean addUser(User user, String password) {
-        String userFilePath = "src/main/database/users.txt";
-        File file = new File(userFilePath);
+        File file = new File(DataBase.getUserFilePath());
 
         if (!file.isFile()) {
-           createFile(userFilePath);
+           createFile(DataBase.getUserFilePath());
         }
 
         try {
-            FileWriter myWriter = new FileWriter(userFilePath, true);
-            HashMap<String, String> hashMap = new HashMap<>();
-            hashMap.put("user", user.getName());
-            hashMap.put("password", password);
-            hashMap.put("userId", UUID.randomUUID().toString());
-            myWriter.write(hashMap.toString() + '\n');
+            FileWriter myWriter = new FileWriter(DataBase.getUserFilePath(), true);
+            String data = "user=" + user.getName() + ',' + "password=" + password;
+            myWriter.write(data + '\n');
             myWriter.close();
             return true;
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static User getUser(String name) {
+        try {
+            File myObj = new File(DataBase.getUserFilePath());
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                if (data.contains("user=" + name)) {
+                    String userName = data.split(",")[0].split("=")[1];
+                    String password = data.split(",")[1].split("=")[1];
+                    return new User(userName, password);
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        return null;
     }
 }
