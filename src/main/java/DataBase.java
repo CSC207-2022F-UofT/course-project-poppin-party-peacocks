@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class DataBase {
     public static void createFile(String fileName) {
@@ -28,6 +29,7 @@ public class DataBase {
             HashMap<String, String> hashMap = new HashMap<>();
             hashMap.put("user", user.getName());
             hashMap.put("password", password);
+            hashMap.put("userId", UUID.randomUUID().toString());
             myWriter.write(hashMap.toString() + '\n');
             myWriter.close();
             return true;
