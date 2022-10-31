@@ -34,4 +34,8 @@ public class User {
         }
         return false;
     }
+
+    public void writeUserToDatabase() {
+        DataBase.addUser(this, this.password);
+    }
 }

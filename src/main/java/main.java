@@ -17,5 +17,8 @@ public class main {
         christmasWishlist.displayList();
         christmasWishlist.filterWishlists(new String[] {"Tech"});
         christmasWishlist.displayList();
+
+        User user = new User("Herman1", "Password");
+        user.writeUserToDatabase();
     }
 }
