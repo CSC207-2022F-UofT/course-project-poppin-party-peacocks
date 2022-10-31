@@ -20,6 +20,22 @@ public class Wishlist {
         Comparator<Item> itemDateComparator = new ItemDateComparator();
         displayedList.sort(itemDateComparator);
     }
+
+    public void sortWishlistByName() {
+        //yes
+    }
+
+    public void sortWishlistByReviewStars() {
+        //yes
+    }
+
+    public void sortWishlistByReviewCount() {
+        //yes
+    }
+
+    public void sortWishlistByPrice() {
+        //yes
+    }
     public boolean addItem(Item item){
         itemList.add(item);
         displayedList.add(item);
