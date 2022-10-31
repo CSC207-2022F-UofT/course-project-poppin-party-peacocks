@@ -22,19 +22,23 @@ public class Wishlist {
     }
 
     public void sortWishlistByName() {
-        //yes
+        Comparator<Item> itemNameComparator = new ItemNameComparator();
+        displayedList.sort(itemNameComparator);
     }
 
     public void sortWishlistByReviewStars() {
-        //yes
+//        Comparator<Item> itemReviewStarComparator = new itemReviewStarComparator();
+//        displayedList.sort(itemReviewStarComparator);
     }
 
     public void sortWishlistByReviewCount() {
-        //yes
+//        Comparator<Item> itemReviewCountComparator = new itemReviewCountComparator();
+//        displayedList.sort(itemReviewCountComparator);
     }
 
     public void sortWishlistByPrice() {
-        //yes
+        Comparator<Item> itemPriceComparator = new ItemPriceComparator();
+        displayedList.sort(itemPriceComparator);
     }
     public boolean addItem(Item item){
         itemList.add(item);
