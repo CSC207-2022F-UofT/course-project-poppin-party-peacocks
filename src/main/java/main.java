@@ -1,5 +1,7 @@
+import java.io.IOException;
+
 public class main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         Item keyboard = new Item("Keyboard", 300.1, 250.0, "www.amazon.com/keyboard",
                 "Description from amazon (or you write your own)", new String[] {"computer accesssories", "Tech", "Mechanical"});
@@ -11,11 +13,15 @@ public class main {
         Wishlist christmasWishlist = new Wishlist("Christmas Wishlist");
 
 
-        System.out.println(christmasWishlist.addItem(keyboard));
-        System.out.println(christmasWishlist.addItem(monitor));
-        System.out.println(christmasWishlist.addItem(plushie));
-        christmasWishlist.displayList();
-        christmasWishlist.filterWishlists(new String[] {"Tech"});
-        christmasWishlist.displayList();
+//        System.out.println(christmasWishlist.addItem(keyboard));
+//        System.out.println(christmasWishlist.addItem(monitor));
+//        System.out.println(christmasWishlist.addItem(plushie));
+//        christmasWishlist.displayList();
+//        christmasWishlist.filterWishlists(new String[] {"Tech"});
+//        christmasWishlist.displayList();
+
+        SearchitemsApi apiSearcher = new SearchitemsApi();
+
+        System.out.println(apiSearcher.apiSearch("keyboard", "CA"));
     }
 }
