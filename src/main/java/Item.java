@@ -1,15 +1,21 @@
+import java.io.IOException;
 import java.util.*;
-public class Item {
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
+public class Item {
 
     private String itemName;
     private String url;
+    //a short description of the item from the webpage
     private String itemDescription;
     private String[] tags;
     private double itemPrice;
     private double priceChange;
     private double desiredPrice;
     private Date dateAdded;
+    private Date dateLastUpdated;
 
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags){
@@ -21,6 +27,7 @@ public class Item {
         this.url = url;
         this.itemDescription = itemDescription;
         this.tags = tags;
+        this.dateLastUpdated = new Date();
     }
 
     public String getItemName(){
@@ -58,6 +65,26 @@ public class Item {
         System.out.println("(" + ranking + "): " + itemName);
         System.out.println("Price: " + itemPrice);
         System.out.println("Date added: " + dateAdded);
+        System.out.println("Last Updated: " + dateLastUpdated);
+        System.out.println("Description:" + itemDescription);
         System.out.println("------------------------------------------");
+    }
+
+    public void updatePrice() throws IOException{
+        try {
+            Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
+            Element price = doc.select(".a-offscreen").first();
+            assert price != null;
+            double sellingPrice = Double.parseDouble(price.text().substring(1));
+            priceChange = itemPrice - sellingPrice;
+            itemPrice = sellingPrice;
+            dateLastUpdated = new Date();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isPriceBelowDesiredPrice(){
+        return itemPrice < desiredPrice;
     }
 }
