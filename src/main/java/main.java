@@ -21,7 +21,7 @@ public class main {
         christmasWishlist.displayList();
 
         User user = new User("Herman1", "Password");
-
-        System.out.println(Objects.requireNonNull(DataBase.getUser("Herman1")).getName());
+        // user.writeUserToDatabase();
+        System.out.println(DataBase.getUser("Herman1").getName());
     }
 }

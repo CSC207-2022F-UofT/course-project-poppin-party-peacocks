@@ -16,9 +16,19 @@ public class User {
         wishlists = new ListOfWishlists();
     }
 
+    public User(String name, String password, String currency){
+        this.name = name;
+        this.password = password;
+        this.currency = currency;
+        wishlists = new ListOfWishlists();
+    }
 
     public String getName(){
         return this.name;
+    }
+
+    public String getCurrency(){
+        return this.currency;
     }
 
     public void setName(String newName){
