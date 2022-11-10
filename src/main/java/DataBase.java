@@ -13,9 +13,13 @@ public class DataBase {
     public static String getUserFilePath() {
         return "src/main/database/users.txt";
     }
-    public static void createFile(String fileName) {
+
+    /** Creates a new file at the specified directory
+     * @param fileDirectory File directory to create a new file at
+     * */
+    public static void createFile(String fileDirectory) {
         try {
-            File file = new File(fileName);
+            File file = new File(fileDirectory);
 
             file.createNewFile();
         } catch (IOException e) {
@@ -24,9 +28,14 @@ public class DataBase {
         }
     }
 
+    /** Adds a new user to the database in JSON format
+     * @param user user to add to the database
+     * @param password password passed from user to store in the database
+     * */
     public static boolean addUser(User user, String password) {
         File file = new File(DataBase.getUserFilePath());
 
+        // If the file directory doesn't exist, create a new file
         if (!file.isFile()) {
            createFile(DataBase.getUserFilePath());
         }
@@ -46,10 +55,14 @@ public class DataBase {
         }
     }
 
+    /** Retrieves and returns a User object based on name
+     * @param name Unique name of the user
+     * */
     public static User getUser(String name) {
         try {
             File myObj = new File(DataBase.getUserFilePath());
             Scanner myReader = new Scanner(myObj);
+            // Find the first user with the correct name
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 JSONParser jsonParser = new JSONParser();
@@ -69,6 +82,7 @@ public class DataBase {
             System.out.println("An error occurred failed to parse user data.");
             e.printStackTrace();
         }
+        // Return a default user if user doesn't exist
         return new User("Default User", "Password");
     }
 }
