@@ -1,4 +1,6 @@
+import javax.lang.model.type.ErrorType;
 import java.util.*;
+import java.util.logging.ErrorManager;
 
 public class Wishlist {
 
@@ -22,7 +24,8 @@ public class Wishlist {
     }
 
     public void sortWishlistByName() {
-        //yes
+        Comparator<Item> itemNameComparator = new ItemNameComparator();
+        displayedList.sort(itemNameComparator);
     }
 
     public void sortWishlistByReviewStars() {
@@ -33,8 +36,20 @@ public class Wishlist {
         //yes
     }
 
-    public void sortWishlistByPrice() {
-        //yes
+    public void sortWishlistByPrice(String order) {
+        Comparator<Item> itemPriceComparator = new ItemPriceComparator();
+        String word = order.toLowerCase();
+
+        switch (word) {
+            case "ascending":
+                displayedList.sort(itemPriceComparator);
+                break;
+            case "descending":
+                displayedList.sort(Collections.reverseOrder(itemPriceComparator));
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
     public boolean addItem(Item item){
         itemList.add(item);

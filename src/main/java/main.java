@@ -10,12 +10,20 @@ public class main {
 
         Wishlist christmasWishlist = new Wishlist("Christmas Wishlist");
 
-
+        // add items keyboard, monitor, plushie as test and displaying them
         System.out.println(christmasWishlist.addItem(keyboard));
         System.out.println(christmasWishlist.addItem(monitor));
         System.out.println(christmasWishlist.addItem(plushie));
-        christmasWishlist.displayList();
+        //christmasWishlist.displayList();
+
+        //filtering wishlist by tag: "Tech"
         christmasWishlist.filterWishlists(new String[] {"Tech"});
         christmasWishlist.displayList();
+
+        //sorting wishlist price
+        //christmasWishlist.sortWishlistByPrice("ascending");
+        //christmasWishlist.sortWishlistByPrice("descending");
+        //christmasWishlist.sortWishlistByPrice("");
+        //christmasWishlist.displayList();
     }
 }
