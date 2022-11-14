@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class SearchitemsApi {
 
 
-    public String apiSearch(String keywords, String marketplace) throws IOException, InterruptedException {
+    private String apiSearch(String keywords, String marketplace) throws IOException, InterruptedException {
 
         String linkurl = keywordstext(keywords, marketplace);
         HttpRequest request = HttpRequest.newBuilder()
@@ -24,7 +24,7 @@ public class SearchitemsApi {
 
     }
 
-    public String cleanResponse(String response){
+    private String cleanResponse(String response){
 
 
         String modifiedResponse = response.replace("[{", "");
@@ -37,7 +37,10 @@ public class SearchitemsApi {
         return modifiedResponse;
     }
 
-    public ArrayList searchToList(String response){
+    public ArrayList searchToList(String keyword, String marketplace) throws IOException, InterruptedException {
+
+        String response = apiSearch(keyword, marketplace);
+        response = cleanResponse(response);
 
         ArrayList<Item> itemList = new ArrayList<Item>();
         String[] pairs = response.split(" , ");
@@ -45,6 +48,8 @@ public class SearchitemsApi {
         ArrayList<String> titleList = new ArrayList<String>();
         ArrayList<String> priceList = new ArrayList<String>();
         ArrayList<String> urlList = new ArrayList<String>();
+        ArrayList<String> reviewCountList = new ArrayList<String>();
+        ArrayList<String> reviewStarList = new ArrayList<String>();
         for (int i=0;i<pairs.length;i++) {
             String pair = pairs[i];
             String[] keyValue = pair.split(" :");
@@ -61,10 +66,18 @@ public class SearchitemsApi {
             if (keyValue[0].contains("detailPageURL")){
                 urlList.add(keyValue[1]);
             }
+
+            if (keyValue[0].contains("totalReviews")){
+                reviewCountList.add(keyValue[1]);
+            }
+
+            if (keyValue[0].contains("rating")){
+                reviewStarList.add(keyValue[1]);
+            }
         }
 
         for (int i=0; i<titleList.size();i++){
-            Item newItem = new Item(titleList.get(i), Double.parseDouble(priceList.get(i)), Double.parseDouble(priceList.get(i)), urlList.get(i), titleList.get(i), new String[] {});
+            Item newItem = new Item(titleList.get(i), Double.parseDouble(priceList.get(i)), Double.parseDouble(priceList.get(i)), urlList.get(i), titleList.get(i), new String[] {keyword}, Integer.parseInt(reviewCountList.get(i)), Double.parseDouble(reviewStarList.get(i)));
             itemList.add(newItem);
 
         }

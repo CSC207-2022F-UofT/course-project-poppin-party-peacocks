@@ -1,11 +1,14 @@
-import java.io.IOException;
-import java.util.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import java.io.IOException;
+import java.util.Date;
+
 public class Item {
 
+    private double reviewStars;
+    private int reviewCount;
     private String itemName;
     private String url;
     //a short description of the item from the webpage
@@ -18,7 +21,7 @@ public class Item {
     private Date dateLastUpdated;
 
 
-    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags){
+    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars){
         this.itemName = name;
         this.itemPrice = price;
         this.priceChange = price;
@@ -28,6 +31,9 @@ public class Item {
         this.itemDescription = itemDescription;
         this.tags = tags;
         this.dateLastUpdated = new Date();
+        this.reviewCount = reviewCount;
+        this.reviewStars = reviewStars;
+
     }
 
     public String getItemName(){
