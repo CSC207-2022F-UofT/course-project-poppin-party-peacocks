@@ -105,7 +105,7 @@ public class Wishlist {
     public boolean addItem(Item item){
         itemList.add(item);
         displayedList.add(item);
-        sortWishlistByDate();
+        sortWishlistByDate("ascending");
         return true;
     }
 
