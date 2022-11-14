@@ -27,9 +27,13 @@ public class main {
         christmasWishlist.filterWishlists(new String[] {"Tech"});
         christmasWishlist.displayList();
 
-//        SearchitemsApi apiSearcher = new SearchitemsApi();
+        SearchitemsApi apiSearcher = new SearchitemsApi();
+
+//        ArrayList itemList = apiSearcher.searchToList("mechanical keyboard");
 //
-//        ArrayList itemList = apiSearcher.searchToList("mechanical keyboard", "CA");
+//        System.out.println(itemList);
+
+
 
 
     }

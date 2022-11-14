@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class SearchitemsApi {
 
 
-    private String apiSearch(String keywords, String marketplace) throws IOException, InterruptedException {
+    public String apiSearch(String keywords, String marketplace) throws IOException, InterruptedException {
 
         String linkurl = keywordstext(keywords, marketplace);
         HttpRequest request = HttpRequest.newBuilder()
@@ -37,7 +37,12 @@ public class SearchitemsApi {
         return modifiedResponse;
     }
 
-    public ArrayList searchToList(String keyword, String marketplace) throws IOException, InterruptedException {
+    public ArrayList searchToList(String keyword) throws IOException, InterruptedException {
+
+
+
+        String marketplace = "CA";
+
 
         String response = apiSearch(keyword, marketplace);
         response = cleanResponse(response);
@@ -77,7 +82,7 @@ public class SearchitemsApi {
         }
 
         for (int i=0; i<titleList.size();i++){
-            Item newItem = new Item(titleList.get(i), Double.parseDouble(priceList.get(i)), Double.parseDouble(priceList.get(i)), urlList.get(i), titleList.get(i), new String[] {keyword}, Integer.parseInt(reviewCountList.get(i)), Double.parseDouble(reviewStarList.get(i)));
+            Item newItem = new Item(titleList.get(i), Double.parseDouble(priceList.get(i)), Double.parseDouble(priceList.get(i)), urlList.get(i), titleList.get(i), new String[] {keyword}, Integer.parseInt(reviewCountList.get(i).replace(" ", "")), Double.parseDouble(reviewStarList.get(i).replace(" ", "")));
             itemList.add(newItem);
 
         }

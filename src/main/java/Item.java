@@ -66,6 +66,14 @@ public class Item {
     public void setDesiredPrice(double newDesiredPrice) {
         this.desiredPrice = newDesiredPrice;
     }
+
+    public void setReviewStarsDescription(double newReviewStar) {
+        this.reviewStars = newReviewStar;
+    }
+    public void setReviewCount(int newReviewCount) {
+        this.reviewCount = newReviewCount;
+    }
+
     public void displayItemInConsole(int ranking){
         System.out.println("------------------------------------------");
         System.out.println("(" + ranking + "): " + itemName);
