@@ -23,24 +23,33 @@ public class Wishlist {
         displayedList.sort(itemDateComparator);
     }
 
-    public void sortWishlistByName() {
+    public void sortWishlistByName(String order) {
         Comparator<Item> itemNameComparator = new ItemNameComparator();
-        displayedList.sort(itemNameComparator);
+
+        switch (order.toLowerCase()) {
+            case "ascending":
+                displayedList.sort(itemNameComparator);
+                break;
+            case "descending":
+                displayedList.sort(Collections.reverseOrder(itemNameComparator));
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     public void sortWishlistByReviewStars() {
-        //yes
+        //Comparator<Item> itemReviewStarComparator = new ItemReviewStarComparator();
     }
 
     public void sortWishlistByReviewCount() {
-        //yes
+        //Comparator<Item> itemReviewCount = new ItemReviewCountComparator();
     }
 
     public void sortWishlistByPrice(String order) {
         Comparator<Item> itemPriceComparator = new ItemPriceComparator();
-        String word = order.toLowerCase();
 
-        switch (word) {
+        switch (order.toLowerCase()) {
             case "ascending":
                 displayedList.sort(itemPriceComparator);
                 break;

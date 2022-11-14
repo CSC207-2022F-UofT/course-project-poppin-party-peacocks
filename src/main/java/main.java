@@ -14,16 +14,22 @@ public class main {
         System.out.println(christmasWishlist.addItem(keyboard));
         System.out.println(christmasWishlist.addItem(monitor));
         System.out.println(christmasWishlist.addItem(plushie));
-        //christmasWishlist.displayList();
-
-        //filtering wishlist by tag: "Tech"
-        christmasWishlist.filterWishlists(new String[] {"Tech"});
         christmasWishlist.displayList();
 
-        //sorting wishlist price
+        //filtering wishlist by tag: "Tech"
+        //christmasWishlist.filterWishlists(new String[] {"Tech"});
+        //christmasWishlist.displayList();
+
+        //sorting wishlist by price
         //christmasWishlist.sortWishlistByPrice("ascending");
         //christmasWishlist.sortWishlistByPrice("descending");
         //christmasWishlist.sortWishlistByPrice("");
+        //christmasWishlist.displayList();
+
+        //sorting wishlist by name
+        //christmasWishlist.sortWishlistByName("ascending");
+        //christmasWishlist.sortWishlistByName("descending");
+        //christmasWishlist.sortWishlistByName("");
         //christmasWishlist.displayList();
     }
 }
