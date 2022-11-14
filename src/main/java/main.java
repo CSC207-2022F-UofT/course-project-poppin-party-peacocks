@@ -11,7 +11,8 @@ public class main {
                 "Description from amazon (or you write your own)", new String[] {"toys"});
 
         Wishlist christmasWishlist = new Wishlist("Christmas Wishlist");
-
+        ListOfWishlists wishlists = new ListOfWishlists();
+        wishlists.addWishlist(christmasWishlist);
 
         System.out.println(christmasWishlist.addItem(keyboard));
         System.out.println(christmasWishlist.addItem(monitor));
@@ -23,5 +24,6 @@ public class main {
         User user = new User("Herman1", "Password");
         // user.writeUserToDatabase();
         System.out.println(DataBase.getUser("Herman1").getName());
+        System.out.println(DataBase.saveListOfWishlists(wishlists, user));
     }
 }

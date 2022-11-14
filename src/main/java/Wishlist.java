@@ -42,7 +42,7 @@ public class Wishlist {
     public void sortWishlistByPrice() {
         //yes
     }
-    public boolean addItem(Item item){
+    public boolean addItem(Item item) {
         itemList.add(item);
         displayedList.add(item);
         sortWishlistByDate();

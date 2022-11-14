@@ -1,3 +1,4 @@
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -16,7 +17,7 @@ public class DataBase {
     }
 
     private static String getWishlistPath(String userName) {
-        return "src/main/database/" + userName;
+        return "src/main/database/" + userName + ".txt";
     }
 
     /** Creates a new file at the specified directory
@@ -109,21 +110,39 @@ public class DataBase {
     }
 
     /** Creates a wishlist in JSON format
-     * @param item item to convert to json format
+     * @param wishlist wishlist to convert to json format
      * */
     public static JSONObject createWishlistJSON(Wishlist wishlist) {
         JSONObject wishlistObject = new JSONObject();
-        wishlistObject.put("name", wishlist.ge)
+        wishlistObject.put("name", wishlist.getName());
+        wishlistObject.put("dateAdded", wishlist.getDateAdded());
+
+        JSONArray itemObjects = new JSONArray();
+        for (Item item : wishlist.getItemList()) {
+            itemObjects.add(DataBase.createItemJSON(item));
+        }
+
+        JSONArray displayedListObject = new JSONArray();
+        for (Item item : wishlist.getDisplayedList()) {
+            displayedListObject.add(DataBase.createItemJSON(item));
+        }
+
+        JSONArray selectedTagsObject = new JSONArray();
+        for (String tag : wishlist.getSelectedTags()) {
+            selectedTagsObject.add(tag);
+        }
+        wishlistObject.put("itemList", itemObjects);
+        wishlistObject.put("displayedList", displayedListObject);
+        wishlistObject.put("selectedTags", selectedTagsObject);
 
         return wishlistObject;
-
     }
 
     /** Adds a list of wishlists data to a user's database
      * @param listOfWishlists list of wishlists data to add to database
      * @param user user of the data it belongs to
      * */
-    public static boolean addListOfWishlists(ListOfWishlists listOfWishlists, User user) {
+    public static boolean saveListOfWishlists(ListOfWishlists listOfWishlists, User user) {
         String wishlistPath = DataBase.getWishlistPath(user.getName());
         File file = new File(wishlistPath);
 
@@ -135,9 +154,14 @@ public class DataBase {
         try {
             FileWriter fileWriter = new FileWriter(wishlistPath);
             JSONObject listOfWishlistsObject = new JSONObject();
-            listOfWishlistsObject.put()
+            JSONArray wishlistsObjects = new JSONArray();
 
-            fileWriter.write(userObject.toJSONString() + '\n');
+            for (Wishlist wishlist : listOfWishlists.listWishlist) {
+                wishlistsObjects.add(DataBase.createWishlistJSON(wishlist));
+            }
+            listOfWishlistsObject.put("wishlists", wishlistsObjects);
+
+            fileWriter.write(listOfWishlistsObject.toJSONString());
             fileWriter.close();
             return true;
         } catch (IOException e) {
