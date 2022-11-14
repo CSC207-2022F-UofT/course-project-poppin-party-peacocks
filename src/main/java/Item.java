@@ -35,6 +35,9 @@ public class Item {
     public double getItemPrice(){
         return this.itemPrice;
     }
+    public double getPriceChange(){
+        return this.priceChange;
+    }
     public double getItemDesiredPrice(){
         return this.desiredPrice;
     }
@@ -49,6 +52,9 @@ public class Item {
     }
     public void setItemDescription(String description) {
         this.itemDescription = description;
+    }
+    public void setPriceChange(Double priceChange) {
+        this.priceChange = priceChange;
     }
     public void setDesiredPrice(double newDesiredPrice) {
         this.desiredPrice = newDesiredPrice;

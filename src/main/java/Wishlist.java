@@ -3,7 +3,6 @@ import java.util.*;
 public class Wishlist {
 
     private String name;
-
     private ArrayList<Item> itemList;
     private ArrayList<Item> displayedList;
     private Date dateAdded;
@@ -16,6 +15,13 @@ public class Wishlist {
         this.dateAdded = new Date();
         this.selectedTags = new ArrayList<String>();
     }
+
+    public String getName() { return  this.name; };
+    public ArrayList<Item> getItemList() {return this.itemList; };
+    public ArrayList<Item> getDisplayedList() {return this.displayedList; };
+    public Date getDateAdded() {return this.dateAdded; };
+    public ArrayList<String> getSelectedTags() {return this.selectedTags; };
+
     public void sortWishlistByDate(){
         Comparator<Item> itemDateComparator = new ItemDateComparator();
         displayedList.sort(itemDateComparator);

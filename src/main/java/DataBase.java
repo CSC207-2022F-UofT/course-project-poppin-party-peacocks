@@ -10,8 +10,13 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class DataBase {
+
     public static String getUserFilePath() {
         return "src/main/database/users.txt";
+    }
+
+    private static String getWishlistPath(String userName) {
+        return "src/main/database/" + userName;
     }
 
     /** Creates a new file at the specified directory
@@ -85,4 +90,60 @@ public class DataBase {
         // Return a default user if user doesn't exist
         return new User("Default User", "Password");
     }
+
+    /** Creates an item in JSON format
+     * @param item item to convert to json format
+     * */
+    public static JSONObject createItemJSON(Item item) {
+        JSONObject itemObject = new JSONObject();
+        itemObject.put("itemName", item.getItemName());
+        itemObject.put("url", item.getItemURL());
+        itemObject.put("itemDescription", item.getItemDescription());
+        itemObject.put("tags", item.getTags());
+        itemObject.put("itemPrice", item.getItemPrice());
+        itemObject.put("priceChange", item.getPriceChange());
+        itemObject.put("desiredPrice", item.getItemDesiredPrice());
+        itemObject.put("dateAdded", item.getItemDateAdded());
+        return itemObject;
+
+    }
+
+    /** Creates a wishlist in JSON format
+     * @param item item to convert to json format
+     * */
+    public static JSONObject createWishlistJSON(Wishlist wishlist) {
+        JSONObject wishlistObject = new JSONObject();
+        wishlistObject.put("name", wishlist.ge)
+
+        return wishlistObject;
+
+    }
+
+    /** Adds a list of wishlists data to a user's database
+     * @param listOfWishlists list of wishlists data to add to database
+     * @param user user of the data it belongs to
+     * */
+    public static boolean addListOfWishlists(ListOfWishlists listOfWishlists, User user) {
+        String wishlistPath = DataBase.getWishlistPath(user.getName());
+        File file = new File(wishlistPath);
+
+        // If the file directory doesn't exist, create a new file
+        if (!file.isFile()) {
+            createFile(DataBase.getUserFilePath());
+        }
+
+        try {
+            FileWriter fileWriter = new FileWriter(wishlistPath);
+            JSONObject listOfWishlistsObject = new JSONObject();
+            listOfWishlistsObject.put()
+
+            fileWriter.write(userObject.toJSONString() + '\n');
+            fileWriter.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
