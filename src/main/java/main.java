@@ -17,13 +17,11 @@ public class main {
         System.out.println(christmasWishlist.addItem(keyboard));
         System.out.println(christmasWishlist.addItem(monitor));
         System.out.println(christmasWishlist.addItem(plushie));
-        christmasWishlist.displayList();
-        christmasWishlist.filterWishlists(new String[] {"Tech"});
-        christmasWishlist.displayList();
 
         User user = new User("Herman1", "Password");
         // user.writeUserToDatabase();
-        System.out.println(DataBase.getUser("Herman1").getName());
-        System.out.println(DataBase.saveListOfWishlists(wishlists, user));
+        // System.out.println(DataBase.getUser("Herman1").getName());
+        DataBase.saveListOfWishlists(wishlists, user);
+        System.out.println(DataBase.getListOfWishlists(user.getName()).listWishlist.get(0).getName());
     }
 }

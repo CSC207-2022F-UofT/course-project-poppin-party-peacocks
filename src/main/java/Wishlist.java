@@ -16,6 +16,14 @@ public class Wishlist {
         this.selectedTags = new ArrayList<String>();
     }
 
+    public Wishlist(String name, ArrayList<Item> itemList, ArrayList<Item> displayedList, Date dateAdded, ArrayList<String> selectedTags){
+        this.name = name;
+        this.itemList = itemList;
+        this.displayedList = displayedList;
+        this.dateAdded = dateAdded;
+        this.selectedTags = selectedTags;
+    }
+
     public String getName() { return  this.name; };
     public ArrayList<Item> getItemList() {return this.itemList; };
     public ArrayList<Item> getDisplayedList() {return this.displayedList; };

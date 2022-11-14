@@ -22,6 +22,16 @@ public class Item {
         this.itemDescription = itemDescription;
         this.tags = tags;
     }
+    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded){
+        this.itemName = name;
+        this.itemPrice = price;
+        this.priceChange = priceChange;
+        this.desiredPrice = desiredPrice;
+        this.dateAdded = dateAdded;
+        this.url = url;
+        this.itemDescription = itemDescription;
+        this.tags = tags;
+    }
 
     public String getItemName(){
         return this.itemName;

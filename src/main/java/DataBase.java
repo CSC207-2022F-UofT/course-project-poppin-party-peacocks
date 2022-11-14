@@ -7,8 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class DataBase {
 
@@ -37,7 +36,10 @@ public class DataBase {
     /** Adds a new user to the database in JSON format
      * @param user user to add to the database
      * @param password password passed from user to store in the database
+     * @returns whether user was successfully saved
      * */
+    // JSONArray's library has errors, can ignore
+    @SuppressWarnings("unchecked")
     public static boolean addUser(User user, String password) {
         File file = new File(DataBase.getUserFilePath());
 
@@ -63,6 +65,7 @@ public class DataBase {
 
     /** Retrieves and returns a User object based on name
      * @param name Unique name of the user
+     * @returns user
      * */
     public static User getUser(String name) {
         try {
@@ -94,28 +97,36 @@ public class DataBase {
 
     /** Creates an item in JSON format
      * @param item item to convert to json format
+     * @returns item in json format
      * */
+    // JSONArray's library has errors, can ignore
+    @SuppressWarnings("unchecked")
     public static JSONObject createItemJSON(Item item) {
         JSONObject itemObject = new JSONObject();
         itemObject.put("itemName", item.getItemName());
         itemObject.put("url", item.getItemURL());
         itemObject.put("itemDescription", item.getItemDescription());
-        itemObject.put("tags", item.getTags());
+        JSONArray tagsObject = new JSONArray();
+        tagsObject.addAll(Arrays.asList(item.getTags()));
+        itemObject.put("tags", tagsObject);
         itemObject.put("itemPrice", item.getItemPrice());
         itemObject.put("priceChange", item.getPriceChange());
         itemObject.put("desiredPrice", item.getItemDesiredPrice());
-        itemObject.put("dateAdded", item.getItemDateAdded());
+        itemObject.put("dateAdded", item.getItemDateAdded().toString());
         return itemObject;
 
     }
 
     /** Creates a wishlist in JSON format
      * @param wishlist wishlist to convert to json format
+     * @returns wishlist in json format
      * */
+    // JSONArray's library has errors, can ignore
+    @SuppressWarnings("unchecked")
     public static JSONObject createWishlistJSON(Wishlist wishlist) {
         JSONObject wishlistObject = new JSONObject();
         wishlistObject.put("name", wishlist.getName());
-        wishlistObject.put("dateAdded", wishlist.getDateAdded());
+        wishlistObject.put("dateAdded", wishlist.getDateAdded().toString());
 
         JSONArray itemObjects = new JSONArray();
         for (Item item : wishlist.getItemList()) {
@@ -128,9 +139,7 @@ public class DataBase {
         }
 
         JSONArray selectedTagsObject = new JSONArray();
-        for (String tag : wishlist.getSelectedTags()) {
-            selectedTagsObject.add(tag);
-        }
+        selectedTagsObject.addAll(wishlist.getSelectedTags());
         wishlistObject.put("itemList", itemObjects);
         wishlistObject.put("displayedList", displayedListObject);
         wishlistObject.put("selectedTags", selectedTagsObject);
@@ -141,7 +150,10 @@ public class DataBase {
     /** Adds a list of wishlists data to a user's database
      * @param listOfWishlists list of wishlists data to add to database
      * @param user user of the data it belongs to
+     * @returns whether wishlist was successfully saved
      * */
+    // JSONArray's library has errors, can ignore
+    @SuppressWarnings("unchecked")
     public static boolean saveListOfWishlists(ListOfWishlists listOfWishlists, User user) {
         String wishlistPath = DataBase.getWishlistPath(user.getName());
         File file = new File(wishlistPath);
@@ -170,4 +182,99 @@ public class DataBase {
         }
     }
 
+
+    /** Retrieves and returns a list of wishlist object based on name
+     * @param userName Unique name of the user
+     * @returns list of wishlists
+     * */
+    public static ListOfWishlists getListOfWishlists(String userName) {
+        try {
+            File myObj = new File(DataBase.getWishlistPath(userName));
+            Scanner myReader = new Scanner(myObj);
+            // Find the first user with the correct name
+            if (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                JSONParser jsonParser = new JSONParser();
+                JSONObject parsedData = (JSONObject) jsonParser.parse(data);
+                JSONArray wishlistsObject = (JSONArray) parsedData.get("wishlists");
+                ArrayList<Wishlist> wishlists = new ArrayList<>();
+
+                for (Object wishlist : wishlistsObject) {
+                    wishlists.add(DataBase.parseWishlist(wishlist));
+                }
+                System.out.println(parsedData);
+                return new ListOfWishlists(wishlists);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred file not found.");
+            e.printStackTrace();
+        } catch (ParseException e) {
+            System.out.println("An error occurred failed to parse user data." + e);
+            e.printStackTrace();
+        } catch (java.text.ParseException e) {
+            throw new RuntimeException(e);
+        }
+        // Return a default wishlist if wishlist does not exist
+        return new ListOfWishlists();
+    }
+
+    /** Parses a wishlist in JSON format
+     * @param wishlistObject wishlist to convert to wish list object
+     * @return wishlist object
+     * */
+    public static Wishlist parseWishlist(Object wishlistObject) throws java.text.ParseException {
+        JSONObject wishlistData = (JSONObject) wishlistObject;
+
+        String name = (String) wishlistData.get("name");
+
+        Date dateAdded = new Date(wishlistData.get("dateAdded").toString());
+
+        ArrayList<Item> items = new ArrayList<>();
+        for (Object itemObject : (JSONArray) wishlistData.get("itemList")) {
+            items.add(DataBase.parseItem(itemObject));
+        }
+
+        ArrayList<Item> displayedItems = new ArrayList<>();
+        for (Object itemObject : (JSONArray) wishlistData.get("displayedList")) {
+            displayedItems.add(DataBase.parseItem(itemObject));
+        }
+
+        ArrayList<String> tags = new ArrayList<>();
+        for (Object tagObject : (JSONArray) wishlistData.get("selectedTags")) {
+            tags.add(tagObject.toString());
+        }
+
+        return new Wishlist(name, items, displayedItems, dateAdded, tags);
+    }
+
+    /** Parses an item in JSON format
+     * @param itemObject item to parse
+     * @returns item object
+     * */
+    public static Item parseItem(Object itemObject) throws java.text.ParseException {
+        JSONObject itemData = (JSONObject) itemObject;
+        String itemName = (String) itemData.get("itemName");
+        String url = (String) itemData.get("url");
+        String itemDescription = (String) itemData.get("itemDescription");
+
+        Double itemPrice = (Double) itemData.get("itemPrice");
+        Double priceChange = (Double) itemData.get("priceChange");
+        Double desiredPrice = (Double) itemData.get("desiredPrice");
+
+        Date dateAdded = new Date(itemData.get("dateAdded").toString());
+
+        ArrayList<String> tags = new ArrayList<>();
+        JSONArray tagsObject = (JSONArray) itemData.get("tags");
+        for (Object tag : tagsObject) {
+            tags.add(tag.toString());
+        }
+
+        String[] tagsArray = new String[tags.size()];
+        for (int i = 0; i < tags.size(); i++) {
+            tagsArray[i] = tags.get(i);
+        }
+
+        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded);
+    }
 }
