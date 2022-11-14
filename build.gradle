@@ -20,3 +20,5 @@ test {
         events "passed", "skipped", "failed"
     }
 }
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
