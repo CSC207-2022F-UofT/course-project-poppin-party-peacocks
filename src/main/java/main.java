@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class main {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -34,9 +33,7 @@ public class main {
 
         SearchitemsApi apiSearcher = new SearchitemsApi();
 
-        //
-
-        ArrayList<Item> itemList = apiSearcher.searchToList("mechanical keyboard", "CA");
+//        ArrayList<Item> itemList = apiSearcher.searchToList("mechanical keyboard", "CA");
 
 //        for (int i = 0; i < 3; i++){
 //            itemList.get(i).displayItemInConsole(i + 1);

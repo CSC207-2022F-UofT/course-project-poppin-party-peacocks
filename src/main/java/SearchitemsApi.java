@@ -7,7 +7,10 @@ import java.util.ArrayList;
 
 public class SearchitemsApi {
 
-
+    /** Calls Amazon Api search tool to return json string of search results of specified keyword and marketplace
+     * @param keywords string keyword to search in Amazon
+     * @param marketplace specified marketplace (ex: "CA" for Canada) to search in Amazon
+     * */
     private String apiSearch(String keywords, String marketplace) throws IOException, InterruptedException {
 
         String linkurl = keywordstext(keywords, marketplace);
@@ -24,6 +27,9 @@ public class SearchitemsApi {
 
     }
 
+    /** Cleans Api return string
+     * @param response string keyword to search in Amazon
+     * */
     private String cleanResponse(String response){
 
 
@@ -36,7 +42,10 @@ public class SearchitemsApi {
         modifiedResponse = modifiedResponse.replace("}", "");
         return modifiedResponse;
     }
-
+    /** Returns Arraylist of Item objects based on search results of the specified keyword on AMazon
+     * @param keyword string keyword to search in Amazon
+     * @param marketplace specified marketplace (ex: "CA" for Canada) to search in Amazon
+     * */
     public ArrayList searchToList(String keyword, String marketplace) throws IOException, InterruptedException {
 
         String response = apiSearch(keyword, marketplace);
@@ -84,11 +93,14 @@ public class SearchitemsApi {
         return itemList;
     }
 
+    /** Returns custom url link with respective keyword search and marketplace
+     * @param keywords string keyword to search in Amazon
+     * @param marketplace specified marketplace (ex: "CA" for Canada) to search in Amazon
+     * */
     private String keywordstext(String keywords, String marketplace) {
 
         return "https://amazon-price1.p.rapidapi.com/search?keywords="+ keywords.replace(" ", "%20") + "&marketplace=" + marketplace;
     }
 
-//test
 
 }
