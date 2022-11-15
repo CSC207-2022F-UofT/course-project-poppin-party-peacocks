@@ -65,7 +65,18 @@ public class Wishlist {
      * @return function is void, but function mutates the wishlist by sorting with review stars
      */
     public void sortWishlistByReviewStars(String order) {
-        //Comparator<Item> itemReviewStarComparator = new ItemReviewStarComparator();
+        Comparator<Item> itemReviewStarComparator = new ItemReviewStarComparator();
+
+        switch (order.toLowerCase()) {
+            case "descending":
+                displayedList.sort(itemReviewStarComparator);
+                break;
+            case "ascending":
+                displayedList.sort(Collections.reverseOrder(itemReviewStarComparator));
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -74,7 +85,18 @@ public class Wishlist {
      * @return function is void, but function mutates the wishlist by sorting with review count
      */
     public void sortWishlistByReviewCount(String order) {
-        //Comparator<Item> itemReviewCount = new ItemReviewCountComparator();
+        Comparator<Item> itemReviewCount = new ItemReviewCountComparator();
+
+        switch (order.toLowerCase()) {
+            case "descending":
+                displayedList.sort(itemReviewCount);
+                break;
+            case "ascending":
+                displayedList.sort(Collections.reverseOrder(itemReviewCount));
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -86,10 +108,10 @@ public class Wishlist {
         Comparator<Item> itemPriceComparator = new ItemPriceComparator();
 
         switch (order.toLowerCase()) {
-            case "ascending":
+            case "descending":
                 displayedList.sort(itemPriceComparator);
                 break;
-            case "descending":
+            case "ascending":
                 displayedList.sort(Collections.reverseOrder(itemPriceComparator));
                 break;
             default:
