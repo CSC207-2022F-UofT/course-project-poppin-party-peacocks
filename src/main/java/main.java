@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class main {
     public static void main(String[] args) {
 
@@ -18,7 +20,14 @@ public class main {
         christmasWishlist.displayList();
 
         //filtering wishlist by tag: "Tech"
-//        christmasWishlist.filterWishlists(new String[] {"Tech"});
-//        christmasWishlist.displayList();
+        christmasWishlist.filterWishlists(new String[] {"Tech"});
+        christmasWishlist.displayList();
+
+        christmasWishlist.filterWishlists(new String[] {"Tech"});
+        christmasWishlist.displayList();
+
+        User user = new User("Herman1", "Password");
+        // user.writeUserToDatabase();
+        System.out.println(DataBase.getUser("Herman1").getName());
     }
 }
