@@ -1,9 +1,6 @@
 import java.util.*;
 
 public class Item {
-
-    private double reviewStars;
-    private int reviewCount;
     private String itemName;
     private String url;
     //a short description of the item from the webpage
@@ -14,6 +11,8 @@ public class Item {
     private double desiredPrice;
     private Date dateAdded;
     private Date dateLastUpdated;
+    private double reviewStars;
+    private int reviewCount;
 
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars){

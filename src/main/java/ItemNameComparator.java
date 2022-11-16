@@ -2,15 +2,16 @@ import java.util.Comparator;
 
 public class ItemNameComparator implements Comparator<Item> {
     /**
-     * Takes 2 Items and compares their names using .getItemName() and sorts in ascending order (A-Z)
+     * Takes 2 Items and compares their names using .getItemName()
+     * Default saved comparison: A-Z (ascending)
      * @param item1 The first name of Item
      * @param item2 The second name of Item
+     * @return returns 1 if item1's name is after item2's name,
+     * returns -1 if item1's name is before item2's name,
+     * returns 0 otherwise
      */
     @Override
     public int compare(Item item1, Item item2) {
-//        if (item1.getItemName().equals(item2.getItemName())) {
-//            return 1;
-//        }
         return (item1.getItemName().compareTo(item2.getItemName()));
     }
 }

@@ -1,12 +1,14 @@
 import java.util.Comparator;
 
 public class ItemDateComparator implements Comparator<Item> {
-    //compares two items by their dates, where the more recent the date, the higher the order
     /**
-     * Takes 2 Items and compares their added dates using .getItemDateAdded() and sorts in ascending order (earliest
-     * date-latest date)
+     * Takes 2 Items and compares their added dates using .getItemDateAdded()
+     * Default saved comparison: Earliest date to Latest date (ascending)
      * @param item1 The first name of Item
      * @param item2 The second name of Item
+     * @return returns 1 if item1's added date is after item2's added date,
+     * returns -1 if item1's added date is before item2's added date,
+     * returns 0 otherwise
      */
     @Override
     public int compare(Item item1, Item item2){
