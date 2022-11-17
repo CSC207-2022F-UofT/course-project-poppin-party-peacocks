@@ -1,14 +1,12 @@
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
+import java.util.*;
 import java.io.IOException;
 import java.util.Date;
 
 public class Item {
-
-    private double reviewStars;
-    private int reviewCount;
     private String itemName;
     private String url;
     //a short description of the item from the webpage
@@ -19,6 +17,9 @@ public class Item {
     private double desiredPrice;
     private Date dateAdded;
     private Date dateLastUpdated;
+    private double reviewStars;
+    private int reviewCount;
+
 
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars){
@@ -76,10 +77,13 @@ public class Item {
         this.desiredPrice = newDesiredPrice;
     }
 
-    public void setReviewStars(double reviewStars) { this.reviewStars = reviewStars; }
-    public void setReviewCount(int reviewCount) {
-        this.reviewCount = reviewCount;
-    }
+    public void setReviewStars(double newReviewStars) { this.reviewStars = newReviewStars;}
+
+    public double getReviewStars() { return reviewStars;}
+
+    public void setReviewCount(int reviewCount) { this.reviewCount = reviewCount;}
+
+    public int getReviewCount() { return reviewCount;}
 
     public void displayItemInConsole(int ranking){
         System.out.println("------------------------------------------");
@@ -88,6 +92,8 @@ public class Item {
         System.out.println("Date added: " + dateAdded);
         System.out.println("Last Updated: " + dateLastUpdated);
         System.out.println("Description:" + itemDescription);
+        System.out.println("Review Stars:" + reviewStars);
+        System.out.println("Review Count:" + reviewCount);
         System.out.println("------------------------------------------");
     }
 
