@@ -35,12 +35,11 @@ public class DataBase {
 
     /** Adds a new user to the database in JSON format
      * @param user user to add to the database
-     * @param password password passed from user to store in the database
      * @returns whether user was successfully saved
      * */
     // JSONArray's library has errors, can ignore
     @SuppressWarnings("unchecked")
-    public static boolean addUser(User user, String password) {
+    public static boolean addUser(User user) {
         File file = new File(DataBase.getUserFilePath());
 
         // If the file directory doesn't exist, create a new file
@@ -52,7 +51,7 @@ public class DataBase {
             FileWriter fileWriter = new FileWriter(DataBase.getUserFilePath(), true);
             JSONObject userObject = new JSONObject();
             userObject.put("user", user.getName());
-            userObject.put("password", password);
+            userObject.put("password", user.getPassword());
             userObject.put("currency", user.getCurrency());
             fileWriter.write(userObject.toJSONString() + '\n');
             fileWriter.close();
