@@ -30,7 +30,7 @@ public class LoginAction {
         if (this.checkUsername()){
             User existingUser = DataBase.getUser(this.inputtedUsername);
             String existingPassword = existingUser.getPassword();
-            if (existingPassword == this.inputtedPassword){
+            if (existingPassword.equals(this.inputtedPassword)){
                 return true;
             }
         }
