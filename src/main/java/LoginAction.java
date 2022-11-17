@@ -1,19 +1,19 @@
 public class LoginAction {
-    private DataBase wishlistDatabase;
-//    private String username;
-//    private String password;
+    private String inputtedUsername;
+    private String inputtedPassword;
 
-    public LoginAction(DataBase wishlistDatabase){
-        this.wishlistDatabase = wishlistDatabase;
-//        this.username = username;
-//        this.password = password;
+    public LoginAction(String username, String password){
+        this.inputtedUsername = username;
+        this.inputtedPassword = password;
     }
 
-    // check if the user exists in wishlist DataBase
-
-    public boolean checkUsername(String username) {
-        User user = this.wishlistDatabase.getUser(username);
-        if (user.getName() == "Default User") {
+    /**
+     * Checks whether inputtedUsername exists in DataBase
+     * @return True if inputtedUsername exists in DataBase
+     */
+    public boolean checkUsername() {
+        User existingUser = DataBase.getUser(this.inputtedUsername);
+        if (existingUser.getName() == "Default User") {
             return false;
         }
         else {
@@ -21,11 +21,16 @@ public class LoginAction {
         }
     }
 
-    // check if password inputted
-    public boolean checkUserMatchesPassword(String username, String password){
-        if (checkUsername(username)){
-            User user = this.wishlistDatabase.getUser(username);
-            if (user.getPassword() == password){
+    /**
+     * Uses checkUsername function to check if inputtedUsername exists in DataBase and if it does, checks if
+     * inputtedPassword matches the password of existingUser
+     * @return True if inputtedUsername exists in DataBase and inputtedPassword matches existingPassword
+     */
+    public boolean checkUserMatchesPassword(){
+        if (this.checkUsername()){
+            User existingUser = DataBase.getUser(this.inputtedUsername);
+            String existingPassword = existingUser.getPassword();
+            if (existingPassword == this.inputtedPassword){
                 return true;
             }
         }
