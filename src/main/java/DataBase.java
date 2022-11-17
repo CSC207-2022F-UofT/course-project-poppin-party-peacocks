@@ -112,6 +112,8 @@ public class DataBase {
         itemObject.put("priceChange", item.getPriceChange());
         itemObject.put("desiredPrice", item.getItemDesiredPrice());
         itemObject.put("dateAdded", item.getItemDateAdded().toString());
+        itemObject.put("reviewStars", item.getReviewStars());
+        itemObject.put("reviewCount", item.getReviewCount());
         return itemObject;
 
     }
@@ -273,7 +275,9 @@ public class DataBase {
         for (int i = 0; i < tags.size(); i++) {
             tagsArray[i] = tags.get(i);
         }
+        Double reviewStars = (Double) itemData.get("reviewStars");
+        int reviewCount = (int) itemData.get("reviewCount");
 
-        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded);
+        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars);
     }
 }

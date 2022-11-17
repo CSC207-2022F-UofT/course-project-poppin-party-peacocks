@@ -35,7 +35,7 @@ public class Item {
         this.reviewStars = reviewStars;
 
     }
-    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded){
+    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars){
         this.itemName = name;
         this.itemPrice = price;
         this.priceChange = priceChange;
@@ -44,6 +44,9 @@ public class Item {
         this.url = url;
         this.itemDescription = itemDescription;
         this.tags = tags;
+        this.reviewCount = reviewCount;
+        this.reviewStars = reviewStars;
+
     }
 
     public String getItemName(){

@@ -16,8 +16,6 @@ public class Wishlist {
         this.selectedTags = new ArrayList<String>();
     }
 
-
-
     public Wishlist(String name, ArrayList<Item> itemList, ArrayList<Item> displayedList, Date dateAdded, ArrayList<String> selectedTags){
         this.name = name;
         this.itemList = itemList;
