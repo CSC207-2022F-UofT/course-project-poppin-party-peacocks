@@ -91,7 +91,7 @@ public class Item {
         System.out.println("------------------------------------------");
     }
 
-    /** Returns custom url link with respective keyword search and marketplace
+    /** Updates price of Item object through webscraping the product page on Amazon
      * */
     public void updatePrice() throws IOException{
         try {
