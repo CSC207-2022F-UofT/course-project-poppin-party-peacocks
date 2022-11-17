@@ -1,8 +1,7 @@
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import java.util.*;
+
 import java.io.IOException;
 import java.util.Date;
 
@@ -59,13 +58,7 @@ public class Item {
         return this.tags;
     }
 
-    public int getReviewCount(){
-        return this.reviewCount;
-    }
 
-    public double getReviewStars(){
-        return this.reviewStars;
-    }
 
     public void setName(String newName){
         this.itemName = newName;
