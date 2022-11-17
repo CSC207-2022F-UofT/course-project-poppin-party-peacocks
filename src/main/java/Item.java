@@ -91,7 +91,7 @@ public class Item {
         System.out.println("------------------------------------------");
     }
 
-    /** Updates price of Item object through webscraping the product page on Amazon
+    /** Updates price of Item object through web-scraping the product page on Amazon
      * */
     public void updatePrice() throws IOException{
         try {
