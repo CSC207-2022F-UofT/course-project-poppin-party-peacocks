@@ -31,6 +31,10 @@ public class User {
         return this.currency;
     }
 
+    public String getPassword(){
+        return this.password;
+    }
+
     public void setName(String newName){
         this.name = newName;
     }
@@ -48,9 +52,5 @@ public class User {
             }
         }
         return false;
-    }
-
-    public void writeUserToDatabase() {
-        DataBase.addUser(this, this.password);
     }
 }

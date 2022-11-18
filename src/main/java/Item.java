@@ -35,6 +35,19 @@ public class Item {
         this.reviewStars = reviewStars;
 
     }
+    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars){
+        this.itemName = name;
+        this.itemPrice = price;
+        this.priceChange = priceChange;
+        this.desiredPrice = desiredPrice;
+        this.dateAdded = dateAdded;
+        this.url = url;
+        this.itemDescription = itemDescription;
+        this.tags = tags;
+        this.reviewCount = reviewCount;
+        this.reviewStars = reviewStars;
+
+    }
 
     public String getItemName(){
         return this.itemName;
@@ -47,6 +60,9 @@ public class Item {
     }
     public double getItemPrice(){
         return this.itemPrice;
+    }
+    public double getPriceChange(){
+        return this.priceChange;
     }
     public double getItemDesiredPrice(){
         return this.desiredPrice;
@@ -65,6 +81,9 @@ public class Item {
     }
     public void setItemDescription(String description) {
         this.itemDescription = description;
+    }
+    public void setPriceChange(Double priceChange) {
+        this.priceChange = priceChange;
     }
     public void setDesiredPrice(double newDesiredPrice) {
         this.desiredPrice = newDesiredPrice;

@@ -1,11 +1,8 @@
-import javax.lang.model.type.ErrorType;
 import java.util.*;
-import java.util.logging.ErrorManager;
 
 public class Wishlist {
 
     private String name;
-
     private ArrayList<Item> itemList;
     private ArrayList<Item> displayedList;
     private Date dateAdded;
@@ -19,6 +16,19 @@ public class Wishlist {
         this.selectedTags = new ArrayList<String>();
     }
 
+    public Wishlist(String name, ArrayList<Item> itemList, ArrayList<Item> displayedList, Date dateAdded, ArrayList<String> selectedTags){
+        this.name = name;
+        this.itemList = itemList;
+        this.displayedList = displayedList;
+        this.dateAdded = dateAdded;
+        this.selectedTags = selectedTags;
+    }
+
+    public String getName() { return  this.name; };
+    public ArrayList<Item> getItemList() {return this.itemList; };
+    public ArrayList<Item> getDisplayedList() {return this.displayedList; };
+    public Date getDateAdded() {return this.dateAdded; };
+    public ArrayList<String> getSelectedTags() {return this.selectedTags; };
     /**
      * Sorts wishlist by date in added date (earliest date-latest date) or (latest date-earliest date)
      * @param order The value of string whether the user wants the wishlist to be ascending or descending
