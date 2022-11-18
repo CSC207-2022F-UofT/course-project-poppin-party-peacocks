@@ -7,8 +7,4 @@ public class ListOfWishlists {
         this.listWishlist = new ArrayList<Wishlist>();
     }
 
-    public void addWishlist(Wishlist wishlist){
-        this.listWishlist.add(wishlist);
-    }
-
 }

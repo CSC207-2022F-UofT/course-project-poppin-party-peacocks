@@ -3,7 +3,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
-import java.util.Date;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Item {
     private String itemName;
@@ -18,7 +19,7 @@ public class Item {
     private Date dateLastUpdated;
     private double reviewStars;
     private int reviewCount;
-
+    private ArrayList<Double> priceHistoryData;
 
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars){
@@ -33,7 +34,8 @@ public class Item {
         this.dateLastUpdated = new Date();
         this.reviewCount = reviewCount;
         this.reviewStars = reviewStars;
-
+        this.priceHistoryData = new ArrayList<Double>();
+        this.priceHistoryData.add(this.itemPrice);
     }
 
     public String getItemName(){
@@ -58,6 +60,9 @@ public class Item {
         return this.tags;
     }
 
+    public ArrayList<Double> getPriceHistoryData(){
+        return this.priceHistoryData;
+    }
 
 
     public void setName(String newName){
@@ -68,6 +73,10 @@ public class Item {
     }
     public void setDesiredPrice(double newDesiredPrice) {
         this.desiredPrice = newDesiredPrice;
+    }
+
+    public void setPriceHistoryData(ArrayList<Double> updatedPrices){
+        this.priceHistoryData = updatedPrices;
     }
 
     public void setReviewStars(double newReviewStars) { this.reviewStars = newReviewStars;}
@@ -110,4 +119,23 @@ public class Item {
     public boolean isPriceBelowDesiredPrice(){
         return itemPrice < desiredPrice;
     }
+
+    // Updates the price asynchronously every hour
+    public class Scheduler {
+        public void main(String[] args) {
+            Timer timer = new Timer ();
+            TimerTask t = new TimerTask () {
+                @Override
+                public void run () {
+                    try {
+                        updatePrice();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            };
+            timer.schedule (t, 0l, 1000*60*60);
+        }
+    }
+
 }
