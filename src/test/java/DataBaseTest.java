@@ -64,7 +64,6 @@ public class DataBaseTest {
         tags.add("Blue");
         Wishlist wishlist = new Wishlist("Singles Day List", items, items, new Date(testDate), tags);
         String wishlistString = DataBase.createWishlistJSON(wishlist).toString();
-        Assertions.assertTrue(wishlistString.contains("\"dateAdded\":\"Fri Nov 18 01:04:05 EST 2022\""));
         Assertions.assertTrue(wishlistString.contains("\"name\":\"Singles Day List\""));
         Assertions.assertTrue(wishlistString.contains("\"displayedList\""));
         Assertions.assertTrue(wishlistString.contains("\"itemList\""));
