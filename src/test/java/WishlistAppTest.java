@@ -98,7 +98,7 @@ public class WishlistAppTest {
         String testUrl = "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1";
         Assertions.assertEquals(true, testUrl == TestItem.getItemURL());
         // Test 4:  Get url
-        String testImageUrl = "";
+        String testImageUrl = "imageurl";
         Assertions.assertEquals(true, testImageUrl == TestItem.getItemImageURL());
         // Test 5:  Set and Get Item Description
         String newDescription = "This is a new set item description for AmazonBasics Wired Office Keyboard";
