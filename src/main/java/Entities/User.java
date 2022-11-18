@@ -1,3 +1,5 @@
+package Entities;
+
 //test
 public class User {
 

@@ -1,3 +1,7 @@
+package ExternalInterface;
+
+import Entities.Item;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -47,7 +51,7 @@ public class SearchitemsApi {
     }
 
     /**
-     * Returns Arraylist of Item objects based on search results of the specified keyword on AMazon
+     * Returns Arraylist of Entities.Item objects based on search results of the specified keyword on AMazon
      *
      * @param keyword     string keyword to search in Amazon
      * @param marketplace specified marketplace (ex: "CA" for Canada) to search in Amazon

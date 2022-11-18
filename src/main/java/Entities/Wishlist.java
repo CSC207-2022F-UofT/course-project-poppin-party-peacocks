@@ -1,3 +1,5 @@
+package Entities;
+
 import java.util.*;
 
 public class Wishlist {
@@ -130,9 +132,9 @@ public class Wishlist {
     }
 
     /**
-     * Adding an Item to the wishlist
-     * @param item The Item that the user wants to add to the wishlist
-     * @return True when an Item gets added to the wishlist
+     * Adding an Entities.Item to the wishlist
+     * @param item The Entities.Item that the user wants to add to the wishlist
+     * @return True when an Entities.Item gets added to the wishlist
      */
     public boolean addItem(Item item){
         itemList.add(item);
@@ -142,9 +144,9 @@ public class Wishlist {
     }
 
     /**
-     * Removing an Item from the wishlist
-     * @param deleteItem The Item the user wants to delete from the wishlist
-     * @return True when an Item gets removed from the wishlist
+     * Removing an Entities.Item from the wishlist
+     * @param deleteItem The Entities.Item the user wants to delete from the wishlist
+     * @return True when an Entities.Item gets removed from the wishlist
      */
     public boolean removeItem(Item deleteItem){
         itemList.remove(deleteItem);

@@ -1,13 +1,7 @@
+import Entities.Item;
+import ExternalInterface.SearchitemsApi;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import tutorial.HelloWorld;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +11,7 @@ public class WishlistAppTest {
 
 
     /**
-     * Testing search item feature and if all items in the return list are of Object Item
+     * Testing search item feature and if all items in the return list are of Object Entities.Item
      */
     @Test
     public void searchItemTestItemInstance() throws IOException, InterruptedException {
@@ -74,7 +68,7 @@ public class WishlistAppTest {
 
 
     /**
-     * Testing setter and getter for Object Item name variable
+     * Testing setter and getter for Object Entities.Item name variable
      */
     @Test
     public void itemClassTestSetGetName() {
@@ -95,7 +89,7 @@ public class WishlistAppTest {
     }
 
     /**
-     * Testing getter for Object Item price variable
+     * Testing getter for Object Entities.Item price variable
      */
     @Test
     public void itemClassTestGetPrice() throws IOException {
@@ -114,7 +108,7 @@ public class WishlistAppTest {
     }
 
     /**
-     * Testing setter and getter for Object Item desired price
+     * Testing setter and getter for Object Entities.Item desired price
      */
     @Test
     public void itemClassTestSetGetDesiredPrice() {
@@ -133,7 +127,7 @@ public class WishlistAppTest {
     }
 
     /**
-     * Testing getter for Object Item url variable
+     * Testing getter for Object Entities.Item url variable
      */
     @Test
     public void itemClassTestSetGetUrl() {
@@ -151,7 +145,7 @@ public class WishlistAppTest {
     }
 
     /**
-     * Testing getter for Object Item imageUrl variable
+     * Testing getter for Object Entities.Item imageUrl variable
      */
     @Test
     public void itemClassTestSetGetImageUrl() throws IOException {
@@ -171,7 +165,7 @@ public class WishlistAppTest {
     }
 
     /**
-     * Testing setter and getter for Object Item item description variable
+     * Testing setter and getter for Object Entities.Item item description variable
      */
     @Test
     public void itemClassTestSetGetItemDescription() throws IOException {
@@ -191,7 +185,7 @@ public class WishlistAppTest {
     }
 
     /**
-     * Testing setter and getter for Object Item review count variable
+     * Testing setter and getter for Object Entities.Item review count variable
      */
     @Test
     public void itemClassTestSetGetReviewCount() throws IOException {
@@ -212,7 +206,7 @@ public class WishlistAppTest {
     }
 
     /**
-     * Testing setter and getter for Object Item review star variable
+     * Testing setter and getter for Object Entities.Item review star variable
      */
     @Test
     public void itemClassTestSetGetReviewStar() throws IOException {

@@ -98,7 +98,7 @@ public class MainApp extends JFrame{
         leftFooterPanel = new JPanel();
         leftFooterPanel.setBackground(Color.MAGENTA);
         leftFooterPanel.setLayout(new FlowLayout());
-        addWishlistButton = new JButton("Add Wishlist");
+        addWishlistButton = new JButton("Add Entities.Wishlist");
         leftFooterPanel.add(addWishlistButton);
         lowerPanel.add(leftFooterPanel, BorderLayout.SOUTH);
                 // right and left padding
@@ -149,9 +149,9 @@ public class MainApp extends JFrame{
         middleFooterPanel = new JPanel(new FlowLayout());
         middleFooterPanel.setBackground(Color.DARK_GRAY);
                 // footer buttons
-        deleteThisWishlistButton = new JButton("Delete this Wishlist");
+        deleteThisWishlistButton = new JButton("Delete this Entities.Wishlist");
         middleFooterPanel.add(deleteThisWishlistButton);
-        addItemButton = new JButton("Add Item");
+        addItemButton = new JButton("Add Entities.Item");
         middleFooterPanel.add(addItemButton);
             // add footer to middlePanel
         middlePanel.add(middleFooterPanel, BorderLayout.SOUTH);
@@ -232,7 +232,7 @@ public class MainApp extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 //                // Change middlePanel top label
-//                thisWishlistLabel.setText("Choose a Wishlist");
+//                thisWishlistLabel.setText("Choose a Entities.Wishlist");
 //                // Reset itemPanel
 //                middlePanel.remove(itemPanel);
 //                itemPanel = new JPanel();

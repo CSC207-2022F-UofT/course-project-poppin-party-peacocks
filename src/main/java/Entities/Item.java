@@ -1,3 +1,5 @@
+package Entities;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -115,7 +117,7 @@ public class Item {
         System.out.println("------------------------------------------");
     }
 
-    /** Updates price of Item object through web-scraping the product page on Amazon
+    /** Updates price of Entities.Item object through web-scraping the product page on Amazon
      * */
     public void updatePrice() throws IOException{
         try {
