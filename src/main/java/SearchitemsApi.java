@@ -59,6 +59,7 @@ public class SearchitemsApi {
         ArrayList<String> urlList = new ArrayList<String>();
         ArrayList<String> reviewCountList = new ArrayList<String>();
         ArrayList<String> reviewStarList = new ArrayList<String>();
+        ArrayList<String> imageUrlList = new ArrayList<String>();
         for (int i=0;i<pairs.length;i++) {
             String pair = pairs[i];
             String[] keyValue = pair.split(" :");
@@ -83,10 +84,14 @@ public class SearchitemsApi {
             if (keyValue[0].contains("rating")){
                 reviewStarList.add(keyValue[1]);
             }
+
+            if (keyValue[0].contains("imageUrl")){
+                imageUrlList.add(keyValue[1]);
+            }
         }
 
         for (int i=0; i<titleList.size();i++){
-            Item newItem = new Item(titleList.get(i), Double.parseDouble(priceList.get(i)), Double.parseDouble(priceList.get(i)), urlList.get(i), titleList.get(i), new String[] {keyword}, Integer.parseInt(reviewCountList.get(i).replace(" ", "")), Double.parseDouble(reviewStarList.get(i).replace(" ", "")));
+            Item newItem = new Item(titleList.get(i), Double.parseDouble(priceList.get(i)), Double.parseDouble(priceList.get(i)), urlList.get(i), imageUrlList.get(i), titleList.get(i), new String[] {keyword}, Integer.parseInt(reviewCountList.get(i).replace(" ", "")), Double.parseDouble(reviewStarList.get(i).replace(" ", "")));
             itemList.add(newItem);
 
         }
