@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 public class main {
     public static void main(String[] args) {
 
@@ -17,5 +19,14 @@ public class main {
         christmasWishlist.displayList();
         christmasWishlist.filterWishlists(new String[] {"Tech"});
         christmasWishlist.displayList();
+
+        LoginRegPage initialJFrame = new LoginRegPage();
+        initialJFrame.setContentPane(initialJFrame.getMainPanel());
+        initialJFrame.setVisible(true);
+        initialJFrame.setSize(600, 400);
+        initialJFrame.setLocationRelativeTo(null);
+        initialJFrame.setTitle("login / signup");
+
+        initialJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
