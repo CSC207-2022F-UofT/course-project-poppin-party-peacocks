@@ -17,7 +17,7 @@ class LoginActionTest {
 
     @Test
     public void testCheckUsernameFail(){
-        LoginAction userInput = new LoginAction("Herman2", "Password");
+        LoginAction userInput = new LoginAction("TestingUserDNEName", "Password");
         Assertions.assertFalse(userInput.checkUsername());
     }
 
@@ -35,7 +35,7 @@ class LoginActionTest {
 
     @Test
     public void testCheckUserMatchesPasswordUserDNE(){
-        LoginAction userInput = new LoginAction("Herman", "password");
+        LoginAction userInput = new LoginAction("TestingUserDNEName", "password");
         Assertions.assertFalse(userInput.checkUserMatchesPassword());
     }
 }
