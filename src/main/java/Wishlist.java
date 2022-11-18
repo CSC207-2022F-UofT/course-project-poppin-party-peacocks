@@ -29,6 +29,8 @@ public class Wishlist {
     public ArrayList<Item> getDisplayedList() {return this.displayedList; };
     public Date getDateAdded() {return this.dateAdded; };
     public ArrayList<String> getSelectedTags() {return this.selectedTags; };
+
+    public void setDateAdded(Date date) { this.dateAdded = date; }
     /**
      * Sorts wishlist by date in added date (earliest date-latest date) or (latest date-earliest date)
      * @param order The value of string whether the user wants the wishlist to be ascending or descending
