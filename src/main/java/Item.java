@@ -85,6 +85,7 @@ public class Item {
     public void setName(String newName){
         this.itemName = newName;
     }
+    public void setDateAdded(Date date) { this.dateAdded = date; }
     public void setItemDescription(String description) {
         this.itemDescription = description;
     }

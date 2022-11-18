@@ -15,7 +15,7 @@ public class DataBase {
         return "src/main/database/users.txt";
     }
 
-    private static String getWishlistPath(String userName) {
+    public static String getWishlistPath(String userName) {
         return "src/main/database/" + userName + ".txt";
     }
 
@@ -277,7 +277,7 @@ public class DataBase {
             tagsArray[i] = tags.get(i);
         }
         Double reviewStars = (Double) itemData.get("reviewStars");
-        int reviewCount = (int) itemData.get("reviewCount");
+        int reviewCount = Integer.parseInt(itemData.get("reviewCount").toString());
         String imageURL = (String) itemData.get("imageURL");
 
         return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars, imageURL);
