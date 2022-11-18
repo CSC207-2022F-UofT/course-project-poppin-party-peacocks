@@ -24,7 +24,7 @@ public class Item {
 
 
 
-    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars,String imageUrl){
+    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl){
         this.itemName = name;
         this.itemPrice = price;
         this.priceChange = price;
@@ -39,7 +39,7 @@ public class Item {
         this.reviewStars = reviewStars;
 
     }
-    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars){
+    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars, String imageUrl){
         this.itemName = name;
         this.itemPrice = price;
         this.priceChange = priceChange;
@@ -50,7 +50,7 @@ public class Item {
         this.tags = tags;
         this.reviewCount = reviewCount;
         this.reviewStars = reviewStars;
-
+        this.imageUrl = imageUrl;
     }
 
     public String getItemName(){
@@ -87,6 +87,7 @@ public class Item {
     public void setName(String newName){
         this.itemName = newName;
     }
+    public void setDateAdded(Date date) { this.dateAdded = date; }
     public void setItemDescription(String description) {
         this.itemDescription = description;
     }

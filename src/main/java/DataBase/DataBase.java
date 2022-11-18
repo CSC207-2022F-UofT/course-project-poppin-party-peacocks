@@ -21,7 +21,7 @@ public class DataBase {
         return "src/main/database/users.txt";
     }
 
-    private static String getWishlistPath(String userName) {
+    public static String getWishlistPath(String userName) {
         return "src/main/database/" + userName + ".txt";
     }
 
@@ -120,6 +120,7 @@ public class DataBase {
         itemObject.put("dateAdded", item.getItemDateAdded().toString());
         itemObject.put("reviewStars", item.getReviewStars());
         itemObject.put("reviewCount", item.getReviewCount());
+        itemObject.put("imageURL", item.getItemImageURL());
         return itemObject;
 
     }
@@ -209,7 +210,6 @@ public class DataBase {
                 for (Object wishlist : wishlistsObject) {
                     wishlists.add(DataBase.parseWishlist(wishlist));
                 }
-                System.out.println(parsedData);
                 return new ListOfWishlists(wishlists);
             }
             myReader.close();
@@ -282,8 +282,9 @@ public class DataBase {
             tagsArray[i] = tags.get(i);
         }
         Double reviewStars = (Double) itemData.get("reviewStars");
-        int reviewCount = (int) itemData.get("reviewCount");
+        int reviewCount = Integer.parseInt(itemData.get("reviewCount").toString());
+        String imageURL = (String) itemData.get("imageURL");
 
-        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars);
+        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars, imageURL);
     }
 }
