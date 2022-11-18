@@ -114,6 +114,7 @@ public class DataBase {
         itemObject.put("dateAdded", item.getItemDateAdded().toString());
         itemObject.put("reviewStars", item.getReviewStars());
         itemObject.put("reviewCount", item.getReviewCount());
+        itemObject.put("imageURL", item.getItemImageURL());
         return itemObject;
 
     }
@@ -277,7 +278,8 @@ public class DataBase {
         }
         Double reviewStars = (Double) itemData.get("reviewStars");
         int reviewCount = (int) itemData.get("reviewCount");
+        String imageURL = (String) itemData.get("imageURL");
 
-        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars);
+        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars, imageURL);
     }
 }
