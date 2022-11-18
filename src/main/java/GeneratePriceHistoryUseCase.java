@@ -78,6 +78,12 @@ public class GeneratePriceHistoryUseCase {
         return prices;
     }
 
+    /**
+     * Helper method for turning time period inputs to number of days. Returns -1 for invalid input.
+     * @param timePeriod the specified time period
+     * @param item the item that the time period methods will be applied to
+     * @return the approximate number of days in the specified time period or -1 for invalid inputs
+     */
     private int convertValidTimePeriodToDaysHelper(String timePeriod, Item item){
         int numDays = 0;
         if(timePeriod.equals("24 hours")){
