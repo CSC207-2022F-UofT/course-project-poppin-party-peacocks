@@ -1,6 +1,7 @@
 import javax.swing.*;
 
 public class main {
+
     public static void main(String[] args) {
 
         Item keyboard = new Item("Keyboard", 300.1, 250.0, "www.amazon.com/keyboard",
@@ -20,7 +21,7 @@ public class main {
         christmasWishlist.filterWishlists(new String[] {"Tech"});
         christmasWishlist.displayList();
 
-        LoginRegPage initialJFrame = new LoginRegPage();
+        placeholderLoginFrame initialJFrame = new placeholderLoginFrame();
         initialJFrame.setContentPane(initialJFrame.getMainPanel());
         initialJFrame.setVisible(true);
         initialJFrame.setSize(600, 400);
