@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.function.BooleanSupplier;
 
 public class DataBaseTest {
     Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
@@ -27,7 +26,17 @@ public class DataBaseTest {
     @Test
     public void TestDataBaseReturnsItemJSON() {
         plushie.setDateAdded(new Date(testDate));
-        Assertions.assertEquals(DataBase.createItemJSON(plushie).toString(), "{\"priceChange\":40.99,\"itemName\":\"Plushie\",\"desiredPrice\":30.0,\"reviewCount\":0,\"imageURL\":\"www.amazonimage.com\\/keyboard\",\"itemPrice\":40.99,\"itemDescription\":\"Description from amazon (or you write your own)\",\"reviewStars\":0.0,\"url\":\"www.amazon.com\\/plushie\",\"dateAdded\":\"Fri Nov 18 01:04:05 EST 2022\",\"tags\":[\"toys\"]}");
+        String itemString = DataBase.createItemJSON(plushie).toString();
+        Assertions.assertTrue(itemString.contains("\"priceChange\":40.99"));
+        Assertions.assertTrue(itemString.contains("\"itemName\":\"Plushie\""));
+        Assertions.assertTrue(itemString.contains("\"desiredPrice\":30.0"));
+        Assertions.assertTrue(itemString.contains("\"reviewCount\":0"));
+        Assertions.assertTrue(itemString.contains("\"imageURL\":\"www.amazonimage.com\\/keyboard\""));
+        Assertions.assertTrue(itemString.contains("\"itemPrice\":40.99"));
+        Assertions.assertTrue(itemString.contains("\"itemDescription\":\"Description from amazon (or you write your own)\""));
+        Assertions.assertTrue(itemString.contains("\"reviewStars\":0.0,"));
+        Assertions.assertTrue(itemString.contains("\"url\":\"www.amazon.com\\/plushie\""));
+        Assertions.assertTrue(itemString.contains("\"tags\":[\"toys\"]"));
     }
 
     @Test
@@ -54,7 +63,12 @@ public class DataBaseTest {
         items.add(plushie);
         tags.add("Blue");
         Wishlist wishlist = new Wishlist("Singles Day List", items, items, new Date(testDate), tags);
-        Assertions.assertEquals(DataBase.createWishlistJSON(wishlist).toString(), "{\"displayedList\":[{\"priceChange\":40.99,\"itemName\":\"Plushie\",\"desiredPrice\":30.0,\"reviewCount\":0,\"imageURL\":\"www.amazonimage.com\\/keyboard\",\"itemPrice\":40.99,\"itemDescription\":\"Description from amazon (or you write your own)\",\"reviewStars\":0.0,\"url\":\"www.amazon.com\\/plushie\",\"dateAdded\":\"Fri Nov 18 01:04:05 EST 2022\",\"tags\":[\"toys\"]}],\"name\":\"Singles Day List\",\"selectedTags\":[\"Blue\"],\"itemList\":[{\"priceChange\":40.99,\"itemName\":\"Plushie\",\"desiredPrice\":30.0,\"reviewCount\":0,\"imageURL\":\"www.amazonimage.com\\/keyboard\",\"itemPrice\":40.99,\"itemDescription\":\"Description from amazon (or you write your own)\",\"reviewStars\":0.0,\"url\":\"www.amazon.com\\/plushie\",\"dateAdded\":\"Fri Nov 18 01:04:05 EST 2022\",\"tags\":[\"toys\"]}],\"dateAdded\":\"Fri Nov 18 01:04:05 EST 2022\"}");
+        String wishlistString = DataBase.createWishlistJSON(wishlist).toString();
+        Assertions.assertTrue(wishlistString.contains("\"dateAdded\":\"Fri Nov 18 01:04:05 EST 2022\""));
+        Assertions.assertTrue(wishlistString.contains("\"name\":\"Singles Day List\""));
+        Assertions.assertTrue(wishlistString.contains("\"displayedList\""));
+        Assertions.assertTrue(wishlistString.contains("\"itemList\""));
+        Assertions.assertTrue(wishlistString.contains("\"selectedTags\""));
     }
 
     @Test

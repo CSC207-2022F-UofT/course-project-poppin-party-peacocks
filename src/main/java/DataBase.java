@@ -204,7 +204,6 @@ public class DataBase {
                 for (Object wishlist : wishlistsObject) {
                     wishlists.add(DataBase.parseWishlist(wishlist));
                 }
-                System.out.println(parsedData);
                 return new ListOfWishlists(wishlists);
             }
             myReader.close();
