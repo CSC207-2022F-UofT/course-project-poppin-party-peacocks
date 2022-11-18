@@ -85,6 +85,4 @@ public class DataBase {
         // Return a default user if user doesn't exist
         return new User("Default User", "Password");
     }
-
-
 }
