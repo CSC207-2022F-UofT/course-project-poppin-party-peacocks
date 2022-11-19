@@ -39,7 +39,7 @@ public class GeneratePriceHistoryUseCase {
      * updatePrice call, in yyyy-MM-dd format.
      *
      * @return the array of all dates since the date the item was added
-     * @throws ParseException
+     * @throws ParseException a date parse exception
      */
     public String[] formatPriceHistoryXAxisForGraphing() throws ParseException {
         ArrayList<Double> priceData = item.getPriceHistoryData();
