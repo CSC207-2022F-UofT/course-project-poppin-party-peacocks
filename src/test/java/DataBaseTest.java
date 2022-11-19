@@ -89,7 +89,7 @@ public class DataBaseTest {
 
     @Test
     public void TestDataBaseWritesAndSavesListOfWishLists() {
-        ListOfWishlistsPage wishlists = new ListOfWishlistsPage();
+        ListOfWishlists wishlists = new ListOfWishlists();
         Wishlist wishlist = new Wishlist("Exam Celebration Wish List");
         wishlist.setDateAdded(new Date(testDate));
         wishlists.addWishlist(wishlist);
