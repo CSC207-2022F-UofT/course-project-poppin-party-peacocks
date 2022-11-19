@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
  */
 
 public class MainAppLoginSignupPage extends JFrame {
+    private customJButton asdf;
     private JPanel mainPanel;
     // header
     private JPanel headerPanel;
@@ -21,7 +22,9 @@ public class MainAppLoginSignupPage extends JFrame {
     // Login Page
     private JPanel loginPanel;
     private JLabel logoLabel;
+    private JLabel usernameLabel;
     private JTextField usernameField;
+    private JLabel passwordLabel;
     private JPasswordField passwordField;
     private JButton loginButton;
 
@@ -29,6 +32,7 @@ public class MainAppLoginSignupPage extends JFrame {
     private JPanel signupPanel;
     private JTextField createUsernameField;
     private JPasswordField createPasswordField;
+    private JLabel confirmPasswordLabel;
     private JPasswordField confirmPasswordField;
     private JButton signupButton;
 
@@ -55,31 +59,48 @@ public class MainAppLoginSignupPage extends JFrame {
         headerPanel = new JPanel(new FlowLayout());
         titleLabel = new JLabel("Starlight Wishes");
         headerPanel.add(titleLabel);
+        asdf = new customJButton();
+        asdf.setPreferredSize(new Dimension(100, 100));
+        asdf.setText("asdf");
+        headerPanel.add(asdf);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         // login panel
         loginPanel = new JPanel();
-        loginPanel.setLayout(new GridLayout(0, 1));
+        GridLayout layout = new GridLayout(0, 1);
+        layout.setVgap(10);
+        loginPanel.setLayout(layout);
         logoLabel = new JLabel(new ImageIcon("sus.png"));
+        usernameLabel = new JLabel("Username");
         usernameField = new JTextField();
+        passwordLabel = new JLabel("Password");
         passwordField = new JPasswordField();
         loginButton = new JButton("Login");
+
+
         loginPanel.add(logoLabel);
+        loginPanel.add(usernameLabel);
         loginPanel.add(usernameField);
+        loginPanel.add(passwordLabel);
         loginPanel.add(passwordField);
         loginPanel.add(loginButton);
-
         mainPanel.add(loginPanel, BorderLayout.CENTER);
 
         // sign up panel
         signupPanel = new JPanel();
         signupPanel.setLayout(new GridLayout(0, 1));
+        usernameLabel = new JLabel("Create Username");
         createUsernameField = new JTextField();
+        passwordLabel = new JLabel("Create Password");
         createPasswordField = new JPasswordField();
+        confirmPasswordLabel = new JLabel("Confirm Password");
         confirmPasswordField = new JPasswordField();
         signupButton = new JButton("Sign Up");
+        signupPanel.add(usernameLabel);
         signupPanel.add(createUsernameField);
+        signupPanel.add(passwordLabel);
         signupPanel.add(createPasswordField);
+        signupPanel.add(confirmPasswordLabel);
         signupPanel.add(confirmPasswordField);
         signupPanel.add(signupButton);
 
