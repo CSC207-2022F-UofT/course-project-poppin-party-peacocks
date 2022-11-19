@@ -3,9 +3,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-
 public class GeneratePriceHistoryUseCase {
     public Item item;
+    private Scheduler scheduler;
+
+    public GeneratePriceHistoryUseCase() {
+        TimerTask t = new TimerTask() {
+            @Override
+            public void run() {
+                updatePriceHistoryData(item);
+            }
+        };
+        this.scheduler = new Scheduler(t, 1000 * 60 * 60 * 24);
+    }
 
     /**
      * Adds the daily updated price of an item to its priceHistoryData
@@ -16,22 +26,6 @@ public class GeneratePriceHistoryUseCase {
         ArrayList<Double> updatedPriceHistoryData = item.getPriceHistoryData();
         updatedPriceHistoryData.add(item.getItemPrice());
         item.setPriceHistoryData(updatedPriceHistoryData);
-    }
-
-    /**
-     * updates priceHistoryData every 24 hours
-     */
-    public class Scheduler {
-        public void main(String[] args) {
-            Timer timer = new Timer();
-            TimerTask t = new TimerTask() {
-                @Override
-                public void run() {
-                    updatePriceHistoryData(item);
-                }
-            };
-            timer.schedule(t, 0l, 1000 * 60 * 60 * 24);
-        }
     }
 
     /**
