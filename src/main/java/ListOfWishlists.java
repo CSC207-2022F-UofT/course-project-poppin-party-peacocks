@@ -8,8 +8,5 @@ public class ListOfWishlists {
         this.listWishlist = wishlists;
     }
 
-    public void addWishlist(Wishlist wishlist){
-        this.listWishlist.add(wishlist);
-    }
 
 }
