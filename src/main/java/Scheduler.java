@@ -12,10 +12,12 @@ public class Scheduler {
         this.timerDuration = timerDuration;
     }
 
+    /** Starts the timer */
     public void enableTimer() {
         this.timer.schedule(this.timerTask, 0L, this.timerDuration);
     }
 
+    /** Disables the timer */
     public void disableTimer() {
         this.timer.cancel();
     }
