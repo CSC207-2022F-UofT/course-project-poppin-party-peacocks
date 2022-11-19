@@ -1,7 +1,7 @@
 package Entities;
 import java.util.*;
-public class Wishlist {
 
+public class Wishlist {
     private String name;
     private ArrayList<Item> itemList;
     private ArrayList<Item> displayedList;

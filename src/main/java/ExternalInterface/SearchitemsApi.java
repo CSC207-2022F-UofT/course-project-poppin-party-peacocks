@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class SearchitemsApi {
     /**
      * Calls Amazon Api search tool to return json string of search results of specified keyword and marketplace
-     * @param keywords    string keyword to search in Amazon
+     * @param keywords string keyword to search in Amazon
      * @param marketplace specified marketplace (ex: "CA" for Canada) to search in Amazon
      */
     private String apiSearch(String keywords, String marketplace) throws IOException, InterruptedException {
@@ -91,7 +91,7 @@ public class SearchitemsApi {
 
     /**
      * Returns custom url link with respective keyword search and marketplace
-     * @param keywords    string keyword to search in Amazon
+     * @param keywords string keyword to search in Amazon
      * @param marketplace specified marketplace (ex: "CA" for Canada) to search in Amazon
      */
     private String keywordstext(String keywords, String marketplace) {

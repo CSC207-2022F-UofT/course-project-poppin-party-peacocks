@@ -1,8 +1,5 @@
 package DataBase;
 import Entities.*;
-import Entities.Item;
-import Entities.ListOfWishlists;
-import Entities.Wishlist;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
