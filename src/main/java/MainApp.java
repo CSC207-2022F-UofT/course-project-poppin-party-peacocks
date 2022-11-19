@@ -54,6 +54,7 @@ public class MainApp extends JFrame{
     private JPanel rightFooterPanel;
     private JButton deleteThisItemButton;
 
+
     public MainApp() {
         super("im a title123");
         setLayout(null);
