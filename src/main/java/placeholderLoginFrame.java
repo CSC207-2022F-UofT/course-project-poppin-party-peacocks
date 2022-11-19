@@ -14,7 +14,6 @@ public class placeholderLoginFrame extends JFrame{
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("fdsa");
                 // open main app frame
                 MainApp mainApp = new MainApp();
                 //mainApp.setContentPane(mainApp.getMainPanel());

@@ -25,13 +25,11 @@ public class main {
         christmasWishlist.filterWishlists(new String[] {"Tech"});
         christmasWishlist.displayList();
 
-        placeholderLoginFrame initialJFrame = new placeholderLoginFrame();
+        // GUI
+        MainAppLoginSignupPage initialJFrame = new MainAppLoginSignupPage();
         initialJFrame.setContentPane(initialJFrame.getMainPanel());
         initialJFrame.setVisible(true);
-        initialJFrame.setSize(600, 400);
         initialJFrame.setLocationRelativeTo(null);
-        initialJFrame.setTitle("login / signup");
-
         initialJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

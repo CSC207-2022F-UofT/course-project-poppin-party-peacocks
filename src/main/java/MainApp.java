@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 
-public class MainApp extends JFrame{
+public class MainApp extends JFrame {
     // placeholder buttons
     private JButton dummy1;
     private JButton dummy2;
@@ -59,7 +59,7 @@ public class MainApp extends JFrame{
         super("im a title123");
         setLayout(null);
         setSize(1200, 638);
-        //setResizable(false);
+        setResizable(false);
 
 
         // ---------- CONSTANTS ----------
@@ -71,43 +71,43 @@ public class MainApp extends JFrame{
         leftPanel.setBackground(Color.red);
         leftPanel.setBounds(0, 0, 400, 638);
         leftPanel.setLayout(null);
-            // upper panel
+        // upper panel
         upperPanel = new JPanel();
         upperPanel.setBackground(Color.green);
         upperPanel.setBounds(0, 0, 400, 300);
         upperPanel.setLayout(new BorderLayout());
-                // app name
+        // app name
         welcomeLabel = new JLabel("Party Peacocks");
         welcomeLabel.setIcon(new ImageIcon("sus.png"));
         welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
         welcomeLabel.setFont(font);
         upperPanel.add(welcomeLabel, BorderLayout.CENTER);
-                // username label
+        // username label
         usernameLabel = new JLabel("Hello Barry");
         usernameLabel.setHorizontalAlignment(JLabel.CENTER);
         upperPanel.add(usernameLabel, BorderLayout.NORTH);
-            // lower panel
+        // lower panel
         lowerPanel = new JPanel();
         lowerPanel.setBackground(Color.orange);
         lowerPanel.setBounds(0, 300, 400, 300);
         lowerPanel.setLayout(new BorderLayout(20, 20));
-                // wishlists label
+        // wishlists label
         listOfWishlistsLabel = new JLabel("Your Wishlists");
         listOfWishlistsLabel.setHorizontalAlignment(JLabel.CENTER);
         lowerPanel.add(listOfWishlistsLabel, BorderLayout.NORTH);
-                // footer
+        // footer
         leftFooterPanel = new JPanel();
         leftFooterPanel.setBackground(Color.MAGENTA);
         leftFooterPanel.setLayout(new FlowLayout());
         addWishlistButton = new JButton("Add Entities.Wishlist");
         leftFooterPanel.add(addWishlistButton);
         lowerPanel.add(leftFooterPanel, BorderLayout.SOUTH);
-                // right and left padding
+        // right and left padding
         leftWestLabel = new JLabel("");
         lowerPanel.add(leftWestLabel, BorderLayout.WEST);
         leftEastLabel = new JLabel("");
         lowerPanel.add(leftEastLabel, BorderLayout.EAST);
-                // list of wishlists
+        // list of wishlists
         wishlistPanel = new JPanel();
         wishlistPanel.setBackground(Color.CYAN);
         wishlistPanel.setLayout(new GridLayout(0, 2));
@@ -126,11 +126,11 @@ public class MainApp extends JFrame{
         middlePanel = new JPanel(new BorderLayout(20, 20));
         middlePanel.setBackground(color);
         middlePanel.setBounds(400, 0, 400, 600);
-            // top label (wishlist name)
-        thisWishlistLabel = new JLabel("Get this wishlist title" );
+        // top label (wishlist name)
+        thisWishlistLabel = new JLabel("Get this wishlist title");
         thisWishlistLabel.setHorizontalAlignment(JLabel.CENTER);
         middlePanel.add(thisWishlistLabel, BorderLayout.NORTH);
-            // items
+        // items
         itemPanel = new JPanel();
         itemPanel.setBackground(Color.PINK);
         itemPanel.setLayout(new GridLayout(0, 1));
@@ -141,27 +141,27 @@ public class MainApp extends JFrame{
         itemPanel.add(dummy5);
         itemPanel.add(dummy6);
         middlePanel.add(itemPanel, BorderLayout.CENTER);
-            // list padding
+        // list padding
         middleWestLabel = new JLabel("");
         middlePanel.add(middleWestLabel, BorderLayout.WEST);
         middleEastLabel = new JLabel("");
         middlePanel.add(middleEastLabel, BorderLayout.EAST);
-            // footer
+        // footer
         middleFooterPanel = new JPanel(new FlowLayout());
         middleFooterPanel.setBackground(Color.DARK_GRAY);
-                // footer buttons
+        // footer buttons
         deleteThisWishlistButton = new JButton("Delete this Entities.Wishlist");
         middleFooterPanel.add(deleteThisWishlistButton);
         addItemButton = new JButton("Add Entities.Item");
         middleFooterPanel.add(addItemButton);
-            // add footer to middlePanel
+        // add footer to middlePanel
         middlePanel.add(middleFooterPanel, BorderLayout.SOUTH);
 
         // ---------- RIGHT PANEL ----------
         rightPanel = new JPanel(new BorderLayout());
         rightPanel.setBackground(Color.blue);
         rightPanel.setBounds(800, 0, 400, 600);
-            // header
+        // header
         rightPanelNORTH = new JPanel(new FlowLayout());
         rightPanelNORTH.setBackground(Color.darkGray);
         thisItemLabel = new JLabel("Get this item title");
@@ -169,10 +169,10 @@ public class MainApp extends JFrame{
         itemPriceLabel = new JLabel("$12.34");
         rightPanelNORTH.add(itemPriceLabel);
         rightPanel.add(rightPanelNORTH, BorderLayout.NORTH);
-            // centre
+        // centre
         rightPanelCENTRE = new JPanel(new GridLayout(0, 1));
         rightPanelCENTRE.setBackground(Color.GRAY);
-                // image
+        // image
         imageLabel = new JLabel();
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
         Image image = null;
@@ -182,41 +182,40 @@ public class MainApp extends JFrame{
             image = ImageIO.read(url);
             resizedImage = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
             imageLabel.setIcon(new ImageIcon(resizedImage));
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Image not found!");
         }
         rightPanelCENTRE.add(imageLabel);
-                // item description
+        // item description
         description = new JLabel("This is an item description.");
         rightPanelCENTRE.add(description);
-                // price chance
+        // price chance
         priceChange = new JLabel("Price change:");
         rightPanelCENTRE.add(priceChange);
-                // date added
+        // date added
         dateAdded = new JLabel("Date Added:");
         rightPanelCENTRE.add(dateAdded);
-                // url
+        // url
         url = new JLabel("INSERT URL HERE");
         rightPanelCENTRE.add(url);
 
         rightPanel.add(rightPanelCENTRE, BorderLayout.CENTER);
-            // WEST side for tags
+        // WEST side for tags
         tagsColumnPanel = new JPanel();
         tagsColumnPanel.setLayout(new BoxLayout(tagsColumnPanel, BoxLayout.Y_AXIS));
         tagsColumnPanel.setBackground(Color.red);
         String[] tags = {"a", "b", "c", "fjdksal;"};    // dummy tags
-        for (String tag: tags) {
+        for (String tag : tags) {
             tagLabel = new JLabel(tag);
             tagsColumnPanel.add(tagLabel);
         }
         rightPanel.add(tagsColumnPanel, BorderLayout.WEST);
-            // footer
+        // footer
         rightFooterPanel = new JPanel(new FlowLayout());
         rightFooterPanel.setBackground(Color.YELLOW);
         deleteThisItemButton = new JButton("Delete this item");
         rightFooterPanel.add(deleteThisItemButton);
-            // add footer to rightPanel
+        // add footer to rightPanel
         rightPanel.add(rightFooterPanel, BorderLayout.SOUTH);
 
 
