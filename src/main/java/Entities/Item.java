@@ -2,7 +2,6 @@ package Entities;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
 import java.io.IOException;
 import java.util.Date;
 
@@ -21,8 +20,6 @@ public class Item {
     private double reviewStars;
     private int reviewCount;
 
-
-
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl){
         this.itemName = name;
         this.itemPrice = price;
@@ -36,7 +33,6 @@ public class Item {
         this.dateLastUpdated = new Date();
         this.reviewCount = reviewCount;
         this.reviewStars = reviewStars;
-
     }
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars, String imageUrl){
         this.itemName = name;
@@ -80,9 +76,6 @@ public class Item {
     public String[] getTags(){
         return this.tags;
     }
-
-
-
     public void setName(String newName){
         this.itemName = newName;
     }
@@ -96,13 +89,9 @@ public class Item {
     public void setDesiredPrice(double newDesiredPrice) {
         this.desiredPrice = newDesiredPrice;
     }
-
     public void setReviewStars(double newReviewStars) { this.reviewStars = newReviewStars;}
-
     public double getReviewStars() { return reviewStars;}
-
     public void setReviewCount(int reviewCount) { this.reviewCount = reviewCount;}
-
     public int getReviewCount() { return reviewCount;}
 
     public void displayItemInConsole(int ranking){
