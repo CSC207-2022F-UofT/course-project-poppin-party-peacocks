@@ -1,8 +1,6 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class LoginRegPage extends JFrame {
     private JPanel mainPanel;
@@ -61,7 +59,6 @@ public class LoginRegPage extends JFrame {
                 mainApp.setLocationRelativeTo(null);
                 mainApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-                // trash old jframe
                 dispose();
 
             }
@@ -77,5 +74,4 @@ public class LoginRegPage extends JFrame {
     public JPanel getMainPanel() {
         return mainPanel;
     }
-
 }

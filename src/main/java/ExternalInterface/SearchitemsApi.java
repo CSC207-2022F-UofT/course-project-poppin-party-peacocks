@@ -1,5 +1,5 @@
 package ExternalInterface;
-import Entities.Item;
+import Entities.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;

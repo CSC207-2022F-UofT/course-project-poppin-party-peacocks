@@ -1,5 +1,6 @@
 package Entities;
 import java.util.Comparator;
+
 public class ItemReviewStarComparator implements Comparator<Item> {
 
     /**

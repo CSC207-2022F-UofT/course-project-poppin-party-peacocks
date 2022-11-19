@@ -7,7 +7,7 @@ public class placeholderLoginFrame extends JFrame{
     private JPanel mainPanel;
     private JButton button;
     public placeholderLoginFrame() {
-        super("yeet");
+        super("test");
         mainPanel = new JPanel();
         mainPanel.setBackground(Color.YELLOW);
         button = new JButton();
@@ -21,7 +21,6 @@ public class placeholderLoginFrame extends JFrame{
                 mainApp.setVisible(true);
                 mainApp.setLocationRelativeTo(null);
                 mainApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                //trash old frame
                 dispose();
             }
         });
