@@ -1,6 +1,5 @@
 package DataBase;
 import Entities.*;
-
 import Entities.Item;
 import Entities.ListOfWishlists;
 import Entities.Wishlist;

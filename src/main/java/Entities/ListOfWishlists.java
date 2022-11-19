@@ -1,8 +1,4 @@
 package Entities;
-
-import Entities.Wishlist;
-
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class ListOfWishlists {

@@ -1,6 +1,4 @@
 package Entities;
-
-//test
 public class User {
 
     private String currency;

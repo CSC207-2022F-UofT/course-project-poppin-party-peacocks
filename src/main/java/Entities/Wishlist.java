@@ -1,7 +1,5 @@
 package Entities;
-
 import java.util.*;
-
 public class Wishlist {
 
     private String name;

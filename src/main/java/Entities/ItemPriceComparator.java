@@ -1,7 +1,4 @@
 package Entities;
-
-import Entities.Item;
-
 import java.util.Comparator;
 public class ItemPriceComparator implements Comparator<Item>{
     /**
