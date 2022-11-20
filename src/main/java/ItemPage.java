@@ -10,6 +10,7 @@ public class ItemPage extends JFrame {
     private JPanel rightPanel;
     private JLabel thisItemLabel;
     private JPanel rightPanelNORTH;
+    private JButton backButton;
     private JLabel itemPriceLabel;
     private JPanel rightPanelCENTRE;
     private JLabel imageLabel;
@@ -42,6 +43,8 @@ public class ItemPage extends JFrame {
         rightPanelNORTH.add(thisItemLabel);
         itemPriceLabel = new JLabel("$12.34");
         rightPanelNORTH.add(itemPriceLabel);
+        backButton = new JButton("Back to Wishlist");
+        rightPanelNORTH.add(backButton);
         rightPanel.add(rightPanelNORTH, BorderLayout.NORTH);
         // centre
         rightPanelCENTRE = new JPanel(new GridLayout(0, 1));
@@ -96,6 +99,20 @@ public class ItemPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO
+                // Currently navigates to WishlistPage.
+                WishlistPage wlPage = new WishlistPage();
+                wlPage.setContentPane(wlPage.getMainPanel());
+                wlPage.setVisible(true);
+                wlPage.setLocationRelativeTo(null);
+                wlPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                dispose();
             }
         });
     }

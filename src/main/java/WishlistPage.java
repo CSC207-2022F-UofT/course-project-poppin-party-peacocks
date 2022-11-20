@@ -5,7 +5,9 @@ import java.awt.event.ActionListener;
 
 public class WishlistPage extends JFrame {
     private JPanel middlePanel;
+    private JPanel northPanel;
     private JLabel thisWishlistLabel;
+    private JButton backButton;
     private JPanel itemPanel;
     private JLabel middleWestLabel;
     private JLabel middleEastLabel;
@@ -33,9 +35,14 @@ public class WishlistPage extends JFrame {
         middlePanel.setBackground(color);
         middlePanel.setBounds(400, 0, 400, 600);
         // top label (wishlist name)
+        northPanel = new JPanel(new FlowLayout());
         thisWishlistLabel = new JLabel("Get this wishlist title");
         thisWishlistLabel.setHorizontalAlignment(JLabel.CENTER);
-        middlePanel.add(thisWishlistLabel, BorderLayout.NORTH);
+        northPanel.add(thisWishlistLabel);
+        // back button
+        backButton = new JButton("Back to List of Wishlists");
+        northPanel.add(backButton);
+        middlePanel.add(northPanel, BorderLayout.NORTH);
         // items
         itemPanel = new JPanel();
         itemPanel.setBackground(Color.PINK);
@@ -88,6 +95,20 @@ public class WishlistPage extends JFrame {
                 itemPage.setVisible(true);
                 itemPage.setLocationRelativeTo(null);
                 itemPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                dispose();
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO
+                // Currently navigates to ListOfWishlistsPage.
+                ListOfWishlistsPage listOfWlPage = new ListOfWishlistsPage();
+                listOfWlPage.setContentPane(listOfWlPage.getMainPanel());
+                listOfWlPage.setVisible(true);
+                listOfWlPage.setLocationRelativeTo(null);
+                listOfWlPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 dispose();
             }
         });

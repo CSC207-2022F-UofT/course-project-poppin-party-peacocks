@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 public class ListOfWishlistsPage extends JFrame {
     private JPanel leftPanel;
     private JPanel upperPanel;
+    private JButton signoutButton;
     private JLabel welcomeLabel;
     private JLabel usernameLabel;
     private JPanel lowerPanel;
@@ -51,6 +52,10 @@ public class ListOfWishlistsPage extends JFrame {
         usernameLabel = new JLabel("Hello Barry");
         usernameLabel.setHorizontalAlignment(JLabel.CENTER);
         upperPanel.add(usernameLabel, BorderLayout.NORTH);
+        // sign out button
+        signoutButton = new JButton("Sign out");
+        signoutButton.setHorizontalAlignment(JButton.CENTER);
+        upperPanel.add(signoutButton, BorderLayout.SOUTH);
         // lower panel
         lowerPanel = new JPanel();
         lowerPanel.setBackground(Color.orange);
@@ -91,11 +96,26 @@ public class ListOfWishlistsPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO
+                // Currently, this navigates to WishlistPage.
                 WishlistPage itemPage = new WishlistPage();
                 itemPage.setContentPane(itemPage.getMainPanel());
                 itemPage.setVisible(true);
                 itemPage.setLocationRelativeTo(null);
                 itemPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                dispose();
+            }
+        });
+
+        signoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO
+                // Currently, this navigates to MainAppLoginSignupPage.
+                MainAppLoginSignupPage loginSignupPage = new MainAppLoginSignupPage();
+                loginSignupPage.setContentPane(loginSignupPage.getMainPanel());
+                loginSignupPage.setVisible(true);
+                loginSignupPage.setLocationRelativeTo(null);
+                loginSignupPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 dispose();
             }
         });
