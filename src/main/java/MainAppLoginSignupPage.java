@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainAppLoginSignupPage extends JFrame {
-    private customJButton asdf;
     private JPanel mainPanel;
     // header
     private JPanel headerPanel;
@@ -14,7 +13,6 @@ public class MainAppLoginSignupPage extends JFrame {
 
     // Login Page
     private JPanel loginPanel;
-    private JLabel logoLabel;
     private JLabel usernameLabel;
     private JTextField usernameField;
     private JLabel passwordLabel;
@@ -45,17 +43,20 @@ public class MainAppLoginSignupPage extends JFrame {
         setResizable(false);
 
         // main panel
-        mainPanel = new JPanel(new BorderLayout());
+        Color color1 = new Color(194, 234, 186);
+        Color color2 = new Color(106, 189, 154);
+
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
         mainPanel.setBounds(0, 0, 400, 638);
 
         // header
         headerPanel = new JPanel(new FlowLayout());
+        headerPanel.setBackground(color2);
         titleLabel = new JLabel("Starlight Wishes");
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setIcon(new ImageIcon("logo_white.png"));
         headerPanel.add(titleLabel);
-        asdf = new customJButton();
-        asdf.setPreferredSize(new Dimension(100, 100));
-        asdf.setText("asdf");
-        headerPanel.add(asdf);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         // login panel
@@ -63,15 +64,15 @@ public class MainAppLoginSignupPage extends JFrame {
         GridLayout layout = new GridLayout(0, 1);
         layout.setVgap(10);
         loginPanel.setLayout(layout);
-        logoLabel = new JLabel(new ImageIcon("sus.png"));
         usernameLabel = new JLabel("Username");
         usernameField = new JTextField();
         passwordLabel = new JLabel("Password");
         passwordField = new JPasswordField();
+//        loginButton = new customJButton();
+//        loginButton.setPreferredSize(new Dimension(100, 30));
+//        loginButton.setText("Login");
         loginButton = new JButton("Login");
 
-
-        loginPanel.add(logoLabel);
         loginPanel.add(usernameLabel);
         loginPanel.add(usernameField);
         loginPanel.add(passwordLabel);
