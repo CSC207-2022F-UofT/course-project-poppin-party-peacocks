@@ -88,12 +88,11 @@ public class WishlistPage extends JFrame {
         addItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO
-                ItemPage itemPage = new ItemPage();
-                itemPage.setContentPane(itemPage.getMainPanel());
-                itemPage.setVisible(true);
-                itemPage.setLocationRelativeTo(null);
-                itemPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                AddItemPage addItemPage = new AddItemPage();
+                addItemPage.setContentPane(addItemPage.getMainPanel());
+                addItemPage.setVisible(true);
+                addItemPage.setLocationRelativeTo(null);
+                addItemPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 dispose();
             }
         });
