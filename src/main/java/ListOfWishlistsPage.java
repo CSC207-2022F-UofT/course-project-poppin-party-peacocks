@@ -9,13 +9,12 @@ public class ListOfWishlistsPage extends JFrame {
     private JButton signoutButton;
     private JLabel welcomeLabel;
     private JLabel usernameLabel;
+    private JPanel upperFooterPanel;
     private JPanel lowerPanel;
     private JLabel listOfWishlistsLabel;
     private JPanel wishlistPanel;
-    private JPanel leftFooterPanel;
+    private JPanel lowerFooterPanel;
     private JButton addWishlistButton;
-    private JLabel leftWestLabel;
-    private JLabel leftEastLabel;
 
     private JButton dummy1;
     private JButton dummy2;
@@ -53,9 +52,11 @@ public class ListOfWishlistsPage extends JFrame {
         usernameLabel.setHorizontalAlignment(JLabel.CENTER);
         upperPanel.add(usernameLabel, BorderLayout.NORTH);
         // sign out button
+        upperFooterPanel = new JPanel(new FlowLayout());
+        upperFooterPanel.setBackground(Color.blue);
         signoutButton = new JButton("Sign out");
-        signoutButton.setHorizontalAlignment(JButton.CENTER);
-        upperPanel.add(signoutButton, BorderLayout.SOUTH);
+        upperFooterPanel.add(signoutButton);
+        upperPanel.add(upperFooterPanel, BorderLayout.SOUTH);
         // lower panel
         lowerPanel = new JPanel();
         lowerPanel.setBackground(Color.orange);
@@ -66,17 +67,12 @@ public class ListOfWishlistsPage extends JFrame {
         listOfWishlistsLabel.setHorizontalAlignment(JLabel.CENTER);
         lowerPanel.add(listOfWishlistsLabel, BorderLayout.NORTH);
         // footer
-        leftFooterPanel = new JPanel();
-        leftFooterPanel.setBackground(Color.MAGENTA);
-        leftFooterPanel.setLayout(new FlowLayout());
-        addWishlistButton = new JButton("Add Entities.Wishlist");
-        leftFooterPanel.add(addWishlistButton);
-        lowerPanel.add(leftFooterPanel, BorderLayout.SOUTH);
-        // right and left padding
-        leftWestLabel = new JLabel("");
-        lowerPanel.add(leftWestLabel, BorderLayout.WEST);
-        leftEastLabel = new JLabel("");
-        lowerPanel.add(leftEastLabel, BorderLayout.EAST);
+        lowerFooterPanel = new JPanel();
+        lowerFooterPanel.setBackground(Color.MAGENTA);
+        lowerFooterPanel.setLayout(new FlowLayout());
+        addWishlistButton = new JButton("Add Wishlist");
+        lowerFooterPanel.add(addWishlistButton);
+        lowerPanel.add(lowerFooterPanel, BorderLayout.SOUTH);
         // list of wishlists
         wishlistPanel = new JPanel();
         wishlistPanel.setBackground(Color.CYAN);
@@ -96,12 +92,11 @@ public class ListOfWishlistsPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO
-                // Currently, this navigates to WishlistPage.
-                WishlistPage itemPage = new WishlistPage();
-                itemPage.setContentPane(itemPage.getMainPanel());
-                itemPage.setVisible(true);
-                itemPage.setLocationRelativeTo(null);
-                itemPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                AddWishlistPage addPage = new AddWishlistPage();
+                addPage.setContentPane(addPage.getMainPanel());
+                addPage.setVisible(true);
+                addPage.setLocationRelativeTo(null);
+                addPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 dispose();
             }
         });

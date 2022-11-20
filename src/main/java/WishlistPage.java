@@ -36,12 +36,11 @@ public class WishlistPage extends JFrame {
         middlePanel.setBounds(400, 0, 400, 600);
         // top label (wishlist name)
         northPanel = new JPanel(new FlowLayout());
+        backButton = new JButton("Back to List of Wishlists");
+        northPanel.add(backButton);
         thisWishlistLabel = new JLabel("Get this wishlist title");
         thisWishlistLabel.setHorizontalAlignment(JLabel.CENTER);
         northPanel.add(thisWishlistLabel);
-        // back button
-        backButton = new JButton("Back to List of Wishlists");
-        northPanel.add(backButton);
         middlePanel.add(northPanel, BorderLayout.NORTH);
         // items
         itemPanel = new JPanel();
@@ -62,10 +61,10 @@ public class WishlistPage extends JFrame {
         // footer
         middleFooterPanel = new JPanel(new FlowLayout());
         middleFooterPanel.setBackground(Color.DARK_GRAY);
-        // footer buttons
-        deleteThisWishlistButton = new JButton("Delete this Entities.Wishlist");
+        deleteThisWishlistButton = new JButton("Delete this Wishlist");
         middleFooterPanel.add(deleteThisWishlistButton);
-        addItemButton = new JButton("Add Entities.Item");
+        addItemButton = new JButton("Add Item");
+
         middleFooterPanel.add(addItemButton);
         // add footer to middlePanel
         middlePanel.add(middleFooterPanel, BorderLayout.SOUTH);

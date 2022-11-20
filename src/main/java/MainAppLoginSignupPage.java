@@ -5,13 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * TODO:
- *  - Add labels above all the text and password fields
- *  - Adjust size and spacing of text and password fields
- *  - Add login and sign up logic
- */
-
 public class MainAppLoginSignupPage extends JFrame {
     private customJButton asdf;
     private JPanel mainPanel;

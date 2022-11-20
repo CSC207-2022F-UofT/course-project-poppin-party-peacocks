@@ -43,8 +43,6 @@ public class ItemPage extends JFrame {
         rightPanelNORTH.add(thisItemLabel);
         itemPriceLabel = new JLabel("$12.34");
         rightPanelNORTH.add(itemPriceLabel);
-        backButton = new JButton("Back to Wishlist");
-        rightPanelNORTH.add(backButton);
         rightPanel.add(rightPanelNORTH, BorderLayout.NORTH);
         // centre
         rightPanelCENTRE = new JPanel(new GridLayout(0, 1));
@@ -64,16 +62,20 @@ public class ItemPage extends JFrame {
         }
         rightPanelCENTRE.add(imageLabel);
         // item description
-        description = new JLabel("This is an item description.");
+        String itemDescriptionVar = "Item description here.";
+        description = new JLabel(itemDescriptionVar);
         rightPanelCENTRE.add(description);
         // price chance
-        priceChange = new JLabel("Price change:");
+        String priceChangeStr = "Price change here.";
+        priceChange = new JLabel(priceChangeStr);
         rightPanelCENTRE.add(priceChange);
         // date added
-        dateAdded = new JLabel("Date Added:");
+        String dateAddedVar = "Date added here.";
+        dateAdded = new JLabel(dateAddedVar);
         rightPanelCENTRE.add(dateAdded);
         // url
-        url = new JLabel("INSERT URL HERE");
+        String urlVar = "url here.";
+        url = new JLabel(urlVar);
         rightPanelCENTRE.add(url);
 
         rightPanel.add(rightPanelCENTRE, BorderLayout.CENTER);
@@ -90,6 +92,8 @@ public class ItemPage extends JFrame {
         // footer
         rightFooterPanel = new JPanel(new FlowLayout());
         rightFooterPanel.setBackground(Color.YELLOW);
+        backButton = new JButton("Back to Wishlist");
+        rightFooterPanel.add(backButton);
         deleteThisItemButton = new JButton("Delete this item");
         rightFooterPanel.add(deleteThisItemButton);
         // add footer to rightPanel
