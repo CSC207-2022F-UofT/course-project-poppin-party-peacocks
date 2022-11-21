@@ -196,6 +196,8 @@ public class Item {
             e.printStackTrace();
         }
     }
+
+    /** Updates currency of the item by converting item price and currency */
     public void updateCurrency() {
         HashMap<String, Double> cadConversion = new HashMap<>();
         cadConversion.put("USD", 0.76);
