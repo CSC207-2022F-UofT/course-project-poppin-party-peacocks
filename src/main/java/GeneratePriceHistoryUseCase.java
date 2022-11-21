@@ -1,3 +1,4 @@
+import Entities.*;
 import Entities.Scheduler;
 
 import java.text.DateFormat;
