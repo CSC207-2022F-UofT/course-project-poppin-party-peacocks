@@ -1,6 +1,3 @@
-import Controller.PriceDropNotification;
-import Controller.SaleNotification;
-import Controller.Scheduler;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -44,7 +41,7 @@ public class Item {
         this.priceHistoryData = new ArrayList<Double>();
         this.priceHistoryData.add(this.itemPrice);
 
-        TimerTask t = new TimerTask() {
+        TimerTask updatePriceTask = new TimerTask() {
             @Override
             public void run() {
                 try {
@@ -54,10 +51,11 @@ public class Item {
                 }
             }
         };
-        Scheduler scheduler = new Scheduler(t, 1000 * 60 * 60);
-        this.scheduler = scheduler;
-        this.priceDropNotification = new PriceDropNotification(scheduler);
-        this.saleNotification = new SaleNotification(scheduler);
+
+        Scheduler updatePriceScheduler = new Scheduler(updatePriceTask, 1000 * 60 * 60 * 24);
+        this.scheduler = updatePriceScheduler;
+        this.priceDropNotification = new PriceDropNotification(this);
+        this.saleNotification = new SaleNotification(this);
     }
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars, String imageUrl){
         this.itemName = name;
@@ -144,6 +142,7 @@ public class Item {
     public boolean isPriceBelowDesiredPrice(){
         return itemPrice < desiredPrice;
     }
+    public boolean isItemOnSale() {return priceChange < 0;}
 
     /** Updates price of Item object through web-scraping the product page on Amazon
      * */
