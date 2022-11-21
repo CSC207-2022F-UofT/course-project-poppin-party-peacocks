@@ -11,6 +11,8 @@ public class AddWishlistPage extends JFrame {
     private JButton cancelButton;
     private JButton createButton;
 
+    private JPanel middlePanel;
+
     public JPanel getMainPanel() {
         return mainPanel;
     }
@@ -21,17 +23,32 @@ public class AddWishlistPage extends JFrame {
         setSize(400, 150);
         setResizable(false);
 
+        // constants
+        Color color1 = new Color(194, 234, 186);
+        Color color2 = new Color(106, 189, 154);
+
         // main panel
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBounds(0, 0, 400, 200);
+        mainPanel.setBackground(color2);
 
         // top label
         label = new JLabel("Name your wishlist:");
         mainPanel.add(label, BorderLayout.NORTH);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setForeground(Color.white);
 
         // text field
-        nameField = new JTextField();
-        mainPanel.add(nameField, BorderLayout.CENTER);
+        nameField = new JTextField("", 20);
+        mainPanel.setSize(400, 200);
+
+        // middle panel
+        middlePanel = new JPanel(new FlowLayout());
+        middlePanel.add(nameField);
+        middlePanel.setBackground(color1);
+
+        // inception
+        mainPanel.add(middlePanel, BorderLayout.CENTER);
 
         // bottom
         southPanel = new JPanel(new FlowLayout());
@@ -40,6 +57,7 @@ public class AddWishlistPage extends JFrame {
         southPanel.add(cancelButton);
         southPanel.add(createButton);
         mainPanel.add(southPanel, BorderLayout.SOUTH);
+        southPanel.setBackground(color2);
 
         createButton.addActionListener(new ActionListener() {
             @Override
