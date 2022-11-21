@@ -1,31 +1,36 @@
-import javax.xml.crypto.Data;
-
-public class UserRegisterInteractor implements UserRegisterDatabaseInput{
-
-//    private UserRegisterInput inputs;
+public class UserRegisterInteractor{
     private String username;
     private String password;
     private String repeatedPassword;
-    private UserRegisterDataBaseGateway dataBaseGateway;
+    private LoginAction tempLogin;
+    private User newUser;
 
     public UserRegisterInteractor(String username, String password, String repeatedPassword) {
         this.username = username;
         this.password = password;
         this.repeatedPassword = repeatedPassword;
-        this.dataBaseGateway = new UserRegisterDataBaseGateway(username, password);
+        this.tempLogin = new LoginAction(username, password);
+        this.newUser = new User(username, password);
     }
 
-
-    @Override
-    public boolean create(UserRegisterDataBaseGateway inputUser) {
+    public boolean create(User newLogin) {
         if (!this.password.equals(this.repeatedPassword)){
             return false;
         }
-        if (this.dataBaseGateway.existingUser(this.username) == true){
+
+        else if (this.tempLogin.checkUsername() == true){
             return false;
         }
 
-        this.dataBaseGateway.save();
+        else if (this.username.length() < 3){
+            return false;
+        }
+
+        else if (this.password.length() < 3){
+            return false;
+        }
+
+        DataBase.addUser(this.newUser, this.password);
         return true;
     }
 }
