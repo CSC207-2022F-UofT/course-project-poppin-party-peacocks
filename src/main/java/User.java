@@ -35,10 +35,6 @@ public class User {
         return this.currency;
     }
 
-    public String getPassword(){
-        return this.password;
-    }
-
     public void setName(String newName){
         this.name = newName;
     }
