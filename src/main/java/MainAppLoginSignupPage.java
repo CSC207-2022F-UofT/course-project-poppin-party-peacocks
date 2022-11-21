@@ -68,9 +68,6 @@ public class MainAppLoginSignupPage extends JFrame {
         usernameField = new JTextField();
         passwordLabel = new JLabel("Password");
         passwordField = new JPasswordField();
-//        loginButton = new customJButton();
-//        loginButton.setPreferredSize(new Dimension(100, 30));
-//        loginButton.setText("Login");
         loginButton = new JButton("Login");
 
         loginPanel.add(usernameLabel);

@@ -50,14 +50,10 @@ public class ListOfWishlistsPage extends JFrame {
         super("My Wishlists");
         setLayout(null);
         setSize(400, 638);
-        //setResizable(false);
 
         this.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 JFrame f = (JFrame)e.getSource();
-//                if (constHeight==0) {
-//                    constHeight = f.getHeight();
-//                }
                 f.setSize(400, f.getHeight());
                 lowerPanel.setBounds(0, 300, 400, f.getHeight() - 338);
                 wishlistPanel.setPreferredSize(new Dimension(400, f.getHeight() - 338));
@@ -72,7 +68,7 @@ public class ListOfWishlistsPage extends JFrame {
 
         // main panel
         leftPanel = new JPanel();
-        leftPanel.setBackground(Color.red);
+        leftPanel.setBackground(color2);
         leftPanel.setBounds(0, 0, 400, 638);
         leftPanel.setLayout(null);
         // upper panel
@@ -120,8 +116,6 @@ public class ListOfWishlistsPage extends JFrame {
         wishlistPanel.setPreferredSize(new Dimension(400, this.getHeight() - 338));
         wishlistPanel.setBackground(Color.WHITE);
         FlowLayout layout = new FlowLayout();
-//        layout.setVgap(25);
-//        layout.setHgap(25);
         wishlistPanel.setLayout(layout);
 
         for (int i = 0; i < 10; i++) {
