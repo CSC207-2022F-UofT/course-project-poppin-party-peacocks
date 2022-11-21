@@ -33,31 +33,27 @@ public class ListOfWishlistsPage extends JFrame {
         return label;
     }
 
-    public JButton createButton(String text, int prefWidth, int prefHeight, Color background, Color foreground, Font font) {
-        JButton button = new JButton();
-        button.setText(text);
-        button.setFont(font);
-        button.setBorder(new RoundedBorder(20));
-        if (prefHeight > 0 && prefWidth > 0) {
-            button.setPreferredSize(new Dimension(prefWidth, prefHeight));
-        }
-        button.setBackground(background);
-        button.setForeground(foreground);
-        return button;
-    }
+//    public JButton createButton(String text, int prefWidth, int prefHeight, Color background, Color foreground, Font font) {
+//        JButton button = new JButton();
+//        button.setText(text);
+//        button.setFont(font);
+//        button.setBorder(new RoundedBorder(20));
+//        if (prefHeight > 0 && prefWidth > 0) {
+//            button.setPreferredSize(new Dimension(prefWidth, prefHeight));
+//        }
+//        button.setBackground(background);
+//        button.setForeground(foreground);
+//        return button;
+//    }
 
     public ListOfWishlistsPage() {
         super("My Wishlists");
         setLayout(null);
         setSize(400, 638);
-        //setResizable(false);
 
         this.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
-                JFrame f = (JFrame)e.getSource();
-//                if (constHeight==0) {
-//                    constHeight = f.getHeight();
-//                }
+                JFrame f = (JFrame) e.getSource();
                 f.setSize(400, f.getHeight());
                 lowerPanel.setBounds(0, 300, 400, f.getHeight() - 338);
                 wishlistPanel.setPreferredSize(new Dimension(400, f.getHeight() - 338));
@@ -72,7 +68,7 @@ public class ListOfWishlistsPage extends JFrame {
 
         // main panel
         leftPanel = new JPanel();
-        leftPanel.setBackground(Color.red);
+        leftPanel.setBackground(color2);
         leftPanel.setBounds(0, 0, 400, 638);
         leftPanel.setLayout(null);
         // upper panel
@@ -96,7 +92,7 @@ public class ListOfWishlistsPage extends JFrame {
         // sign out button
         upperFooterPanel = new JPanel(new FlowLayout());
         upperFooterPanel.setBackground(color2);
-        signoutButton = createButton("Sign Out", 150, 30, color2, Color.WHITE, font1);
+        signoutButton = new CustomJButton("Sign Out", 150, 30, color2, Color.WHITE, font1);
         upperFooterPanel.add(signoutButton);
         upperPanel.add(upperFooterPanel, BorderLayout.SOUTH);
         // lower panel
@@ -112,7 +108,7 @@ public class ListOfWishlistsPage extends JFrame {
         lowerFooterPanel = new JPanel();
         lowerFooterPanel.setBackground(color2);
         lowerFooterPanel.setLayout(new FlowLayout());
-        addWishlistButton = createButton("Add Wishlist", 150, 30, color2, Color.WHITE, font1);
+        addWishlistButton = new CustomJButton("Add Wishlist", 150, 30, color2, Color.WHITE, font1);
         lowerFooterPanel.add(addWishlistButton);
         lowerPanel.add(lowerFooterPanel, BorderLayout.SOUTH);
         // list of wishlists
@@ -120,12 +116,10 @@ public class ListOfWishlistsPage extends JFrame {
         wishlistPanel.setPreferredSize(new Dimension(400, this.getHeight() - 338));
         wishlistPanel.setBackground(Color.WHITE);
         FlowLayout layout = new FlowLayout();
-//        layout.setVgap(25);
-//        layout.setHgap(25);
         wishlistPanel.setLayout(layout);
 
         for (int i = 0; i < 10; i++) {
-            dummyButton = createButton("dummyButton" + Integer.toString(i), 0, 0, Color.WHITE, color2, font1);
+            dummyButton = new CustomJButton("dummyButton" + Integer.toString(i), 0, 0, Color.WHITE, color2, font1);
             wishlistPanel.add(dummyButton);
         }
 

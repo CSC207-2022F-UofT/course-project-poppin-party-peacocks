@@ -1,5 +1,10 @@
 package DataBase;
 import Entities.*;
+
+import Entities.Item;
+import Entities.ListOfWishlists;
+import Entities.Wishlist;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -46,7 +51,7 @@ public class DataBase {
 
         // If the file directory doesn't exist, create a new file
         if (!file.isFile()) {
-           createFile(DataBase.getUserFilePath());
+            createFile(DataBase.getUserFilePath());
         }
 
         try {
@@ -93,7 +98,7 @@ public class DataBase {
             e.printStackTrace();
         }
         // Return a default user if user doesn't exist
-        return new User("Default Entities.User", "Password");
+        return new User("Default User", "Password");
     }
 
     /** Creates an item in JSON format

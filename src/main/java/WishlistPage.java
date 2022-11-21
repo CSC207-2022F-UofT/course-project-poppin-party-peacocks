@@ -72,16 +72,6 @@ public class WishlistPage extends JFrame {
         deleteThisWishlistButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                // Change middlePanel top label
-//                thisWishlistLabel.setText("Choose a Entities.Wishlist");
-//                // Reset itemPanel
-//                middlePanel.remove(itemPanel);
-//                itemPanel = new JPanel();
-//                itemPanel.setBackground(Color.PINK);
-//                itemPanel.setLayout(new GridLayout(0, 1));
-//                middlePanel.add(itemPanel, BorderLayout.CENTER);
-//                middlePanel.revalidate();
-//                middlePanel.repaint();
                 // TODO
             }
         });
