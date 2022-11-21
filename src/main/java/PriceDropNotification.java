@@ -7,6 +7,7 @@ public class PriceDropNotification implements BaseNotification {
     private Boolean showNotification;
 
     public PriceDropNotification(Item item) {
+        this.showNotification = Boolean.FALSE;
         TimerTask checkSale = new TimerTask() {
             @Override
             public void run() {
@@ -39,7 +40,8 @@ public class PriceDropNotification implements BaseNotification {
     }
 
     /** Logic to check if price drop notification should be seen */
-    public void checkNotification() {
+    public boolean checkNotification() {
         this.showNotification = this.item.isPriceBelowDesiredPrice();
+        return this.showNotification;
     }
 }

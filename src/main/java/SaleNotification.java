@@ -7,6 +7,7 @@ public class SaleNotification implements BaseNotification {
     private Boolean showNotification;
 
     public SaleNotification(Item item) {
+        this.showNotification = Boolean.FALSE;
         TimerTask checkSale = new TimerTask() {
             @Override
             public void run() {
@@ -40,7 +41,8 @@ public class SaleNotification implements BaseNotification {
     }
 
     /** Logic to check if sale notification should be seen */
-    public void checkNotification() {
+    public boolean checkNotification() {
         this.showNotification = item.isItemOnSale();
+        return this.showNotification;
     }
 }
