@@ -24,8 +24,12 @@ public class GeneratePriceHistoryUseCase {
      */
     public void updatePriceHistoryData(Item item) {
         ArrayList<Double> updatedPriceHistoryData = item.getPriceHistoryData();
+        ArrayList<Date> updatedPriceHistoryDates = item.getPriceHistoryDates();
         updatedPriceHistoryData.add(item.getItemPrice());
+        updatedPriceHistoryDates.add(new Date());
         item.setPriceHistoryData(updatedPriceHistoryData);
+        item.setPriceHistoryDates(updatedPriceHistoryDates);
+
     }
 
     /**
@@ -36,20 +40,12 @@ public class GeneratePriceHistoryUseCase {
      * @throws ParseException a date parse exception
      */
     public String[] formatPriceHistoryXAxisForGraphing() throws ParseException {
-        ArrayList<Double> priceData = item.getPriceHistoryData();
-        String[] dates = new String[priceData.size()];
+        ArrayList<Date> priceDates = item.getPriceHistoryDates();
+        String[] dates = new String[priceDates.size()];
 
-        // formatting the date added
-        Date firstDate = item.getItemDateAdded();
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-        String firstDateString = dateFormatter.format(firstDate);
-
-        // adding every date from the date added-date of the last price update call to return array of dates
-        Calendar c = Calendar.getInstance();
-        c.setTime(dateFormatter.parse(firstDateString));
-        for (int i = 0; i < dates.length; i++) {
-            c.add(Calendar.DATE, i);
-            dates[i] = dateFormatter.format(c.getTime());
+        for (int i = 0; i < priceDates.size(); i++){
+            dates[i] = dateFormatter.format(priceDates.get(i));
         }
 
         return dates;
@@ -80,37 +76,43 @@ public class GeneratePriceHistoryUseCase {
      */
     private int convertValidTimePeriodToDaysHelper(String timePeriod, Item item){
         int numDays = 0;
-        if(timePeriod.equals("24 hours")){
-            numDays = 1;
+        switch (timePeriod) {
+            case "24 hours":
+                numDays = 1;
+                break;
+            case "1 week":
+                numDays = 7;
+                break;
+            case "30 days":
+                numDays = 30;
+                break;
+            case "6 months":
+                numDays = 365 / 2;
+                break;
+            case "1 year":
+                numDays = 365;
+                break;
+            case "All Time":
+                numDays = item.getPriceHistoryData().size();
+                break;
+            default:
+                numDays = -1;
+                break;
         }
-        else if (timePeriod.equals("1 week")) {
-            numDays = 7;
+        if (numDays > item.getPriceHistoryData().size()){
+            return -1;
         }
-        else if (timePeriod.equals("30 days")) {
-            numDays = 30;
+        else {
+            return numDays;
         }
-        else if (timePeriod.equals("6 months")) {
-            numDays = 365/2;
-        }
-        else if (timePeriod.equals("1 year")) {
-            numDays = 365;
-        }
-        else if (timePeriod.equals("All Time")) {
-            numDays = item.getPriceHistoryData().size();
-        }
-        else{
-            numDays = -1;
-        }
-        return numDays;
     }
 
     /**
      * Calculates the average price of an item within the recent specified time span. Returns -1 if the time period
-     * input is invalid.
+     * input is invalid or if there is not enough info to calculate this.
      * @param timePeriod time period of the average to be calculated. Acceptable inputs include: 24 hours, 1 week,
      *                   30 days, 6 months, 1 year, and All Time
-     * @return the item's calculated average over the recent specified time period or -1 if the input time period is
-     * invalid
+     * @return the item's calculated average over the recent specified time period or -1 if invalid
      */
     public double calculateAveragePrice(String timePeriod) {
         int priceDataSize = item.getPriceHistoryData().size();
@@ -129,7 +131,13 @@ public class GeneratePriceHistoryUseCase {
             priceAverage = priceAverage + item.getPriceHistoryData().get(priceDataSize - i);
             i = i + 1;
         }
-        return priceAverage/numDays;
+        if (numDays == 0){
+            return -1;
+        }
+        else{
+            return priceAverage/numDays;
+        }
+
     }
 
     /**
@@ -181,20 +189,31 @@ public class GeneratePriceHistoryUseCase {
 
     /**
      * Calculates the difference in the current price in proportion to the desired price (ex. $20 item with $10 desired
-     * price should return 200)
-     * @return percentage of current price compared to desired price
+     * price should return 200) or -1 if the desired price is invalid input (0)
+     * @return percentage of current price compared to desired price or -1 for invalid calculations
      */
     public double calculatePercentChangeFromDesiredPrice(){
-        return (item.getItemPrice()/ item.getItemDesiredPrice()) *100;
+        if (item.getItemDesiredPrice() == 0){
+            return -1;
+        }
+        else{
+            return (item.getItemPrice()/ item.getItemDesiredPrice()) *100;
+        }
+
     }
 
     /**
      * Calculates the difference in the current price in proportion to the original price from when the item was added
-     * (ex. $20 item with $10 original price should return 200)
-     * @return percentage of current price compared to original price
+     * (ex. $20 item with $10 original price should return 200) or -1 if the original price is $0
+     * @return percentage of current price compared to original price or -1 for invalid calculations
      */
     public double calculatePercentChangeFromOriginalPrice(){
-        return (item.getItemPrice()/ item.getPriceHistoryData().get(0)) *100;
+        if (item.getPriceHistoryData().get(0) == 0){
+            return -1;
+        }
+        else {
+            return (item.getItemPrice() / item.getPriceHistoryData().get(0)) * 100;
+        }
     }
 
     /**
@@ -210,7 +229,12 @@ public class GeneratePriceHistoryUseCase {
         if (numDays == -1){
             return -1;
         }
-        return (item.getItemPrice()/ calculateAveragePrice(timePeriod)) *100;
+        else if (calculateAveragePrice(timePeriod) == 0){
+            return -1;
+        }
+        else {
+            return (item.getItemPrice() / calculateAveragePrice(timePeriod)) * 100;
+        }
     }
 
     /**
@@ -226,7 +250,12 @@ public class GeneratePriceHistoryUseCase {
         if (numDays == -1){
             return -1;
         }
-        return (item.getItemPrice()/ calculateLowestPrice(timePeriod)) *100;
+        else if(calculateLowestPrice(timePeriod) == 0){
+            return -1;
+        }
+        else {
+            return (item.getItemPrice() / calculateLowestPrice(timePeriod)) * 100;
+        }
     }
 
     /**
@@ -242,7 +271,12 @@ public class GeneratePriceHistoryUseCase {
         if (numDays == -1){
             return -1;
         }
-        return (item.getItemPrice()/ calculateHighestPrice(timePeriod)) *100;
+        else if (calculateHighestPrice(timePeriod) == 0){
+            return -1;
+        }
+        else {
+            return (item.getItemPrice() / calculateHighestPrice(timePeriod)) * 100;
+        }
     }
 
 
