@@ -4,8 +4,8 @@ public class ListOfWishlists {
 
     ArrayList<Wishlist> listWishlist;
     
-    public ListOfWishlists(ArrayList<Wishlist> wishlists){
-        this.listWishlist = wishlists;
+    public ListOfWishlists(){
+        this.listWishlist = new ArrayList<Wishlist>();
     }
 
 
