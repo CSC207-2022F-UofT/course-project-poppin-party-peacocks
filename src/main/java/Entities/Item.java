@@ -1,7 +1,8 @@
+package Entities;
+import Controller.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
 import java.io.IOException;
 import java.util.*;
 
@@ -20,6 +21,7 @@ public class Item {
     private double reviewStars;
     private int reviewCount;
     private ArrayList<Double> priceHistoryData;
+    private ArrayList<Date> priceHistoryDates;
 
     private Scheduler scheduler;
     private PriceDropNotification priceDropNotification;
@@ -102,6 +104,8 @@ public class Item {
     public ArrayList<Double> getPriceHistoryData(){
         return this.priceHistoryData;
     }
+    public ArrayList<Date> getPriceHistoryDates() {return this.priceHistoryDates; }
+
     public void setName(String newName){
         this.itemName = newName;
     }
@@ -119,13 +123,11 @@ public class Item {
     public void setPriceHistoryData(ArrayList<Double> updatedPrices){
         this.priceHistoryData = updatedPrices;
     }
+    public void setPriceHistoryDates(ArrayList<Date> updatedDates) {this.priceHistoryDates = updatedDates; }
 
     public void setReviewStars(double newReviewStars) { this.reviewStars = newReviewStars;}
-
     public double getReviewStars() { return reviewStars;}
-
     public void setReviewCount(int reviewCount) { this.reviewCount = reviewCount;}
-
     public int getReviewCount() { return reviewCount;}
 
     public void displayItemInConsole(int ranking){

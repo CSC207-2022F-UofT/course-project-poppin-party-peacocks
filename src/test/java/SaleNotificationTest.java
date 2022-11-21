@@ -1,5 +1,7 @@
+import Controller.SaleNotification;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import Entities.*;
 
 public class SaleNotificationTest {
     Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
