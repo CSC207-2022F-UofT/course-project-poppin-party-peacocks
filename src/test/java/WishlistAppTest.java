@@ -89,7 +89,7 @@ public class WishlistAppTest {
 
         // Test 1:  Set and Get Name
         TestItem.setName("AmazonBasics Wired Office Keyboard");
-        Assertions.assertEquals(true, "AmazonBasics Wired Office Keyboard" == TestItem.getItemName());
+        Assertions.assertEquals(true, "AmazonBasics Wired Office Keyboard".equals(TestItem.getItemName()));
 
 
     }
@@ -128,7 +128,7 @@ public class WishlistAppTest {
                         "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
         TestItem.setDesiredPrice(17.00);
         Assertions.assertEquals(true, 17.00 == TestItem.getItemDesiredPrice());
-        ;
+        
 
     }
 
@@ -146,7 +146,7 @@ public class WishlistAppTest {
                         "Backed by One-year Amazon Basics Warranty\n" +
                         "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
         String testUrl = "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1";
-        Assertions.assertEquals(true, testUrl == TestItem.getItemURL());
+        Assertions.assertEquals(true, testUrl.equals(TestItem.getItemURL()));
 
     }
 
@@ -165,7 +165,7 @@ public class WishlistAppTest {
                         "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
 
         String testImageUrl = "imageurl";
-        Assertions.assertEquals(true, testImageUrl == TestItem.getItemImageURL());
+        Assertions.assertEquals(true, testImageUrl.equals(TestItem.getItemImageURL()));
 
 
     }
@@ -185,7 +185,7 @@ public class WishlistAppTest {
                         "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
         String newDescription = "This is a new set item description for AmazonBasics Wired Office Keyboard";
         TestItem.setItemDescription(newDescription);
-        Assertions.assertEquals(true, newDescription == TestItem.getItemDescription());
+        Assertions.assertEquals(true, newDescription.equals(TestItem.getItemDescription()));
 
 
     }
