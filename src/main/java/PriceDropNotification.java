@@ -25,16 +25,20 @@ public class PriceDropNotification implements BaseNotification {
     public Boolean getShowNotification() {
         return showNotification;
     }
+
+    /** Starts scheduler */
     @Override
     public void startNotificationListener() {
         this.scheduler.enableTimer();
     }
 
+    /** Ends scheduler */
     @Override
     public void endNotificationListener() {
         this.scheduler.disableTimer();
     }
 
+    /** Logic to check if price drop notification should be seen */
     public void checkNotification() {
         this.showNotification = this.item.isPriceBelowDesiredPrice();
     }
