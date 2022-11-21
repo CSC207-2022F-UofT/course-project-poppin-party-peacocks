@@ -1,8 +1,6 @@
 package Entities;
-
-import Entities.Item;
-
 import java.util.Comparator;
+
 public class ItemPriceComparator implements Comparator<Item>{
     /**
      * Takes 2 Items and compares their prices using .getItemPrice()

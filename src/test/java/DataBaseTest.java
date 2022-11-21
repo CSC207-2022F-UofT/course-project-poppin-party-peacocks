@@ -3,7 +3,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+import Entities.*;
+import DataBase.*;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -96,7 +97,7 @@ public class DataBaseTest {
         User user = new User("TestUser", "Test");
         DataBase.saveListOfWishlists(wishlists, user);
 
-        Assertions.assertEquals(DataBase.getListOfWishlists("TestUser").listWishlist.get(0).getName(), "Exam Celebration Wish List");
+        Assertions.assertEquals(DataBase.getListOfWishlists("TestUser").getListOfWishlist().get(0).getName(), "Exam Celebration Wish List");
     }
 
 }

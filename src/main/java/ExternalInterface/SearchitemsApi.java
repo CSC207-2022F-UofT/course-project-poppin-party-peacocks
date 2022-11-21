@@ -1,7 +1,5 @@
 package ExternalInterface;
-
-import Entities.Item;
-
+import Entities.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -10,15 +8,12 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
 public class SearchitemsApi {
-
     /**
      * Calls Amazon Api search tool to return json string of search results of specified keyword and marketplace
-     *
-     * @param keywords    string keyword to search in Amazon
+     * @param keywords string keyword to search in Amazon
      * @param marketplace specified marketplace (ex: "CA" for Canada) to search in Amazon
      */
     private String apiSearch(String keywords, String marketplace) throws IOException, InterruptedException {
-
         String linkurl = keywordstext(keywords, marketplace);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(linkurl))
@@ -28,18 +23,13 @@ public class SearchitemsApi {
                 .build();
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
         return (response.body());
-
-
     }
 
     /**
      * Cleans Api return string
-     *
      * @param response string keyword to search in Amazon
      */
     private String cleanResponse(String response) {
-
-
         String modifiedResponse = response.replace("[{", "");
         modifiedResponse = modifiedResponse.replace("}]", "");
         modifiedResponse = modifiedResponse.replace('"', ' ');
@@ -51,13 +41,11 @@ public class SearchitemsApi {
     }
 
     /**
-     * Returns Arraylist of Entities.Item objects based on search results of the specified keyword on AMazon
-     *
-     * @param keyword     string keyword to search in Amazon
+     * Returns Arraylist of Entities.Item objects based on search results of the specified keyword on Amazon
+     * @param keyword string keyword to search in Amazon
      * @param marketplace specified marketplace (ex: "CA" for Canada) to search in Amazon
      */
     public ArrayList searchToList(String keyword, String marketplace) throws IOException, InterruptedException {
-
         String response = apiSearch(keyword, marketplace);
         response = cleanResponse(response);
 
@@ -74,10 +62,8 @@ public class SearchitemsApi {
             String pair = pairs[i];
             String[] keyValue = pair.split(" :");
 
-
             if (keyValue[0].contains("title") && !keyValue[0].contains("subtitle")) {
                 titleList.add(keyValue[1]);
-
             }
             if (keyValue[0].contains("price")) {
                 priceList.add(keyValue[1].replace("$", ""));
@@ -85,15 +71,12 @@ public class SearchitemsApi {
             if (keyValue[0].contains("detailPageURL")) {
                 urlList.add(keyValue[1]);
             }
-
             if (keyValue[0].contains("totalReviews")) {
                 reviewCountList.add(keyValue[1]);
             }
-
             if (keyValue[0].contains("rating")) {
                 reviewStarList.add(keyValue[1]);
             }
-
             if (keyValue[0].contains("imageUrl")) {
                 imageUrlList.add(keyValue[1]);
             }
@@ -102,21 +85,16 @@ public class SearchitemsApi {
         for (int i = 0; i < titleList.size(); i++) {
             Item newItem = new Item(titleList.get(i), Double.parseDouble(priceList.get(i)), Double.parseDouble(priceList.get(i)), urlList.get(i), titleList.get(i), new String[]{keyword}, Integer.parseInt(reviewCountList.get(i).replace(" ", "")), Double.parseDouble(reviewStarList.get(i).replace(" ", "")), imageUrlList.get(i));
             itemList.add(newItem);
-
         }
         return itemList;
     }
 
     /**
      * Returns custom url link with respective keyword search and marketplace
-     *
-     * @param keywords    string keyword to search in Amazon
+     * @param keywords string keyword to search in Amazon
      * @param marketplace specified marketplace (ex: "CA" for Canada) to search in Amazon
      */
     private String keywordstext(String keywords, String marketplace) {
-
         return "https://amazon-price1.p.rapidapi.com/search?keywords=" + keywords.replace(" ", "%20") + "&marketplace=" + marketplace;
     }
-
-
 }

@@ -1,8 +1,6 @@
 package Entities;
-
-import Entities.Item;
-
 import java.util.Comparator;
+
 public class ItemReviewStarComparator implements Comparator<Item> {
 
     /**
