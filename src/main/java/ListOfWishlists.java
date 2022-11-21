@@ -8,5 +8,7 @@ public class ListOfWishlists {
         this.listWishlist = new ArrayList<Wishlist>();
     }
 
-
+    public ListOfWishlists(ArrayList<Wishlist> wishlists){
+        this.listWishlist = wishlists;
+    }
 }
