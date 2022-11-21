@@ -1,5 +1,5 @@
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ItemNameComparatorTest {
     Item myFavDrink = new Item("Lime Bubbly", 5.47, 5.00, "www.shoppers.com/bubbly",
@@ -24,6 +24,6 @@ public class ItemNameComparatorTest {
         christmasWishlist.sortWishlistByName("ascending");
         testingWishlist.sortWishlistByName("ascending");
 
-        Assertions.assertEquals(testingWishlist, christmasWishlist);
+        Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }
 }
