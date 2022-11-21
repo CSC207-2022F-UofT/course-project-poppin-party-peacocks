@@ -2,8 +2,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
+import Entities.*;
+import DataBase.DataBase;
 public class ItemTest {
     /**
      * Testing updatePrice feature and if price has been updated (different price than initial price)
