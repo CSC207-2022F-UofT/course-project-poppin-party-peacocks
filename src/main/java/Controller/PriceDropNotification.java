@@ -1,12 +1,14 @@
+package Controller;
+import Entities.*;
 import java.io.IOException;
 import java.util.TimerTask;
 
-public class SaleNotification implements BaseNotification {
+public class PriceDropNotification implements BaseNotification {
     private final Scheduler scheduler;
     private final Item item;
     private Boolean showNotification;
 
-    public SaleNotification(Item item) {
+    public PriceDropNotification(Item item) {
         this.showNotification = Boolean.FALSE;
         TimerTask checkSale = new TimerTask() {
             @Override
@@ -23,7 +25,6 @@ public class SaleNotification implements BaseNotification {
         this.scheduler = new Scheduler(checkSale, 1000 * 60 * 60 * 24);
         this.item = item;
     }
-
     public Boolean getShowNotification() {
         return showNotification;
     }
@@ -40,9 +41,9 @@ public class SaleNotification implements BaseNotification {
         this.scheduler.disableTimer();
     }
 
-    /** Logic to check if sale notification should be seen */
+    /** Logic to check if price drop notification should be seen */
     public boolean checkNotification() {
-        this.showNotification = item.isItemOnSale();
+        this.showNotification = this.item.isPriceBelowDesiredPrice();
         return this.showNotification;
     }
 }
