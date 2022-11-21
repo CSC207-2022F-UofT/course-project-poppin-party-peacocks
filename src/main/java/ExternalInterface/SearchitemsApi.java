@@ -22,7 +22,7 @@ public class SearchitemsApi {
         String linkurl = keywordstext(keywords, marketplace);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(linkurl))
-                .header("X-RapidAPI-Key", "9364e66fc1mshe8be4541ae0999ap180a9ejsn182bd6379d98")
+                .header("X-RapidAPI-Key", "389975de24msh53006b143bcd29fp1c12b7jsnee353d32ee67")
                 .header("X-RapidAPI-Host", "amazon-price1.p.rapidapi.com")
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
