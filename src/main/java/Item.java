@@ -21,6 +21,7 @@ public class Item {
     private int reviewCount;
     private ArrayList<Double> priceHistoryData;
 
+    private Scheduler scheduler;
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl){
         this.itemName = name;
@@ -37,6 +38,18 @@ public class Item {
         this.reviewStars = reviewStars;
         this.priceHistoryData = new ArrayList<Double>();
         this.priceHistoryData.add(this.itemPrice);
+
+        TimerTask t = new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    updatePrice();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+        this.scheduler = new Scheduler(t, 1000 * 60 * 60);
     }
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars, String imageUrl){
         this.itemName = name;
@@ -144,23 +157,4 @@ public class Item {
     public boolean isPriceBelowDesiredPrice(){
         return itemPrice < desiredPrice;
     }
-
-    // Updates the price asynchronously every hour
-    public class Scheduler {
-        public void main(String[] args) {
-            Timer timer = new Timer ();
-            TimerTask t = new TimerTask () {
-                @Override
-                public void run () {
-                    try {
-                        updatePrice();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            };
-            timer.schedule (t, 0l, 1000*60*60);
-        }
-    }
-
 }
