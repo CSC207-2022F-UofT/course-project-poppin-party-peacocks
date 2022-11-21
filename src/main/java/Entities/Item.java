@@ -1,7 +1,9 @@
+package Entities;
+
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
 import java.io.IOException;
 import java.util.*;
 
@@ -123,11 +125,8 @@ public class Item {
     public void setPriceHistoryDates(ArrayList<Date> updatedDates) {this.priceHistoryDates = updatedDates; }
 
     public void setReviewStars(double newReviewStars) { this.reviewStars = newReviewStars;}
-
     public double getReviewStars() { return reviewStars;}
-
     public void setReviewCount(int reviewCount) { this.reviewCount = reviewCount;}
-
     public int getReviewCount() { return reviewCount;}
 
     public void displayItemInConsole(int ranking){
