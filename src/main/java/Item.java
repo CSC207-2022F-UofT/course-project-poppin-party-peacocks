@@ -4,6 +4,8 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Objects;
 
 public class Item {
     private String itemName;
@@ -13,14 +15,13 @@ public class Item {
     private String itemDescription;
     private String[] tags;
     private double itemPrice;
+    private String itemCurrency;
     private double priceChange;
     private double desiredPrice;
     private Date dateAdded;
     private Date dateLastUpdated;
     private double reviewStars;
     private int reviewCount;
-
-
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl){
         this.itemName = name;
@@ -79,9 +80,7 @@ public class Item {
     public String[] getTags(){
         return this.tags;
     }
-
-
-
+    public String getItemCurrency() {return this.itemCurrency; }
     public void setName(String newName){
         this.itemName = newName;
     }
@@ -131,6 +130,37 @@ public class Item {
         } catch (IOException e){
             e.printStackTrace();
         }
+    }
+    public void updateCurrency() {
+        HashMap<String, Double> cadConversion = new HashMap<>();
+        cadConversion.put("USD", 0.76);
+        cadConversion.put("YUAN", 5.33);
+        HashMap<String, Double> yuanConversion = new HashMap<>();
+        yuanConversion.put("USD", 0.14);
+        yuanConversion.put("CAD", 0.19);
+        HashMap<String, Double> usdConversion = new HashMap<>();
+        usdConversion.put("CAD", 1.34);
+        usdConversion.put("YUAN", 7.17);
+
+        String currentCurrency = this.itemCurrency;
+        String newCurrency = DataBase.currentUser.getCurrency();
+
+        if (Objects.equals(currentCurrency, newCurrency)) {
+            return;
+        }
+
+        switch (currentCurrency) {
+            case "CAD":
+                this.itemPrice = cadConversion.get(newCurrency) * this.itemPrice;
+                break;
+            case "USD":
+                this.itemPrice = usdConversion.get(newCurrency) * this.itemPrice;
+                break;
+            case "YUAN":
+                this.itemPrice = yuanConversion.get(newCurrency) * this.itemPrice;
+                break;
+        }
+        this.itemCurrency = newCurrency;
     }
 
     public boolean isPriceBelowDesiredPrice(){
