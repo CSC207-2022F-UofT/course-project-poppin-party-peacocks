@@ -37,6 +37,9 @@ public class ItemTest {
         // Test 1:  Set and Get Name
         TestItem.setName("AmazonBasics Wired Office Keyboard");
         Assertions.assertEquals(true, "AmazonBasics Wired Office Keyboard" == TestItem.getItemName());
+        Assertions.assertEquals(true, "AmazonBasics Wired Office Keyboard".equals(TestItem.getItemName()));
+
+
     }
 
     /**
