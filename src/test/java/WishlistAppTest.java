@@ -65,7 +65,9 @@ public class WishlistAppTest {
                         "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
         // Test 1:  Set and Get Name
         TestItem.setName("AmazonBasics Wired Office Keyboard");
-        Assertions.assertEquals(true, "AmazonBasics Wired Office Keyboard" == TestItem.getItemName());
+        Assertions.assertEquals(true, "AmazonBasics Wired Office Keyboard".equals(TestItem.getItemName()));
+
+
     }
 
     /**

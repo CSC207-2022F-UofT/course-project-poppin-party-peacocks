@@ -1,9 +1,11 @@
 package Entities;
+
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import java.io.IOException;
-import java.util.Date;
+import java.util.*;
 
 public class Item {
     private String itemName;
@@ -19,6 +21,10 @@ public class Item {
     private Date dateLastUpdated;
     private double reviewStars;
     private int reviewCount;
+    private ArrayList<Double> priceHistoryData;
+    private ArrayList<Date> priceHistoryDates;
+
+    private Scheduler scheduler;
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl){
         this.itemName = name;
@@ -33,6 +39,22 @@ public class Item {
         this.dateLastUpdated = new Date();
         this.reviewCount = reviewCount;
         this.reviewStars = reviewStars;
+        this.priceHistoryData = new ArrayList<Double>();
+        this.priceHistoryData.add(this.itemPrice);
+        this.priceHistoryDates = new ArrayList<Date>();
+        this.priceHistoryDates.add(new Date());
+
+        TimerTask t = new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    updatePrice();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+        this.scheduler = new Scheduler(t, 1000 * 60 * 60);
     }
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars, String imageUrl){
         this.itemName = name;
@@ -76,6 +98,13 @@ public class Item {
     public String[] getTags(){
         return this.tags;
     }
+
+    public ArrayList<Double> getPriceHistoryData(){
+        return this.priceHistoryData;
+    }
+    public ArrayList<Date> getPriceHistoryDates() {return this.priceHistoryDates; }
+
+
     public void setName(String newName){
         this.itemName = newName;
     }
@@ -89,6 +118,12 @@ public class Item {
     public void setDesiredPrice(double newDesiredPrice) {
         this.desiredPrice = newDesiredPrice;
     }
+
+    public void setPriceHistoryData(ArrayList<Double> updatedPrices){
+        this.priceHistoryData = updatedPrices;
+    }
+    public void setPriceHistoryDates(ArrayList<Date> updatedDates) {this.priceHistoryDates = updatedDates; }
+
     public void setReviewStars(double newReviewStars) { this.reviewStars = newReviewStars;}
     public double getReviewStars() { return reviewStars;}
     public void setReviewCount(int reviewCount) { this.reviewCount = reviewCount;}
@@ -106,7 +141,7 @@ public class Item {
         System.out.println("------------------------------------------");
     }
 
-    /** Updates price of Entities.Item object through web-scraping the product page on Amazon
+    /** Updates price of Item object through web-scraping the product page on Amazon
      * */
     public void updatePrice() throws IOException{
         try {
