@@ -53,7 +53,13 @@ public class AddWishlistPage extends JFrame {
         // bottom
         southPanel = new JPanel(new FlowLayout());
         cancelButton = new JButton("Cancel");
+        cancelButton.setBorder(new RoundedBorder(5));
+        cancelButton.setForeground(Color.white);
+
         createButton = new JButton("Add");
+        createButton.setBorder(new RoundedBorder(5));
+        createButton.setForeground(Color.white);
+
         southPanel.add(cancelButton);
         southPanel.add(createButton);
         mainPanel.add(southPanel, BorderLayout.SOUTH);

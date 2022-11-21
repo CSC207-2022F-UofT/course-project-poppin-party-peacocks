@@ -29,22 +29,30 @@ public class WishlistPage extends JFrame {
         setSize(400, 638);
         setResizable(false);
 
+
+        // constants
         Color color = new Color(150, 75, 130);
+        Color color1 = new Color(194, 234, 186);
+        Color color2 = new Color(106, 189, 154);
+        Font f1 = new Font(Font.SERIF, Font.PLAIN,  10);
 
         middlePanel = new JPanel(new BorderLayout(20, 20));
-        middlePanel.setBackground(color);
+        middlePanel.setBackground(color1);
         middlePanel.setBounds(400, 0, 400, 600);
         // top label (wishlist name)
         northPanel = new JPanel(new FlowLayout());
         backButton = new JButton("Back to List of Wishlists");
         northPanel.add(backButton);
         thisWishlistLabel = new JLabel("Get this wishlist title");
+        thisWishlistLabel.setForeground(Color.white);
+
         thisWishlistLabel.setHorizontalAlignment(JLabel.CENTER);
         northPanel.add(thisWishlistLabel);
+        northPanel.setBackground(color2);
         middlePanel.add(northPanel, BorderLayout.NORTH);
         // items
         itemPanel = new JPanel();
-        itemPanel.setBackground(Color.PINK);
+        itemPanel.setBackground(color2);
         itemPanel.setLayout(new GridLayout(0, 1));
         dummy4 = new JButton("d4");
         dummy5 = new JButton("d5");
@@ -60,12 +68,14 @@ public class WishlistPage extends JFrame {
         middlePanel.add(middleEastLabel, BorderLayout.EAST);
         // footer
         middleFooterPanel = new JPanel(new FlowLayout());
-        middleFooterPanel.setBackground(Color.DARK_GRAY);
-        deleteThisWishlistButton = new JButton("Delete this Wishlist");
-        middleFooterPanel.add(deleteThisWishlistButton);
-        addItemButton = new JButton("Add Item");
+        middleFooterPanel.setBackground(color2);
 
+        deleteThisWishlistButton = new CustomJButton("Delete this Wishlist", 0, 0, color2, Color.white, f1);
+        middleFooterPanel.add(deleteThisWishlistButton);
+
+        addItemButton = new CustomJButton("Add Item", 0, 0, color2, Color.white, f1);
         middleFooterPanel.add(addItemButton);
+
         // add footer to middlePanel
         middlePanel.add(middleFooterPanel, BorderLayout.SOUTH);
 
