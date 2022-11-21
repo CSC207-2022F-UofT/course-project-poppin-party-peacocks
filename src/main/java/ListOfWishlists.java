@@ -11,4 +11,8 @@ public class ListOfWishlists {
     public ListOfWishlists(ArrayList<Wishlist> wishlists){
         this.listWishlist = wishlists;
     }
+
+    public void addWishlist(Wishlist wishlist) {
+        this.listWishlist.add(wishlist);
+    }
 }

@@ -1,3 +1,6 @@
+import Controller.PriceDropNotification;
+import Controller.SaleNotification;
+import Controller.Scheduler;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -22,6 +25,8 @@ public class Item {
     private ArrayList<Double> priceHistoryData;
 
     private Scheduler scheduler;
+    private PriceDropNotification priceDropNotification;
+    private SaleNotification saleNotification;
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl){
         this.itemName = name;
@@ -49,7 +54,10 @@ public class Item {
                 }
             }
         };
-        this.scheduler = new Scheduler(t, 1000 * 60 * 60);
+        Scheduler scheduler = new Scheduler(t, 1000 * 60 * 60);
+        this.scheduler = scheduler;
+        this.priceDropNotification = new PriceDropNotification(scheduler);
+        this.saleNotification = new SaleNotification(scheduler);
     }
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars, String imageUrl){
         this.itemName = name;
@@ -93,12 +101,9 @@ public class Item {
     public String[] getTags(){
         return this.tags;
     }
-
     public ArrayList<Double> getPriceHistoryData(){
         return this.priceHistoryData;
     }
-
-
     public void setName(String newName){
         this.itemName = newName;
     }
@@ -136,6 +141,9 @@ public class Item {
         System.out.println("Review Count:" + reviewCount);
         System.out.println("------------------------------------------");
     }
+    public boolean isPriceBelowDesiredPrice(){
+        return itemPrice < desiredPrice;
+    }
 
     /** Updates price of Item object through web-scraping the product page on Amazon
      * */
@@ -152,9 +160,5 @@ public class Item {
         } catch (IOException e){
             e.printStackTrace();
         }
-    }
-
-    public boolean isPriceBelowDesiredPrice(){
-        return itemPrice < desiredPrice;
     }
 }
