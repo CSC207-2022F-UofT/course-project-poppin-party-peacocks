@@ -282,6 +282,6 @@ public class DataBase {
         int reviewCount = Integer.parseInt(itemData.get("reviewCount").toString());
         String imageURL = (String) itemData.get("imageURL");
 
-        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars, imageURL);
+        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars, imageURL, "CAD");
     }
 }

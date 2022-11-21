@@ -58,7 +58,39 @@ public class Item {
         };
         this.scheduler = new Scheduler(t, 1000 * 60 * 60);
     }
-    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars, String imageUrl){
+
+    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl, String itemCurrency){
+        this.itemName = name;
+        this.itemPrice = price;
+        this.priceChange = price;
+        this.desiredPrice = desiredPrice;
+        this.dateAdded = new Date();
+        this.url = url;
+        this.imageUrl = imageUrl;
+        this.itemDescription = itemDescription;
+        this.tags = tags;
+        this.dateLastUpdated = new Date();
+        this.reviewCount = reviewCount;
+        this.reviewStars = reviewStars;
+        this.priceHistoryData = new ArrayList<Double>();
+        this.priceHistoryData.add(this.itemPrice);
+        this.priceHistoryDates = new ArrayList<Date>();
+        this.priceHistoryDates.add(new Date());
+
+        TimerTask t = new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    updatePrice();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+        this.scheduler = new Scheduler(t, 1000 * 60 * 60);
+        this.itemCurrency = itemCurrency;
+    }
+    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars, String imageUrl, String itemCurrency){
         this.itemName = name;
         this.itemPrice = price;
         this.priceChange = priceChange;
@@ -70,6 +102,7 @@ public class Item {
         this.reviewCount = reviewCount;
         this.reviewStars = reviewStars;
         this.imageUrl = imageUrl;
+        this.itemCurrency = itemCurrency;
     }
 
     public String getItemName(){
@@ -192,6 +225,7 @@ public class Item {
                 this.itemPrice = yuanConversion.get(newCurrency) * this.itemPrice;
                 break;
         }
+        this.itemPrice =  Math.round(this.itemPrice * 100.0) / 100.0;
         this.itemCurrency = newCurrency;
     }
 
