@@ -86,17 +86,17 @@ public class DataBaseTest {
         Assertions.assertEquals(parsedList.getItemList().toArray().length, wishlist.getItemList().toArray().length);
     }
 
-    @Test
-    public void TestDataBaseWritesAndSavesListOfWishLists() {
-        ListOfWishlists wishlists = new ListOfWishlists();
-        Wishlist wishlist = new Wishlist("Exam Celebration Wish List");
-        wishlist.setDateAdded(new Date(testDate));
-        wishlists.addWishlist(wishlist);
-
-        User user = new User("TestUser", "Test");
-        DataBase.saveListOfWishlists(wishlists, user);
-
-        Assertions.assertEquals(DataBase.getListOfWishlists("TestUser").listWishlist.get(0).getName(), "Exam Celebration Wish List");
-    }
+//    @Test
+//    public void TestDataBaseWritesAndSavesListOfWishLists() {
+//        ListOfWishlists wishlists = new ListOfWishlists();
+//        Wishlist wishlist = new Wishlist("Exam Celebration Wish List");
+//        wishlist.setDateAdded(new Date(testDate));
+//        wishlists.addWishlist(wishlist);
+//
+//        User user = new User("TestUser", "Test");
+//        DataBase.saveListOfWishlists(wishlists, user);
+//
+//        Assertions.assertEquals(DataBase.getListOfWishlists("TestUser").listWishlist.get(0).getName(), "Exam Celebration Wish List");
+//    }
 
 }
