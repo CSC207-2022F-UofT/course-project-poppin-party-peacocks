@@ -189,7 +189,7 @@ public class ItemSearcher {
 
 
             assert price != null;
-            double sellingPrice = Double.parseDouble(price.text()..replace(",", "").substring(1));
+            double sellingPrice = Double.parseDouble(price.text().replace(",", "").substring(1));
             int countRating = Integer.parseInt(htmlCountRating.text().replace(",", "").split(" ")[0]);
             double starRating = Double.parseDouble(htmlStarRating.text().split(" ")[0]);
             assert htmlImgUrl != null;
