@@ -45,7 +45,7 @@ public class SearchitemsApi {
      * @param keyword string keyword to search in Amazon
      * @param marketplace specified marketplace (ex: "CA" for Canada) to search in Amazon
      */
-    public ArrayList searchToList(String keyword, String marketplace) throws IOException, InterruptedException {
+    public ArrayList<Item> searchToList(String keyword, String marketplace) throws IOException, InterruptedException {
         String response = apiSearch(keyword, marketplace);
         response = cleanResponse(response);
 
@@ -66,7 +66,7 @@ public class SearchitemsApi {
                 titleList.add(keyValue[1]);
             }
             if (keyValue[0].contains("price")) {
-                priceList.add(keyValue[1].replace("$", ""));
+                priceList.add(keyValue[1].trim().split(" ")[0].replace("$", ""));
             }
             if (keyValue[0].contains("detailPageURL")) {
                 urlList.add(keyValue[1]);
@@ -81,9 +81,34 @@ public class SearchitemsApi {
                 imageUrlList.add(keyValue[1]);
             }
         }
-
         for (int i = 0; i < titleList.size(); i++) {
-            Item newItem = new Item(titleList.get(i), Double.parseDouble(priceList.get(i)), Double.parseDouble(priceList.get(i)), urlList.get(i), titleList.get(i), new String[]{keyword}, Integer.parseInt(reviewCountList.get(i).replace(" ", "")), Double.parseDouble(reviewStarList.get(i).replace(" ", "")), imageUrlList.get(i));
+            double itemPrice = 0;
+            int reviewCount = 0;
+            double reviewStar = 0;
+            try{
+                itemPrice = Double.parseDouble(priceList.get(i));
+            }catch(NumberFormatException e){
+                itemPrice = 0;
+            }
+            try{
+                reviewCount = Integer.parseInt(reviewCountList.get(i).replace(" ", ""));
+            }catch(NumberFormatException e){
+                reviewCount = 0;
+            }
+            try{
+                reviewStar = Double.parseDouble(reviewStarList.get(i).replace(" ", ""));
+            }catch(NumberFormatException e){
+                reviewStar = 0;
+            }
+
+            Item newItem = new Item(titleList.get(i),
+                    itemPrice,
+                    itemPrice,
+                    urlList.get(i), titleList.get(i),
+                    new String[]{keyword},
+                    reviewCount,
+                    reviewStar,
+                    imageUrlList.get(i));
             itemList.add(newItem);
         }
         return itemList;
