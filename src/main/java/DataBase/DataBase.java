@@ -18,10 +18,10 @@ import java.util.*;
 
 public class DataBase {
 
+    public static User currentUser;
     public static String getUserFilePath() {
         return "src/main/database/users.txt";
     }
-
     public static String getWishlistPath(String userName) {
         return "src/main/database/" + userName + ".txt";
     }
@@ -86,7 +86,9 @@ public class DataBase {
                     String userName = (String) parsedData.get("user");
                     String password = (String) parsedData.get("password");
                     String currency = (String) parsedData.get("currency");
-                    return new User(userName, password, currency);
+                    User newUser = new User(userName, password, currency);
+                    currentUser = newUser;
+                    return newUser;
                 }
             }
             myReader.close();
@@ -286,6 +288,6 @@ public class DataBase {
         int reviewCount = Integer.parseInt(itemData.get("reviewCount").toString());
         String imageURL = (String) itemData.get("imageURL");
 
-        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars, imageURL);
+        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars, imageURL, "CAD");
     }
 }
