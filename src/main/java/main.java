@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import Entities.Item;
 
 public class main {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -53,7 +54,12 @@ public class main {
 
         Item searchKeyboard = itemSearcher.searchItemUrl("https://www.amazon.ca/AmazonBasics-15-Piece-Non-Stick-Cookware-Set/dp/B07481LPMF/ref=sr_1_1_sspa?crid=GL9OB02V670X&keywords=pan&qid=1669055492&qu=eyJxc2MiOiI1Ljk4IiwicXNhIjoiNS42OCIsInFzcCI6IjUuMDgifQ%3D%3D&sprefix=pa%2Caps%2C150&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1");
 
+        searchKeyboard.displayItemInConsole(1);
         ArrayList<Item> searchItems = itemSearcher.searchItemKeywords("mechanical keyboard");
+
+        for (Item item: searchItems){
+            item.displayItemInConsole(1);
+        }
 
 
     }
