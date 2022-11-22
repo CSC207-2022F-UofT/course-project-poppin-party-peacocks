@@ -132,7 +132,7 @@ public class ItemSearcher {
     /**
      * Returns Arraylist of Item objects based on search results of the specified keyword on AMazon
      *
-     * @param keywords     string keyword to search in Amazon interace
+     * @param keywords     string keyword to search in Amazon interface
      */
 
     public ArrayList<Item> searchItemKeywords(String keywords) throws IOException, InterruptedException {
