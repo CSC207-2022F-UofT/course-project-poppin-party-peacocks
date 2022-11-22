@@ -1,3 +1,11 @@
+package ExternalInterface;
+
+import Entities.Item;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -5,7 +13,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
-public class SearchitemsApi {
+public class ItemSearcher {
 
     /**
      * Calls Amazon Api search tool to return json string of search results of specified keyword and marketplace
@@ -112,6 +120,92 @@ public class SearchitemsApi {
     private String keywordstext(String keywords, String marketplace) {
 
         return "https://amazon-price1.p.rapidapi.com/search?keywords=" + keywords.replace(" ", "%20") + "&marketplace=" + marketplace;
+    }
+    /**
+     * Returns generated search amazon link based on keyword
+     *
+     * @param keywords     string keyword to search in Amazon
+     */
+    private String itemLinkGenerator(String keywords) {
+        return "https://www.amazon.ca/s?k=" + keywords.replace(" ", "+");
+    }
+    /**
+     * Returns Arraylist of Item objects based on search results of the specified keyword on AMazon
+     *
+     * @param keywords     string keyword to search in Amazon interface
+     */
+
+    public ArrayList<Item> searchItemKeywords(String keywords) throws IOException, InterruptedException {
+        String url = this.itemLinkGenerator(keywords);
+        ArrayList<Item> itemList = new ArrayList<>();
+        ArrayList<String> listNames = new ArrayList<>();
+        ArrayList<Double> listPrices = new ArrayList<>();
+        ArrayList<String> listUrls = new ArrayList<>();
+        ArrayList<Double> listStars = new ArrayList<>();
+        ArrayList<Integer> listCount = new ArrayList<>();
+        ArrayList<String> listImgs = new ArrayList<>();
+        try {
+            Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
+
+            Elements productUrls = doc.select("h2.a-size-mini.a-spacing-none.a-color-base.s-line-clamp-4").select("a");
+
+
+            for (Element item : productUrls) {
+                String newUrl = "https://www.amazon.ca" + item.attr("href");
+                listUrls.add(newUrl);
+            }
+
+            for (int i = 0; i < 10; i++) {
+                itemList.add(searchItemUrl(listUrls.get(i)));
+            }
+
+            return itemList;
+
+        } catch (IOException e) {
+            return new ArrayList<Item>();
+
+        }
+
+
+    }
+
+    /**
+     * Searches for item based on given url. Returns Item object based on given Amazon Url
+     *
+     * @param url    url of amazon item
+
+     */
+    public Item searchItemUrl(String url) throws IOException {
+
+        try {
+            // This line specifies window type and layout of amazon page based on  Window Version and browser for webscraping
+            Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
+            Element htmlName = doc.select(".a-size-large.product-title-word-break").first();
+            Element price = doc.select(".a-offscreen").first();
+            Element htmlDescription = doc.select("ul.a-unordered-list.a-vertical.a-spacing-mini").select("span.a-list-item").first();
+            Element htmlCountRating = doc.select("div.a-row.a-spacing-medium.averageStarRatingNumerical").select("span.a-size-base.a-color-secondary").first();
+            Element htmlImgUrl = doc.select("ul.a-unordered-list.a-nostyle.a-horizontal.list.maintain-height").select("span.a-list-item span.a-declarative").select("span.a-declarative").select("div.imgTagWrapper").select("img").first();
+            Element htmlStarRating = doc.select("div.a-fixed-left-grid-col.aok-align-center.a-col-right").select("div.a-row").select("span.a-size-base.a-nowrap").first();
+
+
+            assert price != null;
+            double sellingPrice = Double.parseDouble(price.text().substring(1));
+            int countRating = Integer.parseInt(htmlCountRating.text().replace(",", "").split(" ")[0]);
+            double starRating = Double.parseDouble(htmlStarRating.text().split(" ")[0]);
+            assert htmlImgUrl != null;
+            String imgUrl = htmlImgUrl.attr("src");
+            assert htmlName != null;
+            String name = htmlName.text();
+            assert htmlDescription != null;
+            String description = htmlDescription.text();
+            return new Item(name, sellingPrice, sellingPrice, url, description, new String[]{}, countRating, starRating, imgUrl);
+
+
+        } catch (IOException e) {
+            return new Item("", 0, 0, "", "", new String[]{}, 0, 0, "");
+        }
+
+
     }
 
 
