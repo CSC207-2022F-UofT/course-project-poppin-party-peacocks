@@ -1,4 +1,5 @@
 package Entities;
+import Controller.*;
 
 import DataBase.*;
 import org.jsoup.Jsoup;
@@ -29,6 +30,8 @@ public class Item {
     private ArrayList<Date> priceHistoryDates;
 
     private Scheduler scheduler;
+    private PriceDropNotification priceDropNotification;
+    private SaleNotification saleNotification;
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl){
         this.itemName = name;
@@ -45,10 +48,8 @@ public class Item {
         this.reviewStars = reviewStars;
         this.priceHistoryData = new ArrayList<Double>();
         this.priceHistoryData.add(this.itemPrice);
-        this.priceHistoryDates = new ArrayList<Date>();
-        this.priceHistoryDates.add(new Date());
 
-        TimerTask t = new TimerTask() {
+        TimerTask updatePriceTask = new TimerTask() {
             @Override
             public void run() {
                 try {
@@ -58,7 +59,11 @@ public class Item {
                 }
             }
         };
-        this.scheduler = new Scheduler(t, 1000 * 60 * 60);
+
+        Scheduler updatePriceScheduler = new Scheduler(updatePriceTask, 1000 * 60 * 60 * 24);
+        this.scheduler = updatePriceScheduler;
+        this.priceDropNotification = new PriceDropNotification(this);
+        this.saleNotification = new SaleNotification(this);
     }
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl, String itemCurrency){
@@ -135,7 +140,6 @@ public class Item {
     public String[] getTags(){
         return this.tags;
     }
-
     public ArrayList<Double> getPriceHistoryData(){
         return this.priceHistoryData;
     }
@@ -178,6 +182,10 @@ public class Item {
         System.out.println("Review Count:" + reviewCount);
         System.out.println("------------------------------------------");
     }
+    public boolean isPriceBelowDesiredPrice(){
+        return itemPrice < desiredPrice;
+    }
+    public boolean isItemOnSale() {return priceChange < 0;}
 
     /** Updates price of Item object through web-scraping the product page on Amazon
      * */
@@ -230,7 +238,4 @@ public class Item {
         this.itemCurrency = newCurrency;
     }
 
-    public boolean isPriceBelowDesiredPrice(){
-        return itemPrice < desiredPrice;
-    }
 }

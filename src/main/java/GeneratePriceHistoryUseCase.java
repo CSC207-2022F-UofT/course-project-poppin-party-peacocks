@@ -1,5 +1,5 @@
 import Entities.*;
-import Entities.Scheduler;
+import Controller.Scheduler;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
