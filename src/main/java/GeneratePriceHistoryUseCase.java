@@ -77,40 +77,30 @@ public class GeneratePriceHistoryUseCase {
     /**
      * Helper method for turning time period inputs to number of days. Returns -1 for invalid input.
      * @param timePeriod the specified time period
-     * @param item the item that the time period methods will be applied to
      * @return the approximate number of days in the specified time period or -1 for invalid inputs
      */
-    public int convertValidTimePeriodToDaysHelper(String timePeriod, Item item){
+    public int convertValidTimePeriodToDaysHelper(String timePeriod){
         int numDays = 0;
-        switch (timePeriod) {
-            case "24 hours":
-                numDays = 1;
-                break;
-            case "1 week":
-                numDays = 7;
-                break;
-            case "30 days":
-                numDays = 30;
-                break;
-            case "6 months":
-                numDays = 183;
-                break;
-            case "1 year":
-                numDays = 365;
-                break;
-            case "All Time":
-                numDays = item.getPriceHistoryDates().size();
-                break;
-            default:
-                numDays = -1;
-                break;
+        if (timePeriod.equals("24 hours")){
+            numDays = 1;
+        } else if (timePeriod.equals("1 week")) {
+            numDays = 7;
+        } else if (timePeriod.equals("30 days")) {
+            numDays = 30;
+        } else if (timePeriod.equals("6 months")) {
+            numDays = 183;
+        } else if (timePeriod.equals("1 year")) {
+            numDays = 365;
+        } else if (timePeriod.equals("All Time")) {
+            numDays = item.getPriceHistoryDates().size();
+        }
+        else{
+            numDays = -1;
         }
         if (numDays > item.getPriceHistoryDates().size()){
             return -1;
         }
-        else {
-            return numDays;
-        }
+        return numDays;
     }
 
     /**
@@ -122,7 +112,7 @@ public class GeneratePriceHistoryUseCase {
      */
     public double calculateAveragePrice(String timePeriod) {
         int priceDataSize = item.getPriceHistoryData().size();
-        int numDays = convertValidTimePeriodToDaysHelper(timePeriod, item);
+        int numDays = convertValidTimePeriodToDaysHelper(timePeriod);
         //checking valid inputs
         if (numDays == -1){
             return -1;
@@ -153,7 +143,7 @@ public class GeneratePriceHistoryUseCase {
      */
     public double calculateLowestPrice(String timePeriod) {
         int priceDataSize = item.getPriceHistoryData().size();
-        int numDays = convertValidTimePeriodToDaysHelper(timePeriod, item);
+        int numDays = convertValidTimePeriodToDaysHelper(timePeriod);
         //checking valid inputs
         if (numDays == -1){
             return -1;
@@ -176,7 +166,7 @@ public class GeneratePriceHistoryUseCase {
      */
     public double calculateHighestPrice(String timePeriod) {
         int priceDataSize = item.getPriceHistoryData().size();
-        int numDays = convertValidTimePeriodToDaysHelper(timePeriod, item);
+        int numDays = convertValidTimePeriodToDaysHelper(timePeriod);
         //checking valid inputs
         if (numDays == -1){
             return -1;
@@ -228,7 +218,7 @@ public class GeneratePriceHistoryUseCase {
      * time period or -1 for invalid input
      */
     public double compareToAveragePrice(String timePeriod){
-        int numDays = convertValidTimePeriodToDaysHelper(timePeriod, item);
+        int numDays = convertValidTimePeriodToDaysHelper(timePeriod);
         //checking valid inputs
         if (numDays == -1){
             return -1;
@@ -249,7 +239,7 @@ public class GeneratePriceHistoryUseCase {
      * time period or -1 for invalid input
      */
     public double compareToLowestPrice(String timePeriod){
-        int numDays = convertValidTimePeriodToDaysHelper(timePeriod, item);
+        int numDays = convertValidTimePeriodToDaysHelper(timePeriod);
         //checking valid inputs
         if (numDays == -1){
             return -1;
@@ -270,7 +260,7 @@ public class GeneratePriceHistoryUseCase {
      * time period or -1 for invalid input
      */
     public double compareToHighestPrice(String timePeriod){
-        int numDays = convertValidTimePeriodToDaysHelper(timePeriod, item);
+        int numDays = convertValidTimePeriodToDaysHelper(timePeriod);
         //checking valid inputs
         if (numDays == -1){
             return -1;
