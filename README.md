@@ -7,17 +7,17 @@ This program is designed to allow the user to search for things on online retail
 ## Currently implemented features
 Login and list of wishlist UI
 Search UI and functionality (returning searches from amazon pages)
-Logic for database
-          user registration
-          login-logout
-          sorting items in wishlist 
-          currency conversions between USD,CAD,YUAN(chinese currency)
-          Item price history
-          User notification system
+Logic for database,
+          user registration,
+          login-logout,
+          sorting items in wishlist,
+          currency conversions between USD,CAD,YUAN(chinese currency),
+          Item price history,
+          User notification system,
           
 
 ## Planned features
-UI for wishlists,items
+UI for wishlists and items,
 connecting ui to finished logic
 
 ### How to run the project
