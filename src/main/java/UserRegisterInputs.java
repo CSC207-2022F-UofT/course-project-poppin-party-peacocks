@@ -1,3 +1,4 @@
+import Entities.User;
 public class UserRegisterInputs {
     private String username;
     private String password;

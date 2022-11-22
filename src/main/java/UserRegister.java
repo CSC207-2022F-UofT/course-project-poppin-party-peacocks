@@ -1,3 +1,5 @@
+import DataBase.DataBase;
+
 public class UserRegister implements UserRegisterCreateUser{
     final UserRegisterResponseFormatter responseFormatter;
     final UserRegisterStatus status;
@@ -22,7 +24,7 @@ public class UserRegister implements UserRegisterCreateUser{
         } else if (this.inputs.getInputtedPassword().length() < 3) {
             return status.showFailure("Password is too short. Password must have at least 3 characters.");
         }
-        DataBase.addUser(this.inputs.getTempUser(), this.inputs.getInputtedPassword());
+        DataBase.addUser(this.inputs.getTempUser());
         return status.showSuccess(inputs);
     }
 }
