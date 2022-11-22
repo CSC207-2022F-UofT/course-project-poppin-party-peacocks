@@ -1,5 +1,5 @@
 import Entities.Item;
-import ExternalInterface.SearchitemsApi;
+import ExternalInterface.ItemSearcher;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -106,9 +106,9 @@ public class AddItemPage extends JFrame {
                     contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
                     JPanel[] array = new JPanel[10];
                     String keyword = searchBar.getText();
-                    SearchitemsApi itemSearcher = new SearchitemsApi();
+                    ItemSearcher itemSearcher = new ItemSearcher();
                     Item[] itemList = new Item[0];
-                    itemList = itemSearcher.searchToList(keyword, "CA").toArray(itemList);
+                    itemList = itemSearcher.searchItemKeywords(keyword).toArray(itemList);
                     for (int i = 0; i < 10; i++) {
                         array[i] = createPanel(itemList[i], i + 1);
                     }

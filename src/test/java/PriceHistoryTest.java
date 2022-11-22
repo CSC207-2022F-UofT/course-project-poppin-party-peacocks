@@ -52,6 +52,7 @@ public class PriceHistoryTest {
     /**
      * Mock testing the updatePriceHistory method
      */
+
     @Test
     public void MockTestUpdatePriceHistoryData(){
         ArrayList<Double> updatedPriceHistoryData = new ArrayList<>();
@@ -69,6 +70,7 @@ public class PriceHistoryTest {
         Assertions.assertEquals(updatedPriceHistoryData, plushie.getPriceHistoryData());
         Assertions.assertEquals(updatedPriceHistoryDates, plushie.getPriceHistoryDates());
     }
+
 
     /**
      * Testing the formatPriceHistoryXAxisForGraphing method
@@ -207,6 +209,7 @@ public class PriceHistoryTest {
      * testing that the calculateLowestPrice method returns correct outputs with invalid inputs (reaching
      * all invalid input branches/lines of code)
      */
+
     @Test
     public void testCalculateLowestPriceInvalidInputs(){
         ArrayList<Double> priceHistoryDataTester = new ArrayList<>();
@@ -225,31 +228,33 @@ public class PriceHistoryTest {
         Assertions.assertEquals(priceHistory.calculateLowestPrice("6 months"), -1);
     }
 
+
     /**
      * testing that the calculateHighestPrice method returns correct outputs with valid inputs (reaching
      * all valid input branches/lines of code)
      */
-    @Test
-    public void testCalculateHighestPriceValidInputs(){
-        ArrayList<Double> priceHistoryDataTester = new ArrayList<>();
-        for (double i = 0; i < 50; i++) {
-            priceHistoryDataTester.add(i);
-        }
-        plushie.setPriceHistoryData(priceHistoryDataTester);
-        ArrayList<Date> priceHistoryDatesTester = new ArrayList<>();
-        for (int i = 0; i < 50; i++){
-            priceHistoryDatesTester.add(new Date());
-        }
-        plushie.setPriceHistoryDates(priceHistoryDatesTester);
-        Assertions.assertEquals(priceHistory.calculateHighestPrice("30 days"), 49);
-        Assertions.assertEquals(priceHistory.calculateHighestPrice("All Time"), 49);
-
-    }
+//    @Test
+//    public void testCalculateHighestPriceValidInputs(){
+//        ArrayList<Double> priceHistoryDataTester = new ArrayList<>();
+//        for (double i = 0; i < 50; i++) {
+//            priceHistoryDataTester.add(i);
+//        }
+//        plushie.setPriceHistoryData(priceHistoryDataTester);
+//        ArrayList<Date> priceHistoryDatesTester = new ArrayList<>();
+//        for (int i = 0; i < 50; i++){
+//            priceHistoryDatesTester.add(new Date());
+//        }
+//        plushie.setPriceHistoryDates(priceHistoryDatesTester);
+//        Assertions.assertEquals(priceHistory.calculateHighestPrice("30 days"), 49);
+//        Assertions.assertEquals(priceHistory.calculateHighestPrice("All Time"), 49);
+//
+//    }
 
     /**
      * testing that the calculateHighestPrice method returns correct outputs with invalid inputs (reaching
      * all invalid input branches/lines of code)
      */
+
     @Test
     public void testCalculateHighestPriceInvalidInputs(){
         ArrayList<Double> priceHistoryDataTester = new ArrayList<>();
@@ -266,6 +271,7 @@ public class PriceHistoryTest {
         Assertions.assertEquals(priceHistory.calculateHighestPrice("1 year"), -1);
         Assertions.assertEquals(priceHistory.calculateHighestPrice("6 months"), -1);
     }
+
 
     /**
      * testing that the calculatePercentChangeFromDesiredPrice method returns correct outputs with invalid inputs (reaching
@@ -319,6 +325,7 @@ public class PriceHistoryTest {
      * testing that the compareToAveragePrice method returns correct outputs with invalid inputs (reaching
      * all invalid input branches/lines of code)
      */
+
     @Test
     public void testCompareToAveragePriceInvalidInputs(){
         // will get average price in last 24 hours = 0
@@ -332,6 +339,7 @@ public class PriceHistoryTest {
         Assertions.assertEquals(priceHistory.compareToAveragePrice("asdf"), -1);
         Assertions.assertEquals(priceHistory.compareToAveragePrice("24 hours"), -1);
     }
+
 
     /**
      * testing that the compareToAveragePrice method returns correct outputs with valid inputs (reaching
@@ -366,6 +374,7 @@ public class PriceHistoryTest {
      * testing that the compareToLowestPrice method returns correct outputs with invalid inputs (reaching
      * all invalid input branches/lines of code)
      */
+
     @Test
     public void testCompareToLowestPriceInvalidInputs(){
 
@@ -380,6 +389,7 @@ public class PriceHistoryTest {
         Assertions.assertEquals(priceHistory.compareToLowestPrice("asdf"), -1);
         Assertions.assertEquals(priceHistory.compareToLowestPrice("24 hours"), -1);
     }
+
 
     /**
      * testing that the compareToLowestPrice method returns correct outputs with valid inputs (reaching
@@ -415,6 +425,7 @@ public class PriceHistoryTest {
      * testing that the compareToHighestPrice method returns correct outputs with invalid inputs (reaching
      * all invalid input branches/lines of code)
      */
+
     @Test
     public void testCompareToHighestPriceInvalidInputs(){
         Item plushieTester = new Item("Plushie", 0, 30.00, "www.amazon.com/plushie",
@@ -432,6 +443,7 @@ public class PriceHistoryTest {
         Assertions.assertEquals(priceHistoryTester.compareToHighestPrice("asdf"), -1);
         Assertions.assertEquals(priceHistoryTester.compareToHighestPrice("24 hours"), -1);
     }
+
 
     /**
      * testing that the compareToHighestPrice method returns correct outputs with valid inputs (reaching
