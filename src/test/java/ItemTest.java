@@ -6,7 +6,7 @@ import java.io.IOException;
 public class ItemTest {
 
     /**
-     * Testing updatePrice feature and if price has been updated (different price than initial price)
+     * Testing updatePrice feature and if price has been updated (different price than initial prices)
      */
     @Test
     public void updatePriceTestPriceChange() throws IOException {
