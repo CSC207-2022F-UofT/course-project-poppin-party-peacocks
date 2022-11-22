@@ -1,10 +1,13 @@
 package Entities;
 
-
+import DataBase.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.*;
 
 public class Item {
@@ -15,6 +18,7 @@ public class Item {
     private String itemDescription;
     private String[] tags;
     private double itemPrice;
+    private String itemCurrency;
     private double priceChange;
     private double desiredPrice;
     private Date dateAdded;
@@ -56,7 +60,39 @@ public class Item {
         };
         this.scheduler = new Scheduler(t, 1000 * 60 * 60);
     }
-    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars, String imageUrl){
+
+    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl, String itemCurrency){
+        this.itemName = name;
+        this.itemPrice = price;
+        this.priceChange = price;
+        this.desiredPrice = desiredPrice;
+        this.dateAdded = new Date();
+        this.url = url;
+        this.imageUrl = imageUrl;
+        this.itemDescription = itemDescription;
+        this.tags = tags;
+        this.dateLastUpdated = new Date();
+        this.reviewCount = reviewCount;
+        this.reviewStars = reviewStars;
+        this.priceHistoryData = new ArrayList<Double>();
+        this.priceHistoryData.add(this.itemPrice);
+        this.priceHistoryDates = new ArrayList<Date>();
+        this.priceHistoryDates.add(new Date());
+
+        TimerTask t = new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    updatePrice();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+        this.scheduler = new Scheduler(t, 1000 * 60 * 60);
+        this.itemCurrency = itemCurrency;
+    }
+    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars, String imageUrl, String itemCurrency){
         this.itemName = name;
         this.itemPrice = price;
         this.priceChange = priceChange;
@@ -68,6 +104,7 @@ public class Item {
         this.reviewCount = reviewCount;
         this.reviewStars = reviewStars;
         this.imageUrl = imageUrl;
+        this.itemCurrency = itemCurrency;
     }
 
     public String getItemName(){
@@ -105,6 +142,7 @@ public class Item {
     public ArrayList<Date> getPriceHistoryDates() {return this.priceHistoryDates; }
 
 
+    public String getItemCurrency() {return this.itemCurrency; }
     public void setName(String newName){
         this.itemName = newName;
     }
@@ -156,6 +194,40 @@ public class Item {
         } catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    /** Updates currency of the item by converting item price and currency */
+    public void updateCurrency() {
+        HashMap<String, Double> cadConversion = new HashMap<>();
+        cadConversion.put("USD", 0.76);
+        cadConversion.put("YUAN", 5.33);
+        HashMap<String, Double> yuanConversion = new HashMap<>();
+        yuanConversion.put("USD", 0.14);
+        yuanConversion.put("CAD", 0.19);
+        HashMap<String, Double> usdConversion = new HashMap<>();
+        usdConversion.put("CAD", 1.34);
+        usdConversion.put("YUAN", 7.17);
+
+        String currentCurrency = this.itemCurrency;
+        String newCurrency = DataBase.currentUser.getCurrency();
+
+        if (Objects.equals(currentCurrency, newCurrency)) {
+            return;
+        }
+
+        switch (currentCurrency) {
+            case "CAD":
+                this.itemPrice = cadConversion.get(newCurrency) * this.itemPrice;
+                break;
+            case "USD":
+                this.itemPrice = usdConversion.get(newCurrency) * this.itemPrice;
+                break;
+            case "YUAN":
+                this.itemPrice = yuanConversion.get(newCurrency) * this.itemPrice;
+                break;
+        }
+        this.itemPrice =  Math.round(this.itemPrice * 100.0) / 100.0;
+        this.itemCurrency = newCurrency;
     }
 
     public boolean isPriceBelowDesiredPrice(){
