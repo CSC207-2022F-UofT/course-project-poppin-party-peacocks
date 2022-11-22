@@ -1,4 +1,5 @@
 import Entities.Item;
+import ExternalInterface.ItemSearcher;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

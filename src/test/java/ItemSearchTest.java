@@ -1,9 +1,9 @@
 import Entities.Item;
+import ExternalInterface.ItemSearcher;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ItemSearchTest {
 //    /**
@@ -11,7 +11,7 @@ public class ItemSearchTest {
 //     */
 //    @Test
 //    public void searchItemTestItemInstance() throws IOException, InterruptedException {
-//        ItemSearcher itemSearcher = new ItemSearcher();
+//        ExternalInterface.ItemSearcher itemSearcher = new ExternalInterface.ItemSearcher();
 //
 //        ArrayList itemSearchList = itemSearcher.searchItemKeywords("mechanical keyboard");
 //        for (Object item : itemSearchList) {
@@ -24,7 +24,7 @@ public class ItemSearchTest {
 //     */
 //    @Test
 //    public void searchItemTestListLengthReturn() throws IOException, InterruptedException {
-//        ItemSearcher itemSearcher = new ItemSearcher();
+//        ExternalInterface.ItemSearcher itemSearcher = new ExternalInterface.ItemSearcher();
 //
 //        ArrayList itemSearchList = itemSearcher.searchItemKeywords("mechanical keyboard");
 //

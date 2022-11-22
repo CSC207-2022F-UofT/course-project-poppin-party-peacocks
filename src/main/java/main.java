@@ -1,8 +1,8 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
-import DataBase.DataBase;
 import Entities.Item;
+import ExternalInterface.ItemSearcher;
 
 public class main {
     public static void main(String[] args) throws IOException, InterruptedException {
