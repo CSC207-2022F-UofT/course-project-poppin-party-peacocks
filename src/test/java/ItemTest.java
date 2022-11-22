@@ -155,4 +155,5 @@ public class ItemTest {
         TestItem.setReviewStars(4.2);
         Assertions.assertEquals(true, 4.2 == TestItem.getReviewStars());
     }
+
 }
