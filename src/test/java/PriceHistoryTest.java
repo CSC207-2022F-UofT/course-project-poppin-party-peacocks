@@ -269,7 +269,7 @@ public class PriceHistoryTest {
      */
     @Test
     public void testCalculatePercentChangeFromDesiredPriceValidInputs(){
-        Assertions.assertEquals(priceHistory.calculatePercentChangeFromDesiredPrice(), 137);
+        Assertions.assertEquals(priceHistory.calculatePercentChangeFromDesiredPrice(), 136.63);
     }
 
     /**
@@ -297,7 +297,7 @@ public class PriceHistoryTest {
         priceHistoryDataTester.add(35.00);
         priceHistoryDataTester.add(40.99);
         plushie.setPriceHistoryData(priceHistoryDataTester);
-        Assertions.assertEquals(priceHistory.calculatePercentChangeFromOriginalPrice(), 117);
+        Assertions.assertEquals(priceHistory.calculatePercentChangeFromOriginalPrice(), 117.11);
     }
 
 
@@ -345,7 +345,7 @@ public class PriceHistoryTest {
         priceHistoryDatesTester.add(new Date());
         plushie.setPriceHistoryDates(priceHistoryDatesTester);
 
-        Assertions.assertEquals(priceHistory.compareToAveragePrice("1 week"), 162);
+        Assertions.assertEquals(priceHistory.compareToAveragePrice("1 week"), 162.34);
     }
 
     /**
