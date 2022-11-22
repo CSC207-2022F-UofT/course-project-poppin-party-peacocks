@@ -119,10 +119,19 @@ public class ItemSearcher {
 
         return "https://amazon-price1.p.rapidapi.com/search?keywords=" + keywords.replace(" ", "%20") + "&marketplace=" + marketplace;
     }
-
+    /**
+     * Returns generated search amazon link based on keyword
+     *
+     * @param keywords     string keyword to search in Amazon
+     */
     private String itemLinkGenerator(String keywords) {
         return "https://www.amazon.ca/s?k=" + keywords.replace(" ", "+");
     }
+    /**
+     * Returns Arraylist of Item objects based on search results of the specified keyword on AMazon
+     *
+     * @param keywords     string keyword to search in Amazon
+     */
 
     public ArrayList<Item> searchItemKeywords(String keywords) throws IOException, InterruptedException {
         String url = this.itemLinkGenerator(keywords);
@@ -134,34 +143,10 @@ public class ItemSearcher {
         ArrayList<Integer> listCount = new ArrayList<>();
         ArrayList<String> listImgs = new ArrayList<>();
         try {
-            // This line specifies window type and layout of amazon page based on  Window Version and browser for webscraping
             Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
-//            Elements productNames = doc.select("div.s-widget-container.s-spacing-small.s-widget-container-height-small.celwidget").select("span.a-size-base-plus.a-color-base.a-text-normal");
-//
-//            Elements productPrices = doc.select("div.s-widget-container.s-spacing-small.s-widget-container-height-small.celwidget").select("span.a-offscreen");
-//
-//            Elements productImages = doc.select("span.rush-component").select("a.a-link-normal.s-no-outline").select("div.a-section.aok-relative.s-image-square-aspect").select("img");
-//
-//
-            Elements productUrls = doc.select("h2.a-size-mini.a-spacing-none.a-color-base.s-line-clamp-4").select("a");
-//
-//            Elements productCounts = doc.select("a.a-link-normal.s-underline-text.s-underline-link-text.s-link-style").select("span.a-size-base.s-underline-text");
-//
-//            Elements productStars = doc.select("div.a-fixed-left-grid-col a-col-left").select("span");
-//
-//            for (Element item: productNames){
-//                listNames.add(item.text());
-//
-//
-//            }
-//
-//            for (Element item: productPrices){
-//                listPrices.add(Double.parseDouble(item.text().replace(",","").substring(1)));
-//            }
 
-//            for (Element item: productImages){
-//                listImgs.add(item.attr("src"));
-//            }
+            Elements productUrls = doc.select("h2.a-size-mini.a-spacing-none.a-color-base.s-line-clamp-4").select("a");
+
 
             for (Element item : productUrls) {
                 String newUrl = "https://www.amazon.ca" + item.attr("href");
@@ -172,26 +157,7 @@ public class ItemSearcher {
                 itemList.add(searchItemUrl(listUrls.get(i)));
             }
 
-//            for (Item item: itemList){
-//                System.out.println(item.getItemName());
-//                System.out.println(item.getItemDescription());
-//                System.out.println(item.getItemPrice());
-//                System.out.println(item.getItemURL());
-//                System.out.println(item.getReviewCount());
-//                System.out.println(item.getReviewStars());
-//                System.out.println(item.getItemImageURL());
-//            }
             return itemList;
-
-//            for (Element item: productCounts){
-//                listCount.add(Integer.parseInt(item.text().replace(",","")));
-//            }
-
-//            System.out.println(listNames.size());
-//            System.out.println(listPrices.size());
-//            System.out.println(listUrls.size());
-//            System.out.println(listCount.size());
-//            System.out.println(listImgs.size());
 
         } catch (IOException e) {
             return new ArrayList<Item>();
@@ -201,6 +167,12 @@ public class ItemSearcher {
 
     }
 
+    /**
+     * Searches for item based on given url. Returns Item object based on given Amazon Url
+     *
+     * @param url    url of amazon item
+
+     */
     public Item searchItemUrl(String url) throws IOException {
 
         try {
