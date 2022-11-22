@@ -46,18 +46,15 @@ public class main {
 //            itemList.get(i).displayItemInConsole(i + 1);
 //        }
 
-        SearchItemUrl itemSearcher = new SearchItemUrl();
+
+        ItemSearcher itemSearcher = new ItemSearcher();
+        itemSearcher.searchItemKeywords("mechanical keyboard");
 
 
-        Item searchItem = itemSearcher.searchItem("https://www.amazon.ca/Nintendo-Pok%C3%A9monTM-Violet/dp/B0B327JQWT/?_encoding=UTF8&pd_rd_w=lTAnj&content-id=amzn1.sym.b09e9731-f0de-43db-b62a-8954bcec282c&pf_rd_p=b09e9731-f0de-43db-b62a-8954bcec282c&pf_rd_r=RH5X0J96GKQA6C0H20T0&pd_rd_wg=Xvb9Y&pd_rd_r=bdbbe5ac-ee8c-4fd6-9682-439fdabf981f&ref_=pd_gw_ci_mcx_mr_hp_atf_m&th=1");
+        Item searchKeyboard = itemSearcher.searchItemUrl("https://www.amazon.ca/AmazonBasics-15-Piece-Non-Stick-Cookware-Set/dp/B07481LPMF/ref=sr_1_1_sspa?crid=GL9OB02V670X&keywords=pan&qid=1669055492&qu=eyJxc2MiOiI1Ljk4IiwicXNhIjoiNS42OCIsInFzcCI6IjUuMDgifQ%3D%3D&sprefix=pa%2Caps%2C150&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1");
 
-        System.out.println(searchItem.getItemName());
-        System.out.println(searchItem.getItemDescription());
-        System.out.println(searchItem.getItemPrice());
-        System.out.println(searchItem.getItemURL());
-        System.out.println(searchItem.getReviewCount());
-        System.out.println(searchItem.getReviewStars());
-        System.out.println(searchItem.getItemImageURL());
+        ArrayList<Item> searchItems = itemSearcher.searchItemKeywords("mechanical keyboard");
+
 
     }
 

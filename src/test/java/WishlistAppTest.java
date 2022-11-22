@@ -5,14 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import tutorial.HelloWorld;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
-
 public class WishlistAppTest {
 
 
@@ -21,7 +13,7 @@ public class WishlistAppTest {
      */
     @Test
     public void searchItemTestItemInstance() throws IOException, InterruptedException {
-        SearchitemsApi apiSearcher = new SearchitemsApi();
+        ItemSearcher apiSearcher = new ItemSearcher();
 
         ArrayList itemSearchList = apiSearcher.searchToList("mechanical keyboard", "CA");
         for (Object item : itemSearchList) {
@@ -36,7 +28,7 @@ public class WishlistAppTest {
      */
     @Test
     public void searchItemTestListLengthReturn() throws IOException, InterruptedException {
-        SearchitemsApi apiSearcher = new SearchitemsApi();
+        ItemSearcher apiSearcher = new ItemSearcher();
 
         ArrayList itemSearchList = apiSearcher.searchToList("mechanical keyboard", "CA");
 
