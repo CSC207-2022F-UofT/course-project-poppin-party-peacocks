@@ -1,158 +1,165 @@
 import Entities.Item;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.URL;
 
-public class ItemTest {
+public class AddItemPage extends JFrame {
+    private JPanel mainPanel;
+    private JPanel headerPanel;
+    private JLabel searchLabel;
+    private JTextField searchBar;
+    private JButton searchButton;
+    private JPanel contentPanel;
+    private JList<JPanel> list;
+    private JButton cancelButton;
+    private JPanel footerPanel;
+    private JButton selectIndexButton;
+    private int index;
 
-    /**
-     * Testing updatePrice feature and if price has been updated (different price than initial price)
-     */
-    @Test
-    public void updatePriceTestPriceChange() throws IOException {
-        Item priceUpdateTestItem = new Item("AmazonBasics Wired Keyboard", 20.00, 15.00, "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1",
-                "Low-profile Keys Provide a Quiet, Comfortable Typing Experience\n" +
-                        "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
-                        "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
-                        "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "www.imageurl.com");
-
-        double initialPrice = priceUpdateTestItem.getItemPrice();
-
-        priceUpdateTestItem.updatePrice();
-
-        double newPrice = priceUpdateTestItem.getItemPrice();
-
-        Assertions.assertEquals(true, initialPrice != newPrice);
+    public JPanel getMainPanel() {
+        return mainPanel;
     }
 
-    /**
-     * Testing setter and getter for Object Entities.Item name variable
-     */
-    @Test
-    public void itemClassTestSetGetName() {
-        Item TestItem = new Item("AmazonBasics Wired Keyboard", 20.00, 15.00, "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1",
-                "Low-profile Keys Provide a Quiet, Comfortable Typing Experience\n" +
-                        "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
-                        "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
-                        "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
-        // Test 1:  Set and Get Name
-        TestItem.setName("AmazonBasics Wired Office Keyboard");
-        Assertions.assertEquals(true, "AmazonBasics Wired Office Keyboard".equals(TestItem.getItemName()));
-
-
+    public static JPanel createPanel(Item item, int index) {
+        JPanel panel = new JPanel(new BorderLayout());
+        // icon
+        JLabel imageLabel = new JLabel();
+        Image image = null;
+        Image resizedImage = null;
+        try {
+            URL url = new URL(item.getItemImageURL());
+            image = ImageIO.read(url);
+            resizedImage = image.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+            imageLabel.setIcon(new ImageIcon(resizedImage));
+        } catch (IOException e) {
+            System.out.println("Image not found!");
+        }
+        // text
+        JPanel centrePanel = new JPanel();
+        centrePanel.setLayout(new BoxLayout(centrePanel, BoxLayout.Y_AXIS));
+        JLabel nameLabel = new JLabel(item.getItemName());
+        JLabel costLabel = new JLabel(Double.toString(item.getItemPrice()));
+        centrePanel.add(nameLabel);
+        centrePanel.add(costLabel);
+        JLabel indexLabel = new JLabel(Integer.toString(index));
+        panel.add(indexLabel, BorderLayout.EAST);
+        panel.add(centrePanel, BorderLayout.CENTER);
+        panel.add(imageLabel, BorderLayout.WEST);
+        return panel;
     }
 
-    /**
-     * Testing getter for Object Entities.Item price variable
-     */
-    @Test
-    public void itemClassTestGetPrice() throws IOException {
-        Item TestItem = new Item("AmazonBasics Wired Keyboard", 20.00, 15.00, "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1",
-                "Low-profile Keys Provide a Quiet, Comfortable Typing Experience\n" +
-                        "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
-                        "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
-                        "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
-
-        Assertions.assertEquals(true, 20.00 == TestItem.getItemPrice());
+    public void renderCentre() {
+        mainPanel.add(contentPanel, BorderLayout.CENTER);
     }
 
-    /**
-     * Testing setter and getter for Object Entities.Item desired price
-     */
-    @Test
-    public void itemClassTestSetGetDesiredPrice() {
-        Item TestItem = new Item("AmazonBasics Wired Keyboard", 20.00, 15.00, "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1",
-                "Low-profile Keys Provide a Quiet, Comfortable Typing Experience\n" +
-                        "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
-                        "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
-                        "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
+    public AddItemPage() {
+        super("Add Item");
+        setLayout(null);
+        setSize(400, 600);
+        setResizable(true);
 
-        TestItem.setDesiredPrice(17.00);
-        Assertions.assertEquals(true, 17.00 == TestItem.getItemDesiredPrice());
+        mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBounds(0, 0, 400, 600);
+        // header
+        headerPanel = new JPanel(new FlowLayout());
+        searchLabel = new JLabel("Search:");
+        searchBar = new JTextField("", 20);
+        searchButton = new JButton("Go");
+        headerPanel.add(searchLabel);
+        headerPanel.add(searchBar);
+        headerPanel.add(searchButton);
+        mainPanel.add(headerPanel, BorderLayout.NORTH);
+        // centre
+        contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        JPanel[] array = new JPanel[10];
+        list = new JList<>(array);
+        list.setCellRenderer(new PanelRenderer());
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        contentPanel.add(new JScrollPane(list));
+        // Note: adding centre panel to main panel is done in renderCentre().
+
+        // footer
+        cancelButton = new JButton("Cancel");
+        footerPanel = new JPanel(new FlowLayout());
+        selectIndexButton = new JButton("Add Selected Item");
+
+        footerPanel.add(cancelButton);
+        footerPanel.add(selectIndexButton);
+        mainPanel.add(footerPanel, BorderLayout.SOUTH);
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    BorderLayout layout = (BorderLayout) mainPanel.getLayout();
+                    if(layout.getLayoutComponent(BorderLayout.CENTER) != null){
+                        mainPanel.remove(layout.getLayoutComponent(BorderLayout.CENTER));
+                    }
+                    contentPanel = new JPanel();
+                    contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+                    JPanel[] array = new JPanel[10];
+                    String keyword = searchBar.getText();
+                    ItemSearcher itemSearcher = new ItemSearcher();
+                    Item[] itemList = new Item[0];
+                    itemList = itemSearcher.searchItemKeywords(keyword).toArray(itemList);
+                    for (int i = 0; i < 10; i++) {
+                        array[i] = createPanel(itemList[i], i + 1);
+                    }
+                    list = new JList<>(array);
+                    list.setCellRenderer(new PanelRenderer());
+                    list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                    contentPanel.add(new JScrollPane(list));
+                    renderCentre();
+                } catch (NullPointerException error) {
+                    error.printStackTrace();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+                mainPanel.repaint();
+                mainPanel.revalidate();
+            }
+        });
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WishlistPage wlPage = new WishlistPage();
+                wlPage.setContentPane(wlPage.getMainPanel());
+                wlPage.setVisible(true);
+                wlPage.setLocationRelativeTo(null);
+                wlPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                dispose();
+            }
+        });
     }
 
-    /**
-     * Testing getter for Object Entities.Item url variable
-     */
-    @Test
-    public void itemClassTestSetGetUrl() {
-        Item TestItem = new Item("AmazonBasics Wired Keyboard", 20.00, 15.00, "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1",
-                "Low-profile Keys Provide a Quiet, Comfortable Typing Experience\n" +
-                        "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
-                        "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
-                        "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
-        String testUrl = "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1";
+    class PanelRenderer implements ListCellRenderer {
 
-        Assertions.assertEquals(true, testUrl.equals(TestItem.getItemURL()));
-    }
-
-    /**
-     * Testing getter for Object Entities.Item imageUrl variable
-     */
-    @Test
-    public void itemClassTestSetGetImageUrl() throws IOException {
-        Item TestItem = new Item("AmazonBasics Wired Keyboard", 20.00, 15.00, "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1",
-                "Low-profile Keys Provide a Quiet, Comfortable Typing Experience\n" +
-                        "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
-                        "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
-                        "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
-        String testImageUrl = "imageurl";
-
-        Assertions.assertEquals(true, testImageUrl.equals(TestItem.getItemImageURL()));
-    }
-
-    /**
-     * Testing setter and getter for Object Entities.Item item description variable
-     */
-    @Test
-    public void itemClassTestSetGetItemDescription() throws IOException {
-        Item TestItem = new Item("AmazonBasics Wired Keyboard", 20.00, 15.00, "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1",
-                "Low-profile Keys Provide a Quiet, Comfortable Typing Experience\n" +
-                        "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
-                        "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
-                        "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
-        String newDescription = "This is a new set item description for AmazonBasics Wired Office Keyboard";
-
-        TestItem.setItemDescription(newDescription);
-        Assertions.assertEquals(true, newDescription.equals(TestItem.getItemDescription()));
-    }
-
-    /**
-     * Testing setter and getter for Object Entities.Item review count variable
-     */
-    @Test
-    public void itemClassTestSetGetReviewCount() throws IOException {
-        Item TestItem = new Item("AmazonBasics Wired Keyboard", 20.00, 15.00, "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1",
-                "Low-profile Keys Provide a Quiet, Comfortable Typing Experience\n" +
-                        "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
-                        "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
-                        "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
-
-        TestItem.setReviewCount(30);
-        Assertions.assertEquals(true, 30 == TestItem.getReviewCount());
-    }
-
-    /**
-     * Testing setter and getter for Object Entities.Item review star variable
-     */
-    @Test
-    public void itemClassTestSetGetReviewStar() throws IOException {
-        Item TestItem = new Item("AmazonBasics Wired Keyboard", 20.00, 15.00, "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1",
-                "Low-profile Keys Provide a Quiet, Comfortable Typing Experience\n" +
-                        "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
-                        "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
-                        "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
-
-        TestItem.setReviewStars(4.2);
-        Assertions.assertEquals(true, 4.2 == TestItem.getReviewStars());
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            JPanel renderer = (JPanel) value;
+            renderer.setBackground(isSelected ? Color.red : list.getBackground());
+            Color defaultColor = new Color(194, 234, 186);
+            Color selectedColor = new Color(106, 189, 154);
+            if (isSelected) {
+                BorderLayout layout = (BorderLayout) renderer.getLayout();
+                layout.getLayoutComponent(BorderLayout.CENTER).setBackground(selectedColor);
+                renderer.setBackground(selectedColor);
+                renderer.setForeground(selectedColor);
+            } else {
+                BorderLayout layout = (BorderLayout) renderer.getLayout();
+                layout.getLayoutComponent(BorderLayout.CENTER).setBackground(defaultColor);
+                renderer.setBackground(defaultColor);
+                renderer.setForeground(defaultColor);
+            }
+            return renderer;
+        }
     }
 }
