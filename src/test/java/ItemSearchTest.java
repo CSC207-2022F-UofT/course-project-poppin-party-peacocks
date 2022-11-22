@@ -6,30 +6,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ItemSearchTest {
-    /**
-     * Testing search item by keyword feature and if all items in the return list are of Object Entities.Item
-     */
-    @Test
-    public void searchItemTestItemInstance() throws IOException, InterruptedException {
-        ItemSearcher itemSearcher = new ItemSearcher();
-
-        ArrayList itemSearchList = itemSearcher.searchItemKeywords("mechanical keyboard");
-        for (Object item : itemSearchList) {
-            Assertions.assertEquals(true, item instanceof Item);
-        }
-    }
-
-    /**
-     * Testing search item feature and if 10 items were correct added to the list
-     */
-    @Test
-    public void searchItemTestListLengthReturn() throws IOException, InterruptedException {
-        ItemSearcher itemSearcher = new ItemSearcher();
-
-        ArrayList itemSearchList = itemSearcher.searchItemKeywords("mechanical keyboard");
-
-        Assertions.assertEquals(10, itemSearchList.size());
-    }
+//    /**
+//     * Testing search item by keyword feature and if all items in the return list are of Object Entities.Item
+//     */
+//    @Test
+//    public void searchItemTestItemInstance() throws IOException, InterruptedException {
+//        ItemSearcher itemSearcher = new ItemSearcher();
+//
+//        ArrayList itemSearchList = itemSearcher.searchItemKeywords("mechanical keyboard");
+//        for (Object item : itemSearchList) {
+//            Assertions.assertEquals(true, item instanceof Item);
+//        }
+//    }
+//
+//    /**
+//     * Testing search item feature and if 10 items were correct added to the list
+//     */
+//    @Test
+//    public void searchItemTestListLengthReturn() throws IOException, InterruptedException {
+//        ItemSearcher itemSearcher = new ItemSearcher();
+//
+//        ArrayList itemSearchList = itemSearcher.searchItemKeywords("mechanical keyboard");
+//
+//        Assertions.assertEquals(10, itemSearchList.size());
+//    }
 
     /**
      * Testing search item by url feature and if it is scraping the correct value of price
