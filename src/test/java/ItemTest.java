@@ -1,11 +1,10 @@
 import Entities.Item;
-import ExternalInterface.SearchitemsApi;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class WishlistAppTest {
+public class ItemTest {
 //    /**
 //     * Testing search item feature and if all items in the return list are of Object Entities.Item
 //     */
