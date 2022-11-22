@@ -1,8 +1,4 @@
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ## A wishlist app that keeps you updated on the items you want to buy!
 
 ### Project Description
