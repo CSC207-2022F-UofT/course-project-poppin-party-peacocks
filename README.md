@@ -5,7 +5,7 @@
 This program is designed to allow the user to search for things on online retailer websites (currently only amazon is supported) and add items to a wishlist. The program then updates the prices of the items and notifies the user when an item is below their desired price for the item.
 
 ## Currently implemented features
-Login and list of wishlist UI
+Login and list of wishlist UI \n
 Search UI and functionality (returning searches from amazon pages)
 Logic for database,
           user registration,
