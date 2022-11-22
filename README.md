@@ -32,5 +32,5 @@ connecting ui to finished logic.
 4. (Currently on the List Of Wishlists Page): Click on the "Add Wishlist" button at the bottom of the screen.
 5. A window will open, prompting the user to enter a name for the new wishlist.
 6. (Currently on a Wishlist Page): Click the "Add Item" button at the bottom right of the screen.
-7. (Currently on the Item Search Page): At the text bar on the top of the page, enter a desired keyword and click the "Search Button"
+7. (Currently on the Item Search Page): At the text bar on the top of the page, enter a desired keyword and click the "Search Button" (example: "pokemon")
 8. Wait approximately 30 seconds for the search results to appear on screen. 
