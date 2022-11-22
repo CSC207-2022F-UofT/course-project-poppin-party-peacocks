@@ -211,7 +211,7 @@ public class DataBase {
                 for (Object wishlist : wishlistsObject) {
                     wishlists.add(DataBase.parseWishlist(wishlist));
                 }
-                return new ListOfWishlists();
+                return new ListOfWishlists(wishlists);
             }
             myReader.close();
         } catch (FileNotFoundException e) {

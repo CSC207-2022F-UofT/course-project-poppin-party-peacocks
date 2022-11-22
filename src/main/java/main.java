@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
+
+import DataBase.DataBase;
 import Entities.Item;
 
 public class main {
@@ -39,13 +41,6 @@ public class main {
 //        priceUpdateTestItem.updatePrice();
 //        priceUpdateTestItem.displayItemInConsole(0);
 //
-//        SearchitemsApi apiSearcher = new SearchitemsApi();
-//
-//        ArrayList<Item> itemList = apiSearcher.searchToList("mechanical keyboard", "CA");
-//
-//        for (int i = 0; i < 3; i++) {
-//            itemList.get(i).displayItemInConsole(i + 1);
-//        }
 
 
         ItemSearcher itemSearcher = new ItemSearcher();
@@ -60,6 +55,7 @@ public class main {
         for (Item item: searchItems){
             item.displayItemInConsole(1);
         }
+
 
 
     }

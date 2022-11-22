@@ -96,6 +96,7 @@ public class DataBaseTest {
 
         User user = new User("TestUser", "Test");
         DataBase.saveListOfWishlists(wishlists, user);
+        System.out.println(DataBase.getListOfWishlists("TestUser").getListOfWishlist().get(0));
 
         Assertions.assertEquals(DataBase.getListOfWishlists("TestUser").getListOfWishlist().get(0).getName(), "Exam Celebration Wish List");
     }
