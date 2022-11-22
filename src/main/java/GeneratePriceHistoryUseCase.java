@@ -1,7 +1,8 @@
 import Entities.*;
-import Entities.Scheduler;
+import Controller.Scheduler;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -9,8 +10,10 @@ import java.util.*;
 public class GeneratePriceHistoryUseCase {
     public Item item;
     private Scheduler scheduler;
+    DecimalFormat formatter = new DecimalFormat("#.##");
 
-    public GeneratePriceHistoryUseCase() {
+    public GeneratePriceHistoryUseCase(Item item) {
+        this.item = item;
         TimerTask t = new TimerTask() {
             @Override
             public void run() {
@@ -77,7 +80,7 @@ public class GeneratePriceHistoryUseCase {
      * @param item the item that the time period methods will be applied to
      * @return the approximate number of days in the specified time period or -1 for invalid inputs
      */
-    private int convertValidTimePeriodToDaysHelper(String timePeriod, Item item){
+    public int convertValidTimePeriodToDaysHelper(String timePeriod, Item item){
         int numDays = 0;
         switch (timePeriod) {
             case "24 hours":
@@ -90,19 +93,19 @@ public class GeneratePriceHistoryUseCase {
                 numDays = 30;
                 break;
             case "6 months":
-                numDays = 365 / 2;
+                numDays = 183;
                 break;
             case "1 year":
                 numDays = 365;
                 break;
             case "All Time":
-                numDays = item.getPriceHistoryData().size();
+                numDays = item.getPriceHistoryDates().size();
                 break;
             default:
                 numDays = -1;
                 break;
         }
-        if (numDays > item.getPriceHistoryData().size()){
+        if (numDays > item.getPriceHistoryDates().size()){
             return -1;
         }
         else {
@@ -125,11 +128,10 @@ public class GeneratePriceHistoryUseCase {
             return -1;
         }
 
-        int i = 0;
+        int i = 1;
         double priceAverage = 0;
 
         // adds prices from most recent price to specified range
-        // if not enough prices to meet specified range, will just add prices of all available prices
         while((i <= priceDataSize) && (i <= numDays)){
             priceAverage = priceAverage + item.getPriceHistoryData().get(priceDataSize - i);
             i = i + 1;
@@ -138,7 +140,7 @@ public class GeneratePriceHistoryUseCase {
             return -1;
         }
         else{
-            return priceAverage/numDays;
+            return Double.valueOf(formatter.format(priceAverage/numDays));
         }
 
     }
@@ -157,14 +159,13 @@ public class GeneratePriceHistoryUseCase {
             return -1;
         }
 
-        int i = 0;
+        int i = 1;
         double minSoFar = item.getItemPrice();
         while((i <= priceDataSize) && (i <= numDays)){
             minSoFar = Math.min(minSoFar, item.getPriceHistoryData().get(priceDataSize - i));
             i = i + 1;
         }
-        return minSoFar;
-
+        return Double.valueOf(formatter.format(minSoFar));
     }
 
     /**
@@ -181,13 +182,13 @@ public class GeneratePriceHistoryUseCase {
             return -1;
         }
 
-        int i = 0;
+        int i = 1;
         double maxSoFar = item.getItemPrice();
         while((i <= priceDataSize) && (i <= numDays)){
             maxSoFar = Math.max(maxSoFar, item.getPriceHistoryData().get(priceDataSize - i));
             i = i + 1;
         }
-        return maxSoFar;
+        return Double.valueOf(formatter.format(maxSoFar));
     }
 
     /**
@@ -200,7 +201,7 @@ public class GeneratePriceHistoryUseCase {
             return -1;
         }
         else{
-            return (item.getItemPrice()/ item.getItemDesiredPrice()) *100;
+            return Double.valueOf(formatter.format((item.getItemPrice()/ item.getItemDesiredPrice())*100));
         }
 
     }
@@ -215,7 +216,7 @@ public class GeneratePriceHistoryUseCase {
             return -1;
         }
         else {
-            return (item.getItemPrice() / item.getPriceHistoryData().get(0)) * 100;
+            return Double.valueOf(formatter.format((item.getItemPrice()/ item.getPriceHistoryData().get(0))*100));
         }
     }
 
@@ -236,7 +237,7 @@ public class GeneratePriceHistoryUseCase {
             return -1;
         }
         else {
-            return (item.getItemPrice() / calculateAveragePrice(timePeriod)) * 100;
+            return Double.valueOf(formatter.format((item.getItemPrice() / calculateAveragePrice(timePeriod))*100));
         }
     }
 
@@ -257,7 +258,7 @@ public class GeneratePriceHistoryUseCase {
             return -1;
         }
         else {
-            return (item.getItemPrice() / calculateLowestPrice(timePeriod)) * 100;
+            return Double.valueOf(formatter.format((item.getItemPrice() / calculateLowestPrice(timePeriod))*100));
         }
     }
 
@@ -278,7 +279,7 @@ public class GeneratePriceHistoryUseCase {
             return -1;
         }
         else {
-            return (item.getItemPrice() / calculateHighestPrice(timePeriod)) * 100;
+            return Double.valueOf(formatter.format((item.getItemPrice() / calculateHighestPrice(timePeriod))*100));
         }
     }
 
