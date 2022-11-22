@@ -1,13 +1,11 @@
-//test
-public class User {
+package Entities;
 
+public class User {
     private String currency;
     private String name;
     private String password;
-
     private ListOfWishlists wishlists;
     private static final String[] currencyBank = {"USD", "CAD", "YUAN"};
-
 
     public User(String name, String password){
         this.name = name;
