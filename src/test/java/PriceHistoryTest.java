@@ -54,18 +54,20 @@ public class PriceHistoryTest {
      */
     @Test
     public void MockTestUpdatePriceHistoryData(){
-        ArrayList<Double> updatedPriceHistoryData = plushie.getPriceHistoryData();
-        ArrayList<Date> updatedPriceHistoryDates = plushie.getPriceHistoryDates();
-        updatedPriceHistoryData.add(43.23);
+        ArrayList<Double> updatedPriceHistoryData = new ArrayList<>();
+        updatedPriceHistoryData.add(121.22);
+        updatedPriceHistoryData.add(132.20);
+        updatedPriceHistoryData.add(134.34);
+        ArrayList<Date> updatedPriceHistoryDates = new ArrayList<>();
         updatedPriceHistoryDates.add(new Date());
+        updatedPriceHistoryDates.add(new Date());
+        updatedPriceHistoryDates.add(new Date());
+
         plushie.setPriceHistoryData(updatedPriceHistoryData);
         plushie.setPriceHistoryDates(updatedPriceHistoryDates);
+
         Assertions.assertEquals(updatedPriceHistoryData, plushie.getPriceHistoryData());
         Assertions.assertEquals(updatedPriceHistoryDates, plushie.getPriceHistoryDates());
-        ArrayList<Double> testUpdatedPriceHistoryData = new ArrayList<>();
-        testUpdatedPriceHistoryData.add(40.99);
-        testUpdatedPriceHistoryData.add(43.23);
-        Assertions.assertEquals(plushie.getPriceHistoryData(), testUpdatedPriceHistoryData);
     }
 
     /**
@@ -109,18 +111,18 @@ public class PriceHistoryTest {
      * all valid input branches/lines of code)
      */
     @Test
-    public void TestConvertValidTimePeriodToDaysHelperProperInputs(){
+    public void TestConvertValidTimePeriodToDaysHelperValidInputs(){
         ArrayList<Date> priceHistoryDatesTester = new ArrayList<>(500);
         for (int i = 0; i< 500; i++){
             priceHistoryDatesTester.add(new Date());
         }
         plushie.setPriceHistoryDates(priceHistoryDatesTester);
-        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("24 hours", plushie), 1);
-        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("1 week", plushie), 7);
-        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("30 days", plushie), 30);
-        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("6 months", plushie), 183);
-        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("1 year", plushie), 365);
-        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("All Time", plushie), 500);
+        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("24 hours"), 1);
+        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("1 week"), 7);
+        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("30 days"), 30);
+        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("6 months"), 183);
+        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("1 year"), 365);
+        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("All Time"), 500);
     }
 
     /**
@@ -134,11 +136,11 @@ public class PriceHistoryTest {
             priceHistoryDatesSmall.add(new Date());
         }
         plushie.setPriceHistoryDates(priceHistoryDatesSmall);
-        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("1 week", plushie), -1);
-        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("30 days", plushie), -1);
-        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("6 months", plushie), -1);
-        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("1 year", plushie), -1);
-        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("ajshfgdj", plushie), -1);
+        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("1 week"), -1);
+        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("30 days"), -1);
+        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("6 months"), -1);
+        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("1 year"), -1);
+        Assertions.assertEquals(priceHistory.convertValidTimePeriodToDaysHelper("ajshfgdj"), -1);
     }
 
     /**
@@ -212,6 +214,12 @@ public class PriceHistoryTest {
             priceHistoryDataTester.add(i);
         }
         plushie.setPriceHistoryData(priceHistoryDataTester);
+        ArrayList<Date> priceHistoryDatesTester = new ArrayList<>();
+        for (double i = 0; i < 30; i++) {
+            priceHistoryDatesTester.add(new Date());
+        }
+        plushie.setPriceHistoryDates(priceHistoryDatesTester);
+
         Assertions.assertEquals(priceHistory.calculateLowestPrice("asdfsd"), -1);
         Assertions.assertEquals(priceHistory.calculateLowestPrice("1 year"), -1);
         Assertions.assertEquals(priceHistory.calculateLowestPrice("6 months"), -1);
@@ -249,6 +257,11 @@ public class PriceHistoryTest {
             priceHistoryDataTester.add(i);
         }
         plushie.setPriceHistoryData(priceHistoryDataTester);
+        ArrayList<Date> priceHistoryDatesTester = new ArrayList<>();
+        for (double i = 0; i < 30; i++) {
+            priceHistoryDatesTester.add(new Date());
+        }
+        plushie.setPriceHistoryDates(priceHistoryDatesTester);
         Assertions.assertEquals(priceHistory.calculateHighestPrice("asdfsd"), -1);
         Assertions.assertEquals(priceHistory.calculateHighestPrice("1 year"), -1);
         Assertions.assertEquals(priceHistory.calculateHighestPrice("6 months"), -1);
@@ -308,7 +321,6 @@ public class PriceHistoryTest {
      */
     @Test
     public void testCompareToAveragePriceInvalidInputs(){
-        Assertions.assertEquals(priceHistory.compareToAveragePrice("asdf"), -1);
         // will get average price in last 24 hours = 0
         ArrayList<Double> priceHistoryDataTester = new ArrayList<>();
         priceHistoryDataTester.add(0.0);
@@ -317,6 +329,7 @@ public class PriceHistoryTest {
         priceHistoryDatesTester.add(new Date());
         plushie.setPriceHistoryDates(priceHistoryDatesTester);
 
+        Assertions.assertEquals(priceHistory.compareToAveragePrice("asdf"), -1);
         Assertions.assertEquals(priceHistory.compareToAveragePrice("24 hours"), -1);
     }
 
@@ -355,7 +368,8 @@ public class PriceHistoryTest {
      */
     @Test
     public void testCompareToLowestPriceInvalidInputs(){
-        Assertions.assertEquals(priceHistory.compareToLowestPrice("asdf"), -1);
+
+        //makes denominator (lowest price in last 24 hours) = 0
         ArrayList<Double> priceHistoryDataTester = new ArrayList<>();
         priceHistoryDataTester.add(0.0);
         plushie.setPriceHistoryData(priceHistoryDataTester);
@@ -363,6 +377,7 @@ public class PriceHistoryTest {
         priceHistoryDatesTester.add(new Date());
         plushie.setPriceHistoryDates(priceHistoryDatesTester);
 
+        Assertions.assertEquals(priceHistory.compareToLowestPrice("asdf"), -1);
         Assertions.assertEquals(priceHistory.compareToLowestPrice("24 hours"), -1);
     }
 
@@ -406,15 +421,15 @@ public class PriceHistoryTest {
                 "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
         GeneratePriceHistoryUseCase priceHistoryTester = new GeneratePriceHistoryUseCase(plushieTester);
 
-        Assertions.assertEquals(priceHistory.compareToLowestPrice("asdf"), -1);
         // will get average price in last 24 hours = 0
         ArrayList<Double> priceHistoryDataTester = new ArrayList<>();
         priceHistoryDataTester.add(0.0);
-        plushie.setPriceHistoryData(priceHistoryDataTester);
+        plushieTester.setPriceHistoryData(priceHistoryDataTester);
         ArrayList<Date> priceHistoryDatesTester = new ArrayList<>();
         priceHistoryDatesTester.add(new Date());
-        plushie.setPriceHistoryDates(priceHistoryDatesTester);
+        plushieTester.setPriceHistoryDates(priceHistoryDatesTester);
 
+        Assertions.assertEquals(priceHistoryTester.compareToHighestPrice("asdf"), -1);
         Assertions.assertEquals(priceHistoryTester.compareToHighestPrice("24 hours"), -1);
     }
 
