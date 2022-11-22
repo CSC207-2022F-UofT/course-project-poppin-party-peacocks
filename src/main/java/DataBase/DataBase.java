@@ -1,3 +1,10 @@
+package DataBase;
+import Entities.*;
+
+import Entities.Item;
+import Entities.ListOfWishlists;
+import Entities.Wishlist;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -44,7 +51,7 @@ public class DataBase {
 
         // If the file directory doesn't exist, create a new file
         if (!file.isFile()) {
-           createFile(DataBase.getUserFilePath());
+            createFile(DataBase.getUserFilePath());
         }
 
         try {
@@ -62,7 +69,7 @@ public class DataBase {
         }
     }
 
-    /** Retrieves and returns a User object based on name
+    /** Retrieves and returns a Entities.User object based on name
      * @param name Unique name of the user
      * @returns user
      * */
@@ -170,7 +177,7 @@ public class DataBase {
             JSONObject listOfWishlistsObject = new JSONObject();
             JSONArray wishlistsObjects = new JSONArray();
 
-            for (Wishlist wishlist : listOfWishlists.listWishlist) {
+            for (Wishlist wishlist : listOfWishlists.getListOfWishlist()) {
                 wishlistsObjects.add(DataBase.createWishlistJSON(wishlist));
             }
             listOfWishlistsObject.put("wishlists", wishlistsObjects);

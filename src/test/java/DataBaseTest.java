@@ -3,7 +3,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+import Entities.*;
+import DataBase.*;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -86,17 +87,17 @@ public class DataBaseTest {
         Assertions.assertEquals(parsedList.getItemList().toArray().length, wishlist.getItemList().toArray().length);
     }
 
-//    @Test
-//    public void TestDataBaseWritesAndSavesListOfWishLists() {
-//        ListOfWishlists wishlists = new ListOfWishlists();
-//        Wishlist wishlist = new Wishlist("Exam Celebration Wish List");
-//        wishlist.setDateAdded(new Date(testDate));
-//        wishlists.addWishlist(wishlist);
-//
-//        User user = new User("TestUser", "Test");
-//        DataBase.saveListOfWishlists(wishlists, user);
-//
-//        Assertions.assertEquals(DataBase.getListOfWishlists("TestUser").listWishlist.get(0).getName(), "Exam Celebration Wish List");
-//    }
+    @Test
+    public void TestDataBaseWritesAndSavesListOfWishLists() {
+        ListOfWishlists wishlists = new ListOfWishlists();
+        Wishlist wishlist = new Wishlist("Exam Celebration Wish List");
+        wishlist.setDateAdded(new Date(testDate));
+        wishlists.addWishlist(wishlist);
+
+        User user = new User("TestUser", "Test");
+        DataBase.saveListOfWishlists(wishlists, user);
+
+        Assertions.assertEquals(DataBase.getListOfWishlists("TestUser").getListOfWishlist().get(0).getName(), "Exam Celebration Wish List");
+    }
 
 }

@@ -1,7 +1,9 @@
+package Entities;
+
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
 import java.io.IOException;
 import java.util.*;
 
@@ -20,6 +22,7 @@ public class Item {
     private double reviewStars;
     private int reviewCount;
     private ArrayList<Double> priceHistoryData;
+    private ArrayList<Date> priceHistoryDates;
 
     private Scheduler scheduler;
 
@@ -38,6 +41,8 @@ public class Item {
         this.reviewStars = reviewStars;
         this.priceHistoryData = new ArrayList<Double>();
         this.priceHistoryData.add(this.itemPrice);
+        this.priceHistoryDates = new ArrayList<Date>();
+        this.priceHistoryDates.add(new Date());
 
         TimerTask t = new TimerTask() {
             @Override
@@ -97,6 +102,7 @@ public class Item {
     public ArrayList<Double> getPriceHistoryData(){
         return this.priceHistoryData;
     }
+    public ArrayList<Date> getPriceHistoryDates() {return this.priceHistoryDates; }
 
 
     public void setName(String newName){
@@ -116,13 +122,11 @@ public class Item {
     public void setPriceHistoryData(ArrayList<Double> updatedPrices){
         this.priceHistoryData = updatedPrices;
     }
+    public void setPriceHistoryDates(ArrayList<Date> updatedDates) {this.priceHistoryDates = updatedDates; }
 
     public void setReviewStars(double newReviewStars) { this.reviewStars = newReviewStars;}
-
     public double getReviewStars() { return reviewStars;}
-
     public void setReviewCount(int reviewCount) { this.reviewCount = reviewCount;}
-
     public int getReviewCount() { return reviewCount;}
 
     public void displayItemInConsole(int ranking){
