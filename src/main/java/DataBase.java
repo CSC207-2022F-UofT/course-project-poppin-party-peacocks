@@ -1,3 +1,4 @@
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -44,7 +45,7 @@ public class DataBase {
 
         // If the file directory doesn't exist, create a new file
         if (!file.isFile()) {
-           createFile(DataBase.getUserFilePath());
+            createFile(DataBase.getUserFilePath());
         }
 
         try {
