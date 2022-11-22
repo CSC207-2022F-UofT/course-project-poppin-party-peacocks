@@ -1,6 +1,6 @@
-//test
-public class User {
+package Entities;
 
+public class User {
     private String currency;
     private String name;
     private String password;
