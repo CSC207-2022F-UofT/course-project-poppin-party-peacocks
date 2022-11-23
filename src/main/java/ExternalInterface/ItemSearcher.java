@@ -147,16 +147,32 @@ public class ItemSearcher {
         try {
             Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
 
-            Elements productUrls = doc.select("h2.a-size-mini.a-spacing-none.a-color-base.s-line-clamp-4").select("a");
+            Elements productUrls = doc.select("h2.a-size-mini.a-spacing-none.a-color-base a");
 
 
             for (Element item : productUrls) {
+
                 String newUrl = "https://www.amazon.ca" + item.attr("href");
                 listUrls.add(newUrl);
-            }
 
-            for (int i = 0; i < 10; i++) {
-                itemList.add(searchItemUrl(listUrls.get(i)));
+
+
+
+
+
+            }
+            int counter = 0;
+            for (String itemUrl: listUrls) {
+                if (counter == 10){
+                    break;
+                }
+                Item item = searchItemUrl(itemUrl);
+
+                if (item.getItemName() != "" && item.getItemPrice() != 0){
+                    itemList.add(item);
+                    counter += 1;
+                }
+
             }
 
             return itemList;
@@ -165,6 +181,7 @@ public class ItemSearcher {
             return new ArrayList<Item>();
 
         }
+
 
 
     }
@@ -182,14 +199,27 @@ public class ItemSearcher {
             Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
             Element htmlName = doc.select(".a-size-large.product-title-word-break").first();
             Element price = doc.select(".a-offscreen").first();
-            Element htmlDescription = doc.select("ul.a-unordered-list.a-vertical.a-spacing-mini").select("span.a-list-item").first();
+            Element htmlDescription = doc.select("div.a-row.feature").select("div.a-section.a-spacing-small").select("span").first();
             Element htmlCountRating = doc.select("div.a-row.a-spacing-medium.averageStarRatingNumerical").select("span.a-size-base.a-color-secondary").first();
             Element htmlImgUrl = doc.select("ul.a-unordered-list.a-nostyle.a-horizontal.list.maintain-height").select("span.a-list-item span.a-declarative").select("span.a-declarative").select("div.imgTagWrapper").select("img").first();
             Element htmlStarRating = doc.select("div.a-fixed-left-grid-col.aok-align-center.a-col-right").select("div.a-row").select("span.a-size-base.a-nowrap").first();
 
-
+            if (htmlName == null || price == null || htmlDescription == null || htmlCountRating == null || htmlImgUrl == null || htmlStarRating == null){
+                return new Item("", 0, 0, "", "", new String[]{}, 0, 0, "");
+            }
+            double sellingPrice = 0;
+            String description = "";
+            System.out.println(url);
             assert price != null;
-            double sellingPrice = Double.parseDouble(price.text().replace(",", "").substring(1));
+
+            String sellingPriceStr = price.text().replace(",", "").substring(1);
+
+            if (!sellingPriceStr.matches(".*[a-zA-Z]+.*")){
+                sellingPrice = Double.parseDouble(sellingPriceStr);
+            }
+
+
+
             int countRating = Integer.parseInt(htmlCountRating.text().replace(",", "").split(" ")[0]);
             double starRating = Double.parseDouble(htmlStarRating.text().split(" ")[0]);
             assert htmlImgUrl != null;
@@ -197,7 +227,12 @@ public class ItemSearcher {
             assert htmlName != null;
             String name = htmlName.text();
             assert htmlDescription != null;
-            String description = htmlDescription.text();
+            if (htmlDescription != null){
+                description = htmlDescription.text();
+                System.out.println(htmlDescription.text());
+            }
+
+
             return new Item(name, sellingPrice, sellingPrice, url, description, new String[]{}, countRating, starRating, imgUrl);
 
 
