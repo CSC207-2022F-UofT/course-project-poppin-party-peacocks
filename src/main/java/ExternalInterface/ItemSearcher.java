@@ -121,18 +121,20 @@ public class ItemSearcher {
 
         return "https://amazon-price1.p.rapidapi.com/search?keywords=" + keywords.replace(" ", "%20") + "&marketplace=" + marketplace;
     }
+
     /**
      * Returns generated search amazon link based on keyword
      *
-     * @param keywords     string keyword to search in Amazon
+     * @param keywords string keyword to search in Amazon
      */
     private String itemLinkGenerator(String keywords) {
         return "https://www.amazon.ca/s?k=" + keywords.replace(" ", "+");
     }
+
     /**
      * Returns Arraylist of Item objects based on search results of the specified keyword on AMazon
      *
-     * @param keywords     string keyword to search in Amazon interface
+     * @param keywords string keyword to search in Amazon interface
      */
 
     public ArrayList<Item> searchItemKeywords(String keywords) throws IOException, InterruptedException {
@@ -156,19 +158,15 @@ public class ItemSearcher {
                 listUrls.add(newUrl);
 
 
-
-
-
-
             }
             int counter = 0;
-            for (String itemUrl: listUrls) {
-                if (counter == 10){
+            for (String itemUrl : listUrls) {
+                if (counter == 10) {
                     break;
                 }
                 Item item = searchItemUrl(itemUrl, true);
 
-                if (item.getItemName() != "" && item.getItemPrice() != 0){
+                if (item.getItemName() != "" && item.getItemPrice() != 0) {
                     itemList.add(item);
                     counter += 1;
                 }
@@ -183,14 +181,12 @@ public class ItemSearcher {
         }
 
 
-
     }
 
     /**
      * Searches for item based on given url. Returns Item object based on given Amazon Url
      *
-     * @param url    url of amazon item
-
+     * @param url url of amazon item
      */
     public Item searchItemUrl(String url, boolean searchByKeyword) throws IOException {
 
@@ -204,7 +200,7 @@ public class ItemSearcher {
             Element htmlImgUrl = doc.select("ul.a-unordered-list.a-nostyle.a-horizontal.list.maintain-height").select("span.a-list-item span.a-declarative").select("span.a-declarative").select("div.imgTagWrapper").select("img").first();
             Element htmlStarRating = doc.select("div.a-fixed-left-grid-col.aok-align-center.a-col-right").select("div.a-row").select("span.a-size-base.a-nowrap").first();
 
-            if ((htmlName == null || price == null || htmlDescription == null || htmlCountRating == null || htmlImgUrl == null || htmlStarRating == null) && searchByKeyword){
+            if ((htmlName == null || price == null || htmlDescription == null || htmlCountRating == null || htmlImgUrl == null || htmlStarRating == null) && searchByKeyword) {
                 return new Item("", 0, 0, "", "", new String[]{}, 0, 0, "");
             }
             double sellingPrice = 0;
@@ -215,19 +211,18 @@ public class ItemSearcher {
             double starRating = 0;
 
 
-
             String sellingPriceStr = price.text().replace(",", "").substring(1);
 
-            if (!sellingPriceStr.matches(".*[a-zA-Z]+.*")){
+            if (!sellingPriceStr.matches(".*[a-zA-Z]+.*")) {
                 sellingPrice = Double.parseDouble(sellingPriceStr);
             }
 
 
-            if (htmlCountRating != null){
+            if (htmlCountRating != null) {
                 countRating = Integer.parseInt(htmlCountRating.text().replace(",", "").split(" ")[0]);
             }
 
-            if (htmlStarRating != null){
+            if (htmlStarRating != null) {
                 starRating = Double.parseDouble(htmlStarRating.text().split(" ")[0]);
             }
 
@@ -235,12 +230,12 @@ public class ItemSearcher {
                 imgUrl = htmlImgUrl.attr("src");
             }
 
-            if (htmlName != null){
+            if (htmlName != null) {
                 name = htmlName.text();
             }
 
 
-            if (htmlDescription != null){
+            if (htmlDescription != null) {
                 description = htmlDescription.text();
 
             }
