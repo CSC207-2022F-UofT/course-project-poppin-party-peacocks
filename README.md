@@ -33,4 +33,4 @@ connecting ui to finished logic.
 5. A window will open, prompting the user to enter a name for the new wishlist.
 6. (Currently on a Wishlist Page): Click the "Add Item" button at the bottom right of the screen.
 7. (Currently on the Item Search Page): At the text bar on the top of the page, enter a desired keyword and click the "Go" Button (example: "mechanical keyboard")
-8. Wait approximately 30 seconds for the search results to appear on screen. 
+8. Wait up to 70 seconds for the search results to appear on screen. 
