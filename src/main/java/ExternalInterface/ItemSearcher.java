@@ -211,7 +211,6 @@ public class ItemSearcher {
             String description = "";
             String name = "";
             String imgUrl = "";
-            System.out.println(url);
             int countRating = 0;
             double starRating = 0;
 
@@ -243,7 +242,7 @@ public class ItemSearcher {
 
             if (htmlDescription != null){
                 description = htmlDescription.text();
-                System.out.println(htmlDescription.text());
+
             }
 
 
