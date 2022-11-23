@@ -166,7 +166,7 @@ public class ItemSearcher {
                 if (counter == 10){
                     break;
                 }
-                Item item = searchItemUrl(itemUrl);
+                Item item = searchItemUrl(itemUrl, true);
 
                 if (item.getItemName() != "" && item.getItemPrice() != 0){
                     itemList.add(item);
@@ -192,7 +192,7 @@ public class ItemSearcher {
      * @param url    url of amazon item
 
      */
-    public Item searchItemUrl(String url) throws IOException {
+    public Item searchItemUrl(String url, boolean searchByKeyword) throws IOException {
 
         try {
             // This line specifies window type and layout of amazon page based on  Window Version and browser for webscraping
@@ -204,13 +204,18 @@ public class ItemSearcher {
             Element htmlImgUrl = doc.select("ul.a-unordered-list.a-nostyle.a-horizontal.list.maintain-height").select("span.a-list-item span.a-declarative").select("span.a-declarative").select("div.imgTagWrapper").select("img").first();
             Element htmlStarRating = doc.select("div.a-fixed-left-grid-col.aok-align-center.a-col-right").select("div.a-row").select("span.a-size-base.a-nowrap").first();
 
-            if (htmlName == null || price == null || htmlDescription == null || htmlCountRating == null || htmlImgUrl == null || htmlStarRating == null){
+            if ((htmlName == null || price == null || htmlDescription == null || htmlCountRating == null || htmlImgUrl == null || htmlStarRating == null) && searchByKeyword){
                 return new Item("", 0, 0, "", "", new String[]{}, 0, 0, "");
             }
             double sellingPrice = 0;
             String description = "";
+            String name = "";
+            String imgUrl = "";
             System.out.println(url);
-            assert price != null;
+            int countRating = 0;
+            double starRating = 0;
+
+
 
             String sellingPriceStr = price.text().replace(",", "").substring(1);
 
@@ -219,14 +224,23 @@ public class ItemSearcher {
             }
 
 
+            if (htmlCountRating != null){
+                countRating = Integer.parseInt(htmlCountRating.text().replace(",", "").split(" ")[0]);
+            }
 
-            int countRating = Integer.parseInt(htmlCountRating.text().replace(",", "").split(" ")[0]);
-            double starRating = Double.parseDouble(htmlStarRating.text().split(" ")[0]);
-            assert htmlImgUrl != null;
-            String imgUrl = htmlImgUrl.attr("src");
-            assert htmlName != null;
-            String name = htmlName.text();
-            assert htmlDescription != null;
+            if (htmlStarRating != null){
+                starRating = Double.parseDouble(htmlStarRating.text().split(" ")[0]);
+            }
+
+            if (htmlImgUrl != null) {
+                imgUrl = htmlImgUrl.attr("src");
+            }
+
+            if (htmlName != null){
+                name = htmlName.text();
+            }
+
+
             if (htmlDescription != null){
                 description = htmlDescription.text();
                 System.out.println(htmlDescription.text());
