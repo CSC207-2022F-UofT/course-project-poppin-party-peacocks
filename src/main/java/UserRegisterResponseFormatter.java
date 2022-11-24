@@ -6,8 +6,11 @@ public class UserRegisterResponseFormatter implements UserRegisterStatus{
         return newUser;
     }
 
+    /**
+     * Shows fail message by calling UserRegistrationFailed
+     */
     @Override
     public UserRegisterInputs showFailure(String failMessage) {
-        throw new UserCreationFailed(failMessage);
+        throw new UserRegistrationFailed(failMessage);
     }
 }
