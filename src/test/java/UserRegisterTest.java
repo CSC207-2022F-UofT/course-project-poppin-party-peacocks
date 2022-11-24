@@ -14,6 +14,16 @@ class UserRegisterTest {
     }
 
     @Test
+    public void testLoginNewUserSuccess() {
+        UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser4","Fuzzy321", "Fuzzy321");
+        UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
+        UserRegister register = new UserRegister(inputs, formatter);
+        register.create(inputs);
+        LoginAction userInput = new LoginAction("StarlightUser4", "Fuzzy321");
+        Assertions.assertTrue(userInput.checkUserMatchesPassword());
+    }
+
+    @Test
     public void testUserExistsFail(){
         UserRegisterInputs inputs = new UserRegisterInputs("Herman1","Fuzzy321", "Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
@@ -92,5 +102,7 @@ class UserRegisterTest {
 
         Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
+
+
 
 }
