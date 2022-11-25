@@ -107,9 +107,17 @@ public class AddItemPage extends JFrame {
                     JPanel[] array = new JPanel[10];
                     String keyword = searchBar.getText();
                     ItemSearcher itemSearcher = new ItemSearcher();
-                    Item[] itemList = new Item[0];
-                    itemList = itemSearcher.searchItemKeywords(keyword).toArray(itemList);
-                    for (int i = 0; i < 10; i++) {
+                    Item[] itemList = new Item[1];
+                    if (keyword.contains("amazon.")){
+                        itemList[0] = itemSearcher.searchItemUrl(keyword, false);
+                        array = new JPanel[1];
+
+                    }
+                    else{
+                        itemList = itemSearcher.searchItemKeywords(keyword).toArray(itemList);
+                    }
+
+                    for (int i = 0; i < itemList.length; i++) {
                         array[i] = createPanel(itemList[i], i + 1);
                     }
                     list = new JList<>(array);
