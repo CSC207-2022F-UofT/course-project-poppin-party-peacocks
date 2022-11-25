@@ -64,17 +64,25 @@ public class AddItemPage extends JFrame {
         setSize(400, 600);
         setResizable(true);
 
+        // constants
+        Color color1 = new Color(194, 234, 186);
+        Color color2 = new Color(106, 189, 154);
+
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBounds(0, 0, 400, 600);
         // header
         headerPanel = new JPanel(new FlowLayout());
+        headerPanel.setBackground(color2);
         searchLabel = new JLabel("Search:");
+        searchLabel.setForeground(Color.white);
         searchBar = new JTextField("", 20);
         searchButton = new JButton("Go");
         headerPanel.add(searchLabel);
         headerPanel.add(searchBar);
         headerPanel.add(searchButton);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
+        mainPanel.setBackground(color1);
+
         // centre
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
@@ -135,19 +143,21 @@ public class AddItemPage extends JFrame {
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             JPanel renderer = (JPanel) value;
             renderer.setBackground(isSelected ? Color.red : list.getBackground());
+
             Color defaultColor = new Color(238, 238, 238);
             Color selectedColor = new Color(0, 255, 0);
+
             if (isSelected) {
                 BorderLayout layout = (BorderLayout) renderer.getLayout();
                 layout.getLayoutComponent(BorderLayout.CENTER).setBackground(selectedColor);
-                renderer.setBackground(selectedColor);
+                renderer.setBackground(defaultColor);
                 renderer.setForeground(selectedColor);
                 selectIndexButton.setText("Select item " + Integer.toString(index + 1));
             } else {
                 BorderLayout layout = (BorderLayout) renderer.getLayout();
                 layout.getLayoutComponent(BorderLayout.CENTER).setBackground(defaultColor);
                 renderer.setBackground(defaultColor);
-                renderer.setForeground(defaultColor);
+                renderer.setForeground(selectedColor);
             }
             return renderer;
         }

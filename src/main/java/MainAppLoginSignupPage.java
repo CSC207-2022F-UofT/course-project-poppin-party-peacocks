@@ -19,6 +19,8 @@ public class MainAppLoginSignupPage extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton;
 
+    private JPanel loginButtonPanel;
+
     // Sign Up Page
     private JPanel signupPanel;
     private JTextField createUsernameField;
@@ -26,6 +28,9 @@ public class MainAppLoginSignupPage extends JFrame {
     private JLabel confirmPasswordLabel;
     private JPasswordField confirmPasswordField;
     private JButton signupButton;
+
+    private JPanel signupPanelButton;
+
 
     // footer
     private JPanel footerPanel;
@@ -42,10 +47,12 @@ public class MainAppLoginSignupPage extends JFrame {
         setSize(400, 638);
         setResizable(false);
 
-        // main panel
+        //constants
         Color color1 = new Color(194, 234, 186);
         Color color2 = new Color(106, 189, 154);
+        Font font1 = new Font("Montserrat", Font.PLAIN, 12);
 
+        // main panel
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBounds(0, 0, 400, 638);
@@ -64,21 +71,32 @@ public class MainAppLoginSignupPage extends JFrame {
         GridLayout layout = new GridLayout(0, 1);
         layout.setVgap(10);
         loginPanel.setLayout(layout);
-        usernameLabel = new JLabel("Username");
+        usernameLabel = new JLabel("Username:");
         usernameField = new JTextField();
-        passwordLabel = new JLabel("Password");
+        passwordLabel = new JLabel("Password:");
         passwordField = new JPasswordField();
-        loginButton = new JButton("Login");
+
+        loginButtonPanel = new JPanel(new FlowLayout());
+        loginButton = new CustomJButton("Login",0, 0, color2, Color.white, font1);
+        loginButton.setBackground(color2);
+        loginButton.setForeground(Color.white);
+        loginPanel.setBackground(color1);
+        loginButtonPanel.setBackground(color2);
 
         loginPanel.add(usernameLabel);
         loginPanel.add(usernameField);
         loginPanel.add(passwordLabel);
         loginPanel.add(passwordField);
-        loginPanel.add(loginButton);
+
+        // loginPanel.add(loginButton);
+        loginButtonPanel.add(loginButton);
+        loginPanel.add(loginButtonPanel);
         mainPanel.add(loginPanel, BorderLayout.CENTER);
 
         // sign up panel
         signupPanel = new JPanel();
+        signupPanel.setBackground(color1);
+
         signupPanel.setLayout(new GridLayout(0, 1));
         usernameLabel = new JLabel("Create Username");
         createUsernameField = new JTextField();
@@ -86,14 +104,19 @@ public class MainAppLoginSignupPage extends JFrame {
         createPasswordField = new JPasswordField();
         confirmPasswordLabel = new JLabel("Confirm Password");
         confirmPasswordField = new JPasswordField();
-        signupButton = new JButton("Sign Up");
+        signupButton = new CustomJButton("Sign Up", 0, 0, color2, Color.white, font1);
+
+        signupPanelButton = new JPanel(new FlowLayout());
+        signupPanelButton.setBackground(color2);
+
+        signupPanelButton.add(signupButton);
         signupPanel.add(usernameLabel);
         signupPanel.add(createUsernameField);
         signupPanel.add(passwordLabel);
         signupPanel.add(createPasswordField);
         signupPanel.add(confirmPasswordLabel);
         signupPanel.add(confirmPasswordField);
-        signupPanel.add(signupButton);
+        signupPanel.add(signupPanelButton);
 
         // footer panel
         footerPanel = new JPanel(new FlowLayout());

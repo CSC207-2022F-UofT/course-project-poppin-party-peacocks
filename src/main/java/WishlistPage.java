@@ -34,7 +34,7 @@ public class WishlistPage extends JFrame {
         Color color = new Color(150, 75, 130);
         Color color1 = new Color(194, 234, 186);
         Color color2 = new Color(106, 189, 154);
-        Font f1 = new Font(Font.SERIF, Font.PLAIN,  10);
+        Font font1 = new Font("Montserrat", Font.PLAIN, 12);
 
         middlePanel = new JPanel(new BorderLayout(20, 20));
         middlePanel.setBackground(color1);
@@ -70,10 +70,10 @@ public class WishlistPage extends JFrame {
         middleFooterPanel = new JPanel(new FlowLayout());
         middleFooterPanel.setBackground(color2);
 
-        deleteThisWishlistButton = new CustomJButton("Delete this Wishlist", 0, 0, color2, Color.white, f1);
+        deleteThisWishlistButton = new CustomJButton("Delete this Wishlist", 0, 0, color2, Color.white, font1);
         middleFooterPanel.add(deleteThisWishlistButton);
 
-        addItemButton = new CustomJButton("Add Item", 0, 0, color2, Color.white, f1);
+        addItemButton = new CustomJButton("Add Item", 0, 0, color2, Color.white, font1);
         middleFooterPanel.add(addItemButton);
 
         // add footer to middlePanel
