@@ -11,7 +11,8 @@ public class UserRegister implements UserRegisterCreateUser{
 
     /**
      * Checks whether inputtedUsername exists in DataBase
-     * @return UserRegisterStatus status with status failure or success, depending on if the User was able to be created.
+     * @param inputs desired information inputted for new user submitted by user
+     * @return UserRegisterStatus status with status failure or success, depending on if the User could be created
      */
     @Override
     public UserRegisterInputs create(UserRegisterInputs inputs){

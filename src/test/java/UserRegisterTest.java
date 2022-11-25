@@ -11,6 +11,8 @@ class UserRegisterTest {
         UserRegister register = new UserRegister(inputs, formatter);
         register.create(inputs);
         Assertions.assertEquals(inputs.getTempUser().getName(), DataBase.getUser(inputs.getInputtedUsername()).getName());
+
+        DataBase.deleteUser("StarlightUser");
     }
 
     @Test
@@ -21,6 +23,8 @@ class UserRegisterTest {
         register.create(inputs);
         LoginAction userInput = new LoginAction("StarlightUser4", "Fuzzy321");
         Assertions.assertTrue(userInput.checkUserMatchesPassword());
+
+        DataBase.deleteUser("StarlightUser4");
     }
 
     @Test

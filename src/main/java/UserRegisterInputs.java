@@ -34,7 +34,6 @@ public class UserRegisterInputs {
     }
 
     /**
-     *
      * @return The registration information of user as object User
      */
     public User getTempUser(){
@@ -43,7 +42,6 @@ public class UserRegisterInputs {
 
     /**
      * Utilizes LoginAction's checkUsername function to check if tempUser exists in DataBase.
-     *
      * @return True if tempUser exists in DataBase
      */
     public boolean checkUserExists(){
