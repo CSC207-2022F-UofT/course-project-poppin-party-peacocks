@@ -16,14 +16,13 @@ class UserRegisterTest {
 
     @Test
     public void testLoginNewUserSuccess() {
-        UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser4","Fuzzy321", "Fuzzy321");
+        UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser","Fuzzy321", "Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
         UserRegister register = new UserRegister(inputs, formatter);
         register.create(inputs);
-        LoginAction userInput = new LoginAction("StarlightUser4", "Fuzzy321");
+        LoginAction userInput = new LoginAction("StarlightUser", "Fuzzy321");
         Assertions.assertTrue(userInput.checkUserMatchesPassword());
-
-        DataBase.deleteUser("StarlightUser4");
+        DataBase.deleteUser("StarlightUser");
     }
 
     @Test
