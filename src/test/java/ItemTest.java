@@ -98,6 +98,7 @@ public class ItemTest {
 
         TestItem.setDesiredPrice(17.00);
         Assertions.assertEquals(true, 17.00 == TestItem.getItemDesiredPrice());
+
     }
 
     /**
