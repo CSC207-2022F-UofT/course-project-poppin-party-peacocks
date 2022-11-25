@@ -167,6 +167,18 @@ public class DataBase {
         itemObject.put("reviewStars", item.getReviewStars());
         itemObject.put("reviewCount", item.getReviewCount());
         itemObject.put("imageURL", item.getItemImageURL());
+
+        JSONArray historyDateObject = new JSONArray();
+        for (Date date : item.getPriceHistoryDates()) {
+            historyDateObject.add(date.toString());
+        }
+        JSONArray historyDataObject = new JSONArray();
+        tagsObject.addAll(Arrays.asList(item.getPriceHistoryData()));
+
+        itemObject.put("historyDate", historyDateObject);
+        itemObject.put("historyData", historyDataObject);
+        itemObject.put("currency", item.getItemCurrency());
+
         return itemObject;
 
     }
@@ -331,6 +343,20 @@ public class DataBase {
         int reviewCount = Integer.parseInt(itemData.get("reviewCount").toString());
         String imageURL = (String) itemData.get("imageURL");
 
-        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars, imageURL, "CAD");
+        ArrayList<Date> historyDates = new ArrayList<>();
+        JSONArray historyDatesObject = (JSONArray) itemData.get("historyDate");
+        for (Object date : historyDatesObject) {
+            historyDates.add(new Date(date.toString()));
+        }
+
+        ArrayList<Double> historyData = new ArrayList<>();
+        JSONArray historyDataObject = (JSONArray) itemData.get("historyData");
+        for (Object price : historyDataObject) {
+            historyData.add(Double.parseDouble(price.toString()));
+        }
+
+        String currency = (String) itemData.get("currency");
+
+        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars, imageURL, currency, historyData, historyDates);
     }
 }
