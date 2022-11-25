@@ -10,8 +10,7 @@ class UserRegisterTest {
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
         UserRegister register = new UserRegister(inputs, formatter);
         register.create(inputs);
-        Assertions.assertEquals(inputs.getTempUser().getName(), DataBase.getUser(inputs.getInputtedUsername()).getName());
-
+        Assertions.assertEquals(inputs.getTempUser().getName(), DataBase.getUser("StarlightUser").getName());
         DataBase.deleteUser("StarlightUser");
     }
 
