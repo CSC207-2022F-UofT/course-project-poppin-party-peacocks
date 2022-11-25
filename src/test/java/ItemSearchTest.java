@@ -31,9 +31,11 @@ public class ItemSearchTest {
 //        Assertions.assertEquals(10, itemSearchList.size());
 //    }
 
+
 //    /**
 //     * Testing search item by url feature and if it is scraping the correct value of price
 //    */
+
 //    @Test
 //    public void searchItemTestKittenPlushPrice() throws IOException, InterruptedException {
 //        ItemSearcher itemSearcher = new ItemSearcher();
