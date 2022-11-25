@@ -1,3 +1,4 @@
+import DataBase.DataBase;
 import Entities.*;
 import javax.swing.*;
 
@@ -27,6 +28,8 @@ public class main {
 
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
+        User temp = new User("Hello", "test");
+        DataBase.deleteUser("Hello");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();
