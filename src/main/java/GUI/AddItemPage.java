@@ -1,3 +1,7 @@
+package GUI;
+
+import GUI.WishlistPage;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;

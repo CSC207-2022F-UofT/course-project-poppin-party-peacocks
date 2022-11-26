@@ -1,3 +1,5 @@
+package GUI;
+
 import Entities.ListOfWishlists;
 
 import javax.swing.*;
