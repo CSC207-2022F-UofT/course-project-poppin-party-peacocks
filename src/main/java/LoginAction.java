@@ -11,7 +11,6 @@ public class LoginAction {
 
     /**
      * Checks whether inputtedUsername exists in DataBase
-     *
      * @return True if inputtedUsername exists in DataBase
      */
     public boolean checkUsername() {
@@ -27,7 +26,6 @@ public class LoginAction {
     /**
      * Uses checkUsername function to check if inputtedUsername exists in DataBase and if it does, checks if
      * inputtedPassword matches the password of existingUser
-     *
      * @return True if inputtedUsername exists in DataBase and inputtedPassword matches existingPassword
      */
     public boolean checkUserMatchesPassword(){

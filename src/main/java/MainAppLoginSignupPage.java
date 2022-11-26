@@ -1,11 +1,11 @@
-package GUI;
+import Entities.ListOfWishlists;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainAppLoginSignupPage_deprecated extends JFrame {
+public class MainAppLoginSignupPage extends JFrame {
     private JPanel mainPanel;
     // header
     private JPanel headerPanel;
@@ -41,7 +41,7 @@ public class MainAppLoginSignupPage_deprecated extends JFrame {
         return mainPanel;
     }
 
-    public MainAppLoginSignupPage_deprecated() {
+    public MainAppLoginSignupPage() {
         super("Login Page");
         setLayout(null);
         setSize(400, 638);
@@ -156,7 +156,7 @@ public class MainAppLoginSignupPage_deprecated extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HomePage listOfWishlists = new HomePage();
+                ListOfWishlistsPage listOfWishlists = new ListOfWishlistsPage();
                 listOfWishlists.setContentPane(listOfWishlists.getMainPanel());
                 listOfWishlists.setVisible(true);
                 listOfWishlists.setLocationRelativeTo(null);
@@ -170,7 +170,7 @@ public class MainAppLoginSignupPage_deprecated extends JFrame {
         signupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HomePage listOfWishlists = new HomePage();
+                ListOfWishlistsPage listOfWishlists = new ListOfWishlistsPage();
                 listOfWishlists.setContentPane(listOfWishlists.getMainPanel());
                 listOfWishlists.setVisible(true);
                 listOfWishlists.setLocationRelativeTo(null);

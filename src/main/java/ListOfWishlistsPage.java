@@ -1,5 +1,3 @@
-package GUI;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-public class HomePage extends JFrame {
+public class ListOfWishlistsPage extends JFrame {
     private JPanel leftPanel;
     private JPanel upperPanel;
     private JPanel headerPanel;
@@ -39,7 +37,7 @@ public class HomePage extends JFrame {
 //        JButton button = new JButton();
 //        button.setText(text);
 //        button.setFont(font);
-//        button.setBorder(new GUI.RoundedBorder(20));
+//        button.setBorder(new RoundedBorder(20));
 //        if (prefHeight > 0 && prefWidth > 0) {
 //            button.setPreferredSize(new Dimension(prefWidth, prefHeight));
 //        }
@@ -48,7 +46,7 @@ public class HomePage extends JFrame {
 //        return button;
 //    }
 
-    public HomePage() {
+    public ListOfWishlistsPage() {
         super("My Wishlists");
         setLayout(null);
         setSize(400, 638);
@@ -150,8 +148,8 @@ public class HomePage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO
-                // Currently, this navigates to GUI.MainAppLoginSignupPage.
-                MainAppLoginSignupPage_deprecated loginSignupPage = new MainAppLoginSignupPage_deprecated();
+                // Currently, this navigates to MainAppLoginSignupPage.
+                MainAppLoginSignupPage loginSignupPage = new MainAppLoginSignupPage();
                 loginSignupPage.setContentPane(loginSignupPage.getMainPanel());
                 loginSignupPage.setVisible(true);
                 loginSignupPage.setLocationRelativeTo(null);
