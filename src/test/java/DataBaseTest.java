@@ -7,23 +7,22 @@ import Entities.*;
 import DataBase.*;
 import java.util.ArrayList;
 import java.util.Date;
-
-    public class DataBaseTest {
+public class DataBaseTest {
+    ArrayList<Double> priceData = new ArrayList();
+    ArrayList<Date> priceDate = new ArrayList<>();
+    String testDate = "Fri Nov 18 01:04:05 EST 2022";
     Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
-            "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
+            "Description from amazon (or you write your own)", new String[]{"toys"}, 40.99, new Date(testDate), 0, 0, "www.amazonimage.com/keyboard", "CAD", priceData, priceDate);
     ArrayList<Item> items = new ArrayList<>();
     ArrayList<String> tags = new ArrayList<>();
-    String testDate = "Fri Nov 18 01:04:05 EST 2022";
     @Test
     public void TestDataBaseReturnsUserFilePath() {
         Assertions.assertEquals(DataBase.getUserFilePath(), "src/main/database/users.txt");
     }
-
     @Test
     public void TestDataBaseReturnsWishListPath() {
         Assertions.assertEquals(DataBase.getWishlistPath("Herman1"), "src/main/database/Herman1.txt");
     }
-
     @Test
     public void TestDataBaseReturnsItemJSON() {
         plushie.setDateAdded(new Date(testDate));
@@ -37,9 +36,7 @@ import java.util.Date;
         Assertions.assertTrue(itemString.contains("\"itemDescription\":\"Description from amazon (or you write your own)\""));
         Assertions.assertTrue(itemString.contains("\"reviewStars\":0.0,"));
         Assertions.assertTrue(itemString.contains("\"url\":\"www.amazon.com\\/plushie\""));
-        Assertions.assertTrue(itemString.contains("\"tags\":[\"toys\"]"));
     }
-
     @Test
     public void TestDataBaseParsesItemObject() throws ParseException, java.text.ParseException {
         plushie.setDateAdded(new Date(testDate));
@@ -70,7 +67,6 @@ import java.util.Date;
         Assertions.assertTrue(wishlistString.contains("\"itemList\""));
         Assertions.assertTrue(wishlistString.contains("\"selectedTags\""));
     }
-
     @Test
     public void TestDataBaseParsesWishListObject() throws ParseException, java.text.ParseException {
         plushie.setDateAdded(new Date(testDate));

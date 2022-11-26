@@ -16,6 +16,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+import java.util.Objects.*;
+
 public class DataBase {
 
     public static User currentUser;
@@ -167,6 +169,18 @@ public class DataBase {
         itemObject.put("reviewStars", item.getReviewStars());
         itemObject.put("reviewCount", item.getReviewCount());
         itemObject.put("imageURL", item.getItemImageURL());
+
+        JSONArray historyDateObject = new JSONArray();
+        for (Date date : item.getPriceHistoryDates()) {
+            historyDateObject.add(date.toString());
+        }
+        JSONArray historyDataObject = new JSONArray();
+        tagsObject.addAll(Arrays.asList(item.getPriceHistoryData()));
+
+        itemObject.put("historyDate", historyDateObject);
+        itemObject.put("historyData", historyDataObject);
+        itemObject.put("currency", item.getItemCurrency());
+
         return itemObject;
 
     }
@@ -253,8 +267,10 @@ public class DataBase {
                 JSONArray wishlistsObject = (JSONArray) parsedData.get("wishlists");
                 ArrayList<Wishlist> wishlists = new ArrayList<>();
 
-                for (Object wishlist : wishlistsObject) {
-                    wishlists.add(DataBase.parseWishlist(wishlist));
+                if (!Objects.isNull(wishlistsObject)) {
+                    for (Object wishlist : wishlistsObject) {
+                        wishlists.add(DataBase.parseWishlist(wishlist));
+                    }
                 }
                 return new ListOfWishlists(wishlists);
             }
@@ -284,18 +300,27 @@ public class DataBase {
         Date dateAdded = new Date(wishlistData.get("dateAdded").toString());
 
         ArrayList<Item> items = new ArrayList<>();
-        for (Object itemObject : (JSONArray) wishlistData.get("itemList")) {
-            items.add(DataBase.parseItem(itemObject));
+        JSONArray itemsObjects = (JSONArray) wishlistData.get("itemList");
+        if (!Objects.isNull(itemsObjects)) {
+            for (Object itemObject : itemsObjects) {
+                items.add(DataBase.parseItem(itemObject));
+            }
         }
 
         ArrayList<Item> displayedItems = new ArrayList<>();
-        for (Object itemObject : (JSONArray) wishlistData.get("displayedList")) {
-            displayedItems.add(DataBase.parseItem(itemObject));
+        JSONArray itemObjects = (JSONArray) wishlistData.get("displayedList");
+        if (!Objects.isNull(itemObjects)) {
+            for (Object itemObject : (JSONArray) wishlistData.get("displayedList")) {
+                displayedItems.add(DataBase.parseItem(itemObject));
+            }
         }
 
         ArrayList<String> tags = new ArrayList<>();
-        for (Object tagObject : (JSONArray) wishlistData.get("selectedTags")) {
-            tags.add(tagObject.toString());
+        JSONArray tagObjects = (JSONArray) wishlistData.get("selectedTags");
+        if (!Objects.isNull(tagObjects)) {
+            for (Object tagObject : tagObjects) {
+                tags.add(tagObject.toString());
+            }
         }
 
         return new Wishlist(name, items, displayedItems, dateAdded, tags);
@@ -319,8 +344,10 @@ public class DataBase {
 
         ArrayList<String> tags = new ArrayList<>();
         JSONArray tagsObject = (JSONArray) itemData.get("tags");
-        for (Object tag : tagsObject) {
-            tags.add(tag.toString());
+        if (!Objects.isNull(tagsObject)) {
+            for (Object tag : tagsObject) {
+                tags.add(tag.toString());
+            }
         }
 
         String[] tagsArray = new String[tags.size()];
@@ -331,6 +358,25 @@ public class DataBase {
         int reviewCount = Integer.parseInt(itemData.get("reviewCount").toString());
         String imageURL = (String) itemData.get("imageURL");
 
-        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars, imageURL, "CAD");
+        ArrayList<Date> historyDates = new ArrayList<>();
+
+        JSONArray historyDatesObject = (JSONArray) itemData.get("historyDate");
+        if (!Objects.isNull(historyDatesObject)) {
+            for (Object date : historyDatesObject) {
+                historyDates.add(new Date(date.toString()));
+            }
+        }
+
+        ArrayList<Double> historyData = new ArrayList<>();
+        JSONArray historyDataObject = (JSONArray) itemData.get("historyData");
+        if (!Objects.isNull(historyDataObject)) {
+            for (Object price : historyDataObject) {
+                historyData.add(Double.parseDouble(price.toString()));
+            }
+        }
+
+        String currency = (String) itemData.get("currency");
+
+        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars, imageURL, currency, historyData, historyDates);
     }
 }
