@@ -22,6 +22,9 @@ public class DataBase {
     public static String getUserFilePath() {
         return "src/main/database/users.txt";
     }
+    public static String getTempUserFilePath() {
+        return "src/main/database/tempusers.txt";
+    }
     public static String getWishlistPath(String userName) {
         return "src/main/database/" + userName + ".txt";
     }
@@ -69,17 +72,57 @@ public class DataBase {
         }
     }
 
+    /** Deletes user from the database
+     * @param userName username to delete from the database
+     * @returns whether user was successfully deleted
+     * */
+    // JSONArray's library has errors, can ignore
+    @SuppressWarnings("unchecked")
+    public static boolean deleteUser(String userName) {
+        File tempUserFile = new File(getTempUserFilePath());
+
+        // If the tempUserFile directory doesn't exist, create a new tempUserFile
+        if (!tempUserFile.isFile()) {
+            createFile(DataBase.getTempUserFilePath());
+        }
+
+        try {
+            File userFile = new File(DataBase.getUserFilePath());
+            FileWriter tempUserWriter = new FileWriter(DataBase.getTempUserFilePath(), true);
+            Scanner userReader = new Scanner(userFile);
+            // Find the first user with the correct name
+            while (userReader.hasNextLine()) {
+                String data = userReader.nextLine();
+                JSONParser jsonParser = new JSONParser();
+                JSONObject parsedData = (JSONObject) jsonParser.parse(data);
+                if (!(Objects.equals(parsedData.get("user").toString(), userName))) {
+                    tempUserWriter.write(parsedData.toJSONString()+ '\n');
+                }
+            }
+            userReader.close();
+            tempUserWriter.close();
+            userFile.delete();
+            return tempUserFile.renameTo(userFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     /** Retrieves and returns a Entities.User object based on name
      * @param name Unique name of the user
      * @returns user
      * */
     public static User getUser(String name) {
         try {
-            File myObj = new File(DataBase.getUserFilePath());
-            Scanner myReader = new Scanner(myObj);
+            File userFile = new File(DataBase.getUserFilePath());
+            Scanner userReader = new Scanner(userFile);
             // Find the first user with the correct name
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
+            while (userReader.hasNextLine()) {
+                String data = userReader.nextLine();
                 JSONParser jsonParser = new JSONParser();
                 JSONObject parsedData = (JSONObject) jsonParser.parse(data);
                 if (Objects.equals(parsedData.get("user").toString(), name)) {
@@ -91,7 +134,7 @@ public class DataBase {
                     return newUser;
                 }
             }
-            myReader.close();
+            userReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred file not found.");
             e.printStackTrace();
