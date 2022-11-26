@@ -8,25 +8,25 @@ import java.awt.*;
 public class WelcomePage extends JFrame{
     private JPanel mainPanel;
     // header
-    private JLabel titleLabel;
-
-    // Login Page
-    private JLabel usernameLabel;
-    private JTextField usernameField;
-    private JLabel passwordLabel;
-    private JPasswordField passwordField;
-    private JButton loginButton;
-
-    // Sign Up Page
-    private JTextField createUsernameField;
-    private JPasswordField createPasswordField;
-    private JLabel confirmPasswordLabel;
-    private JPasswordField confirmPasswordField;
-    private JButton signupButton;
-
-    // footer
-    private JButton gotoLoginPanelButton;
-    private JButton gotoSignupPanelButton;
+//    private JLabel titleLabel;
+//
+//    // Login Page
+//    private JLabel usernameLabel;
+//    private JTextField usernameField;
+//    private JLabel passwordLabel;
+//    private JPasswordField passwordField;
+//    private JButton loginButton;
+//
+//    // Sign Up Page
+//    private JTextField createUsernameField;
+//    private JPasswordField createPasswordField;
+//    private JLabel confirmPasswordLabel;
+//    private JPasswordField confirmPasswordField;
+//    private JButton signupButton;
+//
+//    // footer
+//    private JButton gotoLoginPanelButton;
+//    private JButton gotoSignupPanelButton;
     private Color color1 = new Color(194, 234, 186);
     private Color color2 = new Color(106, 189, 154);
     private Font buttonFont = new Font("Sans Serif", Font.PLAIN, 12);
@@ -51,7 +51,7 @@ public class WelcomePage extends JFrame{
         mainPanel.setBackground(color2);
         mainPanel.add(titleLabel);
 
-        JPanel loginPanel = new LoginPanel();
+        JPanel loginPanel = new LoginPanel(this);
         mainPanel.add(loginPanel);
 
         JPanel signupPanel = new JPanel();
@@ -67,7 +67,7 @@ public class WelcomePage extends JFrame{
         mainPanel.add(switchToLoginButton);
         mainPanel.add(switchToSignupButton);
 
-        WelcomePageActionListener wpal = new WelcomePageActionListener(mainPanel, loginPanel, signupPanel);
+        WelcomePageActionListener wpal = new WelcomePageActionListener(this, mainPanel, loginPanel, signupPanel);
         switchToLoginButton.addActionListener(wpal.getLoginActionListener());
         switchToSignupButton.addActionListener(wpal.getSignupActionListener());
 

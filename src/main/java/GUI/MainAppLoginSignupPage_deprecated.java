@@ -133,7 +133,7 @@ public class MainAppLoginSignupPage_deprecated extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ListOfWishlistsPage listOfWishlists = new ListOfWishlistsPage();
+                HomePage listOfWishlists = new HomePage();
                 listOfWishlists.setContentPane(listOfWishlists.getMainPanel());
                 listOfWishlists.setVisible(true);
                 listOfWishlists.setLocationRelativeTo(null);
@@ -147,7 +147,7 @@ public class MainAppLoginSignupPage_deprecated extends JFrame {
         signupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ListOfWishlistsPage listOfWishlists = new ListOfWishlistsPage();
+                HomePage listOfWishlists = new HomePage();
                 listOfWishlists.setContentPane(listOfWishlists.getMainPanel());
                 listOfWishlists.setVisible(true);
                 listOfWishlists.setLocationRelativeTo(null);

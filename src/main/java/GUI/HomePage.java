@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-public class ListOfWishlistsPage extends JFrame {
+public class HomePage extends JFrame {
     private JPanel leftPanel;
     private JPanel upperPanel;
     private JPanel headerPanel;
@@ -48,7 +48,7 @@ public class ListOfWishlistsPage extends JFrame {
 //        return button;
 //    }
 
-    public ListOfWishlistsPage() {
+    public HomePage() {
         super("My Wishlists");
         setLayout(null);
         setSize(400, 638);

@@ -1,18 +1,22 @@
 package GUI;
+import Controller.WelcomePageActionListener;
+import Controller.WelcomePageActionListenerNavigation;
+
 import javax.swing.*;
 import java.awt.*;
 
 
 public class LoginPanel extends JPanel{
-
+    private JFrame currJFrame;
     private Color color1 = new Color(194, 234, 186);
     private Color color2 = new Color(106, 189, 154);
     private Font buttonFont = new Font("Sans Serif", Font.PLAIN, 12);
 
-    public LoginPanel(){
+    public LoginPanel(JFrame currJFrame){
         super(null);
         this.setBounds(0,80,360,460);
         this.setBackground(color2);
+        this.currJFrame = currJFrame;
 
         JLabel logo = new JLabel();
         logo.setIcon(new ImageIcon("src/main/java/Assets/logo.png"));
@@ -36,6 +40,8 @@ public class LoginPanel extends JPanel{
                 Color.WHITE, Color.BLACK,
                 buttonFont);
         loginButton.setBounds(120,420,108,24);
+        WelcomePageActionListenerNavigation wpaln = new WelcomePageActionListenerNavigation(currJFrame);
+        loginButton.addActionListener(wpaln.getLoginActionListener());
 
         this.add(usernameLabel);
         this.add(usernameField);
