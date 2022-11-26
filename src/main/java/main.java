@@ -1,4 +1,5 @@
 import GUI.MainAppLoginSignupPage;
+import GUI.WelcomePage;
 
 import javax.swing.*;
 
@@ -17,7 +18,7 @@ public class main {
 
     private static void createAndShowGUI() {
         // Create and set up the window.
-        MainAppLoginSignupPage initialJFrame = new MainAppLoginSignupPage();
+        WelcomePage initialJFrame = new WelcomePage();
         initialJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Create and set up the content pane.
