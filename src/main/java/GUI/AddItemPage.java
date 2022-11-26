@@ -1,3 +1,5 @@
+package GUI;
+
 import Entities.Item;
 import ExternalInterface.ItemSearcher;
 
