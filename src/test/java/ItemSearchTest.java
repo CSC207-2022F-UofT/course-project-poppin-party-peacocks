@@ -39,7 +39,7 @@ public class ItemSearchTest {
         ItemSearcher itemSearcher = new ItemSearcher();
 
         String kittenplush = "https://www.amazon.ca/Kitten-Plush-Stuffed-Animal-Pillow/dp/B088BWPFYZ/ref=sr_1_5?crid=16S7RSE5N25AA&keywords=uwu+cat&qid=1669082008&qu=eyJxc2MiOiIyLjI1IiwicXNhIjoiMC4wMCIsInFzcCI6IjAuMDAifQ%3D%3D&sprefix=uwu+cat%2Caps%2C69&sr=8-5";
-        double expectedPrice = 19.20;
+        double expectedPrice = 28.99;
         Item kittenplushitem = itemSearcher.searchItemUrl(kittenplush, false);
 
         Assertions.assertEquals(kittenplushitem.getItemPrice(), expectedPrice);
