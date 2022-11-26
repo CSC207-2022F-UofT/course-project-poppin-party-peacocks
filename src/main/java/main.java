@@ -1,7 +1,5 @@
 import DataBase.DataBase;
-import Entities.User;
-import GUI.WelcomePage;
-
+import Entities.*;
 import javax.swing.*;
 
 public class main {
@@ -41,8 +39,7 @@ public class main {
 
     private static void createAndShowGUI() {
         // Create and set up the window.
-        //GUI.MainAppLoginSignupPage initialJFrame = new GUI.MainAppLoginSignupPage();
-        WelcomePage initialJFrame = new WelcomePage();
+        MainAppLoginSignupPage initialJFrame = new MainAppLoginSignupPage();
         initialJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Create and set up the content pane.

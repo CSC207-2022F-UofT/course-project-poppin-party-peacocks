@@ -1,5 +1,3 @@
-package GUI;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -65,7 +63,7 @@ public class AddWishlistPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO
-                // Currently navigates to GUI.WishlistPage
+                // Currently navigates to WishlistPage
                 WishlistPage wlPage = new WishlistPage();
                 wlPage.setContentPane(wlPage.getMainPanel());
                 wlPage.setVisible(true);
@@ -78,7 +76,7 @@ public class AddWishlistPage extends JFrame {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Returns to GUI.ListOfWishlistsPage
+                // Returns to ListOfWishlistsPage
                 ListOfWishlistsPage listOfWL = new ListOfWishlistsPage();
                 listOfWL.setContentPane(listOfWL.getMainPanel());
                 listOfWL.setVisible(true);

@@ -1,5 +1,3 @@
-package GUI;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -93,7 +91,7 @@ public class WishlistPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO
-                // Currently navigates to GUI.ListOfWishlistsPage.
+                // Currently navigates to ListOfWishlistsPage.
                 ListOfWishlistsPage listOfWlPage = new ListOfWishlistsPage();
                 listOfWlPage.setContentPane(listOfWlPage.getMainPanel());
                 listOfWlPage.setVisible(true);

@@ -1,5 +1,3 @@
-package GUI;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -112,7 +110,7 @@ public class ItemPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO
-                // Currently navigates to GUI.WishlistPage.
+                // Currently navigates to WishlistPage.
                 WishlistPage wlPage = new WishlistPage();
                 wlPage.setContentPane(wlPage.getMainPanel());
                 wlPage.setVisible(true);
