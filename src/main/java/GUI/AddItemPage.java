@@ -140,6 +140,18 @@ public class AddItemPage extends JFrame {
                 dispose();
             }
         });
+
+        selectIndexButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ItemPage itemPage = new ItemPage();
+                itemPage.setContentPane(itemPage.getMainPanel());
+                itemPage.setVisible(true);
+                itemPage.setLocationRelativeTo(null);
+                itemPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                dispose();
+            }
+        });
     }
 
     class PanelRenderer implements ListCellRenderer {

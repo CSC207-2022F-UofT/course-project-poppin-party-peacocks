@@ -1,5 +1,4 @@
 package GUI;
-import Controller.WelcomePageActionListener;
 import Controller.WelcomePageActionListenerNavigation;
 
 import javax.swing.*;

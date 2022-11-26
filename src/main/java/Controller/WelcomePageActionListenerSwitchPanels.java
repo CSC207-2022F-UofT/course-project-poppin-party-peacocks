@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WelcomePageActionListener {
+public class WelcomePageActionListenerSwitchPanels {
 
     private JPanel mainPanel;
     private JPanel loginPanel;
@@ -13,7 +13,7 @@ public class WelcomePageActionListener {
     private ActionListener showSignupPanelActionListener;
     private ActionListener navToHomePage;
 
-    public WelcomePageActionListener(JFrame currJFrame, JPanel mainPanel, JPanel loginPanel, JPanel signupPanel) {
+    public WelcomePageActionListenerSwitchPanels(JFrame currJFrame, JPanel mainPanel, JPanel loginPanel, JPanel signupPanel) {
         this.mainPanel = mainPanel;
         this.loginPanel = loginPanel;
         this.signupPanel = signupPanel;

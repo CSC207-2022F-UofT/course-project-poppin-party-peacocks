@@ -1,7 +1,7 @@
 package GUI;
 
-import Controller.WelcomePageActionListener;
-import GUI.CustomJButton;
+import Controller.WelcomePageActionListenerSwitchPanels;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -67,7 +67,7 @@ public class WelcomePage extends JFrame{
         mainPanel.add(switchToLoginButton);
         mainPanel.add(switchToSignupButton);
 
-        WelcomePageActionListener wpal = new WelcomePageActionListener(this, mainPanel, loginPanel, signupPanel);
+        WelcomePageActionListenerSwitchPanels wpal = new WelcomePageActionListenerSwitchPanels(this, mainPanel, loginPanel, signupPanel);
         switchToLoginButton.addActionListener(wpal.getLoginActionListener());
         switchToSignupButton.addActionListener(wpal.getSignupActionListener());
 
