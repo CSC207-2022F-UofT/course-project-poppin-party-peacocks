@@ -31,10 +31,10 @@ public class Wishlist {
     public ArrayList<String> getSelectedTags() {return this.selectedTags; };
 
     public void setDateAdded(Date date) { this.dateAdded = date; }
+
     /**
      * Sorts wishlist by date in added date (earliest date-latest date) or (latest date-earliest date)
      * @param order The value of string whether the user wants the wishlist to be ascending or descending
-     * @return function is void, but function mutates the wishlist by sorting by date
      */
     public void sortWishlistByDate(String order){
         Comparator<Item> itemDateComparator = new ItemDateComparator();
@@ -54,7 +54,6 @@ public class Wishlist {
     /**
      * Sorts wishlist by name in ascending order (A-Z) or descending order (Z-A)
      * @param order The value of string whether the user wants the wishlist to be ascending or descending
-     * @return function is void, but function mutates the wishlist by sorting with name
      */
     public void sortWishlistByName(String order) {
         Comparator<Item> itemNameComparator = new ItemNameComparator();
@@ -74,7 +73,6 @@ public class Wishlist {
     /**
      * Sorts wishlist by review stars in ascending order (lowest-highest) or descending order (highest-lowest)
      * @param order The value of string whether the user wants the wishlist to be ascending or descending
-     * @return function is void, but function mutates the wishlist by sorting with review stars
      */
     public void sortWishlistByReviewStars(String order) {
         Comparator<Item> itemReviewStarComparator = new ItemReviewStarComparator();
@@ -94,7 +92,6 @@ public class Wishlist {
     /**
      * Sorts wishlist by review count in ascending order (lowest-highest) or descending order (highest-lowest)
      * @param order The value of string whether the user wants the wishlist to be ascending or descending
-     * @return function is void, but function mutates the wishlist by sorting with review count
      */
     public void sortWishlistByReviewCount(String order) {
         Comparator<Item> itemReviewCount = new ItemReviewCountComparator();
@@ -114,7 +111,6 @@ public class Wishlist {
     /**
      * Sorts wishlist by price in ascending order (lowest-highest) or descending order (highest-lowest)
      * @param order The value of string whether the user wants the wishlist to be ascending or descending
-     * @return function is void, but function mutates the wishlist by sorting with price
      */
     public void sortWishlistByPrice(String order) {
         Comparator<Item> itemPriceComparator = new ItemPriceComparator();
@@ -156,7 +152,6 @@ public class Wishlist {
     /**
      * Filters wishlist by tag
      * @param tags The value of sets of strings of tags
-     * @return function is void, but function mutates the wishlist by filtering tags
      */
     public void filterWishlists(String[] tags){
         selectedTags.addAll(Arrays.asList(tags));
@@ -175,7 +170,6 @@ public class Wishlist {
 
     /**
      * Displays list of tags in console
-     * @return function is void, but function displays the tags in console
      */
     public void displayTags(){
         Set<String> tags = new HashSet<String>();
@@ -189,7 +183,6 @@ public class Wishlist {
 
     /**
      * Displays wishlist in console
-     * @return function is void, but function displays the wishlist in console
      */
     public void displayList(){
         System.out.println("Now displaying: " + name);

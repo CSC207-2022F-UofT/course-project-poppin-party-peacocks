@@ -12,7 +12,7 @@ public class ItemReviewStarComparatorTest {
     Wishlist christmasWishlist = new Wishlist("Christmas Wishlist");
 
     @Test
-    public void ItemReviewStarComparatorTestAscending() {
+    public void ItemReviewStarComparatorAscendingTest() {
         christmasWishlist.addItem(myFavDrink);
         christmasWishlist.addItem(animeFigure);
         christmasWishlist.addItem(plushie);
@@ -29,7 +29,7 @@ public class ItemReviewStarComparatorTest {
     }
 
     @Test
-    public void ItemReviewStarComparatorTestDescending() {
+    public void ItemReviewStarComparatorDescendingTest() {
         christmasWishlist.addItem(myFavDrink);
         christmasWishlist.addItem(animeFigure);
         christmasWishlist.addItem(plushie);
