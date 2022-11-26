@@ -1,3 +1,5 @@
+package GUI;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -69,7 +71,7 @@ public class AddWishlistPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO
-                // Currently navigates to WishlistPage
+                // Currently navigates to GUI.WishlistPage
                 WishlistPage wlPage = new WishlistPage();
                 wlPage.setContentPane(wlPage.getMainPanel());
                 wlPage.setVisible(true);
@@ -82,8 +84,8 @@ public class AddWishlistPage extends JFrame {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Returns to ListOfWishlistsPage
-                ListOfWishlistsPage listOfWL = new ListOfWishlistsPage();
+                // Returns to GUI.ListOfWishlistsPage
+                HomePage listOfWL = new HomePage();
                 listOfWL.setContentPane(listOfWL.getMainPanel());
                 listOfWL.setVisible(true);
                 listOfWL.setLocationRelativeTo(null);
