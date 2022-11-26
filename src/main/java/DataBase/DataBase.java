@@ -98,7 +98,7 @@ public class DataBase {
                 JSONParser jsonParser = new JSONParser();
                 JSONObject parsedData = (JSONObject) jsonParser.parse(data);
                 if (!(Objects.equals(parsedData.get("user").toString(), userName))) {
-                    tempUserWriter.write(parsedData.toJSONString());
+                    tempUserWriter.write(parsedData.toJSONString()+ '\n');
                 }
             }
             userReader.close();
