@@ -16,6 +16,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+import java.util.Objects.*;
+
 public class DataBase {
 
     public static User currentUser;
@@ -265,8 +267,10 @@ public class DataBase {
                 JSONArray wishlistsObject = (JSONArray) parsedData.get("wishlists");
                 ArrayList<Wishlist> wishlists = new ArrayList<>();
 
-                for (Object wishlist : wishlistsObject) {
-                    wishlists.add(DataBase.parseWishlist(wishlist));
+                if (!Objects.isNull(wishlistsObject)) {
+                    for (Object wishlist : wishlistsObject) {
+                        wishlists.add(DataBase.parseWishlist(wishlist));
+                    }
                 }
                 return new ListOfWishlists(wishlists);
             }
@@ -296,18 +300,27 @@ public class DataBase {
         Date dateAdded = new Date(wishlistData.get("dateAdded").toString());
 
         ArrayList<Item> items = new ArrayList<>();
-        for (Object itemObject : (JSONArray) wishlistData.get("itemList")) {
-            items.add(DataBase.parseItem(itemObject));
+        JSONArray itemsObjects = (JSONArray) wishlistData.get("itemList");
+        if (!Objects.isNull(itemsObjects)) {
+            for (Object itemObject : itemsObjects) {
+                items.add(DataBase.parseItem(itemObject));
+            }
         }
 
         ArrayList<Item> displayedItems = new ArrayList<>();
-        for (Object itemObject : (JSONArray) wishlistData.get("displayedList")) {
-            displayedItems.add(DataBase.parseItem(itemObject));
+        JSONArray itemObjects = (JSONArray) wishlistData.get("displayedList");
+        if (!Objects.isNull(itemObjects)) {
+            for (Object itemObject : (JSONArray) wishlistData.get("displayedList")) {
+                displayedItems.add(DataBase.parseItem(itemObject));
+            }
         }
 
         ArrayList<String> tags = new ArrayList<>();
-        for (Object tagObject : (JSONArray) wishlistData.get("selectedTags")) {
-            tags.add(tagObject.toString());
+        JSONArray tagObjects = (JSONArray) wishlistData.get("selectedTags");
+        if (!Objects.isNull(tagObjects)) {
+            for (Object tagObject : tagObjects) {
+                tags.add(tagObject.toString());
+            }
         }
 
         return new Wishlist(name, items, displayedItems, dateAdded, tags);
@@ -331,8 +344,10 @@ public class DataBase {
 
         ArrayList<String> tags = new ArrayList<>();
         JSONArray tagsObject = (JSONArray) itemData.get("tags");
-        for (Object tag : tagsObject) {
-            tags.add(tag.toString());
+        if (!Objects.isNull(tagsObject)) {
+            for (Object tag : tagsObject) {
+                tags.add(tag.toString());
+            }
         }
 
         String[] tagsArray = new String[tags.size()];
@@ -344,15 +359,20 @@ public class DataBase {
         String imageURL = (String) itemData.get("imageURL");
 
         ArrayList<Date> historyDates = new ArrayList<>();
+
         JSONArray historyDatesObject = (JSONArray) itemData.get("historyDate");
-        for (Object date : historyDatesObject) {
-            historyDates.add(new Date(date.toString()));
+        if (!Objects.isNull(historyDatesObject)) {
+            for (Object date : historyDatesObject) {
+                historyDates.add(new Date(date.toString()));
+            }
         }
 
         ArrayList<Double> historyData = new ArrayList<>();
         JSONArray historyDataObject = (JSONArray) itemData.get("historyData");
-        for (Object price : historyDataObject) {
-            historyData.add(Double.parseDouble(price.toString()));
+        if (!Objects.isNull(historyDataObject)) {
+            for (Object price : historyDataObject) {
+                historyData.add(Double.parseDouble(price.toString()));
+            }
         }
 
         String currency = (String) itemData.get("currency");
