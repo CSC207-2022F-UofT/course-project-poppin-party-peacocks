@@ -1,3 +1,7 @@
+package GUI;
+
+import GUI.RoundedBorder;
+
 import javax.swing.*;
 import java.awt.*;
 

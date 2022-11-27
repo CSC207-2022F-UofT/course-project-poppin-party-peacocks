@@ -31,22 +31,20 @@ public class ItemSearchTest {
 //        Assertions.assertEquals(10, itemSearchList.size());
 //    }
 
+    /**
+     * Testing search item by url feature and if it is scraping the correct value of price
+     */
+    @Test
+    public void searchItemTestKittenPlushPrice() throws IOException, InterruptedException {
+        ItemSearcher itemSearcher = new ItemSearcher();
 
-//    /**
-//     * Testing search item by url feature and if it is scraping the correct value of price
-//    */
+        String kittenplush = "https://www.amazon.ca/Kitten-Plush-Stuffed-Animal-Pillow/dp/B088BWPFYZ/ref=sr_1_5?crid=16S7RSE5N25AA&keywords=uwu+cat&qid=1669082008&qu=eyJxc2MiOiIyLjI1IiwicXNhIjoiMC4wMCIsInFzcCI6IjAuMDAifQ%3D%3D&sprefix=uwu+cat%2Caps%2C69&sr=8-5";
+        double expectedPrice = 28.99;
+        Item kittenplushitem = itemSearcher.searchItemUrl(kittenplush, false);
 
-//    @Test
-//    public void searchItemTestKittenPlushPrice() throws IOException, InterruptedException {
-//        ItemSearcher itemSearcher = new ItemSearcher();
-//
-//        String kittenplush = "https://www.amazon.ca/Kitten-Plush-Stuffed-Animal-Pillow/dp/B088BWPFYZ/ref=sr_1_5?crid=16S7RSE5N25AA&keywords=uwu+cat&qid=1669082008&qu=eyJxc2MiOiIyLjI1IiwicXNhIjoiMC4wMCIsInFzcCI6IjAuMDAifQ%3D%3D&sprefix=uwu+cat%2Caps%2C69&sr=8-5";
-//        double expectedPrice = 19.20;
-//        Item kittenplushitem = itemSearcher.searchItemUrl(kittenplush, false);
-//
-//        Assertions.assertEquals(kittenplushitem.getItemPrice(), expectedPrice);
-//
-//    }
+        Assertions.assertEquals(kittenplushitem.getItemPrice(), expectedPrice);
+
+    }
 
     /**
      * Testing search item by url feature and if it is scraping the correct value of name

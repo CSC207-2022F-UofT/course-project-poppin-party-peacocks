@@ -25,10 +25,12 @@ public class User {
         return this.name;
     }
 
-    public String getPassword() {return this.password;}
-
     public String getCurrency(){
         return this.currency;
+    }
+
+    public String getPassword(){
+        return this.password;
     }
 
     public void setName(String newName){

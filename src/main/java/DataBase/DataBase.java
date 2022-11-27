@@ -74,6 +74,40 @@ public class DataBase {
         }
     }
 
+    /** Retrieves and returns a Entities.User object based on name
+     * @param name Unique name of the user
+     * @returns user
+     * */
+    public static User getUser(String name) {
+        try {
+            File myObj = new File(DataBase.getUserFilePath());
+            Scanner myReader = new Scanner(myObj);
+            // Find the first user with the correct name
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                JSONParser jsonParser = new JSONParser();
+                JSONObject parsedData = (JSONObject) jsonParser.parse(data);
+                if (Objects.equals(parsedData.get("user").toString(), name)) {
+                    String userName = (String) parsedData.get("user");
+                    String password = (String) parsedData.get("password");
+                    String currency = (String) parsedData.get("currency");
+                    User newUser = new User(userName, password, currency);
+                    currentUser = newUser;
+                    return newUser;
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred file not found.");
+            e.printStackTrace();
+        } catch (ParseException e) {
+            System.out.println("An error occurred failed to parse user data.");
+            e.printStackTrace();
+        }
+        // Return a default user if user doesn't exist
+        return new User("Default User", "Password");
+    }
+
     /** Deletes user from the database
      * @param userName username to delete from the database
      * @returns whether user was successfully deleted
@@ -111,41 +145,6 @@ public class DataBase {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-    }
-
-
-    /** Retrieves and returns a Entities.User object based on name
-     * @param name Unique name of the user
-     * @returns user
-     * */
-    public static User getUser(String name) {
-        try {
-            File userFile = new File(DataBase.getUserFilePath());
-            Scanner userReader = new Scanner(userFile);
-            // Find the first user with the correct name
-            while (userReader.hasNextLine()) {
-                String data = userReader.nextLine();
-                JSONParser jsonParser = new JSONParser();
-                JSONObject parsedData = (JSONObject) jsonParser.parse(data);
-                if (Objects.equals(parsedData.get("user").toString(), name)) {
-                    String userName = (String) parsedData.get("user");
-                    String password = (String) parsedData.get("password");
-                    String currency = (String) parsedData.get("currency");
-                    User newUser = new User(userName, password, currency);
-                    currentUser = newUser;
-                    return newUser;
-                }
-            }
-            userReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred file not found.");
-            e.printStackTrace();
-        } catch (ParseException e) {
-            System.out.println("An error occurred failed to parse user data.");
-            e.printStackTrace();
-        }
-        // Return a default user if user doesn't exist
-        return new User("Default User", "Password");
     }
 
     /** Creates an item in JSON format

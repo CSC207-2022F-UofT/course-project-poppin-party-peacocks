@@ -1,3 +1,5 @@
+package GUI;
+
 import Entities.Item;
 import ExternalInterface.ItemSearcher;
 
@@ -48,6 +50,7 @@ public class AddItemPage extends JFrame {
         centrePanel.add(nameLabel);
         centrePanel.add(costLabel);
         JLabel indexLabel = new JLabel(Integer.toString(index));
+
         panel.add(indexLabel, BorderLayout.EAST);
         panel.add(centrePanel, BorderLayout.CENTER);
         panel.add(imageLabel, BorderLayout.WEST);
@@ -64,17 +67,25 @@ public class AddItemPage extends JFrame {
         setSize(400, 600);
         setResizable(true);
 
+        // constants
+        Color color1 = new Color(194, 234, 186);
+        Color color2 = new Color(106, 189, 154);
+
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBounds(0, 0, 400, 600);
         // header
         headerPanel = new JPanel(new FlowLayout());
+        headerPanel.setBackground(color2);
         searchLabel = new JLabel("Search:");
+        searchLabel.setForeground(Color.white);
         searchBar = new JTextField("", 20);
         searchButton = new JButton("Go");
         headerPanel.add(searchLabel);
         headerPanel.add(searchBar);
         headerPanel.add(searchButton);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
+        mainPanel.setBackground(color1);
+
         // centre
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
@@ -88,7 +99,7 @@ public class AddItemPage extends JFrame {
         // footer
         cancelButton = new JButton("Cancel");
         footerPanel = new JPanel(new FlowLayout());
-        selectIndexButton = new JButton("Add Selected Item");
+        selectIndexButton = new JButton("Selected item: ");
 
         footerPanel.add(cancelButton);
         footerPanel.add(selectIndexButton);
@@ -96,7 +107,7 @@ public class AddItemPage extends JFrame {
 
         searchButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 try {
                     BorderLayout layout = (BorderLayout) mainPanel.getLayout();
                     if(layout.getLayoutComponent(BorderLayout.CENTER) != null){
@@ -145,6 +156,18 @@ public class AddItemPage extends JFrame {
                 wlPage.setVisible(true);
                 wlPage.setLocationRelativeTo(null);
                 wlPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                dispose();
+            }
+        });
+
+        selectIndexButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ItemPage itemPage = new ItemPage();
+                itemPage.setContentPane(itemPage.getMainPanel());
+                itemPage.setVisible(true);
+                itemPage.setLocationRelativeTo(null);
+                itemPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 dispose();
             }
         });

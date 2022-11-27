@@ -12,7 +12,7 @@ public class ItemDateComparatorTest {
     Wishlist christmasWishlist = new Wishlist("Christmas Wishlist");
 
     @Test
-    public void ItemDateComparatorAscendingTest() {
+    public void ItemDateComparatorTestAscending() {
         christmasWishlist.addItem(myFavDrink);
         christmasWishlist.addItem(animeFigure);
         christmasWishlist.addItem(plushie);
@@ -29,7 +29,7 @@ public class ItemDateComparatorTest {
     }
 
     @Test
-    public void ItemDateComparatorDescendingTest() {
+    public void ItemDateComparatorTestDescending() {
         christmasWishlist.addItem(myFavDrink);
         christmasWishlist.addItem(animeFigure);
         christmasWishlist.addItem(plushie);
