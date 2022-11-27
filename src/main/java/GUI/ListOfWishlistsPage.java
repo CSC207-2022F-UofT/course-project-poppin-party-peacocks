@@ -1,7 +1,5 @@
 package GUI;
 
-import GUI.MainAppLoginSignupPage;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -41,7 +39,7 @@ public class ListOfWishlistsPage extends JFrame {
 //        JButton button = new JButton();
 //        button.setText(text);
 //        button.setFont(font);
-//        button.setBorder(new GUI.RoundedBorder(20));
+//        button.setBorder(new GUI.GUI.RoundedBorder(20));
 //        if (prefHeight > 0 && prefWidth > 0) {
 //            button.setPreferredSize(new Dimension(prefWidth, prefHeight));
 //        }
@@ -153,7 +151,7 @@ public class ListOfWishlistsPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // TODO
                 // Currently, this navigates to GUI.MainAppLoginSignupPage.
-                MainAppLoginSignupPage_deprecated loginSignupPage = new MainAppLoginSignupPage_deprecated();
+                WelcomePage loginSignupPage = new WelcomePage();
                 loginSignupPage.setContentPane(loginSignupPage.getMainPanel());
                 loginSignupPage.setVisible(true);
                 loginSignupPage.setLocationRelativeTo(null);
