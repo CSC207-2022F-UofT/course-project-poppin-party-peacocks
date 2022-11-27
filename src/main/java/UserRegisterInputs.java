@@ -2,13 +2,11 @@ import Entities.User;
 public class UserRegisterInputs {
     private String username;
     private String password;
-    private String repeatedPassword;
     private User tempUser;
 
-    public UserRegisterInputs(String username, String password, String repeatedPassword) {
+    public UserRegisterInputs(String username, String password) {
         this.username = username;
         this.password = password;
-        this.repeatedPassword = repeatedPassword;
         this.tempUser = new User(username, password);
     }
 
@@ -24,13 +22,6 @@ public class UserRegisterInputs {
      */
     public String getInputtedPassword(){
         return this.password;
-    }
-
-    /**
-     * @return Inputted repeatedPassword of user
-     */
-    public String getRepeatedPassword(){
-        return this.repeatedPassword;
     }
 
     /**
