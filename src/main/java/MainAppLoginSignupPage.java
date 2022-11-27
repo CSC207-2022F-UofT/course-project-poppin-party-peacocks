@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainAppLoginSignupPage extends JFrame {
+public class MainAppLoginSignupPage_deprecated extends JFrame {
     private JPanel mainPanel;
     // header
     private JPanel headerPanel;
@@ -43,7 +43,7 @@ public class MainAppLoginSignupPage extends JFrame {
         return mainPanel;
     }
 
-    public MainAppLoginSignupPage() {
+    public MainAppLoginSignupPage_deprecated() {
         super("Login Page");
         setLayout(null);
         setSize(400, 638);

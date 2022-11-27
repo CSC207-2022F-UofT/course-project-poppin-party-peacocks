@@ -1,3 +1,6 @@
+import DataBase.DataBase;
+import Entities.*;
+import GUI.WelcomePage;
 import GUI.MainAppLoginSignupPage;
 import GUI.WelcomePage;
 

@@ -76,6 +76,7 @@ public class WishlistPage extends JFrame {
 
         deleteThisWishlistButton = new CustomJButton("Delete this Wishlist", 0, 0, color2, Color.white, font1);
         middleFooterPanel.add(deleteThisWishlistButton);
+        addItemButton = new JButton("Add Item");
 
         addItemButton = new CustomJButton("Add Item", 0, 0, color2, Color.white, font1);
         middleFooterPanel.add(addItemButton);

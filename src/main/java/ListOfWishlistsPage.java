@@ -153,7 +153,7 @@ public class ListOfWishlistsPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // TODO
                 // Currently, this navigates to GUI.MainAppLoginSignupPage.
-                MainAppLoginSignupPage loginSignupPage = new MainAppLoginSignupPage();
+                MainAppLoginSignupPage_deprecated loginSignupPage = new MainAppLoginSignupPage_deprecated();
                 loginSignupPage.setContentPane(loginSignupPage.getMainPanel());
                 loginSignupPage.setVisible(true);
                 loginSignupPage.setLocationRelativeTo(null);
