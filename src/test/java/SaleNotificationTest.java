@@ -1,5 +1,5 @@
 import Controller.SaleNotification;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import Entities.*;
 
@@ -11,12 +11,14 @@ public class SaleNotificationTest {
     @Test
     public void TestSaleNotificationReturnsShowNotification() {
         SaleNotification saleNotification = new SaleNotification(plushie);
+        saleNotification.startNotificationListener();
         Assertions.assertFalse(saleNotification.getShowNotification());
     }
 
     @Test
     public void TestSaleNotificationChecksNotificationFalse() {
         SaleNotification saleNotification = new SaleNotification(plushie);
+        saleNotification.endNotificationListener();
         Assertions.assertFalse(saleNotification.checkNotification());
     }
 

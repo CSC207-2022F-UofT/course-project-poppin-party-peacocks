@@ -195,7 +195,7 @@ public class Item {
         System.out.println("------------------------------------------");
     }
     public boolean isPriceBelowDesiredPrice(){
-        return itemPrice < desiredPrice;
+        return itemPrice <= desiredPrice;
     }
     public boolean isItemOnSale() {return priceChange < 0;}
 
