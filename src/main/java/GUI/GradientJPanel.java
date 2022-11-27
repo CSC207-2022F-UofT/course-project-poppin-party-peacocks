@@ -6,6 +6,11 @@ import java.awt.*;
 public class GradientJPanel extends JPanel{
     private Color topColor;
     private Color bottomColor;
+    public GradientJPanel(LayoutManager lm){
+        super(lm);
+        this.topColor = new Color(194, 234, 186);;
+        this.bottomColor = new Color(106, 189, 154);;
+    }
     public GradientJPanel(LayoutManager lm, Color topColor, Color bottomColor){
         super(lm);
         this.topColor = topColor;
