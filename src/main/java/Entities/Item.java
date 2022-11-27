@@ -28,7 +28,6 @@ public class Item {
     private int reviewCount;
     private ArrayList<Double> priceHistoryData;
     private ArrayList<Date> priceHistoryDates;
-
     private Scheduler scheduler;
     private PriceDropNotification priceDropNotification;
     private SaleNotification saleNotification;
@@ -97,7 +96,8 @@ public class Item {
         this.scheduler = new Scheduler(t, 1000 * 60 * 60);
         this.itemCurrency = itemCurrency;
     }
-    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars, String imageUrl, String itemCurrency){
+    /** Constructor for database */
+    public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, double priceChange, Date dateAdded, int reviewCount, double reviewStars, String imageUrl, String itemCurrency, ArrayList<Double> priceHistoryData, ArrayList<Date> priceHistoryDates){
         this.itemName = name;
         this.itemPrice = price;
         this.priceChange = priceChange;
@@ -110,8 +110,21 @@ public class Item {
         this.reviewStars = reviewStars;
         this.imageUrl = imageUrl;
         this.itemCurrency = itemCurrency;
+        TimerTask t = new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    updatePrice();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+        this.scheduler = new Scheduler(t, 1000 * 60 * 60);
+        this.itemCurrency = itemCurrency;
+        this.priceHistoryData = priceHistoryData;
+        this.priceHistoryDates = priceHistoryDates;
     }
-
     public String getItemName(){
         return this.itemName;
     }
@@ -121,7 +134,6 @@ public class Item {
     public String getItemURL(){
         return this.url;
     }
-
     public String getItemImageURL(){
         return this.imageUrl;
     }
