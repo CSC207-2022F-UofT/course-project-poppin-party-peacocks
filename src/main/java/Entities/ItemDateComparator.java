@@ -1,7 +1,7 @@
 package Entities;
 import java.util.Comparator;
 
-public class ItemDateComparator implements Comparator<Item> {
+public class ItemDateComparator extends ItemComparator implements Comparator<Item> {
     /**
      * Takes 2 Items and compares their added dates using .getItemDateAdded()
      * Default saved comparison: Earliest date to Latest date (ascending)
