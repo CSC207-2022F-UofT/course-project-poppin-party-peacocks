@@ -25,5 +25,6 @@ public class CustomJButton extends JButton {
         }
         this.setBackground(background);
         this.setForeground(foreground);
+        this.setContentAreaFilled(false);
     }
 }

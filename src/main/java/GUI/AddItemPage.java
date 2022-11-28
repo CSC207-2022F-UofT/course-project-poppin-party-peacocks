@@ -1,6 +1,7 @@
 package GUI;
 
 import Entities.Item;
+import Entities.Wishlist;
 import ExternalInterface.ItemSearcher;
 
 import javax.imageio.ImageIO;
@@ -23,6 +24,7 @@ public class AddItemPage extends JFrame {
     private JPanel footerPanel;
     private JButton selectIndexButton;
     private int index;
+    private Wishlist currWishlist;
 
     public JPanel getMainPanel() {
         return mainPanel;
@@ -61,12 +63,13 @@ public class AddItemPage extends JFrame {
         mainPanel.add(contentPanel, BorderLayout.CENTER);
     }
 
-    public AddItemPage() {
+    public AddItemPage(Wishlist wishlist) {
         super("Add Item");
         setLayout(null);
         setSize(400, 600);
         setResizable(true);
 
+        this.currWishlist = wishlist;
         // constants
         Color color1 = new Color(194, 234, 186);
         Color color2 = new Color(106, 189, 154);
@@ -151,7 +154,7 @@ public class AddItemPage extends JFrame {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                WishlistPage wlPage = new WishlistPage();
+                WishlistPage wlPage = new WishlistPage(currWishlist);
                 wlPage.setContentPane(wlPage.getMainPanel());
                 wlPage.setVisible(true);
                 wlPage.setLocationRelativeTo(null);

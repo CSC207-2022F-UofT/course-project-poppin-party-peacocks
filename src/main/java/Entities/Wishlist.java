@@ -198,4 +198,11 @@ public class Wishlist {
             displayedList.get(i).displayItemInConsole(i+1);
         }
     }
+
+    /**
+    * @return returns the size of the item list
+    **/
+    public int getListSize(){
+        return itemList.size();
+    }
 }

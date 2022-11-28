@@ -69,6 +69,20 @@ public class WishlistTest {
     }
 
     @Test
+    public void getListSizeTestEmpty() {
+        int size = christmasWishlist.getListSize();
+        Assertions.assertEquals(size, 0);
+    }
+
+    @Test
+    public void GetListSizeTestNonEmpty(){
+        christmasWishlist.addItem(myFavDrink);
+        christmasWishlist.addItem(animeFigure);
+        int size = christmasWishlist.getListSize();
+        Assertions.assertEquals(size, 2);
+    }
+
+    @Test
     public void setDateAddedTest() {
         christmasWishlist.addItem(myFavDrink);
         Date testDate = new Date(2022, Calendar.NOVEMBER, 25);
