@@ -21,6 +21,6 @@ public class DataBaseTest {
     }
     @Test
     public void TestDataBaseReturnsTempUserPath() {
-        Assertions.assertEquals(DataBase.getUserFilePath(), "src/main/database/tempusers.txt");
+        Assertions.assertEquals(DataBase.getTempUserFilePath(), "src/main/database/tempusers.txt");
     }
 }
