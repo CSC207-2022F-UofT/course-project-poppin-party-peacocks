@@ -1,4 +1,4 @@
-import DataBase.DataBase;
+import DataBase.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -6,11 +6,12 @@ class UserRegisterTest {
 
     @Test
     public void testCreateUserSuccess() {
+        DataBaseController dataBaseController = new DataBaseController();
         UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser","Fuzzy321", "Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
         UserRegister register = new UserRegister(inputs, formatter);
         register.create(inputs);
-        Assertions.assertEquals(inputs.getTempUser().getName(), DataBase.getUser("StarlightUser").getName());
+        Assertions.assertEquals(inputs.getTempUser().getName(), dataBaseController.getUser("StarlightUser").getName());
         DataBase.deleteUser("StarlightUser");
     }
 

@@ -33,7 +33,7 @@ public class WishlistTest {
         christmasWishlist.addItem(myFavDrink);
         christmasWishlist.addItem(animeFigure);
         christmasWishlist.addItem(plushie);
-        ArrayList<Item> testItemList = christmasWishlist.getItemList();
+        ArrayList<Product> testItemList = christmasWishlist.getItemList();
 
         Assertions.assertEquals(christmasWishlist.getItemList(), testItemList);
     }
@@ -43,7 +43,7 @@ public class WishlistTest {
         christmasWishlist.addItem(myFavDrink);
         christmasWishlist.addItem(animeFigure);
         christmasWishlist.addItem(plushie);
-        ArrayList<Item> testDisplayList = christmasWishlist.getDisplayedList();
+        ArrayList<Product> testDisplayList = christmasWishlist.getDisplayedList();
 
         Assertions.assertEquals(christmasWishlist.getDisplayedList(), testDisplayList);
     }

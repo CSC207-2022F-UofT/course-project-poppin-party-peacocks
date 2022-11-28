@@ -13,7 +13,7 @@ public class DataBaseTest {
     String testDate = "Fri Nov 18 01:04:05 EST 2022";
     Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
             "Description from amazon (or you write your own)", new String[]{"toys"}, 40.99, new Date(testDate), 0, 0, "www.amazonimage.com/keyboard", "CAD", priceData, priceDate);
-    ArrayList<Item> items = new ArrayList<>();
+    ArrayList<Product> items = new ArrayList<>();
     ArrayList<String> tags = new ArrayList<>();
     @Test
     public void TestDataBaseReturnsUserFilePath() {
@@ -25,8 +25,9 @@ public class DataBaseTest {
     }
     @Test
     public void TestDataBaseReturnsItemJSON() {
+        DataBaseFormatter dataBaseFormatter = new DataBaseFormatter();
         plushie.setDateAdded(new Date(testDate));
-        String itemString = DataBase.createItemJSON(plushie).toString();
+        String itemString = dataBaseFormatter.createItemJSON(plushie).toString();
         Assertions.assertTrue(itemString.contains("\"priceChange\":40.99"));
         Assertions.assertTrue(itemString.contains("\"itemName\":\"Plushie\""));
         Assertions.assertTrue(itemString.contains("\"desiredPrice\":30.0"));
@@ -39,10 +40,11 @@ public class DataBaseTest {
     }
     @Test
     public void TestDataBaseParsesItemObject() throws ParseException, java.text.ParseException {
+        DataBaseParser dataBaseParser = new DataBaseParser();
         plushie.setDateAdded(new Date(testDate));
         JSONParser jsonParser = new JSONParser();
         JSONObject itemObject = (JSONObject) jsonParser.parse("{\"priceChange\":40.99,\"itemName\":\"Plushie\",\"desiredPrice\":30.0,\"reviewCount\":0,\"imageURL\":\"www.amazonimage.com\\/keyboard\",\"itemPrice\":40.99,\"itemDescription\":\"Description from amazon (or you write your own)\",\"reviewStars\":0.0,\"url\":\"www.amazon.com\\/plushie\",\"dateAdded\":\"Fri Nov 18 01:04:05 EST 2022\",\"tags\":[\"toys\"]}");
-        Item parsedItem = DataBase.parseItem(itemObject);
+        Product parsedItem = dataBaseParser.parseItem(itemObject);
         Assertions.assertEquals(parsedItem.getProductDescription(), plushie.getProductDescription());
         Assertions.assertEquals(parsedItem.getProductPrice(), plushie.getProductPrice());
         Assertions.assertEquals(parsedItem.getProductName(), plushie.getProductName());
@@ -57,11 +59,12 @@ public class DataBaseTest {
     }
     @Test
     public void TestDataBaseReturnsWishListJSON() {
+        DataBaseFormatter dataBaseFormatter = new DataBaseFormatter();
         plushie.setDateAdded(new Date(testDate));
         items.add(plushie);
         tags.add("Blue");
         Wishlist wishlist = new Wishlist("Singles Day List", items, items, new Date(testDate), tags);
-        String wishlistString = DataBase.createWishlistJSON(wishlist).toString();
+        String wishlistString = dataBaseFormatter.createWishlistJSON(wishlist).toString();
         Assertions.assertTrue(wishlistString.contains("\"name\":\"Singles Day List\""));
         Assertions.assertTrue(wishlistString.contains("\"displayedList\""));
         Assertions.assertTrue(wishlistString.contains("\"itemList\""));
@@ -69,13 +72,14 @@ public class DataBaseTest {
     }
     @Test
     public void TestDataBaseParsesWishListObject() throws ParseException, java.text.ParseException {
+        DataBaseParser dataBaseParser = new DataBaseParser();
         plushie.setDateAdded(new Date(testDate));
         items.add(plushie);
         tags.add("Blue");
         Wishlist wishlist = new Wishlist("Singles Day List", items, items, new Date(testDate), tags);
         JSONParser jsonParser = new JSONParser();
         JSONObject listObject = (JSONObject) jsonParser.parse("{\"displayedList\":[{\"priceChange\":40.99,\"itemName\":\"Plushie\",\"desiredPrice\":30.0,\"reviewCount\":0,\"imageURL\":\"www.amazonimage.com\\/keyboard\",\"itemPrice\":40.99,\"itemDescription\":\"Description from amazon (or you write your own)\",\"reviewStars\":0.0,\"url\":\"www.amazon.com\\/plushie\",\"dateAdded\":\"Fri Nov 18 01:04:05 EST 2022\",\"tags\":[\"toys\"]}],\"name\":\"Singles Day List\",\"selectedTags\":[\"Blue\"],\"itemList\":[{\"priceChange\":40.99,\"itemName\":\"Plushie\",\"desiredPrice\":30.0,\"reviewCount\":0,\"imageURL\":\"www.amazonimage.com\\/keyboard\",\"itemPrice\":40.99,\"itemDescription\":\"Description from amazon (or you write your own)\",\"reviewStars\":0.0,\"url\":\"www.amazon.com\\/plushie\",\"dateAdded\":\"Fri Nov 18 01:04:05 EST 2022\",\"tags\":[\"toys\"]}],\"dateAdded\":\"Fri Nov 18 01:04:05 EST 2022\"}");
-        Wishlist parsedList = DataBase.parseWishlist(listObject);
+        Wishlist parsedList = dataBaseParser.parseWishlist(listObject);
         Assertions.assertEquals(parsedList.getName(), wishlist.getName());
         Assertions.assertEquals(parsedList.getDateAdded(), wishlist.getDateAdded());
         Assertions.assertEquals(parsedList.getDisplayedList().toArray().length, wishlist.getDisplayedList().toArray().length);
@@ -85,6 +89,7 @@ public class DataBaseTest {
 
     @Test
     public void TestDataBaseWritesAndSavesListOfWishLists() {
+        DataBaseController dataBaseController = new DataBaseController();
         ListOfWishlists wishlists = new ListOfWishlists();
         Wishlist wishlist = new Wishlist("Exam Celebration Wish List");
         wishlist.setDateAdded(new Date(testDate));
@@ -93,7 +98,7 @@ public class DataBaseTest {
         User user = new User("TestUser", "Test");
         DataBase.saveListOfWishlists(wishlists, user);
 
-        Assertions.assertEquals(DataBase.getListOfWishlists("TestUser").getListOfWishlist().get(0).getName(), "Exam Celebration Wish List");
+        Assertions.assertEquals(dataBaseController.getListOfWishlists("TestUser").getListOfWishlist().get(0).getName(), "Exam Celebration Wish List");
     }
 
 }
