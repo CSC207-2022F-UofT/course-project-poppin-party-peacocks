@@ -103,7 +103,7 @@ public class DataBase {
             userReader.close();
             tempUserWriter.close();
             userFile.delete();
-            return true;
+            return tempUserFile.renameTo(userFile);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
