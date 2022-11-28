@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+/** A class that helps fetches user and wishlists from the data */
 public class DataBaseController {
 
     /** Retrieves and returns a list of wishlist object based on name

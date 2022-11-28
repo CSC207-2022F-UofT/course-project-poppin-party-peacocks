@@ -1,7 +1,6 @@
 package DataBase;
 import Entities.*;
 
-import Entities.Item;
 import Entities.ListOfWishlists;
 import Entities.Wishlist;
 
@@ -10,16 +9,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
-import java.util.Objects.*;
-
+/** A class that manages user and wishlist read and write to files */
 public class DataBase {
-
     public static User currentUser;
     public static String getUserFilePath() {
         return "src/main/database/users.txt";
@@ -80,7 +74,7 @@ public class DataBase {
      * */
     // JSONArray's library has errors, can ignore
     @SuppressWarnings("unchecked")
-    public static boolean deleteUser(String userName) {
+    public static boolean deleteUser(String userName) throws IOException {
         File tempUserFile = new File(getTempUserFilePath());
         File userFile = new File(getUserFilePath());
         // If the tempUserFile directory doesn't exist, create a new tempUserFile
@@ -88,20 +82,24 @@ public class DataBase {
             createFile(DataBase.getTempUserFilePath());
         }
 
+        if (!userFile.isFile()) {
+            createFile(DataBase.getUserFilePath());
+        }
+
+        BufferedReader reader = new BufferedReader(new FileReader(userFile));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tempUserFile));
+        String currentLine;
         try {
-            FileWriter tempUserWriter = new FileWriter(DataBase.getTempUserFilePath(), true);
-            Scanner userReader = new Scanner(userFile);
-            // Find the first user with the correct name
-            while (userReader.hasNextLine()) {
-                String data = userReader.nextLine();
+            while((currentLine = reader.readLine()) != null) {
                 JSONParser jsonParser = new JSONParser();
-                JSONObject parsedData = (JSONObject) jsonParser.parse(data);
+                JSONObject parsedData = (JSONObject) jsonParser.parse(currentLine);
                 if (!(Objects.equals(parsedData.get("user").toString(), userName))) {
-                    tempUserWriter.write(parsedData.toJSONString()+ '\n');
+                    writer.write(parsedData.toJSONString()+ '\n');
                 }
+
             }
-            userReader.close();
-            tempUserWriter.close();
+            reader.close();
+            writer.close();
             userFile.delete();
             return tempUserFile.renameTo(userFile);
         } catch (IOException e) {

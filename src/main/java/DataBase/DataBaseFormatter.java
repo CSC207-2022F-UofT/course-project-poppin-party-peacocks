@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
 
 import java.util.Arrays;
 import java.util.Date;
-
+/** A class that helps the database format item and wishlist data for storage */
 public class DataBaseFormatter {
     /** Creates an item in JSON format
      * @param product item to convert to json format

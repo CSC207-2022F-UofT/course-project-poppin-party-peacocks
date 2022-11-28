@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
+/** A class that helps parses JSON data from the database */
 public class DataBaseParser {
     /** Parses a wishlist in JSON format
      * @param wishlistObject wishlist to convert to wish list object
