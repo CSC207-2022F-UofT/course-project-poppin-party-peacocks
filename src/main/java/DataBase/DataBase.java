@@ -82,14 +82,13 @@ public class DataBase {
     @SuppressWarnings("unchecked")
     public static boolean deleteUser(String userName) {
         File tempUserFile = new File(getTempUserFilePath());
-
+        File userFile = new File(getUserFilePath());
         // If the tempUserFile directory doesn't exist, create a new tempUserFile
         if (!tempUserFile.isFile()) {
             createFile(DataBase.getTempUserFilePath());
         }
 
         try {
-            File userFile = new File(DataBase.getUserFilePath());
             FileWriter tempUserWriter = new FileWriter(DataBase.getTempUserFilePath(), true);
             Scanner userReader = new Scanner(userFile);
             // Find the first user with the correct name
@@ -104,7 +103,7 @@ public class DataBase {
             userReader.close();
             tempUserWriter.close();
             userFile.delete();
-            return tempUserFile.renameTo(userFile);
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
             return false;
