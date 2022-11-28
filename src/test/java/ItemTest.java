@@ -42,11 +42,11 @@ public class ItemTest {
                         "Backed by One-year Amazon Basics Warranty\n" +
                         "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "www.imageurl.com");
 
-        double initialPrice = priceUpdateTestItem.getItemPrice();
+        double initialPrice = priceUpdateTestItem.getProductPrice();
 
         priceUpdateTestItem.updatePrice();
 
-        double newPrice = priceUpdateTestItem.getItemPrice();
+        double newPrice = priceUpdateTestItem.getProductPrice();
 
         Assertions.assertEquals(true, initialPrice != newPrice);
     }
@@ -64,7 +64,7 @@ public class ItemTest {
                         "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
         // Test 1:  Set and Get Name
         TestItem.setName("AmazonBasics Wired Office Keyboard");
-        Assertions.assertEquals(true, "AmazonBasics Wired Office Keyboard".equals(TestItem.getItemName()));
+        Assertions.assertEquals(true, "AmazonBasics Wired Office Keyboard".equals(TestItem.getProductName()));
 
 
     }
@@ -81,7 +81,7 @@ public class ItemTest {
                         "Backed by One-year Amazon Basics Warranty\n" +
                         "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
 
-        Assertions.assertEquals(true, 20.00 == TestItem.getItemPrice());
+        Assertions.assertEquals(true, 20.00 == TestItem.getProductPrice());
     }
 
     /**
@@ -97,7 +97,7 @@ public class ItemTest {
                         "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
 
         TestItem.setDesiredPrice(17.00);
-        Assertions.assertEquals(true, 17.00 == TestItem.getItemDesiredPrice());
+        Assertions.assertEquals(true, 17.00 == TestItem.getProductDesiredPrice());
     }
 
     /**
@@ -113,7 +113,7 @@ public class ItemTest {
                         "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
         String testUrl = "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1";
 
-        Assertions.assertEquals(true, testUrl.equals(TestItem.getItemURL()));
+        Assertions.assertEquals(true, testUrl.equals(TestItem.getProductURL()));
     }
 
     /**
@@ -129,7 +129,7 @@ public class ItemTest {
                         "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
         String testImageUrl = "imageurl";
 
-        Assertions.assertEquals(true, testImageUrl.equals(TestItem.getItemImageURL()));
+        Assertions.assertEquals(true, testImageUrl.equals(TestItem.getProductImageURL()));
     }
 
     /**
@@ -145,8 +145,8 @@ public class ItemTest {
                         "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
         String newDescription = "This is a new set item description for AmazonBasics Wired Office Keyboard";
 
-        TestItem.setItemDescription(newDescription);
-        Assertions.assertEquals(true, newDescription.equals(TestItem.getItemDescription()));
+        TestItem.setProductDescription(newDescription);
+        Assertions.assertEquals(true, newDescription.equals(TestItem.getProductDescription()));
     }
 
     /**

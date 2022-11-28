@@ -43,17 +43,17 @@ public class DataBaseTest {
         JSONParser jsonParser = new JSONParser();
         JSONObject itemObject = (JSONObject) jsonParser.parse("{\"priceChange\":40.99,\"itemName\":\"Plushie\",\"desiredPrice\":30.0,\"reviewCount\":0,\"imageURL\":\"www.amazonimage.com\\/keyboard\",\"itemPrice\":40.99,\"itemDescription\":\"Description from amazon (or you write your own)\",\"reviewStars\":0.0,\"url\":\"www.amazon.com\\/plushie\",\"dateAdded\":\"Fri Nov 18 01:04:05 EST 2022\",\"tags\":[\"toys\"]}");
         Item parsedItem = DataBase.parseItem(itemObject);
-        Assertions.assertEquals(parsedItem.getItemDescription(), plushie.getItemDescription());
-        Assertions.assertEquals(parsedItem.getItemPrice(), plushie.getItemPrice());
-        Assertions.assertEquals(parsedItem.getItemName(), plushie.getItemName());
-        Assertions.assertEquals(parsedItem.getItemURL(), plushie.getItemURL());
-        Assertions.assertEquals(parsedItem.getItemDesiredPrice(), plushie.getItemDesiredPrice());
+        Assertions.assertEquals(parsedItem.getProductDescription(), plushie.getProductDescription());
+        Assertions.assertEquals(parsedItem.getProductPrice(), plushie.getProductPrice());
+        Assertions.assertEquals(parsedItem.getProductName(), plushie.getProductName());
+        Assertions.assertEquals(parsedItem.getProductURL(), plushie.getProductURL());
+        Assertions.assertEquals(parsedItem.getProductDesiredPrice(), plushie.getProductDesiredPrice());
         Assertions.assertArrayEquals(parsedItem.getTags(), plushie.getTags());
         Assertions.assertEquals(parsedItem.getPriceChange(), plushie.getPriceChange());
-        Assertions.assertEquals(parsedItem.getItemImageURL(), plushie.getItemImageURL());
+        Assertions.assertEquals(parsedItem.getProductImageURL(), plushie.getProductImageURL());
         Assertions.assertEquals(parsedItem.getReviewCount(), plushie.getReviewCount());
         Assertions.assertEquals(parsedItem.getReviewStars(), plushie.getReviewStars());
-        Assertions.assertEquals(parsedItem.getItemDateAdded(), plushie.getItemDateAdded());
+        Assertions.assertEquals(parsedItem.getProductDateAdded(), plushie.getProductDateAdded());
     }
     @Test
     public void TestDataBaseReturnsWishListJSON() {

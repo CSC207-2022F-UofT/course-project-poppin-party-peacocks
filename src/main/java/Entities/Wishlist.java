@@ -186,16 +186,4 @@ public class Wishlist {
         }
         System.out.println("Tags: " + tags.toString());
     }
-
-    /**
-     * Displays wishlist in console
-     * @return function is void, but function displays the wishlist in console
-     */
-    public void displayList(){
-        System.out.println("Now displaying: " + name);
-        System.out.println("Currently selected tags: " + selectedTags.toString());
-        for(int i = 0; i < displayedList.size(); i++){
-            displayedList.get(i).displayItemInConsole(i+1);
-        }
-    }
 }

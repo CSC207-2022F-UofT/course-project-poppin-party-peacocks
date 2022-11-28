@@ -13,9 +13,9 @@ public class ItemPriceComparator implements Comparator<Item>{
      */
     @Override
     public int compare(Item item1, Item item2) {
-        if (item1.getItemPrice() >= item2.getItemPrice()) {
+        if (item1.getProductPrice() >= item2.getProductPrice()) {
             return 1;
-        } else if (item1.getItemPrice() <= item2.getItemPrice()) {
+        } else if (item1.getProductPrice() <= item2.getProductPrice()) {
             return -1;
         } else {
             return 0;
