@@ -1,6 +1,7 @@
 package ExternalInterface;
 
 import Entities.Item;
+import Entities.Product;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -12,6 +13,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ItemSearcher {
     /**
@@ -120,9 +122,9 @@ public class ItemSearcher {
      * @param keywords string keyword to search in Amazon interface
      */
 
-    public ArrayList<Item> searchItemKeywords(String keywords) throws IOException, InterruptedException {
+    public ArrayList<Product> searchItemKeywords(String keywords) throws IOException, InterruptedException {
         String url = this.itemLinkGenerator(keywords);
-        ArrayList<Item> itemList = new ArrayList<>();
+        ArrayList<Product> itemList = new ArrayList<>();
         ArrayList<String> listNames = new ArrayList<>();
         ArrayList<Double> listPrices = new ArrayList<>();
         ArrayList<String> listUrls = new ArrayList<>();
@@ -141,15 +143,15 @@ public class ItemSearcher {
                 if (counter == 10) {
                     break;
                 }
-                Item item = searchItemUrl(itemUrl, true);
-                if (item.getItemName() != "" && item.getItemPrice() != 0) {
+                Product item = searchItemUrl(itemUrl, true);
+                if (!Objects.equals(item.getProductName(), "") && item.getProductPrice() != 0) {
                     itemList.add(item);
                     counter += 1;
                 }
             }
             return itemList;
         } catch (IOException e) {
-            return new ArrayList<Item>();
+            return new ArrayList<Product>();
         }
     }
 

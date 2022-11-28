@@ -13,9 +13,9 @@ public class ItemDateComparator implements Comparator<Item> {
      */
     @Override
     public int compare(Item item1, Item item2){
-        if(item1.getItemDateAdded().after(item2.getItemDateAdded())){
+        if(item1.getProductDateAdded().after(item2.getProductDateAdded())){
             return 1;
-        } else if (item1.getItemDateAdded().before(item2.getItemDateAdded())){
+        } else if (item1.getProductDateAdded().before(item2.getProductDateAdded())){
             return -1;
         } else {
             return 0;

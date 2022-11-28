@@ -153,35 +153,34 @@ public class DataBase {
      * */
     // JSONArray's library has errors, can ignore
     @SuppressWarnings("unchecked")
-    public static JSONObject createItemJSON(Item item) {
-        JSONObject itemObject = new JSONObject();
-        itemObject.put("itemName", item.getItemName());
-        itemObject.put("url", item.getItemURL());
-        itemObject.put("itemDescription", item.getItemDescription());
+    public static JSONObject createItemJSON(Product product) {
+        JSONObject productObject = new JSONObject();
+        productObject.put("itemName", product.getProductName());
+        productObject.put("url", product.getProductURL());
+        productObject.put("itemDescription", product.getProductDescription());
         JSONArray tagsObject = new JSONArray();
-        tagsObject.addAll(Arrays.asList(item.getTags()));
-        itemObject.put("tags", tagsObject);
-        itemObject.put("itemPrice", item.getItemPrice());
-        itemObject.put("priceChange", item.getPriceChange());
-        itemObject.put("desiredPrice", item.getItemDesiredPrice());
-        itemObject.put("dateAdded", item.getItemDateAdded().toString());
-        itemObject.put("reviewStars", item.getReviewStars());
-        itemObject.put("reviewCount", item.getReviewCount());
-        itemObject.put("imageURL", item.getItemImageURL());
+        tagsObject.addAll(Arrays.asList(product.getTags()));
+        productObject.put("tags", tagsObject);
+        productObject.put("itemPrice", product.getProductPrice());
+        productObject.put("priceChange", product.getPriceChange());
+        productObject.put("desiredPrice", product.getProductDesiredPrice());
+        productObject.put("dateAdded", product.getProductDateAdded().toString());
+        productObject.put("reviewStars", product.getReviewStars());
+        productObject.put("reviewCount", product.getReviewCount());
+        productObject.put("imageURL", product.getProductImageURL());
 
         JSONArray historyDateObject = new JSONArray();
-        for (Date date : item.getPriceHistoryDates()) {
+        for (Date date : product.getPriceHistoryDates()) {
             historyDateObject.add(date.toString());
         }
         JSONArray historyDataObject = new JSONArray();
-        tagsObject.addAll(Arrays.asList(item.getPriceHistoryData()));
+        tagsObject.addAll(Arrays.asList(product.getPriceHistoryData()));
 
-        itemObject.put("historyDate", historyDateObject);
-        itemObject.put("historyData", historyDataObject);
-        itemObject.put("currency", item.getItemCurrency());
+        productObject.put("historyDate", historyDateObject);
+        productObject.put("historyData", historyDataObject);
+        productObject.put("currency", product.getProductCurrency());
 
-        return itemObject;
-
+        return productObject;
     }
 
     /** Creates a wishlist in JSON format
