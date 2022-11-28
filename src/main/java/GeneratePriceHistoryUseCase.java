@@ -2,6 +2,16 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtils;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
+
+import java.util.Date;
+
+import java.util.ArrayList;
 
 public class GeneratePriceHistoryUseCase {
     public Item item;
@@ -280,4 +290,24 @@ public class GeneratePriceHistoryUseCase {
     }
 
 
+    public void generatePriceChart() throws IOException {
+        DefaultCategoryDataset chartDataSet = new DefaultCategoryDataset();
+        ArrayList<Double> prices = item.getPriceHistoryData();
+        ArrayList<Date> dates = item.getPriceHistoryDates();
+
+        String datePattern = "MM-dd-yyyy";
+        SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+
+        for(int i = 0; i < prices.size(); i++){
+            chartDataSet.addValue(prices.get(i),"Price", dateFormatter.format(dates.get(i)));
+        }
+
+        // Create chart
+        JFreeChart priceChart = ChartFactory.createLineChart("Price History", "Date",
+                "Price", chartDataSet);
+
+        ChartUtils.saveChartAsJPEG(new File("src/main/java/price_history.png"), priceChart, 450, 400);
+
+
+    }
 }
