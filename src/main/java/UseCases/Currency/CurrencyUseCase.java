@@ -6,6 +6,7 @@ import Entities.Product;
 import java.util.HashMap;
 import java.util.Objects;
 
+/** A use case for products to update their price in supported currencies */
 public class CurrencyUseCase {
     private final HashMap<String, Double> cadConversion;
     private final HashMap<String, Double> yuanConversion;
