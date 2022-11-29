@@ -89,4 +89,10 @@ public class DataBaseController {
         return new User("Default User", "Password");
     }
 
+    /** Retrieves the current active user
+     * @returns user
+     * */
+    public User getCurrentUser() {
+        return DataBase.currentUser;
+    }
 }

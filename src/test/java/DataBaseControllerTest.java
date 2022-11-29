@@ -8,14 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class DataBaseControllerTest {
-    ArrayList<Double> priceData = new ArrayList();
-    ArrayList<Date> priceDate = new ArrayList<>();
     String testDate = "Fri Nov 18 01:04:05 EST 2022";
-    Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
-            "Description from amazon (or you write your own)", new String[]{"toys"}, 40.99, new Date(testDate), 0, 0, "www.amazonimage.com/keyboard", "CAD", priceData, priceDate);
-    ArrayList<Product> items = new ArrayList<>();
-    ArrayList<String> tags = new ArrayList<>();
-
 
     @Test
     public void TestDataBaseWritesAndSavesListOfWishLists() {
@@ -29,6 +22,14 @@ public class DataBaseControllerTest {
         DataBase.saveListOfWishlists(wishlists, user);
 
         Assertions.assertEquals(dataBaseController.getListOfWishlists("TestUser").getListOfWishlist().get(0).getName(), "Exam Celebration Wish List");
+    }
+
+    @Test
+    public void TestDataBaseGetsCurrentUser() {
+        DataBase.currentUser = new User("Name", "Password");
+        DataBaseController dataBaseController = new DataBaseController();
+
+        Assertions.assertEquals(dataBaseController.getCurrentUser().getName(), "Name");
     }
 
 }
