@@ -1,21 +1,14 @@
-import DataBase.DataBase;
-import Entities.*;
-import GUI.WelcomePage;
 import GUI.WelcomePage;
 
 import javax.swing.*;
 
 public class main {
 
-    public static void main(String[] args) {
+    public main() {
 
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
+        javax.swing.SwingUtilities.invokeLater(main::createAndShowGUI);
     }
 
     private static void createAndShowGUI() {
@@ -29,5 +22,9 @@ public class main {
 
         // Display in the centre of the screen.
         initialJFrame.setLocationRelativeTo(null);
+
+        // Icon
+        ImageIcon icon = new ImageIcon("src/main/java/Assets/logo.png");
+        initialJFrame.setIconImage(icon.getImage());
     }
 }

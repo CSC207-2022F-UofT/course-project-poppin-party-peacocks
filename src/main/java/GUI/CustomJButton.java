@@ -1,17 +1,9 @@
 package GUI;
 
-import GUI.RoundedBorder;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class CustomJButton extends JButton {
-    private String text;
-    private int prefWidth;
-    private int prefHeight;
-    private Color background;
-    private Color foreground;
-    private Font font;
 
     public CustomJButton(String text, int prefWidth, int prefHeight, Color background, Color foreground, Font font) {
         super();
