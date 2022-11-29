@@ -1,14 +1,13 @@
 package Entities;
 import Controller.*;
 
-import DataBase.*;
+import UseCases.Notification.PriceDropNotification;
+import UseCases.Notification.SaleNotification;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Objects;
 import java.util.*;
 
 public class Item implements Product {
@@ -180,10 +179,6 @@ public class Item implements Product {
     public int getReviewCount() { return reviewCount;}
     public void setProductPrice(double newPrice) {this.itemPrice = newPrice;}
     public void setProductCurrency(String newCurrency) {this.itemCurrency = newCurrency;}
-    public boolean isPriceBelowDesiredPrice(){
-        return itemPrice <= desiredPrice;
-    }
-    public boolean isItemOnSale() {return priceChange < 0;}
 
     /** Updates price of Item object through web-scraping the product page on Amazon
      * */

@@ -1,4 +1,4 @@
-package Controller;
+package UseCases.Notification;
 
 interface BaseNotification {
     /** Starts a notification schedule */
