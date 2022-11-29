@@ -1,4 +1,4 @@
-import Controller.PriceDropNotification;
+import UseCases.Notification.PriceDropNotification;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import Entities.*;

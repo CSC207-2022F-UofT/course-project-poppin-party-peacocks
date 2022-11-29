@@ -27,4 +27,6 @@ public interface Product {
     public double getReviewStars();
     public void setReviewCount(int reviewCount);
     public int getReviewCount();
+    public void setProductPrice(double newPrice);
+    public void setProductCurrency(String newCurrency);
 }

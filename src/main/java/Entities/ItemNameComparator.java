@@ -1,7 +1,7 @@
 package Entities;
 import java.util.Comparator;
 
-public class ItemNameComparator implements Comparator<Item> {
+public class ItemNameComparator implements Comparator<Product> {
     /**
      * Takes 2 Items and compares their names using .getItemName()
      * Default saved comparison: A-Z (ascending)
@@ -12,7 +12,7 @@ public class ItemNameComparator implements Comparator<Item> {
      * returns 0 otherwise
      */
     @Override
-    public int compare(Item item1, Item item2) {
+    public int compare(Product item1, Product item2) {
         return (item1.getProductName().compareTo(item2.getProductName()));
     }
 }

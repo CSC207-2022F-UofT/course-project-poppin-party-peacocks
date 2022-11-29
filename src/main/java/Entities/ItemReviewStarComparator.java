@@ -1,7 +1,7 @@
 package Entities;
 import java.util.Comparator;
 
-public class ItemReviewStarComparator implements Comparator<Item> {
+public class ItemReviewStarComparator implements Comparator<Product> {
 
     /**
      * Takes 2 Items and compares their review stars using .getReviewStar()
@@ -14,7 +14,7 @@ public class ItemReviewStarComparator implements Comparator<Item> {
      * returns 0 otherwise
      */
     @Override
-    public int compare(Item item1, Item item2) {
+    public int compare(Product item1, Product item2) {
         if (item1.getReviewStars() <= item2.getReviewStars()) {
             return 1;
         } else if (item1.getReviewStars() >= item2.getReviewStars()) {

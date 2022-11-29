@@ -1,4 +1,4 @@
-import Controller.SaleNotification;
+import UseCases.Notification.SaleNotification;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import Entities.*;

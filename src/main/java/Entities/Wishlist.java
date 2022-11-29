@@ -3,20 +3,20 @@ import java.util.*;
 
 public class Wishlist {
     private String name;
-    private ArrayList<Item> itemList;
-    private ArrayList<Item> displayedList;
+    private ArrayList<Product> itemList;
+    private ArrayList<Product> displayedList;
     private Date dateAdded;
     private ArrayList<String> selectedTags;
 
     public Wishlist(String name){
         this.name = name;
-        this.itemList = new ArrayList<Item>();
-        this.displayedList = new ArrayList<Item>();
+        this.itemList = new ArrayList<Product>();
+        this.displayedList = new ArrayList<Product>();
         this.dateAdded = new Date();
         this.selectedTags = new ArrayList<String>();
     }
 
-    public Wishlist(String name, ArrayList<Item> itemList, ArrayList<Item> displayedList, Date dateAdded, ArrayList<String> selectedTags){
+    public Wishlist(String name, ArrayList<Product> itemList, ArrayList<Product> displayedList, Date dateAdded, ArrayList<String> selectedTags){
         this.name = name;
         this.itemList = itemList;
         this.displayedList = displayedList;
@@ -25,8 +25,8 @@ public class Wishlist {
     }
 
     public String getName() { return  this.name; };
-    public ArrayList<Item> getItemList() {return this.itemList; };
-    public ArrayList<Item> getDisplayedList() {return this.displayedList; };
+    public ArrayList<Product> getItemList() {return this.itemList; };
+    public ArrayList<Product> getDisplayedList() {return this.displayedList; };
     public Date getDateAdded() {return this.dateAdded; };
     public ArrayList<String> getSelectedTags() {return this.selectedTags; };
 
@@ -37,7 +37,7 @@ public class Wishlist {
      * @return function is void, but function mutates the wishlist by sorting by date
      */
     public void sortWishlistByDate(String order){
-        Comparator<Item> itemDateComparator = new ItemDateComparator();
+        Comparator<Product> itemDateComparator = new ItemDateComparator();
 
         switch (order.toLowerCase()) {
             case "ascending":
@@ -57,7 +57,7 @@ public class Wishlist {
      * @return function is void, but function mutates the wishlist by sorting with name
      */
     public void sortWishlistByName(String order) {
-        Comparator<Item> itemNameComparator = new ItemNameComparator();
+        Comparator<Product> itemNameComparator = new ItemNameComparator();
 
         switch (order.toLowerCase()) {
             case "ascending":
@@ -77,7 +77,7 @@ public class Wishlist {
      * @return function is void, but function mutates the wishlist by sorting with review stars
      */
     public void sortWishlistByReviewStars(String order) {
-        Comparator<Item> itemReviewStarComparator = new ItemReviewStarComparator();
+        Comparator<Product> itemReviewStarComparator = new ItemReviewStarComparator();
 
         switch (order.toLowerCase()) {
             case "descending":
@@ -97,7 +97,7 @@ public class Wishlist {
      * @return function is void, but function mutates the wishlist by sorting with review count
      */
     public void sortWishlistByReviewCount(String order) {
-        Comparator<Item> itemReviewCount = new ItemReviewCountComparator();
+        Comparator<Product> itemReviewCount = new ItemReviewCountComparator();
 
         switch (order.toLowerCase()) {
             case "descending":
@@ -117,7 +117,7 @@ public class Wishlist {
      * @return function is void, but function mutates the wishlist by sorting with price
      */
     public void sortWishlistByPrice(String order) {
-        Comparator<Item> itemPriceComparator = new ItemPriceComparator();
+        Comparator<Product> itemPriceComparator = new ItemPriceComparator();
 
         switch (order.toLowerCase()) {
             case "descending":
@@ -160,9 +160,9 @@ public class Wishlist {
      */
     public void filterWishlists(String[] tags){
         selectedTags.addAll(Arrays.asList(tags));
-        displayedList = new ArrayList<Item>(itemList);
-        ArrayList<Item> tempList = new ArrayList<Item>(itemList);
-        for(Item i : displayedList){
+        displayedList = new ArrayList<Product>(itemList);
+        ArrayList<Product> tempList = new ArrayList<Product>(itemList);
+        for(Product i : displayedList){
             for(String tag : tags){
                 ArrayList<String> iTags = new ArrayList<String>(Arrays.asList(i.getTags()));
                 if(!iTags.contains(tag)){
@@ -179,7 +179,7 @@ public class Wishlist {
      */
     public void displayTags(){
         Set<String> tags = new HashSet<String>();
-        for(Item i : itemList) {
+        for(Product i : itemList) {
             for (String tag : i.getTags()) {
                 tags.add(tag);
             }
