@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class WishlistTest {
     Item myFavDrink = new Item("Lime Bubbly", 5.47, 5.00, "www.shoppers.com/bubbly",
@@ -82,7 +83,9 @@ public class WishlistTest {
     public void setDateAddedTest() {
         christmasWishlist.addProduct(myFavDrink);
         Date testDate = new Date(2022, Calendar.NOVEMBER, 25);
+                //new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").format();
         christmasWishlist.setDateAdded(testDate);
+        //new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").format(date));
 
         Assertions.assertEquals(testDate.getYear(), christmasWishlist.getDateAdded().getYear());
         Assertions.assertEquals(testDate.getMonth(), christmasWishlist.getDateAdded().getMonth());
