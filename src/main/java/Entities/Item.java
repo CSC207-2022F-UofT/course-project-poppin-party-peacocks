@@ -125,10 +125,6 @@ public class Item implements Product {
         this.priceHistoryDates = priceHistoryDates;
     }
 
-    public Item() {
-
-    }
-
     public String getProductName(){
         return this.itemName;
     }
