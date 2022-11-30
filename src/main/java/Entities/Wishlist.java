@@ -1,22 +1,25 @@
 package Entities;
 import java.util.*;
 
-public class Wishlist {
+/**
+ * A class that stores a list of products. Implements ProductList functionalities.
+ */
+public class Wishlist implements ProductList {
     private String name;
     private ArrayList<Product> itemList;
     private ArrayList<Product> displayedList;
     private Date dateAdded;
     private ArrayList<String> selectedTags;
 
-    public Wishlist(String name){
+    public Wishlist(String name) {
         this.name = name;
-        this.itemList = new ArrayList<Product>();
-        this.displayedList = new ArrayList<Product>();
+        this.itemList = new ArrayList<>();
+        this.displayedList = new ArrayList<>();
         this.dateAdded = new Date();
-        this.selectedTags = new ArrayList<String>();
+        this.selectedTags = new ArrayList<>();
     }
 
-    public Wishlist(String name, ArrayList<Product> itemList, ArrayList<Product> displayedList, Date dateAdded, ArrayList<String> selectedTags){
+    public Wishlist(String name, ArrayList<Product> itemList, ArrayList<Product> displayedList, Date dateAdded, ArrayList<String> selectedTags) {
         this.name = name;
         this.itemList = itemList;
         this.displayedList = displayedList;
@@ -24,19 +27,44 @@ public class Wishlist {
         this.selectedTags = selectedTags;
     }
 
-    public String getName() { return  this.name; };
-    public ArrayList<Product> getItemList() {return this.itemList; };
-    public ArrayList<Product> getDisplayedList() {return this.displayedList; };
-    public Date getDateAdded() {return this.dateAdded; };
-    public ArrayList<String> getSelectedTags() {return this.selectedTags; };
+    public String getName() {
+        return this.name;
+    }
 
-    public void setDateAdded(Date date) { this.dateAdded = date; }
+    public ArrayList<Product> getProductList() {
+        return this.itemList;
+    }
+
+    public ArrayList<Product> getDisplayedList() {
+        return this.displayedList;
+    }
+
+    public Date getDateAdded() {
+        return this.dateAdded;
+    }
+
+    public ArrayList<String> getSelectedTags() {
+        return this.selectedTags;
+    }
+
+    public int getListSize() {
+        return itemList.size();
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDateAdded(Date date) {
+        this.dateAdded = date;
+    }
+
     /**
-     * Sorts wishlist by date in added date (earliest date-latest date) or (latest date-earliest date)
-     * @param order The value of string whether the user wants the wishlist to be ascending or descending
-     * @return function is void, but function mutates the wishlist by sorting by date
+     * Sorts ProductList by date in added date (earliest date-latest date) or (latest date-earliest date)
+     *
+     * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
-    public void sortWishlistByDate(String order){
+    public void sortProductListByDate(String order) {
         Comparator<Product> itemDateComparator = new ItemDateComparator();
 
         switch (order.toLowerCase()) {
@@ -52,11 +80,11 @@ public class Wishlist {
     }
 
     /**
-     * Sorts wishlist by name in ascending order (A-Z) or descending order (Z-A)
-     * @param order The value of string whether the user wants the wishlist to be ascending or descending
-     * @return function is void, but function mutates the wishlist by sorting with name
+     * Sorts ProductList by name in ascending order (A-Z) or descending order (Z-A)
+     *
+     * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
-    public void sortWishlistByName(String order) {
+    public void sortProductListByName(String order) {
         Comparator<Product> itemNameComparator = new ItemNameComparator();
 
         switch (order.toLowerCase()) {
@@ -72,11 +100,11 @@ public class Wishlist {
     }
 
     /**
-     * Sorts wishlist by review stars in ascending order (lowest-highest) or descending order (highest-lowest)
-     * @param order The value of string whether the user wants the wishlist to be ascending or descending
-     * @return function is void, but function mutates the wishlist by sorting with review stars
+     * Sorts ProductList by review stars in ascending order (lowest-highest) or descending order (highest-lowest)
+     *
+     * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
-    public void sortWishlistByReviewStars(String order) {
+    public void sortProductListByReviewStars(String order) {
         Comparator<Product> itemReviewStarComparator = new ItemReviewStarComparator();
 
         switch (order.toLowerCase()) {
@@ -92,11 +120,11 @@ public class Wishlist {
     }
 
     /**
-     * Sorts wishlist by review count in ascending order (lowest-highest) or descending order (highest-lowest)
-     * @param order The value of string whether the user wants the wishlist to be ascending or descending
-     * @return function is void, but function mutates the wishlist by sorting with review count
+     * Sorts ProductList by review count in ascending order (lowest-highest) or descending order (highest-lowest)
+     *
+     * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
-    public void sortWishlistByReviewCount(String order) {
+    public void sortProductListByReviewCount(String order) {
         Comparator<Product> itemReviewCount = new ItemReviewCountComparator();
 
         switch (order.toLowerCase()) {
@@ -112,11 +140,11 @@ public class Wishlist {
     }
 
     /**
-     * Sorts wishlist by price in ascending order (lowest-highest) or descending order (highest-lowest)
-     * @param order The value of string whether the user wants the wishlist to be ascending or descending
-     * @return function is void, but function mutates the wishlist by sorting with price
+     * Sorts ProductList by price in ascending order (lowest-highest) or descending order (highest-lowest)
+     *
+     * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
-    public void sortWishlistByPrice(String order) {
+    public void sortProductListByPrice(String order) {
         Comparator<Product> itemPriceComparator = new ItemPriceComparator();
 
         switch (order.toLowerCase()) {
@@ -132,77 +160,46 @@ public class Wishlist {
     }
 
     /**
-     * Adding an Entities.Item to the wishlist
-     * @param item The Entities.Item that the user wants to add to the wishlist
-     * @return True when an Entities.Item gets added to the wishlist
+     * Adding an Entities.Item to the ProductList
+     *
+     * @param product The Entities.Product that the user wants to add to the ProductList
+     * @return True when an Entities.Product gets added to the ProductList
      */
-    public boolean addItem(Item item){
-        itemList.add(item);
-        displayedList.add(item);
-        sortWishlistByDate("ascending");
+    public boolean addProduct(Product product) {
+        itemList.add(product);
+        displayedList.add(product);
+        sortProductListByDate("ascending");
         return true;
     }
 
     /**
-     * Removing an Entities.Item from the wishlist
-     * @param deleteItem The Entities.Item the user wants to delete from the wishlist
-     * @return True when an Entities.Item gets removed from the wishlist
+     * Removing an Entities.Item from the ProductList
+     *
+     * @param product The Entities.Product the user wants to delete from the ProductList
+     * @return True when an Entities.Product gets removed from the ProductList
      */
-    public boolean removeItem(Item deleteItem){
-        itemList.remove(deleteItem);
+    public boolean removeProduct(Product product) {
+        itemList.remove(product);
         return true;
     }
 
     /**
-     * Filters wishlist by tag
+     * Filters ProductList by tag
+     *
      * @param tags The value of sets of strings of tags
-     * @return function is void, but function mutates the wishlist by filtering tags
      */
-    public void filterWishlists(String[] tags){
+    public void filterProductList(String[] tags) {
         selectedTags.addAll(Arrays.asList(tags));
         displayedList = new ArrayList<Product>(itemList);
         ArrayList<Product> tempList = new ArrayList<Product>(itemList);
-        for(Product i : displayedList){
-            for(String tag : tags){
+        for (Product i : displayedList) {
+            for (String tag : tags) {
                 ArrayList<String> iTags = new ArrayList<String>(Arrays.asList(i.getTags()));
-                if(!iTags.contains(tag)){
+                if (!iTags.contains(tag)) {
                     tempList.remove(i);
                 }
             }
         }
         displayedList = tempList;
-    }
-
-    /**
-     * Displays list of tags in console
-     * @return function is void, but function displays the tags in console
-     */
-    public void displayTags(){
-        Set<String> tags = new HashSet<String>();
-        for(Product i : itemList) {
-            for (String tag : i.getTags()) {
-                tags.add(tag);
-            }
-        }
-        System.out.println("Tags: " + tags.toString());
-    }
-
-    /**
-     * Displays wishlist in console
-     * @return function is void, but function displays the wishlist in console
-     */
-    public void displayList(){
-        System.out.println("Now displaying: " + name);
-        System.out.println("Currently selected tags: " + selectedTags.toString());
-        for(int i = 0; i < displayedList.size(); i++){
-            displayedList.get(i).displayItemInConsole(i+1);
-        }
-    }
-
-    /**
-    * @return returns the size of the item list
-    **/
-    public int getListSize(){
-        return itemList.size();
     }
 }
