@@ -57,7 +57,7 @@ public class DataBaseFormatter {
         wishlistObject.put("dateAdded", wishlist.getDateAdded().toString());
 
         JSONArray itemObjects = new JSONArray();
-        for (Product item : wishlist.getItemList()) {
+        for (Product item : wishlist.getProductList()) {
             itemObjects.add(createItemJSON(item));
         }
 
