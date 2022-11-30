@@ -3,6 +3,9 @@ package Entities;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * An interface that specifies the functionalities expected from a product
+ */
 public interface Product {
     String getProductName();
     String getProductDescription();
