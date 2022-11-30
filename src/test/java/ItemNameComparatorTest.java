@@ -13,34 +13,34 @@ public class ItemNameComparatorTest {
 
     @Test
     public void ItemNameComparatorTestAscending() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
 
-        christmasWishlist.sortWishlistByName("ascending");
-        testingWishlist.sortWishlistByName("ascending");
+        christmasWishlist.sortProductListByName("ascending");
+        testingWishlist.sortProductListByName("ascending");
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }
 
     @Test
     public void ItemNameComparatorTestDescending() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
 
-        christmasWishlist.sortWishlistByName("descending");
-        testingWishlist.sortWishlistByName("descending");
+        christmasWishlist.sortProductListByName("descending");
+        testingWishlist.sortProductListByName("descending");
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }

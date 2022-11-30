@@ -57,6 +57,6 @@ public class DataBaseParserTest {
         Assertions.assertEquals(parsedList.getDateAdded(), wishlist.getDateAdded());
         Assertions.assertEquals(parsedList.getDisplayedList().toArray().length, wishlist.getDisplayedList().toArray().length);
         Assertions.assertArrayEquals(parsedList.getSelectedTags().toArray(), wishlist.getSelectedTags().toArray());
-        Assertions.assertEquals(parsedList.getItemList().toArray().length, wishlist.getItemList().toArray().length);
+        Assertions.assertEquals(parsedList.getProductList().toArray().length, wishlist.getProductList().toArray().length);
     }
 }

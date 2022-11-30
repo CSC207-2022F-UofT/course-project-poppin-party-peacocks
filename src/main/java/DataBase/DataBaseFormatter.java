@@ -58,7 +58,7 @@ public class DataBaseFormatter {
         wishlistObject.put("dateAdded", new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").format(wishlist.getDateAdded()));
 
         JSONArray itemObjects = new JSONArray();
-        for (Product item : wishlist.getItemList()) {
+        for (Product item : wishlist.getProductList()) {
             itemObjects.add(createItemJSON(item));
         }
 
