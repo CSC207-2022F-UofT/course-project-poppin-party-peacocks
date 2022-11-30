@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class DataBaseParserTest {
-    ArrayList<Double> priceData = new ArrayList();
+    ArrayList<Double> priceData = new ArrayList<>();
     ArrayList<Date> priceDate = new ArrayList<>();
     String testDate = "Fri Nov 18 01:04:05 EST 2022";
     Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
@@ -52,6 +52,6 @@ public class DataBaseParserTest {
         Assertions.assertEquals(parsedList.getDateAdded(), wishlist.getDateAdded());
         Assertions.assertEquals(parsedList.getDisplayedList().toArray().length, wishlist.getDisplayedList().toArray().length);
         Assertions.assertArrayEquals(parsedList.getSelectedTags().toArray(), wishlist.getSelectedTags().toArray());
-        Assertions.assertEquals(parsedList.getItemList().toArray().length, wishlist.getItemList().toArray().length);
+        Assertions.assertEquals(parsedList.getProductList().toArray().length, wishlist.getProductList().toArray().length);
     }
 }
