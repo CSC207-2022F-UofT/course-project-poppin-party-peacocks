@@ -20,7 +20,6 @@ public class ItemPanel extends JPanel {
         this.setSize(300,100);
         borderColor = Color.WHITE;
         panelColor = new Color(236, 236, 236);
-        //this.setBackground(panelColor);
     }
 
     @Override
@@ -31,6 +30,17 @@ public class ItemPanel extends JPanel {
         g2.fillRoundRect(0,0,getWidth()-1,getHeight()-1,20,20);
         g2.setColor(borderColor);
         g2.drawRoundRect(0,0,getWidth()-1,getHeight()-1,20,20);
+        g2.drawRoundRect(7,7, getHeight()-15, getHeight()-15, 20,20);
 
+        Image image = img.getImage();
+        Image scaledImg = image.getScaledInstance(85,85, Image.SCALE_DEFAULT);
+        img = new ImageIcon(scaledImg);
+        img.paintIcon(null, g2, 6,6);
+
+        g2.setColor(Color.BLACK);
+        g2.setFont(new Font("Montserrat", Font.PLAIN, 18));
+        g2.drawString(itemName, 100,25);
+        g2.setFont(new Font("Montserrat", Font.PLAIN, 12));
+        g2.drawString(itemPrice, 100, 40);
     }
 }
