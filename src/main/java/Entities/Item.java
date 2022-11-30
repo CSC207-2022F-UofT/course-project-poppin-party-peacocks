@@ -1,17 +1,16 @@
 package Entities;
 import Controller.*;
 
-import DataBase.*;
+import UseCases.Notification.PriceDropNotification;
+import UseCases.Notification.SaleNotification;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Objects;
 import java.util.*;
 
-public class Item {
+public class Item implements Product {
     private String itemName;
     private String url;
     private String imageUrl;
@@ -125,28 +124,28 @@ public class Item {
         this.priceHistoryData = priceHistoryData;
         this.priceHistoryDates = priceHistoryDates;
     }
-    public String getItemName(){
+    public String getProductName(){
         return this.itemName;
     }
-    public String getItemDescription(){
+    public String getProductDescription(){
         return this.itemDescription;
     }
-    public String getItemURL(){
+    public String getProductURL(){
         return this.url;
     }
-    public String getItemImageURL(){
+    public String getProductImageURL(){
         return this.imageUrl;
     }
-    public double getItemPrice(){
+    public double getProductPrice(){
         return this.itemPrice;
     }
     public double getPriceChange(){
         return this.priceChange;
     }
-    public double getItemDesiredPrice(){
+    public double getProductDesiredPrice(){
         return this.desiredPrice;
     }
-    public Date getItemDateAdded(){
+    public Date getProductDateAdded(){
         return this.dateAdded;
     }
     public String[] getTags(){
@@ -156,14 +155,12 @@ public class Item {
         return this.priceHistoryData;
     }
     public ArrayList<Date> getPriceHistoryDates() {return this.priceHistoryDates; }
-
-
-    public String getItemCurrency() {return this.itemCurrency; }
+    public String getProductCurrency() {return this.itemCurrency; }
     public void setName(String newName){
         this.itemName = newName;
     }
     public void setDateAdded(Date date) { this.dateAdded = date; }
-    public void setItemDescription(String description) {
+    public void setProductDescription(String description) {
         this.itemDescription = description;
     }
     public void setPriceChange(Double priceChange) {
@@ -172,32 +169,16 @@ public class Item {
     public void setDesiredPrice(double newDesiredPrice) {
         this.desiredPrice = newDesiredPrice;
     }
-
     public void setPriceHistoryData(ArrayList<Double> updatedPrices){
         this.priceHistoryData = updatedPrices;
     }
     public void setPriceHistoryDates(ArrayList<Date> updatedDates) {this.priceHistoryDates = updatedDates; }
-
     public void setReviewStars(double newReviewStars) { this.reviewStars = newReviewStars;}
     public double getReviewStars() { return reviewStars;}
     public void setReviewCount(int reviewCount) { this.reviewCount = reviewCount;}
     public int getReviewCount() { return reviewCount;}
-
-    public void displayItemInConsole(int ranking){
-        System.out.println("------------------------------------------");
-        System.out.println("(" + ranking + "): " + itemName);
-        System.out.println("Price: " + itemPrice);
-        System.out.println("Date added: " + dateAdded);
-        System.out.println("Last Updated: " + dateLastUpdated);
-        System.out.println("Description:" + itemDescription);
-        System.out.println("Review Stars:" + reviewStars);
-        System.out.println("Review Count:" + reviewCount);
-        System.out.println("------------------------------------------");
-    }
-    public boolean isPriceBelowDesiredPrice(){
-        return itemPrice < desiredPrice;
-    }
-    public boolean isItemOnSale() {return priceChange < 0;}
+    public void setProductPrice(double newPrice) {this.itemPrice = newPrice;}
+    public void setProductCurrency(String newCurrency) {this.itemCurrency = newCurrency;}
 
     /** Updates price of Item object through web-scraping the product page on Amazon
      * */
@@ -215,39 +196,4 @@ public class Item {
             e.printStackTrace();
         }
     }
-
-    /** Updates currency of the item by converting item price and currency */
-    public void updateCurrency() {
-        HashMap<String, Double> cadConversion = new HashMap<>();
-        cadConversion.put("USD", 0.76);
-        cadConversion.put("YUAN", 5.33);
-        HashMap<String, Double> yuanConversion = new HashMap<>();
-        yuanConversion.put("USD", 0.14);
-        yuanConversion.put("CAD", 0.19);
-        HashMap<String, Double> usdConversion = new HashMap<>();
-        usdConversion.put("CAD", 1.34);
-        usdConversion.put("YUAN", 7.17);
-
-        String currentCurrency = this.itemCurrency;
-        String newCurrency = DataBase.currentUser.getCurrency();
-
-        if (Objects.equals(currentCurrency, newCurrency)) {
-            return;
-        }
-
-        switch (currentCurrency) {
-            case "CAD":
-                this.itemPrice = cadConversion.get(newCurrency) * this.itemPrice;
-                break;
-            case "USD":
-                this.itemPrice = usdConversion.get(newCurrency) * this.itemPrice;
-                break;
-            case "YUAN":
-                this.itemPrice = yuanConversion.get(newCurrency) * this.itemPrice;
-                break;
-        }
-        this.itemPrice =  Math.round(this.itemPrice * 100.0) / 100.0;
-        this.itemCurrency = newCurrency;
-    }
-
 }

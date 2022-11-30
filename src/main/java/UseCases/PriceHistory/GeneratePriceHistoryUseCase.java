@@ -1,3 +1,5 @@
+package UseCases.PriceHistory;
+
 import Entities.*;
 import Controller.Scheduler;
 
@@ -31,7 +33,7 @@ public class GeneratePriceHistoryUseCase {
     public void updatePriceHistoryData(Item item) {
         ArrayList<Double> updatedPriceHistoryData = item.getPriceHistoryData();
         ArrayList<Date> updatedPriceHistoryDates = item.getPriceHistoryDates();
-        updatedPriceHistoryData.add(item.getItemPrice());
+        updatedPriceHistoryData.add(item.getProductPrice());
         updatedPriceHistoryDates.add(new Date());
         item.setPriceHistoryData(updatedPriceHistoryData);
         item.setPriceHistoryDates(updatedPriceHistoryDates);
@@ -150,7 +152,7 @@ public class GeneratePriceHistoryUseCase {
         }
 
         int i = 1;
-        double minSoFar = item.getItemPrice();
+        double minSoFar = item.getProductPrice();
         while((i <= priceDataSize) && (i <= numDays)){
             minSoFar = Math.min(minSoFar, item.getPriceHistoryData().get(priceDataSize - i));
             i = i + 1;
@@ -173,7 +175,7 @@ public class GeneratePriceHistoryUseCase {
         }
 
         int i = 1;
-        double maxSoFar = item.getItemPrice();
+        double maxSoFar = item.getProductPrice();
         while((i <= priceDataSize) && (i <= numDays)){
             maxSoFar = Math.max(maxSoFar, item.getPriceHistoryData().get(priceDataSize - i));
             i = i + 1;
@@ -187,11 +189,11 @@ public class GeneratePriceHistoryUseCase {
      * @return percentage of current price compared to desired price or -1 for invalid calculations
      */
     public double calculatePercentChangeFromDesiredPrice(){
-        if (item.getItemDesiredPrice() == 0){
+        if (item.getProductDesiredPrice() == 0){
             return -1;
         }
         else{
-            return Double.valueOf(formatter.format((item.getItemPrice()/ item.getItemDesiredPrice())*100));
+            return Double.valueOf(formatter.format((item.getProductPrice()/ item.getProductDesiredPrice())*100));
         }
 
     }
@@ -206,7 +208,7 @@ public class GeneratePriceHistoryUseCase {
             return -1;
         }
         else {
-            return Double.valueOf(formatter.format((item.getItemPrice()/ item.getPriceHistoryData().get(0))*100));
+            return Double.valueOf(formatter.format((item.getProductPrice()/ item.getPriceHistoryData().get(0))*100));
         }
     }
 
@@ -227,7 +229,7 @@ public class GeneratePriceHistoryUseCase {
             return -1;
         }
         else {
-            return Double.valueOf(formatter.format((item.getItemPrice() / calculateAveragePrice(timePeriod))*100));
+            return Double.valueOf(formatter.format((item.getProductPrice() / calculateAveragePrice(timePeriod))*100));
         }
     }
 
@@ -248,7 +250,7 @@ public class GeneratePriceHistoryUseCase {
             return -1;
         }
         else {
-            return Double.valueOf(formatter.format((item.getItemPrice() / calculateLowestPrice(timePeriod))*100));
+            return Double.valueOf(formatter.format((item.getProductPrice() / calculateLowestPrice(timePeriod))*100));
         }
     }
 
@@ -269,7 +271,7 @@ public class GeneratePriceHistoryUseCase {
             return -1;
         }
         else {
-            return Double.valueOf(formatter.format((item.getItemPrice() / calculateHighestPrice(timePeriod))*100));
+            return Double.valueOf(formatter.format((item.getProductPrice() / calculateHighestPrice(timePeriod))*100));
         }
     }
 

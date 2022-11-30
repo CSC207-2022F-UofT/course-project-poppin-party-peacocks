@@ -37,7 +37,7 @@ public class AddItemPage extends JFrame {
         Image image = null;
         Image resizedImage = null;
         try {
-            URL url = new URL(item.getItemImageURL());
+            URL url = new URL(item.getProductImageURL());
             image = ImageIO.read(url);
             resizedImage = image.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
             imageLabel.setIcon(new ImageIcon(resizedImage));
@@ -47,8 +47,8 @@ public class AddItemPage extends JFrame {
         // text
         JPanel centrePanel = new JPanel();
         centrePanel.setLayout(new BoxLayout(centrePanel, BoxLayout.Y_AXIS));
-        JLabel nameLabel = new JLabel(item.getItemName());
-        JLabel costLabel = new JLabel(Double.toString(item.getItemPrice()));
+        JLabel nameLabel = new JLabel(item.getProductName());
+        JLabel costLabel = new JLabel(Double.toString(item.getProductPrice()));
         centrePanel.add(nameLabel);
         centrePanel.add(costLabel);
         JLabel indexLabel = new JLabel(Integer.toString(index));
