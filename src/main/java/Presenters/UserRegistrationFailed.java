@@ -1,3 +1,5 @@
+package Presenters;
+
 public class UserRegistrationFailed extends RuntimeException{
     /**
      * Constructs a new runtime exception with message errorMessage

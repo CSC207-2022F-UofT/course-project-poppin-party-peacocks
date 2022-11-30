@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 public class WelcomePageActionListenerNavigation {
     private JFrame currJFrame;
     private ActionListener navToHomePage;
+    UserRegisterController controller;
 
     public WelcomePageActionListenerNavigation(JFrame currJFrame) {
         this.currJFrame = currJFrame;
@@ -13,7 +14,7 @@ public class WelcomePageActionListenerNavigation {
         navToHomePage = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GUI.HomePage homePage = new GUI.HomePage();
+                GUI.HomePage homePage = new GUI.HomePage(controller);
                 homePage.setContentPane(homePage.getMainPanel());
                 homePage.setVisible(true);
                 homePage.setLocationRelativeTo(null);

@@ -1,3 +1,5 @@
+package UseCases;
+
 import Entities.*;
 import Controller.Scheduler;
 

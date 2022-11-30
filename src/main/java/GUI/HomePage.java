@@ -1,5 +1,8 @@
 package GUI;
 
+import Controller.UserRegisterController;
+import UseCases.UserRegisterInputs;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,6 +26,7 @@ public class HomePage extends JFrame {
     private JButton addWishlistButton;
 
     private JButton dummyButton;
+    UserRegisterController userRegisterController;
 
     public JPanel getMainPanel() {
         return leftPanel;
@@ -35,8 +39,10 @@ public class HomePage extends JFrame {
         return label;
     }
 
-    public HomePage() {
+    public HomePage(UserRegisterController controller) {
         super("My Wishlists");
+
+        this.userRegisterController = controller;
         setLayout(null);
         setSize(400, 638);
 
@@ -134,11 +140,13 @@ public class HomePage extends JFrame {
         });
 
         signoutButton.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO
                 // Currently, this navigates to GUI.MainAppLoginSignupPage.
-                WelcomePage loginSignupPage = new WelcomePage();
+
+                WelcomePage loginSignupPage = new WelcomePage(controller);
                 loginSignupPage.setContentPane(loginSignupPage.getMainPanel());
                 loginSignupPage.setVisible(true);
                 loginSignupPage.setLocationRelativeTo(null);

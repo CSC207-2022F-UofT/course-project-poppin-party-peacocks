@@ -12,6 +12,7 @@ public class WelcomePageActionListenerSwitchPanels {
     private ActionListener showLoginPanelActionListener;
     private ActionListener showSignupPanelActionListener;
     private ActionListener navToHomePage;
+    UserRegisterController controller;
 
     public WelcomePageActionListenerSwitchPanels(JFrame currJFrame, JPanel mainPanel, JPanel loginPanel, JPanel signupPanel) {
         this.mainPanel = mainPanel;
@@ -42,7 +43,7 @@ public class WelcomePageActionListenerSwitchPanels {
         navToHomePage = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GUI.HomePage homePage = new GUI.HomePage();
+                GUI.HomePage homePage = new GUI.HomePage(controller);
                 homePage.setContentPane(homePage.getMainPanel());
                 homePage.setVisible(true);
                 homePage.setLocationRelativeTo(null);

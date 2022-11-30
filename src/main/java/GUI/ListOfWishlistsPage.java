@@ -1,5 +1,7 @@
 package GUI;
 
+import Controller.UserRegisterController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,6 +25,8 @@ public class ListOfWishlistsPage extends JFrame {
     private JButton addWishlistButton;
 
     private JButton dummyButton;
+    UserRegisterController controller;
+
 
     public JPanel getMainPanel() {
         return leftPanel;
@@ -151,7 +155,7 @@ public class ListOfWishlistsPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // TODO
                 // Currently, this navigates to GUI.MainAppLoginSignupPage.
-                WelcomePage loginSignupPage = new WelcomePage();
+                WelcomePage loginSignupPage = new WelcomePage(controller);
                 loginSignupPage.setContentPane(loginSignupPage.getMainPanel());
                 loginSignupPage.setVisible(true);
                 loginSignupPage.setLocationRelativeTo(null);

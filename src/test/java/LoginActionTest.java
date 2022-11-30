@@ -1,4 +1,4 @@
-import org.junit.Before;
+import UseCases.LoginAction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
