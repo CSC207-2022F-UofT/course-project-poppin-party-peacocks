@@ -1,11 +1,10 @@
 package Entities;
 import Controller.*;
 
+import ExternalInterface.ItemUpdateChecker;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.*;
@@ -179,21 +178,17 @@ public class Item implements Product {
     public int getReviewCount() { return reviewCount;}
     public void setProductPrice(double newPrice) {this.itemPrice = newPrice;}
     public void setProductCurrency(String newCurrency) {this.itemCurrency = newCurrency;}
+    public void setDateLastUpdated(Date date) {this.dateLastUpdated = date;}
+
 
     /** Updates price of Item object through web-scraping the product page on Amazon
      * */
     public void updatePrice() throws IOException{
-        try {
-            // This line specifies window type and layout of amazon page based on  Window Version and browser for webscraping
-            Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
-            Element price = doc.select(".a-offscreen").first();
-            assert price != null;
-            double sellingPrice = Double.parseDouble(price.text().substring(1));
-            priceChange = itemPrice - sellingPrice;
-            itemPrice = sellingPrice;
-            dateLastUpdated = new Date();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        ItemUpdateChecker itemUpdateChecker = new ItemUpdateChecker();
+        double sellingPrice = itemUpdateChecker.updatePriceCheck(url);
+        priceChange = itemPrice - sellingPrice;
+        itemPrice = sellingPrice;
+        dateLastUpdated = new Date();
+
     }
 }

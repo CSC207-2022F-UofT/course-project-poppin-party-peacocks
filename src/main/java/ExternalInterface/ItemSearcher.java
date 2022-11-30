@@ -13,6 +13,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ItemSearcher {
     /**
@@ -55,10 +56,10 @@ public class ItemSearcher {
      * @param keyword     string keyword to search in Amazon
      * @param marketplace specified marketplace (ex: "CA" for Canada) to search in Amazon
      */
-    public ArrayList searchToList(String keyword, String marketplace) throws IOException, InterruptedException {
+    public ArrayList<Product> searchToList(String keyword, String marketplace) throws IOException, InterruptedException {
         String response = apiSearch(keyword, marketplace);
         response = cleanResponse(response);
-        ArrayList<Item> itemList = new ArrayList<Item>();
+        ArrayList<Product> itemList = new ArrayList<Product>();
         String[] pairs = response.split(" , ");
         ArrayList<String> titleList = new ArrayList<String>();
         ArrayList<String> priceList = new ArrayList<String>();
@@ -66,8 +67,7 @@ public class ItemSearcher {
         ArrayList<String> reviewCountList = new ArrayList<String>();
         ArrayList<String> reviewStarList = new ArrayList<String>();
         ArrayList<String> imageUrlList = new ArrayList<String>();
-        for (int i = 0; i < pairs.length; i++) {
-            String pair = pairs[i];
+        for (String pair : pairs) {
             String[] keyValue = pair.split(" :");
             if (keyValue[0].contains("title") && !keyValue[0].contains("subtitle")) {
                 titleList.add(keyValue[1]);
@@ -90,7 +90,7 @@ public class ItemSearcher {
         }
 
         for (int i = 0; i < titleList.size(); i++) {
-            Item newItem = new Item(titleList.get(i), Double.parseDouble(priceList.get(i)), Double.parseDouble(priceList.get(i)), urlList.get(i), titleList.get(i), new String[]{keyword}, Integer.parseInt(reviewCountList.get(i).replace(" ", "")), Double.parseDouble(reviewStarList.get(i).replace(" ", "")), imageUrlList.get(i));
+            Product newItem = new Item(titleList.get(i), Double.parseDouble(priceList.get(i)), Double.parseDouble(priceList.get(i)), urlList.get(i), titleList.get(i), new String[]{keyword}, Integer.parseInt(reviewCountList.get(i).replace(" ", "")), Double.parseDouble(reviewStarList.get(i).replace(" ", "")), imageUrlList.get(i));
             itemList.add(newItem);
         }
         return itemList;
@@ -124,12 +124,8 @@ public class ItemSearcher {
     public ArrayList<Product> searchItemKeywords(String keywords) throws IOException, InterruptedException {
         String url = this.itemLinkGenerator(keywords);
         ArrayList<Product> itemList = new ArrayList<>();
-        ArrayList<String> listNames = new ArrayList<>();
-        ArrayList<Double> listPrices = new ArrayList<>();
         ArrayList<String> listUrls = new ArrayList<>();
-        ArrayList<Double> listStars = new ArrayList<>();
-        ArrayList<Integer> listCount = new ArrayList<>();
-        ArrayList<String> listImgs = new ArrayList<>();
+
         try {
             Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
             Elements productUrls = doc.select("h2.a-size-mini.a-spacing-none.a-color-base a");
@@ -143,14 +139,14 @@ public class ItemSearcher {
                     break;
                 }
                 Product item = searchItemUrl(itemUrl, true);
-                if (item.getProductName() != "" && item.getProductPrice() != 0) {
+                if (!Objects.equals(item.getProductName(), "") && item.getProductPrice() != 0) {
                     itemList.add(item);
                     counter += 1;
                 }
             }
             return itemList;
         } catch (IOException e) {
-            return new ArrayList<Product>();
+            return new ArrayList<>();
         }
     }
 
@@ -179,6 +175,7 @@ public class ItemSearcher {
             String imgUrl = "";
             int countRating = 0;
             double starRating = 0;
+            assert price != null;
             String sellingPriceStr = price.text().replace(",", "").substring(1);
 
             if (!sellingPriceStr.matches(".*[a-zA-Z]+.*")) {
