@@ -13,7 +13,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class ItemSearcher {
     /**
@@ -144,7 +143,7 @@ public class ItemSearcher {
                     break;
                 }
                 Product item = searchItemUrl(itemUrl, true);
-                if (!Objects.equals(item.getProductName(), "") && item.getProductPrice() != 0) {
+                if (item.getProductName() != "" && item.getProductPrice() != 0) {
                     itemList.add(item);
                     counter += 1;
                 }

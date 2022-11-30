@@ -22,6 +22,9 @@ public class AddItemPage extends JFrame {
     private JButton cancelButton;
     private JPanel footerPanel;
     private JButton selectIndexButton;
+
+
+
     private int index;
 
     public JPanel getMainPanel() {
