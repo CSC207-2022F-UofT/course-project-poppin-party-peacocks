@@ -1,13 +1,14 @@
+package DataBaseTest;
+
 import DataBase.DataBaseFormatter;
 import Entities.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.Date;
 
 public class DataBaseFormatterTest {
-    ArrayList<Double> priceData = new ArrayList();
+    ArrayList<Double> priceData = new ArrayList<>();
     ArrayList<Date> priceDate = new ArrayList<>();
     String testDate = "Fri Nov 18 01:04:05 EST 2022";
     Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",

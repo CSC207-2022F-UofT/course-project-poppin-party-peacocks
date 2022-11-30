@@ -1,8 +1,11 @@
+package EntitiesTest;
+
+import Entities.Item;
+import Entities.Wishlist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import Entities.*;
 
-public class ItemReviewCountComparatorTest {
+public class ItemReviewStarComparatorTest {
     Item myFavDrink = new Item("Lime Bubbly", 5.47, 5.00, "www.shoppers.com/bubbly",
             "my favorite drink, bubbly", new String[]{"Drink"}, 69, 4.19,"www.shoppersimage.com/bubbly");
     Item animeFigure = new Item("Starlight Anya Forger", 100, 85.00, "www.amazon.com/AnyaPeanuts", "new Anya figure", new String[]{"Figure"}, 150, 4.8,"www.amazonimage.com/AnyaPeanuts" );
@@ -12,7 +15,7 @@ public class ItemReviewCountComparatorTest {
     Wishlist christmasWishlist = new Wishlist("Christmas Wishlist");
 
     @Test
-    public void ItemReviewCountComparatorTestAscending() {
+    public void ItemReviewStarComparatorTestAscending() {
         christmasWishlist.addProduct(myFavDrink);
         christmasWishlist.addProduct(animeFigure);
         christmasWishlist.addProduct(plushie);
@@ -22,14 +25,14 @@ public class ItemReviewCountComparatorTest {
         testingWishlist.addProduct(animeFigure);
         testingWishlist.addProduct(plushie);
 
-        christmasWishlist.sortProductListByReviewCount("ascending");
-        testingWishlist.sortProductListByReviewCount("ascending");
+        christmasWishlist.sortProductListByReviewStars("ascending");
+        testingWishlist.sortProductListByReviewStars("ascending");
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }
 
     @Test
-    public void ItemReviewCountComparatorTestDescending() {
+    public void ItemReviewStarComparatorTestDescending() {
         christmasWishlist.addProduct(myFavDrink);
         christmasWishlist.addProduct(animeFigure);
         christmasWishlist.addProduct(plushie);
@@ -39,8 +42,8 @@ public class ItemReviewCountComparatorTest {
         testingWishlist.addProduct(animeFigure);
         testingWishlist.addProduct(plushie);
 
-        christmasWishlist.sortProductListByReviewCount("descending");
-        testingWishlist.sortProductListByReviewCount("descending");
+        christmasWishlist.sortProductListByReviewStars("descending");
+        testingWishlist.sortProductListByReviewStars("descending");
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }

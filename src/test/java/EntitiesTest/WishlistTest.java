@@ -1,7 +1,10 @@
+package EntitiesTest;
+
+import Entities.Item;
+import Entities.Product;
+import Entities.Wishlist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import Entities.*;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -294,31 +297,5 @@ public class WishlistTest {
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
 
-    }
-
-    public void displayTagsTest() {
-        christmasWishlist.addProduct(myFavDrink);
-        christmasWishlist.addProduct(animeFigure);
-        christmasWishlist.addProduct(plushie);
-
-        Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addProduct(myFavDrink);
-        testingWishlist.addProduct(animeFigure);
-        testingWishlist.addProduct(plushie);
-
-        Assertions.assertEquals(testingWishlist.getSelectedTags(), christmasWishlist.getSelectedTags());
-    }
-
-    public void displayListTest() {
-        christmasWishlist.addProduct(myFavDrink);
-        christmasWishlist.addProduct(animeFigure);
-        christmasWishlist.addProduct(plushie);
-
-        Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addProduct(myFavDrink);
-        testingWishlist.addProduct(animeFigure);
-        testingWishlist.addProduct(plushie);
-
-        Assertions.assertEquals(testingWishlist.getDisplayedList(), christmasWishlist.getDisplayedList());
     }
 }

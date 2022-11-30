@@ -1,8 +1,9 @@
+package UseCasesTest.Currency;
+
 import Entities.Item;
 import UseCases.Currency.CurrencyUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import DataBase.*;
 import Entities.*;
 
