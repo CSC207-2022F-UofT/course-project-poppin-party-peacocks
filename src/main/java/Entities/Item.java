@@ -62,6 +62,7 @@ public class Item implements Product {
         this.scheduler = updatePriceScheduler;
         this.priceDropNotification = new PriceDropNotification(this);
         this.saleNotification = new SaleNotification(this);
+        this.itemCurrency = "CAD";
     }
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl, String itemCurrency){
@@ -138,6 +139,20 @@ public class Item implements Product {
     }
     public double getProductPrice(){
         return this.itemPrice;
+    }
+    public String getProductPriceString(){
+        String priceString = "";
+        switch (itemCurrency){
+            case "CAD":
+                    priceString =  "$" + Double.toString(itemPrice);
+            case "USD":
+                priceString =  "$" + Double.toString(itemPrice);
+            case "YUAN":
+                priceString =  "¥" + Double.toString(itemPrice);
+            default:
+                priceString = "";
+        }
+        return priceString;
     }
     public double getPriceChange(){
         return this.priceChange;
