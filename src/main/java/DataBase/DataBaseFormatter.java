@@ -5,6 +5,7 @@ import Entities.Wishlist;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 /** A class that helps the database format item and wishlist data for storage */
@@ -26,17 +27,17 @@ public class DataBaseFormatter {
         productObject.put("itemPrice", product.getProductPrice());
         productObject.put("priceChange", product.getPriceChange());
         productObject.put("desiredPrice", product.getProductDesiredPrice());
-        productObject.put("dateAdded", product.getProductDateAdded().toString());
+        productObject.put("dateAdded", new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").format(product.getProductDateAdded()));
         productObject.put("reviewStars", product.getReviewStars());
         productObject.put("reviewCount", product.getReviewCount());
         productObject.put("imageURL", product.getProductImageURL());
 
         JSONArray historyDateObject = new JSONArray();
         for (Date date : product.getPriceHistoryDates()) {
-            historyDateObject.add(date.toString());
+            historyDateObject.add(new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").format(date));
         }
         JSONArray historyDataObject = new JSONArray();
-        tagsObject.addAll(Arrays.asList(product.getPriceHistoryData()));
+        tagsObject.add(product.getPriceHistoryData());
 
         productObject.put("historyDate", historyDateObject);
         productObject.put("historyData", historyDataObject);
@@ -54,7 +55,7 @@ public class DataBaseFormatter {
     public JSONObject createWishlistJSON(Wishlist wishlist) {
         JSONObject wishlistObject = new JSONObject();
         wishlistObject.put("name", wishlist.getName());
-        wishlistObject.put("dateAdded", wishlist.getDateAdded().toString());
+        wishlistObject.put("dateAdded", new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").format(wishlist.getDateAdded()));
 
         JSONArray itemObjects = new JSONArray();
         for (Product item : wishlist.getItemList()) {

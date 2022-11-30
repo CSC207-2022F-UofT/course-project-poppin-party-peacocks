@@ -24,6 +24,10 @@ public class Wishlist {
         this.selectedTags = selectedTags;
     }
 
+    public Wishlist() {
+
+    }
+
     public String getName() { return  this.name; };
     public ArrayList<Product> getItemList() {return this.itemList; };
     public ArrayList<Product> getDisplayedList() {return this.displayedList; };
