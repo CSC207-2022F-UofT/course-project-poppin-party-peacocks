@@ -74,7 +74,7 @@ public class ItemPage extends JFrame {
 
         // Item Information
         double itemPrice = 56.78;
-        String itemDescription = "This product is bubly.\n Hello watermelon1 watermelon2 watermelon3";
+        String itemDescription = "This product is bubly.\n Hello watermelon1 watermelon2 watermelon3. Herms likes bubly in the following flavours: lime, orange, mango, everything else, grapefruit. He was not joking.";
         double itemPriceChange = 3.00;
         Date itemDateAdded = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -96,6 +96,8 @@ public class ItemPage extends JFrame {
         JScrollPane scrollBar = new JScrollPane(contentPanel,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollBar.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+        scrollBar.setBorder(null);
         scrollBar.setBounds(75, 300, 200, 200);
 
         // item price
