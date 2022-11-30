@@ -1,7 +1,7 @@
 package Entities;
 import java.util.Comparator;
 
-public class ItemReviewCountComparator implements Comparator<Item> {
+public class ItemReviewCountComparator implements Comparator<Product> {
     /**
      * Takes 2 Items and compares their review count using .getReviewCount()
      * Returns 1, -1, 0 depending on the results of the comparison
@@ -13,7 +13,7 @@ public class ItemReviewCountComparator implements Comparator<Item> {
      * returns 0 otherwise
      */
     @Override
-    public int compare(Item item1, Item item2) {
+    public int compare(Product item1, Product item2) {
         if (item1.getReviewCount() <= item2.getReviewCount()) {
             return 1;
         } else if (item1.getReviewCount() >= item2.getReviewCount()) {
