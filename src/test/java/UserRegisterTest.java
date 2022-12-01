@@ -1,21 +1,25 @@
-import DataBase.DataBase;
+import DataBase.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 class UserRegisterTest {
 
     @Test
-    public void testCreateUserSuccess() {
+    public void testCreateUserSuccess() throws IOException {
+        DataBaseController dataBaseController = new DataBaseController();
         UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser","Fuzzy321", "Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
         UserRegister register = new UserRegister(inputs, formatter);
         register.create(inputs);
-        Assertions.assertEquals(inputs.getTempUser().getName(), DataBase.getUser("StarlightUser").getName());
+        Assertions.assertEquals(inputs.getTempUser().getName(), dataBaseController.getUser("StarlightUser").getName());
         DataBase.deleteUser("StarlightUser");
     }
 
     @Test
-    public void testLoginNewUserSuccess() {
+    public void testLoginNewUserSuccess() throws IOException {
         UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser","Fuzzy321", "Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
         UserRegister register = new UserRegister(inputs, formatter);
@@ -104,7 +108,4 @@ class UserRegisterTest {
 
         Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
-
-
-
 }

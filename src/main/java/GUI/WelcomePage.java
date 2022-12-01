@@ -1,6 +1,6 @@
 package GUI;
 
-import Controller.WelcomePageActionListenerSwitchPanels;
+import GUI.Listeners.WelcomePageActionListenerSwitchPanels;
 
 import javax.swing.*;
 import java.awt.*;

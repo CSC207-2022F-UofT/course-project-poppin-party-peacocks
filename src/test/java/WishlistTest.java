@@ -1,4 +1,3 @@
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import Entities.*;
@@ -21,38 +20,38 @@ public class WishlistTest {
     ///////////////////////////////
     @Test
     public void getNameTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Assertions.assertEquals("Christmas Wishlist", christmasWishlist.getName());
     }
 
     @Test
     public void getItemListTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
-        ArrayList<Item> testItemList = christmasWishlist.getItemList();
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
+        ArrayList<Product> testItemList = christmasWishlist.getProductList();
 
-        Assertions.assertEquals(christmasWishlist.getItemList(), testItemList);
+        Assertions.assertEquals(christmasWishlist.getProductList(), testItemList);
     }
 
     @Test
     public void getDisplayedListTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
-        ArrayList<Item> testDisplayList = christmasWishlist.getDisplayedList();
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
+        ArrayList<Product> testDisplayList = christmasWishlist.getDisplayedList();
 
         Assertions.assertEquals(christmasWishlist.getDisplayedList(), testDisplayList);
     }
 
     @Test
     public void getDateAddedTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
         Date testDate = christmasWishlist.getDateAdded();
 
         Assertions.assertEquals(christmasWishlist.getDateAdded(), testDate);
@@ -60,17 +59,25 @@ public class WishlistTest {
 
     @Test
     public void getSelectedTagsTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
         ArrayList<String> testTags = christmasWishlist.getSelectedTags();
 
         Assertions.assertEquals(christmasWishlist.getSelectedTags(), testTags);
     }
 
     @Test
+    public void getListSizeTest(){
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
+        Assertions.assertEquals(christmasWishlist.getListSize(), 3);
+    }
+
+    @Test
     public void setDateAddedTest() {
-        christmasWishlist.addItem(myFavDrink);
+        christmasWishlist.addProduct(myFavDrink);
         Date testDate = new Date(2022, Calendar.NOVEMBER, 25);
         christmasWishlist.setDateAdded(testDate);
 
@@ -79,233 +86,238 @@ public class WishlistTest {
         Assertions.assertEquals(testDate.getDay(), christmasWishlist.getDateAdded().getDay());
     }
 
+    @Test void setNameTest(){
+        christmasWishlist.setName("christmas");
+        Assertions.assertEquals(christmasWishlist.getName(), "christmas");
+    }
+
     ///////////////////
     //testing methods//
     ///////////////////
     @Test
     public void sortWishlistByDateAscendingTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
 
-        christmasWishlist.sortWishlistByDate("ascending");
-        testingWishlist.sortWishlistByDate("ascending");
+        christmasWishlist.sortProductListByDate("ascending");
+        testingWishlist.sortProductListByDate("ascending");
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }
 
     @Test
     public void sortWishlistByDateDescendingTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
 
-        christmasWishlist.sortWishlistByDate("descending");
-        testingWishlist.sortWishlistByDate("descending");
+        christmasWishlist.sortProductListByDate("descending");
+        testingWishlist.sortProductListByDate("descending");
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }
 
     @Test
     public void sortWishlistByNameAscendingTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
 
-        christmasWishlist.sortWishlistByName("ascending");
-        testingWishlist.sortWishlistByName("ascending");
+        christmasWishlist.sortProductListByName("ascending");
+        testingWishlist.sortProductListByName("ascending");
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }
 
     @Test
     public void sortWishlistByNameDescendingTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
 
-        christmasWishlist.sortWishlistByName("descending");
-        testingWishlist.sortWishlistByName("descending");
+        christmasWishlist.sortProductListByName("descending");
+        testingWishlist.sortProductListByName("descending");
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }
 
     @Test
     public void sortWishlistByReviewStarsAscendingTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
 
-        christmasWishlist.sortWishlistByReviewStars("ascending");
-        testingWishlist.sortWishlistByReviewStars("ascending");
+        christmasWishlist.sortProductListByReviewStars("ascending");
+        testingWishlist.sortProductListByReviewStars("ascending");
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }
 
     @Test
     public void sortWishlistByReviewStarsDescendingTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
 
-        christmasWishlist.sortWishlistByReviewStars("descending");
-        testingWishlist.sortWishlistByReviewStars("descending");
+        christmasWishlist.sortProductListByReviewStars("descending");
+        testingWishlist.sortProductListByReviewStars("descending");
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }
 
     @Test
     public void sortWishlistByReviewCountAscendingTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
 
-        christmasWishlist.sortWishlistByReviewCount("ascending");
-        testingWishlist.sortWishlistByReviewCount("ascending");
+        christmasWishlist.sortProductListByReviewCount("ascending");
+        testingWishlist.sortProductListByReviewCount("ascending");
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }
 
     @Test
     public void sortWishlistByReviewCountDescendingTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
 
-        christmasWishlist.sortWishlistByReviewCount("descending");
-        testingWishlist.sortWishlistByReviewCount("descending");
+        christmasWishlist.sortProductListByReviewCount("descending");
+        testingWishlist.sortProductListByReviewCount("descending");
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }
 
     @Test
     public void sortWishlistByPriceAscendingTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
 
-        christmasWishlist.sortWishlistByPrice("ascending");
-        testingWishlist.sortWishlistByPrice("ascending");
+        christmasWishlist.sortProductListByPrice("ascending");
+        testingWishlist.sortProductListByPrice("ascending");
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }
 
     @Test
     public void sortWishlistByPriceDescendingTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
 
-        christmasWishlist.sortWishlistByPrice("descending");
-        testingWishlist.sortWishlistByPrice("descending");
+        christmasWishlist.sortProductListByPrice("descending");
+        testingWishlist.sortProductListByPrice("descending");
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
     }
 
     @Test
     public void addItemTest() {
-        Assertions.assertTrue(true, String.valueOf(christmasWishlist.addItem(myFavDrink)));
+        Assertions.assertTrue(true, String.valueOf(christmasWishlist.addProduct(myFavDrink)));
     }
 
     @Test
     public void removeItemTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
-        Assertions.assertTrue(true, String.valueOf(christmasWishlist.removeItem(animeFigure)));
+        Assertions.assertTrue(true, String.valueOf(christmasWishlist.removeProduct(animeFigure)));
     }
 
     @Test
     public void filterWishlistTest() {
         String[] testTags = {"toys"};
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
-        testingWishlist.filterWishlists(testTags);
-        christmasWishlist.filterWishlists(testTags);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
+        testingWishlist.filterProductList(testTags);
+        christmasWishlist.filterProductList(testTags);
 
         Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
 
     }
 
     public void displayTagsTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
 
         Assertions.assertEquals(testingWishlist.getSelectedTags(), christmasWishlist.getSelectedTags());
     }
 
     public void displayListTest() {
-        christmasWishlist.addItem(myFavDrink);
-        christmasWishlist.addItem(animeFigure);
-        christmasWishlist.addItem(plushie);
+        christmasWishlist.addProduct(myFavDrink);
+        christmasWishlist.addProduct(animeFigure);
+        christmasWishlist.addProduct(plushie);
 
         Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addItem(myFavDrink);
-        testingWishlist.addItem(animeFigure);
-        testingWishlist.addItem(plushie);
+        testingWishlist.addProduct(myFavDrink);
+        testingWishlist.addProduct(animeFigure);
+        testingWishlist.addProduct(plushie);
 
         Assertions.assertEquals(testingWishlist.getDisplayedList(), christmasWishlist.getDisplayedList());
     }

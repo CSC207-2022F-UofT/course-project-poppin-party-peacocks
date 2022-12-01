@@ -1,3 +1,5 @@
+package UseCases.PriceHistory;
+
 import Entities.*;
 import Controller.Scheduler;
 

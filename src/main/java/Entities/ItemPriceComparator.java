@@ -1,7 +1,7 @@
 package Entities;
 import java.util.Comparator;
 
-public class ItemPriceComparator implements Comparator<Item>{
+public class ItemPriceComparator implements Comparator<Product>{
     /**
      * Takes 2 Items and compares their prices using .getItemPrice()
      * Defauly saved comparison: Lowest to Highest (ascending)
@@ -12,7 +12,7 @@ public class ItemPriceComparator implements Comparator<Item>{
      * returns 0 otherwise
      */
     @Override
-    public int compare(Item item1, Item item2) {
+    public int compare(Product item1, Product item2) {
         if (item1.getProductPrice() >= item2.getProductPrice()) {
             return 1;
         } else if (item1.getProductPrice() <= item2.getProductPrice()) {
