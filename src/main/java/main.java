@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class main {
+    /**
+     * main
+     */
 
     public static void main(String[] args) {
         System.out.println(new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").format(new Date()));
@@ -13,6 +16,9 @@ public class main {
         javax.swing.SwingUtilities.invokeLater(main::createAndShowGUI);
     }
 
+    /**
+     * Start GUI when program runs.
+     */
     private static void createAndShowGUI() {
         // Create and set up the window.
         WelcomePage initialJFrame = new WelcomePage();

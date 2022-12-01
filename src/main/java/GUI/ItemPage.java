@@ -23,6 +23,10 @@ public class ItemPage extends JFrame {
         return mainPanel;
     }
 
+    /**
+     * ItemPage constructor.
+     */
+
     public ItemPage() {
 
         // JFrame setup
