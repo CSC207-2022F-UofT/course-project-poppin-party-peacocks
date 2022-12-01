@@ -124,6 +124,7 @@ public class Item implements Product {
         this.priceHistoryData = priceHistoryData;
         this.priceHistoryDates = priceHistoryDates;
     }
+
     public String getProductName(){
         return this.itemName;
     }
