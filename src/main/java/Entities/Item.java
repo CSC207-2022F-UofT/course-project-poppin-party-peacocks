@@ -12,11 +12,11 @@ import java.util.*;
 
 public class Item implements Product {
     private String itemName;
-    private String url;
-    private String imageUrl;
+    private final String url;
+    private final String imageUrl;
     //a short description of the item from the webpage
     private String itemDescription;
-    private String[] tags;
+    private final String[] tags;
     private double itemPrice;
     private String itemCurrency;
     private double priceChange;
@@ -44,7 +44,7 @@ public class Item implements Product {
         this.dateLastUpdated = new Date();
         this.reviewCount = reviewCount;
         this.reviewStars = reviewStars;
-        this.priceHistoryData = new ArrayList<Double>();
+        this.priceHistoryData = new ArrayList<>();
         this.priceHistoryData.add(this.itemPrice);
 
         TimerTask updatePriceTask = new TimerTask() {
@@ -58,8 +58,7 @@ public class Item implements Product {
             }
         };
 
-        Scheduler updatePriceScheduler = new Scheduler(updatePriceTask, 1000 * 60 * 60 * 24);
-        this.scheduler = updatePriceScheduler;
+        this.scheduler = new Scheduler(updatePriceTask, 1000 * 60 * 60 * 24);
         this.priceDropNotification = new PriceDropNotification(this);
         this.saleNotification = new SaleNotification(this);
         this.itemCurrency = "CAD";
@@ -78,9 +77,9 @@ public class Item implements Product {
         this.dateLastUpdated = new Date();
         this.reviewCount = reviewCount;
         this.reviewStars = reviewStars;
-        this.priceHistoryData = new ArrayList<Double>();
+        this.priceHistoryData = new ArrayList<>();
         this.priceHistoryData.add(this.itemPrice);
-        this.priceHistoryDates = new ArrayList<Date>();
+        this.priceHistoryDates = new ArrayList<>();
         this.priceHistoryDates.add(new Date());
 
         TimerTask t = new TimerTask() {
@@ -141,16 +140,14 @@ public class Item implements Product {
         return this.itemPrice;
     }
     public String getProductPriceString(){
-        String priceString = "";
+        String priceString;
         switch (itemCurrency){
-            case "CAD":
-                    priceString =  "$" + Double.toString(itemPrice);
             case "USD":
-                priceString =  "$" + Double.toString(itemPrice);
+                priceString =  "$" + itemPrice;
             case "YUAN":
-                priceString =  "¥" + Double.toString(itemPrice);
+                priceString =  "¥" + itemPrice;
             default:
-                priceString = "";
+                priceString =  "$" + itemPrice;
         }
         return priceString;
     }

@@ -6,6 +6,10 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * A GUI class used to create a visual representation of an item inside a list.
+ * Contains an image, name, and price of the item. Details of the item can instead be seen in the ItemPage.
+ */
 public class ItemPanel extends JPanel {
 
     String imgURL;
@@ -19,7 +23,11 @@ public class ItemPanel extends JPanel {
     public ItemPanel(String imgURL, String itemName, String itemPrice) {
         super(null);
         this.imgURL = imgURL;
-        this.itemName = itemName;
+        if (itemName.length() > 20){
+            this.itemName = itemName.substring(0,20) + "...";
+        }else{
+            this.itemName = itemName;
+        }
         this.itemPrice = itemPrice;
         this.setSize(300,100);
         borderColor = Color.WHITE;
@@ -33,6 +41,12 @@ public class ItemPanel extends JPanel {
     public void setPanelColor(Color c){
         this.panelColor = c;
     }
+
+    /**
+     * Overrides the paintComponent method inheritted from JPanel.
+     * Creates a visual representation of an item, which is displayed in the wishlist.
+     * @param g the Graphics object to protect
+     */
     @Override
     protected void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
@@ -50,7 +64,16 @@ public class ItemPanel extends JPanel {
             img.paintIcon(null, g2, 10,10);
         }
         catch (IOException e) {
-            e.printStackTrace();
+            try{
+                URL url = new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png");
+                Image image = ImageIO.read(url);
+                Image scaledImg = image.getScaledInstance(80,80, Image.SCALE_SMOOTH);
+                img = new ImageIcon(scaledImg);
+                img.paintIcon(null, g2, 10,10);
+            }
+            catch (IOException e1){
+                e1.printStackTrace();
+            }
         }
 
 

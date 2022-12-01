@@ -6,14 +6,14 @@ import java.util.*;
  */
 public class Wishlist implements ProductList {
     private String name;
-    private ArrayList<Product> itemList;
+    private ArrayList<Product> productList;
     private ArrayList<Product> displayedList;
     private Date dateAdded;
     private ArrayList<String> selectedTags;
 
     public Wishlist(String name) {
         this.name = name;
-        this.itemList = new ArrayList<>();
+        this.productList = new ArrayList<>();
         this.displayedList = new ArrayList<>();
         this.dateAdded = new Date();
         this.selectedTags = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Wishlist implements ProductList {
 
     public Wishlist(String name, ArrayList<Product> itemList, ArrayList<Product> displayedList, Date dateAdded, ArrayList<String> selectedTags) {
         this.name = name;
-        this.itemList = itemList;
+        this.productList = itemList;
         this.displayedList = displayedList;
         this.dateAdded = dateAdded;
         this.selectedTags = selectedTags;
@@ -32,7 +32,7 @@ public class Wishlist implements ProductList {
     }
 
     public ArrayList<Product> getProductList() {
-        return this.itemList;
+        return this.productList;
     }
 
     public ArrayList<Product> getDisplayedList() {
@@ -48,7 +48,7 @@ public class Wishlist implements ProductList {
     }
 
     public int getListSize() {
-        return itemList.size();
+        return productList.size();
     }
 
     public void setName(String name) {
@@ -166,7 +166,7 @@ public class Wishlist implements ProductList {
      * @return True when an Entities.Product gets added to the ProductList
      */
     public boolean addProduct(Product product) {
-        itemList.add(product);
+        productList.add(product);
         displayedList.add(product);
         sortProductListByDate("ascending");
         return true;
@@ -179,7 +179,7 @@ public class Wishlist implements ProductList {
      * @return True when an Entities.Product gets removed from the ProductList
      */
     public boolean removeProduct(Product product) {
-        itemList.remove(product);
+        productList.remove(product);
         return true;
     }
 
@@ -190,16 +190,19 @@ public class Wishlist implements ProductList {
      */
     public void filterProductList(String[] tags) {
         selectedTags.addAll(Arrays.asList(tags));
-        displayedList = new ArrayList<Product>(itemList);
-        ArrayList<Product> tempList = new ArrayList<Product>(itemList);
+        displayedList = new ArrayList<>(productList);
+        ArrayList<Product> tempList = new ArrayList<>(productList);
         for (Product i : displayedList) {
             for (String tag : tags) {
-                ArrayList<String> iTags = new ArrayList<String>(Arrays.asList(i.getTags()));
+                ArrayList<String> iTags = new ArrayList<>(Arrays.asList(i.getTags()));
                 if (!iTags.contains(tag)) {
                     tempList.remove(i);
                 }
             }
         }
         displayedList = tempList;
+    }
+    public void refreshListPrices(){
+
     }
 }

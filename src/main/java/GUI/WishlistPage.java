@@ -1,113 +1,161 @@
 package GUI;
 
-import Entities.Item;
+import Entities.Product;
 import Entities.Wishlist;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
+/**
+ * A GUI class that handles the visual representation of a product list. Handles navigation to adjacent pages and logic
+ * for adding and deleting products from the list.
+ */
 public class WishlistPage extends JFrame {
 
     private GradientJPanel mainPanel;
-    private Wishlist wl;
+    private final Wishlist wl;
+    private ArrayList<Product> itemList;
+    private JList<ItemPanel> itemPanelJList;
+    private JScrollPane itemScrollPane;
 
     public WishlistPage(){
         super();
         wl = new Wishlist("New Wishlist");
         this.setTitle(wl.getName());
-        setLayout(null);
-        setSize(360, 640);
-        setResizable(false);
-        mainPanel = new GradientJPanel(null);
+        initialiseJFrame();
         initialiseMainPanel();
     }
     public WishlistPage(Wishlist wishlist) {
         super(wishlist.getName());
         wl = wishlist;
-        setLayout(null);
-        setSize(360, 640);
-        setResizable(false);
-        mainPanel = new GradientJPanel(null);
+        initialiseJFrame();
         initialiseMainPanel();
     }
+
+    /**
+     * @return the main panel for this JFrame
+     */
     public JPanel getMainPanel(){return mainPanel;}
 
+    /**
+     * sets up the JFrame
+     */
+    private void initialiseJFrame(){
+        setLayout(null);
+        setResizable(false);
+        setSize(360, 640);
+        setVisible(true);
+        mainPanel = new GradientJPanel(null);
+    }
 
+    /**
+     * Initialises the main panel to contain all of its buttons and items
+     * Adds action listeners to the buttons to facilitate page navigation and other functionality
+     */
     private void initialiseMainPanel(){
         JPanel topPanel = new JPanel(null);
         topPanel.setBackground(new Color(106, 189, 154));
         topPanel.setBounds(0,0,360,56);
         JLabel titleLabel = new JLabel(wl.getName());
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBounds(50,20,200,20);
+        titleLabel.setBounds(50,20,300,20);
         titleLabel.setFont(new Font("Montserrat", Font.PLAIN, 20));
         topPanel.add(titleLabel);
 
         mainPanel.add(topPanel);
-
-//        JPanel botPanel = new JPanel(null);
-//        botPanel.setBackground(new Color(106, 189, 154));
-//        botPanel.setBounds(0,536,360,56);
-//        mainPanel.add(botPanel);
-
-
-
-
-        ItemPanel testItem = new ItemPanel("https://cdn.discordapp.com/attachments/1021470245690544208/1047350845303422996/FWNDO5cX0AEOk9y.jpg",
-                "test item", "$100.00");
-//        testItem.setLocation(21,100);
-//        mainPanel.add(testItem);
-        Item myFavDrink = new Item("Lime Bubbly", 5.47, 5.00, "www.shoppers.com/bubbly",
-                "my favorite drink, bubbly", new String[]{"Drink"}, 69, 4.19,"www.shoppersimage.com/bubbly");
-        Item animeFigure = new Item("Starlight Anya Forger", 100, 85.00, "www.amazon.com/AnyaPeanuts", "new Anya figure", new String[]{"Figure"}, 150, 4.8,"www.amazonimage.com/AnyaPeanuts" );
-        Item plushie = new Item("Whale Plushie", 40.99, 30.00, "www.amazon.com/WhalePlushie",
-                "Giant Whale Plushie", new String[]{"toys"}, 1050, 4.3, "www.amazonimage.com/OhWhale");
-
-        Wishlist christmasWishlist = new Wishlist("Christmas Wishlist");
-        christmasWishlist.addProduct(myFavDrink);
-        christmasWishlist.addProduct(animeFigure);
-        christmasWishlist.addProduct(plushie);
-        christmasWishlist.addProduct(plushie);
-        christmasWishlist.addProduct(plushie);
-        christmasWishlist.addProduct(plushie);
-
-
-        ItemPanel[] panelList = new ItemPanel[christmasWishlist.getListSize()];
-        Item[] itemList = new Item[christmasWishlist.getListSize()];
-        itemList = christmasWishlist.getProductList().toArray(itemList);
-        for (int i = 0; i < itemList.length; i++){
-//            ItemPanel tempPanel = new ItemPanel(itemList[i].getProductURL(), itemList[i].getProductName(), itemList[i].getProductPriceString());
-//            panelList[i] = tempPanel;
-            panelList[i] = testItem;
-        }
-        //mainPanel.add(panelList[0]);
-//        ItemPanel[] panelList = new ItemPanel[wl.getListSize()];
-//        Item[] itemList = new Item[wl.getListSize()];
-//        itemList = wl.getProductList().toArray(itemList);
-//        for (int i = 0; i < itemList.length; i++){
-//            ItemPanel tempPanel = new ItemPanel(itemList[i].getProductURL(), itemList[i].getProductName(), itemList[i].getProductPriceString());
-//            panelList[i] = tempPanel;
-//        }
-
-        JList<ItemPanel> itemJList = new JList<>(panelList);
-
-        itemJList.setCellRenderer(new ItemPanelRenderer());
-        itemJList.setFixedCellHeight(100);
-        itemJList.setFixedCellWidth(310);
-        itemJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        itemJList.setBackground(new Color(194, 234, 186));
-        JScrollPane itemScrollPane = new JScrollPane(itemJList);
-        itemScrollPane.setHorizontalScrollBar(null);
-        itemScrollPane.setBounds(16,80,310,420);
-        //itemScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        itemScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
-        mainPanel.add(itemScrollPane);
+        RefreshButton refreshButton = new RefreshButton();
+        refreshButton.setBounds(300,9,36,36);
+        mainPanel.add(refreshButton);
 
         BackButton backButton = new BackButton();
         backButton.setBounds(10,17,24,21);
         mainPanel.add(backButton);
 
+        SortButton sortButton = new SortButton();
+        sortButton.setBounds(20, 515, 60 ,60);
+        mainPanel.add(sortButton);
+
+        DeleteButton deleteButton = new DeleteButton();
+        deleteButton.setBounds(102, 515, 60 ,60);
+        mainPanel.add(deleteButton);
+
         AddButton addButton = new AddButton();
-        addButton.setBounds(140,515,60,60);
+        addButton.setBounds(184,515,60,60);
         mainPanel.add(addButton);
+
+        RightArrowButton viewItemButton = new RightArrowButton();
+        viewItemButton.setBounds(266, 515, 60 ,60);
+        mainPanel.add(viewItemButton);
+
+        mainPanel.setComponentZOrder(titleLabel, 1);
+        mainPanel.setComponentZOrder(topPanel, 2);
+
+        generateListOfItems();
+        backButton.addActionListener(e -> {
+            HomePage homePage = new HomePage();
+            homePage.setContentPane(homePage.getMainPanel());
+            homePage.setVisible(true);
+            homePage.setLocationRelativeTo(null);
+            homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            dispose();
+        });
+        refreshButton.addActionListener(e -> wl.refreshListPrices());
+        sortButton.addActionListener(e -> {
+
+        });
+        deleteButton.addActionListener(e -> {
+            mainPanel.remove(itemScrollPane);
+            if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
+                wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
+                generateListOfItems();
+            }
+        });
+        addButton.addActionListener(e -> {
+            AddItemPage addItemPage = new AddItemPage(wl);
+            addItemPage.setContentPane(addItemPage.getMainPanel());
+            addItemPage.setVisible(true);
+            addItemPage.setLocationRelativeTo(null);
+            addItemPage.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            dispose();
+        });
+        viewItemButton.addActionListener(e -> {
+            if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
+                Product selectedItem = itemList.get(itemPanelJList.getSelectedIndex());
+                ItemPage itemPage = new ItemPage();
+                itemPage.setContentPane(itemPage.getMainPanel());
+                itemPage.setVisible(true);
+                itemPage.setLocationRelativeTo(null);
+                itemPage.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                dispose();
+            }
+        });
+    }
+
+    /**
+     * creates a JScrollPane from a JList from a list from the wishlist
+     * Configures the JScrollPane and adds it to the main panel
+     */
+    private void generateListOfItems(){
+        ArrayList<ItemPanel> panelList = new ArrayList<>();
+        itemList = wl.getProductList();
+        for (Product product : itemList) {
+            panelList.add(new ItemPanel(product.getProductImageURL(),
+                    product.getProductName(), product.getProductPriceString()));
+        }
+        ItemPanel[] tempPanelList = new ItemPanel[panelList.size()];
+        tempPanelList = panelList.toArray(tempPanelList);
+        itemPanelJList = new JList<>(tempPanelList);
+        itemPanelJList.setCellRenderer(new ItemPanelRenderer());
+        itemPanelJList.setFixedCellHeight(100);
+        itemPanelJList.setFixedCellWidth(310);
+        itemPanelJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        itemPanelJList.setBackground(new Color(194, 234, 186));
+        itemScrollPane = new JScrollPane(itemPanelJList);
+        itemScrollPane.setBounds(16,80,310,400);
+        itemScrollPane.setHorizontalScrollBar(null);
+        itemScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+        mainPanel.add(itemScrollPane);
+        mainPanel.revalidate();
+        mainPanel.repaint();
     }
 }
