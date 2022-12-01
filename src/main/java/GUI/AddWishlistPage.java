@@ -1,16 +1,10 @@
 package GUI;
 
-import GUI.ListOfWishlistsPage;
-import GUI.RoundedBorder;
-import GUI.WishlistPage;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AddWishlistPage extends JFrame {
-    private JPanel mainPanel;
+    private final JPanel mainPanel;
 
     public JPanel getMainPanel() {
         return mainPanel;
@@ -78,31 +72,24 @@ public class AddWishlistPage extends JFrame {
 
 
 
-        createButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO
-                // Currently navigates to GUI.WishlistPage
-                WishlistPage wlPage = new WishlistPage();
-                wlPage.setContentPane(wlPage.getMainPanel());
-                wlPage.setVisible(true);
-                wlPage.setLocationRelativeTo(null);
-                wlPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                dispose();
-            }
+        createButton.addActionListener(e -> {
+            // Currently navigates to GUI.WishlistPage
+            WishlistPage wlPage = new WishlistPage();
+            wlPage.setContentPane(wlPage.getMainPanel());
+            wlPage.setVisible(true);
+            wlPage.setLocationRelativeTo(null);
+            wlPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            dispose();
         });
 
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Returns to GUI.ListOfWishlistsPage
-                ListOfWishlistsPage listOfWL = new ListOfWishlistsPage();
-                listOfWL.setContentPane(listOfWL.getMainPanel());
-                listOfWL.setVisible(true);
-                listOfWL.setLocationRelativeTo(null);
-                listOfWL.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                dispose();
-            }
+        cancelButton.addActionListener(e -> {
+            // Returns to GUI.ListOfWishlistsPage
+            ListOfWishlistsPage listOfWL = new ListOfWishlistsPage();
+            listOfWL.setContentPane(listOfWL.getMainPanel());
+            listOfWL.setVisible(true);
+            listOfWL.setLocationRelativeTo(null);
+            listOfWL.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            dispose();
         });
     }
 }
