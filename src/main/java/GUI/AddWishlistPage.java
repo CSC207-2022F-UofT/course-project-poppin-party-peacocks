@@ -11,13 +11,6 @@ import java.awt.event.ActionListener;
 
 public class AddWishlistPage extends JFrame {
     private JPanel mainPanel;
-    private JLabel label;
-    private JTextField nameField;
-    private JPanel southPanel;
-    private JButton cancelButton;
-    private JButton createButton;
-
-    private JPanel middlePanel;
 
     public JPanel getMainPanel() {
         return mainPanel;
@@ -26,50 +19,64 @@ public class AddWishlistPage extends JFrame {
     public AddWishlistPage() {
         super("Add Wishlist");
         setLayout(null);
-        setSize(400, 150);
+        setSize(360, 640);
         setResizable(false);
 
         // constants
         Color color1 = new Color(194, 234, 186);
         Color color2 = new Color(106, 189, 154);
+        Font headerFont = new Font("Arial", Font.PLAIN, 20);
+
 
         // main panel
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBounds(0, 0, 400, 200);
         mainPanel.setBackground(color2);
 
+        // header panel
+        JPanel headerPanel = new JPanel(null);
+        headerPanel.setBackground(color2);
+        headerPanel.setPreferredSize(new Dimension(360, 56));
+
         // top label
-        label = new JLabel("Name your wishlist:");
-        mainPanel.add(label, BorderLayout.NORTH);
-        label.setHorizontalAlignment(JLabel.CENTER);
-        label.setForeground(Color.white);
+        CustomJLabel label = new CustomJLabel("Add Wishlist", Color.WHITE, headerFont);
+        label.setBounds(135,-5, 391, 64);
+
+        headerPanel.add(label);
+        mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         // text field
-        nameField = new JTextField("", 20);
-        mainPanel.setSize(400, 200);
+        JLabel nameLabel = new CustomJLabel("Name your wishlist:", Color.BLACK, headerFont);
+        nameLabel.setBounds(87, 114, 185, 24);
+
+        JTextField nameField = new JTextField("", 20);
+        nameField.setBounds(32, 160, 296, 40);
+        nameField.setBorder(new RoundedBorder(5));
 
         // middle panel
-        middlePanel = new JPanel(new FlowLayout());
+        JPanel middlePanel = new JPanel(null);
+        middlePanel.add(nameLabel);
         middlePanel.add(nameField);
         middlePanel.setBackground(color1);
+
+        // buttons
+        CustomJButton cancelButton = new CustomJButton("Cancel", 0 , 0,
+                Color.WHITE, Color.WHITE, headerFont);
+        cancelButton.setBorder(new RoundedBorder(20));
+        cancelButton.setBounds(187, 221, 119, 51);
+
+        CustomJButton createButton = new CustomJButton("Add", 0 , 0,
+                Color.WHITE, Color.WHITE, headerFont);
+        createButton.setBorder(new RoundedBorder(20));
+        createButton.setBounds(53, 221, 119, 51);
+
+        middlePanel.add(cancelButton);
+        middlePanel.add(createButton);
 
         // inception
         mainPanel.add(middlePanel, BorderLayout.CENTER);
 
-        // bottom
-        southPanel = new JPanel(new FlowLayout());
-        cancelButton = new JButton("Cancel");
-        cancelButton.setBorder(new RoundedBorder(5));
-        cancelButton.setForeground(Color.white);
 
-        createButton = new JButton("Add");
-        createButton.setBorder(new RoundedBorder(5));
-        createButton.setForeground(Color.white);
-
-        southPanel.add(cancelButton);
-        southPanel.add(createButton);
-        mainPanel.add(southPanel, BorderLayout.SOUTH);
-        southPanel.setBackground(color2);
 
         createButton.addActionListener(new ActionListener() {
             @Override
