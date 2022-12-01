@@ -4,10 +4,13 @@ import GUI.WelcomePage;
 import GUI.WelcomePage;
 
 import javax.swing.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class main {
 
     public static void main(String[] args) {
+        System.out.println(new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").format(new Date()));
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
