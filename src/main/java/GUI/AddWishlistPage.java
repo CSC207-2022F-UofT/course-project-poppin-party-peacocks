@@ -3,9 +3,17 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A graphic user interface for the AddWishlistPage with the purpose of giving an opportunity to the user to customize
+ * the name of their wishlist.
+ */
 public class AddWishlistPage extends JFrame {
     private final JPanel mainPanel;
 
+    /**
+     * getter method for mainPanel
+     * @return mainPanel
+     */
     public JPanel getMainPanel() {
         return mainPanel;
     }
@@ -20,7 +28,6 @@ public class AddWishlistPage extends JFrame {
         Color color1 = new Color(194, 234, 186);
         Color color2 = new Color(106, 189, 154);
         Font headerFont = new Font("Arial", Font.PLAIN, 20);
-
 
         // main panel
         mainPanel = new JPanel(new BorderLayout());
@@ -68,8 +75,6 @@ public class AddWishlistPage extends JFrame {
 
         // inception
         mainPanel.add(middlePanel, BorderLayout.CENTER);
-
-
 
         createButton.addActionListener(e -> {
             // Currently navigates to GUI.WishlistPage
