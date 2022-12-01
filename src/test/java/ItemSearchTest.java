@@ -42,7 +42,7 @@ public class ItemSearchTest {
         double expectedPrice = 28.99;
         Item kittenplushitem = itemSearcher.searchItemUrl(kittenplush, false);
 
-        Assertions.assertEquals(kittenplushitem.getItemPrice(), expectedPrice);
+        Assertions.assertEquals(kittenplushitem.getProductPrice(), expectedPrice);
 
     }
 
@@ -57,7 +57,7 @@ public class ItemSearchTest {
         String expectedName = "uiuoutoy Super Mario Bros. Red Toad Plush Mushroom 7''";
         Item kittenplushitem = itemSearcher.searchItemUrl(toadplush, false);
 
-        Assertions.assertEquals(kittenplushitem.getItemName(), expectedName);
+        Assertions.assertEquals(kittenplushitem.getProductName(), expectedName);
 
     }
     /**

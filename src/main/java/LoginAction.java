@@ -1,4 +1,4 @@
-import DataBase.DataBase;
+import DataBase.*;
 import Entities.*;
 public class LoginAction {
     private String inputtedUsername;
@@ -14,7 +14,8 @@ public class LoginAction {
      * @return True if inputtedUsername exists in DataBase
      */
     public boolean checkUsername() {
-        User existingUser = DataBase.getUser(this.inputtedUsername);
+        DataBaseController dataBaseController = new DataBaseController();
+        User existingUser = dataBaseController.getUser(this.inputtedUsername);
         if (existingUser.getName() == "Default User") {
             return false;
         }
@@ -29,8 +30,9 @@ public class LoginAction {
      * @return True if inputtedUsername exists in DataBase and inputtedPassword matches existingPassword
      */
     public boolean checkUserMatchesPassword(){
+        DataBaseController dataBaseController = new DataBaseController();
         if (this.checkUsername()){
-            User existingUser = DataBase.getUser(this.inputtedUsername);
+            User existingUser = dataBaseController.getUser(this.inputtedUsername);
             String existingPassword = existingUser.getPassword();
             if (existingPassword.equals(this.inputtedPassword)){
                 return true;
