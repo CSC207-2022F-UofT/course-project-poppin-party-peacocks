@@ -34,24 +34,23 @@ public class AddWishlistPage extends JFrame {
 
         // top label
         CustomJLabel label = new CustomJLabel("Add Wishlist", Color.WHITE, headerFont);
-        label.setBounds(135,-5, 391, 64);
+        label.setBounds(125,-5, 391, 64);
 
         headerPanel.add(label);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         // text field
         JLabel nameLabel = new CustomJLabel("Name your wishlist:", Color.BLACK, headerFont);
-        nameLabel.setBounds(87, 114, 185, 24);
+        nameLabel.setBounds(95, 114, 185, 24);
 
         JTextField nameField = new JTextField("", 20);
         nameField.setBounds(32, 160, 296, 40);
         nameField.setBorder(new RoundedBorder(5));
 
         // middle panel
-        JPanel middlePanel = new JPanel(null);
+        GradientJPanel middlePanel = new GradientJPanel(null, color1, color2);
         middlePanel.add(nameLabel);
         middlePanel.add(nameField);
-        middlePanel.setBackground(color1);
 
         // buttons
         CustomJButton cancelButton = new CustomJButton("Cancel", 0 , 0,
