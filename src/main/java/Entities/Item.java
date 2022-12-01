@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.*;
 
+/**
+ * a class that manages attributes for an Item
+ */
 public class Item implements Product {
     private String itemName;
     private String url;

@@ -1,6 +1,9 @@
 package Entities;
 import java.util.*;
 
+/**
+ * a class that manages constructors for a list of Wishlists
+ */
 public class ListOfWishlists {
 
     private ArrayList<Wishlist> listWishlist;

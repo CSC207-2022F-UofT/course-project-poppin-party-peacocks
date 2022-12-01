@@ -1,7 +1,9 @@
 package Entities;
-import java.util.Comparator;
 
-public class ItemPriceComparator implements Comparator<Product>{
+/**
+ * a class that compares 2 Products with respect to their price
+ */
+public class ProductPriceComparator implements ProductComparator {
     /**
      * Takes 2 Items and compares their prices using .getItemPrice()
      * Defauly saved comparison: Lowest to Highest (ascending)

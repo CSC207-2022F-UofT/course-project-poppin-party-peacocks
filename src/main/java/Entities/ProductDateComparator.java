@@ -1,7 +1,9 @@
 package Entities;
-import java.util.Comparator;
 
-public class ItemDateComparator implements Comparator<Product> {
+/**
+ * a class that compares 2 Products with respect to their added date
+ */
+public class ProductDateComparator implements ProductComparator {
     /**
      * Takes 2 Items and compares their added dates using .getItemDateAdded()
      * Default saved comparison: Earliest date to Latest date (ascending)
