@@ -130,10 +130,6 @@ public class ItemPage extends JFrame {
         CustomJLabel dateAdded = new CustomJLabel("Date Added: " + itemDateAddedFormatted, Color.WHITE, textFont);
         contentPanel.add(dateAdded);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        // url
-//        CustomJLabel urlLabel = new CustomJLabel(String.format(html, 150, "URL: " + url), Color.WHITE, textFont);
-//        contentPanel.add(urlLabel);
-//        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         // tags
         CustomJLabel tagLabel = new CustomJLabel("Tags: " + totalTag, Color.WHITE, textFont);
         contentPanel.add(tagLabel);
