@@ -39,7 +39,7 @@ public class AddWishlistPage extends JFrame {
         headerPanel.add(label);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
-        // text field
+        //text field
         JLabel nameLabel = new CustomJLabel("Name your wishlist:", Color.BLACK, headerFont);
         nameLabel.setBounds(95, 114, 185, 24);
 
