@@ -2,6 +2,7 @@ package GUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
@@ -33,7 +34,7 @@ public class ItemPage extends JFrame {
         // constants
         final Color color1 = new Color(194, 234, 186);
         final Color color2 = new Color(106, 189, 154);
-        final Font textFont = new Font("Montserrat", Font.PLAIN, 12);
+        final Font textFont = new Font("Montserrat", Font.PLAIN, 14);
         final Font titleFont = new Font("Montserrat", Font.PLAIN, 20);
 
         // main panel
@@ -67,14 +68,18 @@ public class ItemPage extends JFrame {
         } catch (IOException e) {
             System.out.println("Image not found!");
         }
-
-        // image
         imageLabel.setBounds(75, 76, 200, 200);
         mainPanel.add(imageLabel);
 
         // Item Information
+        String currency = "USD";
         double itemPrice = 56.78;
-        String itemDescription = "This product is bubly.\n Hello watermelon1 watermelon2 watermelon3. Herms likes bubly in the following flavours: lime, orange, mango, everything else, grapefruit. He was not joking.";
+        double reviewStars = 4.5;
+        int reviewCount = 258;
+        String itemDescription = "This product is bubly.\n Hello watermelon1 watermelon2 watermelon3. Herms " +
+                "likes bubly in the following flavours: lime, orange, mango, everything else, grapefruit. " +
+                "He was not joking.";
+        double desiredPrice = 60;
         double itemPriceChange = 3.00;
         Date itemDateAdded = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -90,6 +95,7 @@ public class ItemPage extends JFrame {
         String html = "<html><body style='width: %1spx'>%1s";
 
         JPanel contentPanel = new JPanel();
+        contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         contentPanel.setMaximumSize(new Dimension(200, 200));
         contentPanel.setBackground(color2);
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
@@ -101,52 +107,49 @@ public class ItemPage extends JFrame {
         scrollBar.setBounds(75, 300, 200, 200);
 
         // item price
-        CustomJLabel itemPriceLabel = new CustomJLabel("Price: " + itemPrice, Color.WHITE, textFont);
-        //itemPriceLabel.setBounds(75, 300, 300, 15);
+        CustomJLabel itemPriceLabel = new CustomJLabel("Price: " + itemPrice + " " + currency, Color.WHITE, textFont);
         contentPanel.add(itemPriceLabel);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        // ratings
+        CustomJLabel ratings = new CustomJLabel("Stars: " + reviewStars + " (" + reviewCount + ")", Color.WHITE, textFont);
+        contentPanel.add(ratings);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         // item description
-        CustomJLabel description = new CustomJLabel(String.format(html, 150, "Description: " + itemDescription), Color.WHITE, textFont);
-        //description.setBounds(75, 330, 200, 15);
+        CustomJLabel description = new CustomJLabel(String.format(html, 130, "Description: " + itemDescription), Color.WHITE, textFont);
         contentPanel.add(description);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        // desired price
+        CustomJLabel desiredPriceLabel = new CustomJLabel("Desired Price: " + desiredPrice + " " + currency, Color.WHITE, textFont);
+        contentPanel.add(desiredPriceLabel);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         // price chance
-        CustomJLabel priceChange = new CustomJLabel("Price Change: " + itemPriceChange, Color.WHITE, textFont);
-        //priceChange.setBounds(75, 360, 300, 15);
+        CustomJLabel priceChange = new CustomJLabel("Price Change: " + itemPriceChange + " " + currency, Color.WHITE, textFont);
         contentPanel.add(priceChange);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         // date added
         CustomJLabel dateAdded = new CustomJLabel("Date Added: " + itemDateAddedFormatted, Color.WHITE, textFont);
-        //dateAdded.setBounds(75, 390, 300, 15);
         contentPanel.add(dateAdded);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         // url
-        CustomJLabel urlLabel = new CustomJLabel("URL: " + url, Color.WHITE, textFont);
-        //url.setBounds(75, 420, 300, 15);
-        contentPanel.add(urlLabel);
-        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+//        CustomJLabel urlLabel = new CustomJLabel(String.format(html, 150, "URL: " + url), Color.WHITE, textFont);
+//        contentPanel.add(urlLabel);
+//        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         // tags
         CustomJLabel tagLabel = new CustomJLabel("Tags: " + totalTag, Color.WHITE, textFont);
-        //tagLabel.setBounds(75, 450, 300, 15);
         contentPanel.add(tagLabel);
 
         mainPanel.add(scrollBar);
 
-        // footer panel
-        JPanel footerPanel = new JPanel(new FlowLayout());
-        footerPanel.setBackground(color2);
-        CustomJButton deleteThisItemButton = new CustomJButton("Delete this item", 0, 0,
-                color2, Color.WHITE, textFont);
-        footerPanel.setBounds(0, 530, 360, 100);
-        footerPanel.add(deleteThisItemButton);
-        mainPanel.add(footerPanel);
+        // url
+        CustomJLabel urlLabel = new CustomJLabel("URL:", Color.WHITE, textFont);
+        urlLabel.setBounds(160, 520, 100, 20);
+        mainPanel.add(urlLabel);
+        JTextField urlField = new JTextField("URL:\n" + url);
+        urlField.setEditable(false);
+        urlField.setBounds(75, 550, 200, 30);
+        mainPanel.add(urlField);
 
         // Button Logic
-        // Deletes this item from the wishlist and navigates back to WishlistPage.
-        deleteThisItemButton.addActionListener(e -> {
-            // TODO
-        });
-
         // Navigates back to WishlistPage.
         backButton.addActionListener(e -> {
             WishlistPage wlPage = new WishlistPage();
