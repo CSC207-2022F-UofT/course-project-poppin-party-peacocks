@@ -1,10 +1,12 @@
 package UseCasesTest;
 
 import DataBase.*;
+import UseCases.LoginAction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import UseCases.UserRegister.*;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 class UserRegisterTest {
@@ -12,9 +14,9 @@ class UserRegisterTest {
     @Test
     public void testCreateUserSuccess() throws IOException {
         DataBaseController dataBaseController = new DataBaseController();
-        UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser","Fuzzy321", "Fuzzy321");
+        UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser","Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
-        UserRegister register = new UserRegister(inputs, formatter);
+        UserRegister register = new UserRegister(formatter);
         register.create(inputs);
         Assertions.assertEquals(inputs.getTempUser().getName(), dataBaseController.getUser("StarlightUser").getName());
         DataBase.deleteUser("StarlightUser");
@@ -22,9 +24,9 @@ class UserRegisterTest {
 
     @Test
     public void testLoginNewUserSuccess() throws IOException {
-        UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser","Fuzzy321", "Fuzzy321");
+        UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser","Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
-        UserRegister register = new UserRegister(inputs, formatter);
+        UserRegister register = new UserRegister(formatter);
         register.create(inputs);
         LoginAction userInput = new LoginAction("StarlightUser", "Fuzzy321");
         Assertions.assertTrue(userInput.checkUserMatchesPassword());
@@ -33,9 +35,9 @@ class UserRegisterTest {
 
     @Test
     public void testUserExistsFail(){
-        UserRegisterInputs inputs = new UserRegisterInputs("Herman1","Fuzzy321", "Fuzzy321");
+        UserRegisterInputs inputs = new UserRegisterInputs("Herman1","Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
-        UserRegister register = new UserRegister(inputs, formatter);
+        UserRegister register = new UserRegister(formatter);
 
         Exception exception = assertThrows(RuntimeException.class, () -> {
             register.create(inputs);
@@ -49,9 +51,9 @@ class UserRegisterTest {
 
     @Test
     public void testUsernameTooLongFail(){
-        UserRegisterInputs inputs = new UserRegisterInputs("Herman10000000000000000000","Fuzzy321", "Fuzzy321");
+        UserRegisterInputs inputs = new UserRegisterInputs("Herman10000000000000000000","Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
-        UserRegister register = new UserRegister(inputs, formatter);
+        UserRegister register = new UserRegister(formatter);
 
         Exception exception = assertThrows(RuntimeException.class, () -> {
             register.create(inputs);
@@ -65,9 +67,9 @@ class UserRegisterTest {
 
     @Test
     public void testUsernameTooShortFail(){
-        UserRegisterInputs inputs = new UserRegisterInputs("A","Fuzzy321", "Fuzzy321");
+        UserRegisterInputs inputs = new UserRegisterInputs("A","Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
-        UserRegister register = new UserRegister(inputs, formatter);
+        UserRegister register = new UserRegister(formatter);
 
         Exception exception = assertThrows(RuntimeException.class, () -> {
             register.create(inputs);
@@ -81,9 +83,9 @@ class UserRegisterTest {
 
     @Test
     public void testPasswordTooShortFail(){
-        UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser1","1", "1");
+        UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser1","1");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
-        UserRegister register = new UserRegister(inputs, formatter);
+        UserRegister register = new UserRegister(formatter);
 
         Exception exception = assertThrows(RuntimeException.class, () -> {
             register.create(inputs);
@@ -95,19 +97,4 @@ class UserRegisterTest {
         Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
 
-    @Test
-    public void testPasswordsDontMatchFail(){
-        UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser3","Fuzzy321", "fuzzy321");
-        UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
-        UserRegister register = new UserRegister(inputs, formatter);
-
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            register.create(inputs);
-        });
-
-        String expectedMessage = "Passwords don't match.";
-        String actualMessage = exception.getMessage();
-
-        Assertions.assertTrue(actualMessage.contains(expectedMessage));
-    }
 }
