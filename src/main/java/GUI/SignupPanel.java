@@ -2,15 +2,21 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import Controller.UserRegisterController;
+import Entities.User;
 
 public class SignupPanel extends JPanel {
     private final JFrame currJFrame;
     private final Color color1 = new Color(194, 234, 186);
     private final Color color2 = new Color(106, 189, 154);
     private final Font buttonFont = new Font("Sans Serif", Font.PLAIN, 12);
+    UserRegisterController userRegisterController;
 
-    public SignupPanel(JFrame currJFrame) {
+    public SignupPanel(JFrame currJFrame, UserRegisterController userRegisterController) {
         super(null);
+
+        this.userRegisterController = userRegisterController;
+
         this.setBounds(0, 80, 360, 460);
         this.setBackground(color2);
         this.currJFrame = currJFrame;
@@ -38,6 +44,15 @@ public class SignupPanel extends JPanel {
                 Color.WHITE, Color.BLACK,
                 buttonFont);
         signupButton.setBounds(120, 420, 108, 24);
+
+        signupButton.addActionListener(e->{
+            try{
+                userRegisterController.create(createUsernameField.getText(), String.valueOf(createPasswordField.getPassword()));
+                JOptionPane.showMessageDialog(signupButton, "User created. You may now login.");
+            } catch(Exception message){
+                JOptionPane.showMessageDialog(signupButton, message.getMessage());
+            }
+        });
 
         this.add(createUsernameLabel);
         this.add(createUsernameField);

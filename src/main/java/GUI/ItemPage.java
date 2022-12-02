@@ -2,39 +2,63 @@ package GUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+/**
+ * This ItemPage class is a JFrame that displays the attributes of a given item from a wishlist.
+ */
 public class ItemPage extends JFrame {
-    private final JPanel rightPanel;
+    private final GradientJPanel mainPanel;
 
+    /**
+     * mainPanel getter method.
+     * @return mainPanel
+     */
     public JPanel getMainPanel() {
-        return rightPanel;
+        return mainPanel;
     }
 
+    /**
+     * ItemPage constructor.
+     */
+
     public ItemPage() {
+
+        // JFrame setup
         super("Item name here");
         setLayout(null);
-        setSize(400, 638);
+        setSize(360, 640);
         setResizable(false);
 
-        rightPanel = new JPanel(new BorderLayout());
-        rightPanel.setBackground(Color.blue);
-        rightPanel.setBounds(800, 0, 400, 600);
-        // header
-        JPanel rightPanelNORTH = new JPanel(new FlowLayout());
-        rightPanelNORTH.setBackground(Color.darkGray);
-        JLabel thisItemLabel = new JLabel("Get this item title");
-        rightPanelNORTH.add(thisItemLabel);
-        JLabel itemPriceLabel = new JLabel("$12.34");
-        rightPanelNORTH.add(itemPriceLabel);
-        rightPanel.add(rightPanelNORTH, BorderLayout.NORTH);
-        // centre
-        JPanel rightPanelCENTRE = new JPanel(new GridLayout(0, 1));
-        rightPanelCENTRE.setBackground(Color.GRAY);
+        // constants
+        final Color color1 = new Color(194, 234, 186);
+        final Color color2 = new Color(106, 189, 154);
+        final Font textFont = new Font("Montserrat", Font.PLAIN, 14);
+        final Font titleFont = new Font("Montserrat", Font.PLAIN, 20);
+
+        // main panel
+        mainPanel = new GradientJPanel(null, color1, color2);
+        mainPanel.setBounds(0, 0, 360, 640);
+
+        // header panel
+        JPanel headerPanel = new JPanel(null);
+        headerPanel.setBackground(color2);
+        headerPanel.setBounds(0, 0, 360, 56);
+        CustomJButton backButton = new CustomJButton("", 0, 0,
+                color2, color2, textFont);
+        backButton.setIcon(new ImageIcon("src/main/java/Assets/backArrow.png"));
+        backButton.setBounds(15, 15, 25, 25);
+        headerPanel.add(backButton);
+        CustomJLabel thisItemLabel = new CustomJLabel("Get this item title", Color.WHITE, titleFont);
+        thisItemLabel.setBounds(75, 17, 360, 24);
+        headerPanel.add(thisItemLabel);
+        mainPanel.add(headerPanel);
+
         // image
         JLabel imageLabel = new JLabel();
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -48,53 +72,87 @@ public class ItemPage extends JFrame {
         } catch (IOException e) {
             System.out.println("Image not found!");
         }
-        rightPanelCENTRE.add(imageLabel);
-        // item description
-        String itemDescriptionVar = "Item description here.";
-        JLabel description = new JLabel(itemDescriptionVar);
-        rightPanelCENTRE.add(description);
-        // price chance
-        String priceChangeStr = "Price change here.";
-        JLabel priceChange = new JLabel(priceChangeStr);
-        rightPanelCENTRE.add(priceChange);
-        // date added
-        String dateAddedVar = "Date added here.";
-        JLabel dateAdded = new JLabel(dateAddedVar);
-        rightPanelCENTRE.add(dateAdded);
-        // url
-        String urlVar = "url here.";
-        JLabel url1 = new JLabel(urlVar);
-        rightPanelCENTRE.add(url1);
+        imageLabel.setBounds(75, 76, 200, 200);
+        mainPanel.add(imageLabel);
 
-        rightPanel.add(rightPanelCENTRE, BorderLayout.CENTER);
-        // WEST side for tags
-        JPanel tagsColumnPanel = new JPanel();
-        tagsColumnPanel.setLayout(new BoxLayout(tagsColumnPanel, BoxLayout.Y_AXIS));
-        tagsColumnPanel.setBackground(Color.red);
-        String[] tags = {"a", "b", "c", "fjdksal;"};    // dummy tags
+        // Item Information
+        String currency = "USD";
+        double itemPrice = 56.78;
+        double reviewStars = 4.5;
+        int reviewCount = 258;
+        String itemDescription = "This product is bubly.\n Hello watermelon1 watermelon2 watermelon3. Herms " +
+                "likes bubly in the following flavours: lime, orange, mango, everything else, grapefruit. " +
+                "He was not joking.";
+        double desiredPrice = 60;
+        double itemPriceChange = 3.00;
+        Date itemDateAdded = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String itemDateAddedFormatted = dateFormat.format(itemDateAdded);
+        String url = "https://www.amazon.ca/gp/product/B0B2449PY2/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&th=1";
+        String[] tags = {"a", "b", "f"};
+        StringBuilder totalTag = new StringBuilder();
         for (String tag : tags) {
-            JLabel tagLabel = new JLabel(tag);
-            tagsColumnPanel.add(tagLabel);
+            totalTag.append(tag);
+            totalTag.append(" ");
         }
-        rightPanel.add(tagsColumnPanel, BorderLayout.WEST);
-        // footer
-        JPanel rightFooterPanel = new JPanel(new FlowLayout());
-        rightFooterPanel.setBackground(Color.YELLOW);
-        JButton backButton = new JButton("Back to Wishlist");
-        rightFooterPanel.add(backButton);
-        JButton deleteThisItemButton = new JButton("Delete this item");
-        rightFooterPanel.add(deleteThisItemButton);
-        // add footer to rightPanel
-        rightPanel.add(rightFooterPanel, BorderLayout.SOUTH);
 
-        deleteThisItemButton.addActionListener(e -> {
-            // TODO
-        });
+        String html = "<html><body style='width: %1spx'>%1s";
 
+        JPanel contentPanel = new JPanel();
+        contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        contentPanel.setMaximumSize(new Dimension(200, 200));
+        contentPanel.setBackground(color2);
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        JScrollPane scrollBar = new JScrollPane(contentPanel,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollBar.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+        scrollBar.setBorder(null);
+        scrollBar.setBounds(75, 300, 200, 200);
+
+        // item price
+        CustomJLabel itemPriceLabel = new CustomJLabel("Price: " + itemPrice + " " + currency, Color.WHITE, textFont);
+        contentPanel.add(itemPriceLabel);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        // ratings
+        CustomJLabel ratings = new CustomJLabel("Stars: " + reviewStars + " (" + reviewCount + ")", Color.WHITE, textFont);
+        contentPanel.add(ratings);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        // item description
+        CustomJLabel description = new CustomJLabel(String.format(html, 130, "Description: " + itemDescription), Color.WHITE, textFont);
+        contentPanel.add(description);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        // desired price
+        CustomJLabel desiredPriceLabel = new CustomJLabel("Desired Price: " + desiredPrice + " " + currency, Color.WHITE, textFont);
+        contentPanel.add(desiredPriceLabel);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        // price chance
+        CustomJLabel priceChange = new CustomJLabel("Price Change: " + itemPriceChange + " " + currency, Color.WHITE, textFont);
+        contentPanel.add(priceChange);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        // date added
+        CustomJLabel dateAdded = new CustomJLabel("Date Added: " + itemDateAddedFormatted, Color.WHITE, textFont);
+        contentPanel.add(dateAdded);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        // tags
+        CustomJLabel tagLabel = new CustomJLabel("Tags: " + totalTag, Color.WHITE, textFont);
+        contentPanel.add(tagLabel);
+
+        mainPanel.add(scrollBar);
+
+        // url
+        CustomJLabel urlLabel = new CustomJLabel("URL:", Color.WHITE, textFont);
+        urlLabel.setBounds(160, 520, 100, 20);
+        mainPanel.add(urlLabel);
+        JTextField urlField = new JTextField("URL:\n" + url);
+        urlField.setEditable(false);
+        urlField.setBounds(75, 550, 200, 30);
+        mainPanel.add(urlField);
+
+        // Button Logic
+        // Navigates back to WishlistPage.
         backButton.addActionListener(e -> {
-            // TODO
-            // Currently navigates to GUI.WishlistPage.
-            WishlistPage wlPage = new WishlistPage( );
+            WishlistPage wlPage = new WishlistPage();
             wlPage.setContentPane(wlPage.getMainPanel());
             wlPage.setVisible(true);
             wlPage.setLocationRelativeTo(null);

@@ -1,6 +1,7 @@
 package GUI;
 
 import Entities.Item;
+import Entities.Product;
 import Entities.Wishlist;
 import ExternalInterface.ItemSearcher;
 
@@ -24,7 +25,7 @@ public class AddItemPage extends JFrame {
         return mainPanel;
     }
 
-    public static JPanel createPanel(Item item, int index) {
+    public static JPanel createPanel(Product item, int index) {
         JPanel panel = new JPanel(new BorderLayout());
         // icon
         JLabel imageLabel = new JLabel();

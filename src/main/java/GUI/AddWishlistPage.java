@@ -1,7 +1,5 @@
 package GUI;
 
-import GUI.RoundedBorder;
-import GUI.WishlistPage;
 import javax.swing.*;
 import java.awt.*;
 
