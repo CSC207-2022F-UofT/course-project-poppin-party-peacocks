@@ -24,6 +24,8 @@ public class AddItemPage extends JFrame {
     private JPanel footerPanel;
     private JButton selectIndexButton;
 
+    private Product selectedItem = new Item("", 0,0, "", "", new String[] {},0, 0, "" );
+
 
 
     private int index;

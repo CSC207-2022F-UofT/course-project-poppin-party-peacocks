@@ -46,21 +46,21 @@ public class Item implements Product {
         this.priceHistoryData = new ArrayList<Double>();
         this.priceHistoryData.add(this.itemPrice);
 
-        TimerTask updatePriceTask = new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    updatePrice();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-
-        Scheduler updatePriceScheduler = new Scheduler(updatePriceTask, 1000 * 60 * 60 * 24);
-        this.scheduler = updatePriceScheduler;
-        this.priceDropNotification = new PriceDropNotification(this);
-        this.saleNotification = new SaleNotification(this);
+//        TimerTask updatePriceTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                try {
+//                    updatePrice();
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        };
+//
+//        Scheduler updatePriceScheduler = new Scheduler(updatePriceTask, 1000 * 60 * 60 * 24);
+//        this.scheduler = updatePriceScheduler;
+//        this.priceDropNotification = new PriceDropNotification(this);
+//        this.saleNotification = new SaleNotification(this);
     }
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl, String itemCurrency){
@@ -184,11 +184,7 @@ public class Item implements Product {
     /** Updates price of Item object through web-scraping the product page on Amazon
      * */
     public void updatePrice() throws IOException{
-        ItemUpdateChecker itemUpdateChecker = new ItemUpdateChecker();
-        double sellingPrice = itemUpdateChecker.updatePriceCheck(url);
-        priceChange = itemPrice - sellingPrice;
-        itemPrice = sellingPrice;
-        dateLastUpdated = new Date();
+
 
     }
 }
