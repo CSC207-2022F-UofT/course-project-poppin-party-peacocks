@@ -1,7 +1,9 @@
+import Controller.UserRegisterController;
 import DataBase.DataBase;
 import Entities.*;
 import GUI.WelcomePage;
 import GUI.WelcomePage;
+import UseCases.UserRegister.*;
 
 import javax.swing.*;
 import java.text.SimpleDateFormat;
@@ -21,8 +23,14 @@ public class main {
     }
 
     private static void createAndShowGUI() {
+        UserRegisterStatus presenter = new UserRegisterResponseFormatter();
+        UserRegisterCreateUser interactor = new UserRegister(presenter);
+        UserRegisterController userRegisterController = new UserRegisterController(
+                interactor
+        );
+
         // Create and set up the window.
-        WelcomePage initialJFrame = new WelcomePage();
+        WelcomePage initialJFrame = new WelcomePage(userRegisterController);
         initialJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Create and set up the content pane.

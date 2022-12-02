@@ -1,7 +1,5 @@
 package GUI;
 
-import GUI.ListOfWishlistsPage;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -107,7 +105,7 @@ public class WishlistPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // TODO
                 // Currently navigates to GUI.ListOfWishlistsPage.
-                ListOfWishlistsPage listOfWlPage = new ListOfWishlistsPage();
+                HomePage listOfWlPage = new HomePage();
                 listOfWlPage.setContentPane(listOfWlPage.getMainPanel());
                 listOfWlPage.setVisible(true);
                 listOfWlPage.setLocationRelativeTo(null);

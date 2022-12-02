@@ -1,14 +1,14 @@
+package UseCases.UserRegister;
+import DataBase.DataBaseController;
 import Entities.User;
 public class UserRegisterInputs {
     private String username;
     private String password;
-    private String repeatedPassword;
     private User tempUser;
 
-    public UserRegisterInputs(String username, String password, String repeatedPassword) {
+    public UserRegisterInputs(String username, String password) {
         this.username = username;
         this.password = password;
-        this.repeatedPassword = repeatedPassword;
         this.tempUser = new User(username, password);
     }
 
@@ -27,13 +27,6 @@ public class UserRegisterInputs {
     }
 
     /**
-     * @return Inputted repeatedPassword of user
-     */
-    public String getRepeatedPassword(){
-        return this.repeatedPassword;
-    }
-
-    /**
      * @return The registration information of user as object User
      */
     public User getTempUser(){
@@ -41,11 +34,17 @@ public class UserRegisterInputs {
     }
 
     /**
-     * Utilizes LoginAction's checkUsername function to check if tempUser exists in DataBase.
+     * Check if tempUser exists in DataBase.
      * @return True if tempUser exists in DataBase
      */
     public boolean checkUserExists(){
-        LoginAction tempLogin = new LoginAction(this.username, this.password);
-        return tempLogin.checkUsername();
+        DataBaseController dataBaseController = new DataBaseController();
+        User existingUser = dataBaseController.getUser(this.getInputtedUsername());
+        if (existingUser.getName() == "Default User") {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 }

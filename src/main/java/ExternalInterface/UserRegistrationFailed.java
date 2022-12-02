@@ -1,3 +1,5 @@
+package ExternalInterface;
+
 public class UserRegistrationFailed extends RuntimeException{
     /**
      * Constructs a new runtime exception with message errorMessage

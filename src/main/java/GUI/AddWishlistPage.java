@@ -1,6 +1,5 @@
 package GUI;
 
-import GUI.ListOfWishlistsPage;
 import GUI.RoundedBorder;
 import GUI.WishlistPage;
 
@@ -89,7 +88,7 @@ public class AddWishlistPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Returns to GUI.ListOfWishlistsPage
-                ListOfWishlistsPage listOfWL = new ListOfWishlistsPage();
+                HomePage listOfWL = new HomePage();
                 listOfWL.setContentPane(listOfWL.getMainPanel());
                 listOfWL.setVisible(true);
                 listOfWL.setLocationRelativeTo(null);
