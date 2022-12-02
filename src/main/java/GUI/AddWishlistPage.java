@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddWishlistPage extends JFrame {
+public class    AddWishlistPage extends JFrame {
     private JPanel mainPanel;
     private JLabel label;
     private JTextField nameField;
