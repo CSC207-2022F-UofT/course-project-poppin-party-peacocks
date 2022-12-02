@@ -4,18 +4,18 @@ import Entities.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class DataBaseControllerTest {
-    String testDate = "Fri Nov 18 01:04:05 EST 2022";
+    String testDate = "Tue. Nov. 29 20:49:30 2022";
 
     @Test
-    public void TestDataBaseWritesAndSavesListOfWishLists() {
+    public void TestDataBaseWritesAndSavesListOfWishLists() throws ParseException {
         DataBaseController dataBaseController = new DataBaseController();
         ListOfWishlists wishlists = new ListOfWishlists();
         Wishlist wishlist = new Wishlist("Exam Celebration Wish List");
-        wishlist.setDateAdded(new Date(testDate));
+        wishlist.setDateAdded(new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").parse(testDate));
         wishlists.addWishlist(wishlist);
 
         User user = new User("TestUser", "Test");
