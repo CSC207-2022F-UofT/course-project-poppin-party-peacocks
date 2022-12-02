@@ -1,5 +1,3 @@
-package DataBaseTest;
-
 import DataBase.DataBaseParser;
 import Entities.*;
 import org.json.simple.JSONObject;

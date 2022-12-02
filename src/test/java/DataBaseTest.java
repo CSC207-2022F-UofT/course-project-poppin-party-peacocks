@@ -1,5 +1,3 @@
-package DataBaseTest;
-
 import DataBase.DataBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,5 +1,3 @@
-package DataBaseTest;
-
 import DataBase.DataBase;
 import DataBase.DataBaseController;
 import Entities.*;
