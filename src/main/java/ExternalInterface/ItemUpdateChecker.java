@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.util.Date;
 
 public class ItemUpdateChecker {
+    /**
+     * Using Jsoup library to fetch updated price of specific item on Amazon.
+     *
+     * @param item   takes product item and checks for price change, if so, price will be updated respective to the object
+     */
 
 
     public Double updatePriceCheck(Product item) throws IOException {
