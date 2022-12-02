@@ -1,6 +1,7 @@
 package GUI;
 
 import Entities.Item;
+import Entities.Product;
 import ExternalInterface.ItemSearcher;
 
 import javax.imageio.ImageIO;
@@ -22,13 +23,18 @@ public class AddItemPage extends JFrame {
     private JButton cancelButton;
     private JPanel footerPanel;
     private JButton selectIndexButton;
+
+    private Product selectedItem = new Item("", 0,0, "", "", new String[] {},0, 0, "" );
+
+
+
     private int index;
 
     public JPanel getMainPanel() {
         return mainPanel;
     }
 
-    public static JPanel createPanel(Item item, int index) {
+    public static JPanel createPanel(Product item, int index) {
         JPanel panel = new JPanel(new BorderLayout());
         // icon
         JLabel imageLabel = new JLabel();
@@ -118,7 +124,7 @@ public class AddItemPage extends JFrame {
                     JPanel[] array = new JPanel[10];
                     String keyword = searchBar.getText();
                     ItemSearcher itemSearcher = new ItemSearcher();
-                    Item[] itemList = new Item[1];
+                    Product[] itemList = new Product[1];
                     if (keyword.contains("amazon.")){
                         itemList[0] = itemSearcher.searchItemUrl(keyword, false);
                         array = new JPanel[1];

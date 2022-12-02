@@ -1,11 +1,10 @@
 package Entities;
 import Controller.*;
 
+import ExternalInterface.ItemUpdateChecker;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.*;
@@ -47,21 +46,21 @@ public class Item implements Product {
         this.priceHistoryData = new ArrayList<Double>();
         this.priceHistoryData.add(this.itemPrice);
 
-        TimerTask updatePriceTask = new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    updatePrice();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-
-        Scheduler updatePriceScheduler = new Scheduler(updatePriceTask, 1000 * 60 * 60 * 24);
-        this.scheduler = updatePriceScheduler;
-        this.priceDropNotification = new PriceDropNotification(this);
-        this.saleNotification = new SaleNotification(this);
+//        TimerTask updatePriceTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                try {
+//                    updatePrice();
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        };
+//
+//        Scheduler updatePriceScheduler = new Scheduler(updatePriceTask, 1000 * 60 * 60 * 24);
+//        this.scheduler = updatePriceScheduler;
+//        this.priceDropNotification = new PriceDropNotification(this);
+//        this.saleNotification = new SaleNotification(this);
     }
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl, String itemCurrency){
@@ -82,17 +81,17 @@ public class Item implements Product {
         this.priceHistoryDates = new ArrayList<Date>();
         this.priceHistoryDates.add(new Date());
 
-        TimerTask t = new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    updatePrice();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-        this.scheduler = new Scheduler(t, 1000 * 60 * 60);
+//        TimerTask t = new TimerTask() {
+//            @Override
+//            public void run() {
+//                try {
+//                    updatePrice();
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        };
+//        this.scheduler = new Scheduler(t, 1000 * 60 * 60);
         this.itemCurrency = itemCurrency;
     }
     /** Constructor for database */
@@ -109,17 +108,17 @@ public class Item implements Product {
         this.reviewStars = reviewStars;
         this.imageUrl = imageUrl;
         this.itemCurrency = itemCurrency;
-        TimerTask t = new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    updatePrice();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-        this.scheduler = new Scheduler(t, 1000 * 60 * 60);
+//        TimerTask t = new TimerTask() {
+//            @Override
+//            public void run() {
+//                try {
+//                    updatePrice();
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+////        };
+//        this.scheduler = new Scheduler(t, 1000 * 60 * 60);
         this.itemCurrency = itemCurrency;
         this.priceHistoryData = priceHistoryData;
         this.priceHistoryDates = priceHistoryDates;
@@ -180,21 +179,6 @@ public class Item implements Product {
     public int getReviewCount() { return reviewCount;}
     public void setProductPrice(double newPrice) {this.itemPrice = newPrice;}
     public void setProductCurrency(String newCurrency) {this.itemCurrency = newCurrency;}
+    public void setDateLastUpdated(Date date) {this.dateLastUpdated = date;}
 
-    /** Updates price of Item object through web-scraping the product page on Amazon
-     * */
-    public void updatePrice() throws IOException{
-        try {
-            // This line specifies window type and layout of amazon page based on  Window Version and browser for webscraping
-            Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
-            Element price = doc.select(".a-offscreen").first();
-            assert price != null;
-            double sellingPrice = Double.parseDouble(price.text().substring(1));
-            priceChange = itemPrice - sellingPrice;
-            itemPrice = sellingPrice;
-            dateLastUpdated = new Date();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }
 }

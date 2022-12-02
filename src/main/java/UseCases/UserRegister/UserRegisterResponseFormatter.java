@@ -1,4 +1,8 @@
-public class UserRegisterResponseFormatter implements UserRegisterStatus{
+package UseCases.UserRegister;
+
+import ExternalInterface.UserRegistrationFailed;
+
+public class UserRegisterResponseFormatter implements UserRegisterStatus {
 
     /**
      * Returns the inputs made by the user in order to add user into DataBase
@@ -11,9 +15,9 @@ public class UserRegisterResponseFormatter implements UserRegisterStatus{
     }
 
     /**
-     * Shows fail message by calling UserRegistrationFailed
+     * Shows fail message by calling ExternalInterface.UserRegistrationFailed
      * @param failMessage String describing fail message
-     * @throws new UserRegistrationFailed(failMessage) in order to construct an error message with String failMessage
+     * @throws new ExternalInterface.UserRegistrationFailed(failMessage) in order to construct an error message with String failMessage
      */
     @Override
     public UserRegisterInputs showFailure(String failMessage) {
