@@ -1,3 +1,5 @@
+package UseCases;
+
 import DataBase.*;
 import Entities.*;
 public class LoginAction {

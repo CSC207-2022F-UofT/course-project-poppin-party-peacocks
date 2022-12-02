@@ -1,5 +1,6 @@
 package GUI;
 import GUI.Listeners.WelcomePageActionListenerNavigation;
+import UseCases.LoginAction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,8 +40,26 @@ public class LoginPanel extends JPanel{
                 Color.WHITE, Color.BLACK,
                 buttonFont);
         loginButton.setBounds(120,420,108,24);
+
         WelcomePageActionListenerNavigation wpaln = new WelcomePageActionListenerNavigation(currJFrame);
-        loginButton.addActionListener(wpaln.getLoginActionListener());
+
+        loginButton.addActionListener(e->{
+            LoginAction login = new LoginAction(usernameField.getText(),
+                    String.valueOf(passwordField.getPassword()));
+            if (!login.checkUsername() | !login.checkUserMatchesPassword()){
+                JOptionPane.showMessageDialog(loginButton,
+                        "User and/or password does not match the records in our system. Please try again.");
+            }
+            else if (login.checkUserMatchesPassword()) {
+//                wpaln.getLoginActionListener();
+                HomePage homePage = new HomePage();
+                homePage.setContentPane(homePage.getMainPanel());
+                homePage.setVisible(true);
+                homePage.setLocationRelativeTo(null);
+                homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                currJFrame.dispose();
+            }
+        });
 
         this.add(usernameLabel);
         this.add(usernameField);
