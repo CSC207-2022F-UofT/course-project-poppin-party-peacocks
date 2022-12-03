@@ -1,4 +1,4 @@
-import Entities.DataBase.DataBaseParser;
+import DataBase.DataBaseParser;
 import Entities.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

@@ -1,4 +1,4 @@
-package Entities.DataBase;
+package DataBase;
 
 import Entities.Product;
 import Entities.Wishlist;
