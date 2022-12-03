@@ -39,16 +39,23 @@ public class Wishlist implements ProductList{
         this.name = name;
     }
     public void setDateAdded(Date date) { this.dateAdded = date; }
-
     /**
      * Sorts ProductList by date in added date (earliest date-latest date) or (latest date-earliest date)
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByDate(String order){
-        ProductComparatorController ComparatorController = new ProductComparatorController();
-        ProductComparator productDateComparator = ComparatorController.sortWishlist("date");
+        Comparator<Product> itemDateComparator = new ItemDateComparator();
 
-        sortingHelper(order, productDateComparator);
+        switch (order.toLowerCase()) {
+            case "ascending":
+                displayedList.sort(itemDateComparator);
+                break;
+            case "descending":
+                displayedList.sort(Collections.reverseOrder(itemDateComparator));
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -56,10 +63,18 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByName(String order) {
-        ProductComparatorController ComparatorController = new ProductComparatorController();
-        ProductComparator productNameComparator = ComparatorController.sortWishlist("name");
+        Comparator<Product> itemNameComparator = new ItemNameComparator();
 
-        sortingHelper(order, productNameComparator);
+        switch (order.toLowerCase()) {
+            case "ascending":
+                displayedList.sort(itemNameComparator);
+                break;
+            case "descending":
+                displayedList.sort(Collections.reverseOrder(itemNameComparator));
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -67,10 +82,18 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByReviewStars(String order) {
-        ProductComparatorController ComparatorController = new ProductComparatorController();
-        ProductComparator productReviewStarComparator = ComparatorController.sortWishlist("review star");
+        Comparator<Product> itemReviewStarComparator = new ItemReviewStarComparator();
 
-        sortingHelper(order, productReviewStarComparator);
+        switch (order.toLowerCase()) {
+            case "descending":
+                displayedList.sort(itemReviewStarComparator);
+                break;
+            case "ascending":
+                displayedList.sort(Collections.reverseOrder(itemReviewStarComparator));
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -78,10 +101,18 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByReviewCount(String order) {
-        ProductComparatorController ComparatorController = new ProductComparatorController();
-        ProductComparator productReviewCountComparator = ComparatorController.sortWishlist("review count");
+        Comparator<Product> itemReviewCount = new ItemReviewCountComparator();
 
-        sortingHelper(order, productReviewCountComparator);
+        switch (order.toLowerCase()) {
+            case "descending":
+                displayedList.sort(itemReviewCount);
+                break;
+            case "ascending":
+                displayedList.sort(Collections.reverseOrder(itemReviewCount));
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -89,25 +120,14 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByPrice(String order) {
-        ProductComparatorController ComparatorController = new ProductComparatorController();
-        ProductComparator productPriceComparator = ComparatorController.sortWishlist("price");
+        Comparator<Product> itemPriceComparator = new ItemPriceComparator();
 
-        sortingHelper(order, productPriceComparator);
-    }
-
-    /**
-     * Helper functions that displays productComparator in ascending or descending
-     * @param order The value of string, ascending or descending
-     * @param productComparator productComparator that is based of whichever comparator was created by the class
-     *                          that is calling this helper method
-     */
-    private void sortingHelper(String order, ProductComparator productComparator) {
         switch (order.toLowerCase()) {
-            case "ascending":
-                displayedList.sort(productComparator);
-                break;
             case "descending":
-                displayedList.sort(Collections.reverseOrder(productComparator));
+                displayedList.sort(itemPriceComparator);
+                break;
+            case "ascending":
+                displayedList.sort(Collections.reverseOrder(itemPriceComparator));
                 break;
             default:
                 throw new IllegalArgumentException();
@@ -142,11 +162,11 @@ public class Wishlist implements ProductList{
      */
     public void filterProductList(String[] tags){
         selectedTags.addAll(Arrays.asList(tags));
-        displayedList = new ArrayList<>(itemList);
-        ArrayList<Product> tempList = new ArrayList<>(itemList);
+        displayedList = new ArrayList<Product>(itemList);
+        ArrayList<Product> tempList = new ArrayList<Product>(itemList);
         for(Product i : displayedList){
             for(String tag : tags){
-                ArrayList<String> iTags = new ArrayList<>(Arrays.asList(i.getTags()));
+                ArrayList<String> iTags = new ArrayList<String>(Arrays.asList(i.getTags()));
                 if(!iTags.contains(tag)){
                     tempList.remove(i);
                 }

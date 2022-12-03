@@ -8,7 +8,6 @@ public class PriceDropNotification implements BaseNotification {
     private final Scheduler scheduler;
     private final Product product;
     private Boolean showNotification;
-
     public PriceDropNotification(Product product) {
         this.showNotification = Boolean.FALSE;
         TimerTask checkSale = new TimerTask() {

@@ -1,4 +1,4 @@
-import Entities.DataBase.DataBase;
+import DataBase.DataBase;
 
 public class UserRegister implements UserRegisterCreateUser{
     final UserRegisterStatus status;
