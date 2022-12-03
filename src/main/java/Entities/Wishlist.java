@@ -94,12 +94,6 @@ public class Wishlist implements ProductList{
         sortingHelper(order, productPriceComparator);
     }
 
-    /**
-     * Helper functions that displays productComparator in ascending or descending
-     * @param order The value of string, ascending or descending
-     * @param productComparator productComparator that is based of whichever comparator was created by the class
-     *                          that is calling this helper method
-     */
     private void sortingHelper(String order, ProductComparator productComparator) {
         switch (order.toLowerCase()) {
             case "ascending":
