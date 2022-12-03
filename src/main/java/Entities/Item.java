@@ -58,6 +58,7 @@ public class Item implements Product {
 //        this.scheduler = updatePriceScheduler;
 //        this.priceDropNotification = new PriceDropNotification(this);
 //        this.saleNotification = new SaleNotification(this);
+        this.itemCurrency = "CAD";
     }
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl, String itemCurrency){
