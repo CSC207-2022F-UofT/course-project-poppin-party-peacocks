@@ -1,5 +1,12 @@
 package GUI;
 
+import Controller.UserRegisterController;
+import Entities.User;
+import UseCases.UserRegister.UserRegister;
+import UseCases.UserRegister.UserRegisterCreateUser;
+import UseCases.UserRegister.UserRegisterResponseFormatter;
+import UseCases.UserRegister.UserRegisterStatus;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,6 +30,7 @@ public class HomePage extends JFrame {
     private JButton addWishlistButton;
 
     private JButton dummyButton;
+    UserRegisterController userRegisterController;
 
     public JPanel getMainPanel() {
         return leftPanel;
@@ -138,7 +146,13 @@ public class HomePage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // TODO
                 // Currently, this navigates to GUI.MainAppLoginSignupPage.
-                WelcomePage loginSignupPage = new WelcomePage();
+                UserRegisterStatus presenter = new UserRegisterResponseFormatter();
+                UserRegisterCreateUser interactor = new UserRegister(presenter);
+                UserRegisterController userRegisterController = new UserRegisterController(
+                        interactor
+                );
+
+                WelcomePage loginSignupPage = new WelcomePage(userRegisterController);
                 loginSignupPage.setContentPane(loginSignupPage.getMainPanel());
                 loginSignupPage.setVisible(true);
                 loginSignupPage.setLocationRelativeTo(null);
