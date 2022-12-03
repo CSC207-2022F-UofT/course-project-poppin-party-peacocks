@@ -1,5 +1,7 @@
 import DataBase.*;
 import Entities.*;
+import Entities.DataBase.DataBaseController;
+
 public class LoginAction {
     private String inputtedUsername;
     private String inputtedPassword;

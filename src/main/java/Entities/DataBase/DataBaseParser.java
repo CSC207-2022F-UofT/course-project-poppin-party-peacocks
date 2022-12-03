@@ -1,4 +1,4 @@
-package DataBase;
+package Entities.DataBase;
 
 import Entities.Item;
 import Entities.Product;

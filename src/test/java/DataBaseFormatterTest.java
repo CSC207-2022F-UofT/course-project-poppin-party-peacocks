@@ -1,4 +1,4 @@
-import DataBase.DataBaseFormatter;
+import Entities.DataBase.DataBaseFormatter;
 import Entities.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

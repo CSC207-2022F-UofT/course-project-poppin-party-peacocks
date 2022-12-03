@@ -1,4 +1,4 @@
-package DataBase;
+package Entities.DataBase;
 
 import Entities.ListOfWishlists;
 import Entities.User;

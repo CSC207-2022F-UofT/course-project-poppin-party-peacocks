@@ -1,4 +1,6 @@
 import DataBase.*;
+import Entities.DataBase.DataBase;
+import Entities.DataBase.DataBaseController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
