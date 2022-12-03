@@ -44,18 +44,10 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByDate(String order){
-        Comparator<Product> itemDateComparator = new ItemDateComparator();
+        ProductComparatorController ComparatorController = new ProductComparatorController();
+        ProductComparator productDateComparator = ComparatorController.sortWishlist("date");
 
-        switch (order.toLowerCase()) {
-            case "ascending":
-                displayedList.sort(itemDateComparator);
-                break;
-            case "descending":
-                displayedList.sort(Collections.reverseOrder(itemDateComparator));
-                break;
-            default:
-                throw new IllegalArgumentException();
-        }
+        sortingHelper(order, productDateComparator);
     }
 
     /**
@@ -63,18 +55,10 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByName(String order) {
-        Comparator<Product> itemNameComparator = new ItemNameComparator();
+        ProductComparatorController ComparatorController = new ProductComparatorController();
+        ProductComparator productNameComparator = ComparatorController.sortWishlist("name");
 
-        switch (order.toLowerCase()) {
-            case "ascending":
-                displayedList.sort(itemNameComparator);
-                break;
-            case "descending":
-                displayedList.sort(Collections.reverseOrder(itemNameComparator));
-                break;
-            default:
-                throw new IllegalArgumentException();
-        }
+        sortingHelper(order, productNameComparator);
     }
 
     /**
@@ -82,18 +66,10 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByReviewStars(String order) {
-        Comparator<Product> itemReviewStarComparator = new ItemReviewStarComparator();
+        ProductComparatorController ComparatorController = new ProductComparatorController();
+        ProductComparator productReviewStarComparator = ComparatorController.sortWishlist("review star");
 
-        switch (order.toLowerCase()) {
-            case "descending":
-                displayedList.sort(itemReviewStarComparator);
-                break;
-            case "ascending":
-                displayedList.sort(Collections.reverseOrder(itemReviewStarComparator));
-                break;
-            default:
-                throw new IllegalArgumentException();
-        }
+        sortingHelper(order, productReviewStarComparator);
     }
 
     /**
@@ -101,18 +77,10 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByReviewCount(String order) {
-        Comparator<Product> itemReviewCount = new ItemReviewCountComparator();
+        ProductComparatorController ComparatorController = new ProductComparatorController();
+        ProductComparator productReviewCountComparator = ComparatorController.sortWishlist("review count");
 
-        switch (order.toLowerCase()) {
-            case "descending":
-                displayedList.sort(itemReviewCount);
-                break;
-            case "ascending":
-                displayedList.sort(Collections.reverseOrder(itemReviewCount));
-                break;
-            default:
-                throw new IllegalArgumentException();
-        }
+        sortingHelper(order, productReviewCountComparator);
     }
 
     /**
@@ -120,14 +88,25 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByPrice(String order) {
-        Comparator<Product> itemPriceComparator = new ItemPriceComparator();
+        ProductComparatorController ComparatorController = new ProductComparatorController();
+        ProductComparator productPriceComparator = ComparatorController.sortWishlist("price");
 
+        sortingHelper(order, productPriceComparator);
+    }
+
+    /**
+     * Helper functions that displays productComparator in ascending or descending
+     * @param order The value of string, ascending or descending
+     * @param productComparator productComparator that is based of whichever comparator was created by the class
+     *                          that is calling this helper method
+     */
+    private void sortingHelper(String order, ProductComparator productComparator) {
         switch (order.toLowerCase()) {
-            case "descending":
-                displayedList.sort(itemPriceComparator);
-                break;
             case "ascending":
-                displayedList.sort(Collections.reverseOrder(itemPriceComparator));
+                displayedList.sort(productComparator);
+                break;
+            case "descending":
+                displayedList.sort(Collections.reverseOrder(productComparator));
                 break;
             default:
                 throw new IllegalArgumentException();
@@ -173,5 +152,9 @@ public class Wishlist implements ProductList{
             }
         }
         displayedList = tempList;
+    }
+
+    public void refreshListPrices() {
+
     }
 }
