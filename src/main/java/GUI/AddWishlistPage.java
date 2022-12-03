@@ -86,7 +86,7 @@ public class AddWishlistPage extends JFrame {
             dispose();
         });
         cancelButton.addActionListener(e -> {
-            // Returns to GUI.ListOfWishlistsPage
+            // Returns to GUI.HomePage
             HomePage listOfWL = new HomePage();
             listOfWL.setContentPane(listOfWL.getMainPanel());
             listOfWL.setVisible(true);
