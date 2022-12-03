@@ -45,8 +45,8 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByDate(String order){
-        ProductComparatorFactory ProductFactory = new ProductComparatorFactory();
-        ProductComparator productDateComparator = ProductFactory.createComparator("date");
+        ProductComparatorController ComparatorController = new ProductComparatorController();
+        ProductComparator productDateComparator = ComparatorController.sortWishlist("date");
 
         sortingHelper(order, productDateComparator);
     }
@@ -56,8 +56,8 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByName(String order) {
-        ProductComparatorFactory ProductFactory = new ProductComparatorFactory();
-        ProductComparator productNameComparator = ProductFactory.createComparator("name");
+        ProductComparatorController ComparatorController = new ProductComparatorController();
+        ProductComparator productNameComparator = ComparatorController.sortWishlist("name");
 
         sortingHelper(order, productNameComparator);
     }
@@ -67,8 +67,8 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByReviewStars(String order) {
-        ProductComparatorFactory ProductFactory = new ProductComparatorFactory();
-        ProductComparator productReviewStarComparator = ProductFactory.createComparator("review star");
+        ProductComparatorController ComparatorController = new ProductComparatorController();
+        ProductComparator productReviewStarComparator = ComparatorController.sortWishlist("review star");
 
         sortingHelper(order, productReviewStarComparator);
     }
@@ -78,10 +78,10 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByReviewCount(String order) {
-        ProductComparatorFactory ProductFactory = new ProductComparatorFactory();
-        ProductComparator productReviewStarComparator = ProductFactory.createComparator("review count");
+        ProductComparatorController ComparatorController = new ProductComparatorController();
+        ProductComparator productReviewCountComparator = ComparatorController.sortWishlist("review count");
 
-        sortingHelper(order, productReviewStarComparator);
+        sortingHelper(order, productReviewCountComparator);
     }
 
     /**
@@ -89,19 +89,19 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByPrice(String order) {
-        ProductComparatorFactory ProductFactory = new ProductComparatorFactory();
-        ProductComparator productPriceComparator = ProductFactory.createComparator("price");
+        ProductComparatorController ComparatorController = new ProductComparatorController();
+        ProductComparator productPriceComparator = ComparatorController.sortWishlist("price");
 
         sortingHelper(order, productPriceComparator);
     }
 
-    private void sortingHelper(String order, ProductComparator productPriceComparator) {
+    private void sortingHelper(String order, ProductComparator productComparator) {
         switch (order.toLowerCase()) {
             case "ascending":
-                displayedList.sort(productPriceComparator);
+                displayedList.sort(productComparator);
                 break;
             case "descending":
-                displayedList.sort(Collections.reverseOrder(productPriceComparator));
+                displayedList.sort(Collections.reverseOrder(productComparator));
                 break;
             default:
                 throw new IllegalArgumentException();
