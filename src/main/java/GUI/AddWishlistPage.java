@@ -1,7 +1,5 @@
 package GUI;
 
-import GUI.RoundedBorder;
-import GUI.WishlistPage;
 import javax.swing.*;
 import java.awt.*;
 
@@ -88,8 +86,8 @@ public class AddWishlistPage extends JFrame {
             dispose();
         });
         cancelButton.addActionListener(e -> {
-            // Returns to GUI.ListOfWishlistsPage
-            ListOfWishlistsPage listOfWL = new ListOfWishlistsPage();
+            // Returns to GUI.HomePage()
+            HomePage listOfWL = new HomePage();
             listOfWL.setContentPane(listOfWL.getMainPanel());
             listOfWL.setVisible(true);
             listOfWL.setLocationRelativeTo(null);
