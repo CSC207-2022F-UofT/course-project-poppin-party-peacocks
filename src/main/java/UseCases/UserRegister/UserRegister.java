@@ -2,6 +2,10 @@ package UseCases.UserRegister;
 
 import DataBase.DataBase;
 
+/**
+ * A use case class that implements the UserRegisterCreateUser interface to create a new User in DataBase by calling
+ * upon UserRegisterStatus interface
+ */
 public class UserRegister implements UserRegisterCreateUser {
     final UserRegisterStatus status;
 

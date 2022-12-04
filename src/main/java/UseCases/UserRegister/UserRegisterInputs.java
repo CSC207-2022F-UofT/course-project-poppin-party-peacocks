@@ -1,6 +1,10 @@
 package UseCases.UserRegister;
 import DataBase.DataBaseController;
 import Entities.User;
+
+/**
+ * A use case class to receive the inputted username and password from the new user
+ */
 public class UserRegisterInputs {
     private String username;
     private String password;

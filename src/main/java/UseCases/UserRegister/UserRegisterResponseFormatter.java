@@ -2,6 +2,10 @@ package UseCases.UserRegister;
 
 import ExternalInterface.UserRegistrationFailed;
 
+/**
+ * A use case class that implements the UserRegisterStatus interface to format UserRegisterInputs into a new user in
+ * the system if it meets the requirements
+ */
 public class UserRegisterResponseFormatter implements UserRegisterStatus {
 
     /**

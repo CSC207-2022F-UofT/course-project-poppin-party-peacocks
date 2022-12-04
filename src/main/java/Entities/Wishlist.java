@@ -1,9 +1,7 @@
 package Entities;
 import java.util.*;
 
-/**
- * A class that stores a list of products. Implements ProductList functionalities.
- */
+
 public class Wishlist implements ProductList{
     private String name;
     private ArrayList<Product> itemList;
