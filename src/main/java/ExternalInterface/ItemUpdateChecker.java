@@ -26,8 +26,6 @@ public class ItemUpdateChecker {
             item.setPriceChange(item.getProductPrice() - sellingPrice);
             item.setProductPrice(sellingPrice);
             item.setDateLastUpdated(new Date());
-
-
         } catch (IOException e){
             e.printStackTrace();
         }
