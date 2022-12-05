@@ -7,14 +7,14 @@ import java.util.*;
  */
 public class Wishlist implements ProductList{
     private String name;
-    private ArrayList<Product> itemList;
+    private ArrayList<Product> productList;
     private ArrayList<Product> displayedList;
     private Date dateAdded;
     private ArrayList<String> selectedTags;
 
     public Wishlist(String name){
         this.name = name;
-        this.itemList = new ArrayList<>();
+        this.productList = new ArrayList<>();
         this.displayedList = new ArrayList<>();
         this.dateAdded = new Date();
         this.selectedTags = new ArrayList<>();
@@ -22,23 +22,23 @@ public class Wishlist implements ProductList{
 
     public Wishlist(String name, ArrayList<Product> itemList, ArrayList<Product> displayedList, Date dateAdded, ArrayList<String> selectedTags){
         this.name = name;
-        this.itemList = itemList;
+        this.productList = itemList;
         this.displayedList = displayedList;
         this.dateAdded = dateAdded;
         this.selectedTags = selectedTags;
     }
 
     public Wishlist (ArrayList<Product> itemList) {
-        this.itemList = itemList;
+        this.productList = itemList;
     }
 
     public String getName() { return  this.name; }
-    public ArrayList<Product> getProductList() {return this.itemList; }
+    public ArrayList<Product> getProductList() {return this.productList; }
     public ArrayList<Product> getDisplayedList() {return this.displayedList; }
     public Date getDateAdded() {return this.dateAdded; }
     public ArrayList<String> getSelectedTags() {return this.selectedTags; }
     public int getListSize(){
-        return itemList.size();
+        return productList.size();
     }
     public void setName(String name){
         this.name = name;
@@ -51,7 +51,7 @@ public class Wishlist implements ProductList{
      * @return True when an Entities.Product gets added to the ProductList
      */
     public boolean addProduct(Product product){
-        itemList.add(product);
+        productList.add(product);
         displayedList.add(product);
         return true;
     }
@@ -62,7 +62,7 @@ public class Wishlist implements ProductList{
      * @return True when an Entities.Product gets removed from the ProductList
      */
     public boolean removeProduct(Product product){
-        itemList.remove(product);
+        productList.remove(product);
         return true;
     }
 }

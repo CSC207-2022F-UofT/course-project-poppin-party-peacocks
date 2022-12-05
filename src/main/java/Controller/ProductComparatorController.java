@@ -15,14 +15,14 @@ import UseCases.Comparator.ProductComparatorFactory;
  */
 public class ProductComparatorController implements ProductList {
     private String name;
-    private final ArrayList<Product> itemList;
+    private final ArrayList<Product> productList;
     private final ArrayList<Product> displayedList;
     private Date dateAdded;
     private final ArrayList<String> selectedTags;
 
     public ProductComparatorController(String name){
         this.name = name;
-        this.itemList = new ArrayList<>();
+        this.productList = new ArrayList<>();
         this.displayedList = new ArrayList<>();
         this.dateAdded = new Date();
         this.selectedTags = new ArrayList<>();
@@ -47,10 +47,10 @@ public class ProductComparatorController implements ProductList {
     public void sortingHelper(String order, ProductComparator productComparator) {
         switch (order.toLowerCase()) {
             case "ascending":
-                itemList.sort(productComparator);
+                productList.sort(productComparator);
                 break;
             case "descending":
-                itemList.sort(Collections.reverseOrder(productComparator));
+                productList.sort(Collections.reverseOrder(productComparator));
                 break;
             default:
                 throw new IllegalArgumentException();
@@ -62,7 +62,7 @@ public class ProductComparatorController implements ProductList {
     }
 
     public ArrayList<Product> getProductList() {
-        return this.itemList;
+        return this.productList;
     }
 
     public ArrayList<Product> getDisplayedList() {
@@ -78,7 +78,7 @@ public class ProductComparatorController implements ProductList {
     }
 
     public int getListSize() {
-        return itemList.size();
+        return productList.size();
     }
 
     public void setDateAdded(Date date) {
@@ -95,7 +95,7 @@ public class ProductComparatorController implements ProductList {
      * @return True when a Product gets added to the itemList
      */
     public boolean addProduct(Product product) {
-        itemList.add(product);
+        productList.add(product);
         displayedList.add(product);
         return false;
     }
