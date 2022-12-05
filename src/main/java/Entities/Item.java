@@ -1,21 +1,18 @@
 package Entities;
 import Controller.*;
 
-import ExternalInterface.ItemUpdateChecker;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
-
-import java.io.IOException;
 import java.util.Date;
 import java.util.*;
 
 public class Item implements Product {
     private String itemName;
-    private String url;
-    private String imageUrl;
+    private final String url;
+    private final String imageUrl;
     //a short description of the item from the webpage
     private String itemDescription;
-    private String[] tags;
+    private final String[] tags;
     private double itemPrice;
     private String itemCurrency;
     private double priceChange;
@@ -43,7 +40,7 @@ public class Item implements Product {
         this.dateLastUpdated = new Date();
         this.reviewCount = reviewCount;
         this.reviewStars = reviewStars;
-        this.priceHistoryData = new ArrayList<Double>();
+        this.priceHistoryData = new ArrayList<>();
         this.priceHistoryData.add(this.itemPrice);
 
 //        TimerTask updatePriceTask = new TimerTask() {
@@ -61,6 +58,7 @@ public class Item implements Product {
 //        this.scheduler = updatePriceScheduler;
 //        this.priceDropNotification = new PriceDropNotification(this);
 //        this.saleNotification = new SaleNotification(this);
+        this.itemCurrency = "CAD";
     }
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl, String itemCurrency){
@@ -76,9 +74,9 @@ public class Item implements Product {
         this.dateLastUpdated = new Date();
         this.reviewCount = reviewCount;
         this.reviewStars = reviewStars;
-        this.priceHistoryData = new ArrayList<Double>();
+        this.priceHistoryData = new ArrayList<>();
         this.priceHistoryData.add(this.itemPrice);
-        this.priceHistoryDates = new ArrayList<Date>();
+        this.priceHistoryDates = new ArrayList<>();
         this.priceHistoryDates.add(new Date());
 
 //        TimerTask t = new TimerTask() {
@@ -138,6 +136,18 @@ public class Item implements Product {
     }
     public double getProductPrice(){
         return this.itemPrice;
+    }
+    public String getProductPriceString(){
+        String priceString;
+        switch (itemCurrency){
+            case "USD":
+                priceString =  "$" + itemPrice;
+            case "YUAN":
+                priceString =  "¥" + itemPrice;
+            default:
+                priceString =  "$" + itemPrice;
+        }
+        return priceString;
     }
     public double getPriceChange(){
         return this.priceChange;
