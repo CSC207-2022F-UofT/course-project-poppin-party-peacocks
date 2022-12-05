@@ -6,6 +6,7 @@ import Entities.Wishlist;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -18,10 +19,9 @@ public class DataBaseParser {
      * */
     public Wishlist parseWishlist(Object wishlistObject) throws java.text.ParseException {
         JSONObject wishlistData = (JSONObject) wishlistObject;
-
         String name = (String) wishlistData.get("name");
 
-        Date dateAdded = new Date(wishlistData.get("dateAdded").toString());
+        Date dateAdded =  new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").parse(wishlistData.get("dateAdded").toString());
 
         ArrayList<Product> items = new ArrayList<>();
         JSONArray itemsObjects = (JSONArray) wishlistData.get("itemList");
@@ -47,7 +47,7 @@ public class DataBaseParser {
             }
         }
 
-        return new Wishlist(name, items, displayedItems, dateAdded, tags);
+       return new Wishlist(name, items, displayedItems, dateAdded, tags);
     }
 
     /** Parses an item in JSON format
@@ -64,7 +64,7 @@ public class DataBaseParser {
         Double priceChange = (Double) itemData.get("priceChange");
         Double desiredPrice = (Double) itemData.get("desiredPrice");
 
-        Date dateAdded = new Date(itemData.get("dateAdded").toString());
+        Date dateAdded =  new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").parse(itemData.get("dateAdded").toString());
 
         ArrayList<String> tags = new ArrayList<>();
         JSONArray tagsObject = (JSONArray) itemData.get("tags");
@@ -87,7 +87,7 @@ public class DataBaseParser {
         JSONArray historyDatesObject = (JSONArray) itemData.get("historyDate");
         if (!Objects.isNull(historyDatesObject)) {
             for (Object date : historyDatesObject) {
-                historyDates.add(new Date(date.toString()));
+                historyDates.add(new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").parse(date.toString()));
             }
         }
 
@@ -100,7 +100,6 @@ public class DataBaseParser {
         }
 
         String currency = (String) itemData.get("currency");
-
         return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars, imageURL, currency, historyData, historyDates);
     }
 
