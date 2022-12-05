@@ -1,23 +1,24 @@
 package Entities;
 import java.util.*;
 
-public class ListOfWishlists {
+public class ListOfWishlists implements ListofProductLists {
 
-    private ArrayList<Wishlist> listWishlist;
+    private ArrayList<ProductList> listWishlist;
 
     public ListOfWishlists(){
-        this.listWishlist = new ArrayList<Wishlist>();
+        this.listWishlist = new ArrayList<ProductList>();
     }
 
-    public ListOfWishlists(ArrayList<Wishlist> wishlists){
+    public ListOfWishlists(ArrayList<ProductList> wishlists){
         this.listWishlist = wishlists;
     }
 
-    public ArrayList<Wishlist> getListOfWishlist() {
+    public ArrayList<ProductList> getListOfWishlist() {
         return this.listWishlist;
     }
 
-    public void addWishlist(Wishlist wishlist){
+
+    public void addWishlist(ProductList wishlist){
         this.listWishlist.add(wishlist);
     }
 }

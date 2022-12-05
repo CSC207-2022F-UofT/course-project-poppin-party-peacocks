@@ -117,7 +117,7 @@ public class DataBase {
      * */
     // JSONArray's library has errors, can ignore
     @SuppressWarnings("unchecked")
-    public static boolean saveListOfWishlists(ListOfWishlists listOfWishlists, User user) {
+    public static boolean saveListOfWishlists(ListofProductLists listOfWishlists, User user) {
         DataBaseFormatter dataBaseFormatter = new DataBaseFormatter();
         String wishlistPath = DataBase.getWishlistPath(user.getName());
         File file = new File(wishlistPath);
@@ -132,7 +132,7 @@ public class DataBase {
             JSONObject listOfWishlistsObject = new JSONObject();
             JSONArray wishlistsObjects = new JSONArray();
 
-            for (Wishlist wishlist : listOfWishlists.getListOfWishlist()) {
+            for (ProductList wishlist : listOfWishlists.getListOfWishlist()) {
                 wishlistsObjects.add(dataBaseFormatter.createWishlistJSON(wishlist));
             }
             listOfWishlistsObject.put("wishlists", wishlistsObjects);

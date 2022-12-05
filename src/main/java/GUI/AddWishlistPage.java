@@ -4,6 +4,7 @@ import GUI.RoundedBorder;
 import GUI.WishlistPage;
 import javax.swing.*;
 import java.awt.*;
+import Entities.*;
 
 /**
  * A graphic user interface for the AddWishlistPage with the purpose of giving an opportunity to the user to customize
@@ -89,7 +90,7 @@ public class AddWishlistPage extends JFrame {
         });
         cancelButton.addActionListener(e -> {
             // Returns to GUI.ListOfWishlistsPage
-            ListOfWishlistsPage listOfWL = new ListOfWishlistsPage();
+            HomePage listOfWL = new HomePage();
             listOfWL.setContentPane(listOfWL.getMainPanel());
             listOfWL.setVisible(true);
             listOfWL.setLocationRelativeTo(null);

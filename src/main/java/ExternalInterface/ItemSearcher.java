@@ -155,7 +155,7 @@ public class ItemSearcher {
      *
      * @param url url of amazon item
      */
-    public Item searchItemUrl(String url, boolean searchByKeyword) throws IOException {
+    public Product searchItemUrl(String url, boolean searchByKeyword) throws IOException {
         try {
             // This line specifies window type and layout of amazon page based on  Window Version and browser for webscraping
             Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();

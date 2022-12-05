@@ -1,8 +1,6 @@
 package DataBase;
 
-import Entities.ListOfWishlists;
-import Entities.User;
-import Entities.Wishlist;
+import Entities.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -21,7 +19,7 @@ public class DataBaseController {
      * @param userName Unique name of the user
      * @returns list of wishlists
      * */
-    public ListOfWishlists getListOfWishlists(String userName) {
+    public ListofProductLists getListOfWishlists(String userName) {
         DataBaseParser dataBaseParser = new DataBaseParser();
         try {
             File myObj = new File(DataBase.getWishlistPath(userName));
@@ -32,7 +30,7 @@ public class DataBaseController {
                 JSONParser jsonParser = new JSONParser();
                 JSONObject parsedData = (JSONObject) jsonParser.parse(data);
                 JSONArray wishlistsObject = (JSONArray) parsedData.get("wishlists");
-                ArrayList<Wishlist> wishlists = new ArrayList<>();
+                ArrayList<ProductList> wishlists = new ArrayList<>();
 
                 if (!Objects.isNull(wishlistsObject)) {
                     for (Object wishlist : wishlistsObject) {
