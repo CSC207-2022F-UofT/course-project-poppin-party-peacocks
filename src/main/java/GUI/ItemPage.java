@@ -122,10 +122,6 @@ public class ItemPage extends JFrame {
         CustomJLabel description = new CustomJLabel(String.format(html, 130, "Description: " + itemDescription), Color.WHITE, textFont);
         contentPanel.add(description);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        // desired price
-        CustomJLabel desiredPriceLabel = new CustomJLabel("Desired Price: " + desiredPrice + " " + currency, Color.WHITE, textFont);
-        contentPanel.add(desiredPriceLabel);
-        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         // price chance
         CustomJLabel priceChange = new CustomJLabel("Price Change: " + itemPriceChange + " " + currency, Color.WHITE, textFont);
         contentPanel.add(priceChange);
@@ -137,6 +133,20 @@ public class ItemPage extends JFrame {
         // tags
         CustomJLabel tagLabel = new CustomJLabel("Tags: " + totalTag, Color.WHITE, textFont);
         contentPanel.add(tagLabel);
+
+
+        // desired price
+        CustomJLabel desiredPriceLabel = new CustomJLabel("Desired Price: " + desiredPrice + " " + currency, Color.WHITE, textFont);
+        contentPanel.add(desiredPriceLabel);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JTextField desiredPriceInput = new JTextField("", 10);
+        desiredPriceInput.setForeground(Color.white);
+        JButton desiredPriceButton = new JButton("Go");
+
+        contentPanel.add(desiredPriceInput);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPanel.add(desiredPriceButton);
 
         mainPanel.add(scrollBar);
 
@@ -158,6 +168,14 @@ public class ItemPage extends JFrame {
             wlPage.setLocationRelativeTo(null);
             wlPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
+        });
+
+        // Button logic for desired price chnage
+        desiredPriceButton.addActionListener(e -> {
+            String priceText = desiredPriceInput.getText();
+
+            Double updatedDesiredPrice =  Double.parseDouble(priceText);
+
         });
     }
 }
