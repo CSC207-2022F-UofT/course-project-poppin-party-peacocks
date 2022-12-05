@@ -16,10 +16,11 @@ import java.util.ArrayList;
 public class WishlistPage extends JFrame {
 
     private GradientJPanel mainPanel;
-    private final Wishlist wl;
+    private Wishlist wl;
     private ArrayList<Product> itemList;
     private JList<ItemPanel> itemPanelJList;
     private JScrollPane itemScrollPane;
+    private boolean isSortFrameOpen = false;
 
     public WishlistPage(Wishlist wishlist) {
         super(wishlist.getName());
@@ -27,12 +28,16 @@ public class WishlistPage extends JFrame {
         initialiseJFrame();
         initialiseMainPanel();
     }
-
+    public void setWishlist(Wishlist wl){
+        this.wl = wl;
+    }
+    public void setSortFrameOpen(boolean isOpen){
+        this.isSortFrameOpen = isOpen;
+    }
     /**
      * @return the main panel for this JFrame
      */
     public JPanel getMainPanel(){return mainPanel;}
-
     /**
      * sets up the JFrame
      */
@@ -115,8 +120,10 @@ public class WishlistPage extends JFrame {
             generateListOfItems();
         });
         sortButton.addActionListener(e -> {
-
-
+            if(!isSortFrameOpen){
+                SortFrame sortFrame = new SortFrame(this, wl);
+                isSortFrameOpen = true;
+            }
         });
         deleteButton.addActionListener(e -> {
             mainPanel.remove(itemScrollPane);
@@ -150,7 +157,7 @@ public class WishlistPage extends JFrame {
      * creates a JScrollPane from a JList from a list from the wishlist
      * Configures the JScrollPane and adds it to the main panel
      */
-    private void generateListOfItems(){
+    public void generateListOfItems(){
         ArrayList<ItemPanel> panelList = new ArrayList<>();
         itemList = wl.getProductList();
         for (Product product : itemList) {

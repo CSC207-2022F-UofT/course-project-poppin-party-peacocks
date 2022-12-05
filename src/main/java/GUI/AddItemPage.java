@@ -158,7 +158,8 @@ public class AddItemPage extends JFrame {
         });
     }
     public static class PanelRenderer implements ListCellRenderer<Object> {
-        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+        public Component getListCellRendererComponent(JList list, Object value, int index,
+                                                      boolean isSelected, boolean cellHasFocus) {
             JPanel renderer = (JPanel) value;
             renderer.setBackground(isSelected ? Color.red : list.getBackground());
             Color defaultColor = new Color(194, 234, 186);
