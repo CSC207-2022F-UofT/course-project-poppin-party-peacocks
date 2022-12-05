@@ -1,4 +1,5 @@
 package Entities;
+
 import java.util.*;
 
 /**
@@ -27,6 +28,10 @@ public class Wishlist implements ProductList{
         this.selectedTags = selectedTags;
     }
 
+    public Wishlist (ArrayList<Product> itemList) {
+        this.itemList = itemList;
+    }
+
     public String getName() { return  this.name; }
     public ArrayList<Product> getProductList() {return this.itemList; }
     public ArrayList<Product> getDisplayedList() {return this.displayedList; }
@@ -45,10 +50,10 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByDate(String order){
-        ProductComparatorController ComparatorController = new ProductComparatorController();
-        ProductComparator productDateComparator = ComparatorController.sortWishlist("date");
-
-        sortingHelper(order, productDateComparator);
+//        ProductComparatorController ComparatorController = new ProductComparatorController();
+//        ProductComparator productDateComparator = ComparatorController.sortWishlist("date");
+//
+//        sortingHelper(order, productDateComparator);
     }
 
     /**
@@ -56,10 +61,10 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByName(String order) {
-        ProductComparatorController ComparatorController = new ProductComparatorController();
-        ProductComparator productNameComparator = ComparatorController.sortWishlist("name");
-
-        sortingHelper(order, productNameComparator);
+//        ProductComparatorController ComparatorController = new ProductComparatorController();
+//        ProductComparator productNameComparator = ComparatorController.sortWishlist("name");
+//
+//        sortingHelper(order, productNameComparator);
     }
 
     /**
@@ -67,10 +72,10 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByReviewStars(String order) {
-        ProductComparatorController ComparatorController = new ProductComparatorController();
-        ProductComparator productReviewStarComparator = ComparatorController.sortWishlist("review star");
-
-        sortingHelper(order, productReviewStarComparator);
+//        ProductComparatorController ComparatorController = new ProductComparatorController();
+//        ProductComparator productReviewStarComparator = ComparatorController.sortWishlist("review star");
+//
+//        sortingHelper(order, productReviewStarComparator);
     }
 
     /**
@@ -78,10 +83,10 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByReviewCount(String order) {
-        ProductComparatorController ComparatorController = new ProductComparatorController();
-        ProductComparator productReviewCountComparator = ComparatorController.sortWishlist("review count");
-
-        sortingHelper(order, productReviewCountComparator);
+//        ProductComparatorController ComparatorController = new ProductComparatorController();
+//        ProductComparator productReviewCountComparator = ComparatorController.sortWishlist("review count");
+//
+//        sortingHelper(order, productReviewCountComparator);
     }
 
     /**
@@ -89,10 +94,10 @@ public class Wishlist implements ProductList{
      * @param order The value of string whether the user wants the ProductList to be ascending or descending
      */
     public void sortProductListByPrice(String order) {
-        ProductComparatorController ComparatorController = new ProductComparatorController();
-        ProductComparator productPriceComparator = ComparatorController.sortWishlist("price");
-
-        sortingHelper(order, productPriceComparator);
+//        ProductComparatorController ComparatorController = new ProductComparatorController();
+//        ProductComparator productPriceComparator = ComparatorController.sortWishlist("price");
+//
+//        sortingHelper(order, productPriceComparator);
     }
 
     /**
@@ -101,18 +106,6 @@ public class Wishlist implements ProductList{
      * @param productComparator productComparator that is based of whichever comparator was created by the class
      *                          that is calling this helper method
      */
-    private void sortingHelper(String order, ProductComparator productComparator) {
-        switch (order.toLowerCase()) {
-            case "ascending":
-                displayedList.sort(productComparator);
-                break;
-            case "descending":
-                displayedList.sort(Collections.reverseOrder(productComparator));
-                break;
-            default:
-                throw new IllegalArgumentException();
-        }
-    }
 
     /**
      * Adding an Entities.Item to the ProductList

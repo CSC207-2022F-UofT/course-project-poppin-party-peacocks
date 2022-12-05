@@ -1,4 +1,6 @@
-package Entities;
+package UseCases.Comparator;
+
+import Entities.*;
 
 /**
  * a class that returns ProductComparators depending on word

@@ -1,5 +1,7 @@
 package Entities;
 
+import UseCases.Comparator.ProductComparator;
+
 /**
  * a class that compares 2 Products with respect to their price
  */

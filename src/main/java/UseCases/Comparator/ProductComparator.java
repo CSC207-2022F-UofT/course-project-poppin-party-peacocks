@@ -1,4 +1,6 @@
-package Entities;
+package UseCases.Comparator;
+
+import Entities.Product;
 
 import java.util.Comparator;
 
