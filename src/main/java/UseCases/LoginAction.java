@@ -2,9 +2,12 @@ package UseCases;
 
 import DataBase.*;
 import Entities.*;
+
+import java.util.Objects;
+
 public class LoginAction {
-    private String inputtedUsername;
-    private String inputtedPassword;
+    private final String inputtedUsername;
+    private final String inputtedPassword;
 
     public LoginAction(String username, String password){
         this.inputtedUsername = username;
@@ -18,12 +21,7 @@ public class LoginAction {
     public boolean checkUsername() {
         DataBaseController dataBaseController = new DataBaseController();
         User existingUser = dataBaseController.getUser(this.inputtedUsername);
-        if (existingUser.getName() == "Default User") {
-            return false;
-        }
-        else {
-            return true;
-        }
+        return !Objects.equals(existingUser.getName(), "Default User");
     }
 
     /**
