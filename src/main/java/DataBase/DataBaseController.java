@@ -108,7 +108,7 @@ public class DataBaseController {
             JSONObject listOfWishlistsObject = new JSONObject();
             JSONArray wishlistsObjects = new JSONArray();
 
-            for (Wishlist wishlist : listOfWishlists.getListOfWishlist()) {
+            for (ProductList wishlist : listOfWishlists.getListOfWishlist()) {
                 wishlistsObjects.add(dataBaseFormatter.createWishlistJSON(wishlist));
             }
             listOfWishlistsObject.put("wishlists", wishlistsObjects);
