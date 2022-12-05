@@ -22,8 +22,7 @@ public class ProductComparatorFactory {
                 return new ProductReviewCountComparator();
             case "review star":
                 return new ProductReviewStarComparator();
-            default:
-                throw new IllegalArgumentException("Unknown comparator name "+ newWord);
         }
+        return null;
     }
 }

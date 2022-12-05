@@ -7,11 +7,15 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class WishlistTest {
+    Date date1 = new Date(2022, Calendar.DECEMBER, 15);
+    Date date2 = new Date(2022, Calendar.NOVEMBER, 15);
+    Date date3 = new Date(2022, Calendar.SEPTEMBER, 15);
     Item myFavDrink = new Item("Lime Bubbly", 5.47, 5.00, "www.shoppers.com/bubbly",
-            "my favorite drink, bubbly", new String[]{"Drink"}, 69, 4.19,"www.shoppersimage.com/bubbly");
-    Item animeFigure = new Item("Starlight Anya Forger", 100, 85.00, "www.amazon.com/AnyaPeanuts", "new Anya figure", new String[]{"Figure"}, 150, 4.8,"www.amazonimage.com/AnyaPeanuts" );
+            "my favorite drink, bubbly", 69, 4.19,"www.shoppersimage.com/bubbly", date3, new String[]{"drink"});
+    Item animeFigure = new Item("Starlight Anya Forger", 100, 85.00, "www.amazon.com/AnyaPeanuts",
+            "new Anya figure", 150, 4.8,"www.amazonimage.com/AnyaPeanuts", date2, new String[]{"figure"});
     Item plushie = new Item("Whale Plushie", 40.99, 30.00, "www.amazon.com/WhalePlushie",
-            "Giant Whale Plushie", new String[]{"toys"}, 1050, 4.3, "www.amazonimage.com/OhWhale");
+            "Giant Whale Plushie", 1050, 4.3, "www.amazonimage.com/OhWhale", date1, new String[]{"toys"});
 
     Wishlist christmasWishlist = new Wishlist("Christmas Wishlist");
 

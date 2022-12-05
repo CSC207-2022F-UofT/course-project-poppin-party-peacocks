@@ -11,15 +11,15 @@ public class ProductPriceComparator implements ProductComparator {
      * Defauly saved comparison: Lowest to Highest (ascending)
      * @param item1 The first name of Entities.Item
      * @param item2 The second name of Entities.Item
-     * @return returns 1 if item1's price >= item2's price,
-     * returns -1 if item1's price <= item2's price,
+     * @return returns 1 if item1's price > item2's price,
+     * returns -1 if item1's price < item2's price,
      * returns 0 otherwise
      */
     @Override
     public int compare(Product item1, Product item2) {
-        if (item1.getProductPrice() >= item2.getProductPrice()) {
+        if (item1.getProductPrice() > item2.getProductPrice()) {
             return 1;
-        } else if (item1.getProductPrice() <= item2.getProductPrice()) {
+        } else if (item1.getProductPrice() < item2.getProductPrice()) {
             return -1;
         } else {
             return 0;

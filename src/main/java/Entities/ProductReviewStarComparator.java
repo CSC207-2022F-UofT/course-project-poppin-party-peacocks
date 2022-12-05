@@ -13,15 +13,15 @@ public class ProductReviewStarComparator implements ProductComparator {
      * Default saved comparison: Lowest to Highest (ascending)
      * @param item1 The first name of Entities.Item
      * @param item2 The second name of Entities.Item
-     * @return returns 1 if item1's review star is >= item2's review star,
-     * returns -1 if item1's review star is <= item2's review star,
+     * @return returns 1 if item1's review star is > item2's review star,
+     * returns -1 if item1's review star is < item2's review star,
      * returns 0 otherwise
      */
     @Override
     public int compare(Product item1, Product item2) {
-        if (item1.getReviewStars() >= item2.getReviewStars()) {
+        if (item1.getReviewStars() > item2.getReviewStars()) {
             return 1;
-        } else if (item1.getReviewStars() <= item2.getReviewStars()) {
+        } else if (item1.getReviewStars() < item2.getReviewStars()) {
             return -1;
         } else {
             return 0;
