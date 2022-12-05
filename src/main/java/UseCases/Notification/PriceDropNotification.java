@@ -19,7 +19,7 @@ public class PriceDropNotification implements BaseNotification {
             }
         };
 
-        this.scheduler = new Scheduler(checkSale, 10000);
+        this.scheduler = new Scheduler(checkSale, 1000);
         this.product = product;
     }
     public boolean getShowNotification() {
@@ -49,7 +49,7 @@ public class PriceDropNotification implements BaseNotification {
     /** Logic to check if price drop notification should be seen
      * @returns boolean if notification should be shown */
     public boolean checkNotification() {
-        this.showNotification = this.product.getProductPrice() <= this.product.getProductDesiredPrice();
+        this.showNotification = this.product.getProductPrice() < this.product.getProductDesiredPrice();
         return this.showNotification;
     }
 }

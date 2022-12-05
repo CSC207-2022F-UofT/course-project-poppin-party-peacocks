@@ -20,7 +20,7 @@ public class SaleNotification implements BaseNotification {
             }
         };
 
-        this.scheduler = new Scheduler(checkSale, 10000);
+        this.scheduler = new Scheduler(checkSale, 1000);
         this.product = product;
     }
 
