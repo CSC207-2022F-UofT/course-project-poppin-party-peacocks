@@ -193,7 +193,7 @@ public class ItemSearcher {
                 sellingPrice = Double.parseDouble(sellingPriceStr);
 
                 if (!userCurrency.equals("CAD")){
-                    sellingPrice *= currencyChange;
+                    sellingPrice /= currencyChange;
                 }
             }
             if (htmlCountRating != null) {
