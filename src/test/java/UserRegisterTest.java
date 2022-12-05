@@ -17,18 +17,19 @@ class UserRegisterTest {
         UserRegister register = new UserRegister(formatter);
         register.create(inputs);
         Assertions.assertEquals(inputs.getTempUser().getName(), dataBaseController.getUser("StarlightUser").getName());
-        DataBase.deleteUser("StarlightUser");
+        dataBaseController.deleteUser("StarlightUser");
     }
 
     @Test
     public void testLoginNewUserSuccess() throws IOException {
+        DataBaseController dataBaseController = new DataBaseController();
         UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser","Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
         UserRegister register = new UserRegister(formatter);
         register.create(inputs);
         LoginAction userInput = new LoginAction("StarlightUser", "Fuzzy321");
         Assertions.assertTrue(userInput.checkUserMatchesPassword());
-        DataBase.deleteUser("StarlightUser");
+        dataBaseController.deleteUser("StarlightUser");
     }
 
     @Test

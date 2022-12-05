@@ -1,5 +1,6 @@
 package UseCases.Notification;
 
+/** An interface defining common methods for price notifications */
 interface BaseNotification {
     /** Starts a notification schedule */
     public void startNotificationListener();

@@ -1,117 +1,161 @@
 package GUI;
 
+import Entities.Product;
+import Entities.Wishlist;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+/**
+ * A GUI class that handles the visual representation of a product list. Handles navigation to adjacent pages and logic
+ * for adding and deleting products from the list.
+ */
 public class WishlistPage extends JFrame {
-    private JPanel middlePanel;
-    private JPanel northPanel;
-    private JLabel thisWishlistLabel;
-    private JButton backButton;
-    private JPanel itemPanel;
-    private JLabel middleWestLabel;
-    private JLabel middleEastLabel;
-    private JPanel middleFooterPanel;
-    private JButton deleteThisWishlistButton;
-    private JButton addItemButton;
 
-    private JButton dummy4;
-    private JButton dummy5;
-    private JButton dummy6;
+    private GradientJPanel mainPanel;
+    private final Wishlist wl;
+    private ArrayList<Product> itemList;
+    private JList<ItemPanel> itemPanelJList;
+    private JScrollPane itemScrollPane;
 
-    public JPanel getMainPanel() {
-        return middlePanel;
+    public WishlistPage(){
+        super();
+        wl = new Wishlist("New Wishlist");
+        this.setTitle(wl.getName());
+        initialiseJFrame();
+        initialiseMainPanel();
+    }
+    public WishlistPage(Wishlist wishlist) {
+        super(wishlist.getName());
+        wl = wishlist;
+        initialiseJFrame();
+        initialiseMainPanel();
     }
 
-    public WishlistPage() {
-        super("Wishlist name here");
+    /**
+     * @return the main panel for this JFrame
+     */
+    public JPanel getMainPanel(){return mainPanel;}
+
+    /**
+     * sets up the JFrame
+     */
+    private void initialiseJFrame(){
         setLayout(null);
-        setSize(400, 638);
         setResizable(false);
+        setSize(360, 640);
+        setVisible(true);
+        mainPanel = new GradientJPanel(null);
+    }
 
+    /**
+     * Initialises the main panel to contain all of its buttons and items
+     * Adds action listeners to the buttons to facilitate page navigation and other functionality
+     */
+    private void initialiseMainPanel(){
+        JPanel topPanel = new JPanel(null);
+        topPanel.setBackground(new Color(106, 189, 154));
+        topPanel.setBounds(0,0,360,56);
+        JLabel titleLabel = new JLabel(wl.getName());
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setBounds(50,20,300,20);
+        titleLabel.setFont(new Font("Montserrat", Font.PLAIN, 20));
+        topPanel.add(titleLabel);
 
-        // constants
-        Color color = new Color(150, 75, 130);
-        Color color1 = new Color(194, 234, 186);
-        Color color2 = new Color(106, 189, 154);
-        Font font1 = new Font("Montserrat", Font.PLAIN, 12);
+        mainPanel.add(topPanel);
+        RefreshButton refreshButton = new RefreshButton();
+        refreshButton.setBounds(300,9,36,36);
+        mainPanel.add(refreshButton);
 
-        middlePanel = new JPanel(new BorderLayout(20, 20));
-        middlePanel.setBackground(color1);
-        middlePanel.setBounds(400, 0, 400, 600);
-        // top label (wishlist name)
-        northPanel = new JPanel(new FlowLayout());
-        backButton = new JButton("Back to List of Wishlists");
-        northPanel.add(backButton);
-        thisWishlistLabel = new JLabel("Get this wishlist title");
-        thisWishlistLabel.setForeground(Color.white);
+        BackButton backButton = new BackButton();
+        backButton.setBounds(10,17,24,21);
+        mainPanel.add(backButton);
 
-        thisWishlistLabel.setHorizontalAlignment(JLabel.CENTER);
-        northPanel.add(thisWishlistLabel);
-        northPanel.setBackground(color2);
-        middlePanel.add(northPanel, BorderLayout.NORTH);
-        // items
-        itemPanel = new JPanel();
-        itemPanel.setBackground(color2);
-        itemPanel.setLayout(new GridLayout(0, 1));
-        dummy4 = new JButton("d4");
-        dummy5 = new JButton("d5");
-        dummy6 = new JButton("d6");
-        itemPanel.add(dummy4);
-        itemPanel.add(dummy5);
-        itemPanel.add(dummy6);
-        middlePanel.add(itemPanel, BorderLayout.CENTER);
-        // list padding
-        middleWestLabel = new JLabel("");
-        middlePanel.add(middleWestLabel, BorderLayout.WEST);
-        middleEastLabel = new JLabel("");
-        middlePanel.add(middleEastLabel, BorderLayout.EAST);
-        // footer
-        middleFooterPanel = new JPanel(new FlowLayout());
-        middleFooterPanel.setBackground(color2);
+        SortButton sortButton = new SortButton();
+        sortButton.setBounds(20, 515, 60 ,60);
+        mainPanel.add(sortButton);
 
-        deleteThisWishlistButton = new CustomJButton("Delete this Wishlist", 0, 0, color2, Color.white, font1);
-        middleFooterPanel.add(deleteThisWishlistButton);
-        addItemButton = new JButton("Add Item");
+        DeleteButton deleteButton = new DeleteButton();
+        deleteButton.setBounds(102, 515, 60 ,60);
+        mainPanel.add(deleteButton);
 
-        addItemButton = new CustomJButton("Add Item", 0, 0, color2, Color.white, font1);
-        middleFooterPanel.add(addItemButton);
+        AddButton addButton = new AddButton();
+        addButton.setBounds(184,515,60,60);
+        mainPanel.add(addButton);
 
-        // add footer to middlePanel
-        middlePanel.add(middleFooterPanel, BorderLayout.SOUTH);
+        RightArrowButton viewItemButton = new RightArrowButton();
+        viewItemButton.setBounds(266, 515, 60 ,60);
+        mainPanel.add(viewItemButton);
 
-        deleteThisWishlistButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO
+        mainPanel.setComponentZOrder(titleLabel, 1);
+        mainPanel.setComponentZOrder(topPanel, 2);
+
+        generateListOfItems();
+        backButton.addActionListener(e -> {
+            HomePage homePage = new HomePage();
+            homePage.setContentPane(homePage.getMainPanel());
+            homePage.setVisible(true);
+            homePage.setLocationRelativeTo(null);
+            homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            dispose();
+        });
+        refreshButton.addActionListener(e -> wl.refreshListPrices());
+        sortButton.addActionListener(e -> {
+
+        });
+        deleteButton.addActionListener(e -> {
+            mainPanel.remove(itemScrollPane);
+            if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
+                wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
+                generateListOfItems();
             }
         });
-        addItemButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AddItemPage addItemPage = new AddItemPage();
-                addItemPage.setContentPane(addItemPage.getMainPanel());
-                addItemPage.setVisible(true);
-                addItemPage.setLocationRelativeTo(null);
-                addItemPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        addButton.addActionListener(e -> {
+            AddItemPage addItemPage = new AddItemPage(wl);
+            addItemPage.setContentPane(addItemPage.getMainPanel());
+            addItemPage.setVisible(true);
+            addItemPage.setLocationRelativeTo(null);
+            addItemPage.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            dispose();
+        });
+        viewItemButton.addActionListener(e -> {
+            if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
+                Product selectedItem = itemList.get(itemPanelJList.getSelectedIndex());
+                ItemPage itemPage = new ItemPage();
+                itemPage.setContentPane(itemPage.getMainPanel());
+                itemPage.setVisible(true);
+                itemPage.setLocationRelativeTo(null);
+                itemPage.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 dispose();
             }
         });
+    }
 
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO
-                // Currently navigates to GUI.ListOfWishlistsPage.
-                HomePage listOfWlPage = new HomePage();
-                listOfWlPage.setContentPane(listOfWlPage.getMainPanel());
-                listOfWlPage.setVisible(true);
-                listOfWlPage.setLocationRelativeTo(null);
-                listOfWlPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                dispose();
-            }
-        });
+    /**
+     * creates a JScrollPane from a JList from a list from the wishlist
+     * Configures the JScrollPane and adds it to the main panel
+     */
+    private void generateListOfItems(){
+        ArrayList<ItemPanel> panelList = new ArrayList<>();
+        itemList = wl.getProductList();
+        for (Product product : itemList) {
+            panelList.add(new ItemPanel(product.getProductImageURL(),
+                    product.getProductName(), product.getProductPriceString()));
+        }
+        ItemPanel[] tempPanelList = new ItemPanel[panelList.size()];
+        tempPanelList = panelList.toArray(tempPanelList);
+        itemPanelJList = new JList<>(tempPanelList);
+        itemPanelJList.setCellRenderer(new ItemPanelRenderer());
+        itemPanelJList.setFixedCellHeight(100);
+        itemPanelJList.setFixedCellWidth(310);
+        itemPanelJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        itemPanelJList.setBackground(new Color(194, 234, 186));
+        itemScrollPane = new JScrollPane(itemPanelJList);
+        itemScrollPane.setBounds(16,80,310,400);
+        itemScrollPane.setHorizontalScrollBar(null);
+        itemScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+        mainPanel.add(itemScrollPane);
+        mainPanel.revalidate();
+        mainPanel.repaint();
     }
 }
