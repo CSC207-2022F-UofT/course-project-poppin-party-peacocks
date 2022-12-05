@@ -19,12 +19,6 @@ public class ProductReviewStarComparator implements ProductComparator {
      */
     @Override
     public int compare(Product item1, Product item2) {
-        if (item1.getReviewStars() > item2.getReviewStars()) {
-            return 1;
-        } else if (item1.getReviewStars() < item2.getReviewStars()) {
-            return -1;
-        } else {
-            return 0;
-        }
+        return Double.compare(item1.getReviewStars(), item2.getReviewStars());
     }
 }
