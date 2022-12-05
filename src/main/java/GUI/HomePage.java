@@ -1,7 +1,6 @@
 package GUI;
 
 import Controller.UserRegisterController;
-import Entities.User;
 import UseCases.UserRegister.UserRegister;
 import UseCases.UserRegister.UserRegisterCreateUser;
 import UseCases.UserRegister.UserRegisterResponseFormatter;

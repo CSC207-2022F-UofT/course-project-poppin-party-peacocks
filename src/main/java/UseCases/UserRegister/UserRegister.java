@@ -1,6 +1,9 @@
 package UseCases.UserRegister;
 
 import DataBase.DataBaseController;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 
 public class UserRegister implements UserRegisterCreateUser {
     final UserRegisterStatus status;
@@ -15,7 +18,7 @@ public class UserRegister implements UserRegisterCreateUser {
      * @return UseCases.UserRegisterStatus status with status failure or success, depending on if the User could be created
      */
     @Override
-    public UserRegisterInputs create(UserRegisterInputs inputs){
+    public UserRegisterInputs create(UserRegisterInputs inputs) throws IOException, ParseException {
         DataBaseController dataBaseController = new DataBaseController();
         if (inputs.checkUserExists()){
             return status.showFailure("User already exists, pick a new username.");

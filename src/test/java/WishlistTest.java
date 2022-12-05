@@ -1,6 +1,8 @@
+import Entities.Item;
+import Entities.Product;
+import Entities.Wishlist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import Entities.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;

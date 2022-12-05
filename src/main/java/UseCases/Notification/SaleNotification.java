@@ -1,6 +1,7 @@
 package UseCases.Notification;
 import Controller.Scheduler;
-import Entities.*;
+import Entities.Product;
+
 import java.util.TimerTask;
 
 /** A sale notification use case that tells us if a product is on sale */

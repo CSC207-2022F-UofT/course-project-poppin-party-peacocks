@@ -1,6 +1,7 @@
+import Entities.Item;
+import Entities.Wishlist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import Entities.*;
 
 public class ItemReviewStarComparatorTest {
     Item myFavDrink = new Item("Lime Bubbly", 5.47, 5.00, "www.shoppers.com/bubbly",

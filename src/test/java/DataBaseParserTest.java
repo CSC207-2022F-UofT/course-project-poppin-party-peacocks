@@ -1,5 +1,7 @@
 import DataBase.DataBaseParser;
-import Entities.*;
+import Entities.Item;
+import Entities.Product;
+import Entities.Wishlist;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;

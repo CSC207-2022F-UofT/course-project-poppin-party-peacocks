@@ -1,6 +1,7 @@
 package UseCases.Notification;
 import Controller.Scheduler;
-import Entities.*;
+import Entities.Product;
+
 import java.util.TimerTask;
 
 /** A price drop notification use case that tells us if a product drops below the user's desired price */

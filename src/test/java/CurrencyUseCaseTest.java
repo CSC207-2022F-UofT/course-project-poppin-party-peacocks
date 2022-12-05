@@ -1,10 +1,10 @@
 import Entities.Item;
+import Entities.User;
 import UseCases.Currency.CurrencyUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import DataBase.*;
-import Entities.*;
 
 public class CurrencyUseCaseTest {
 
