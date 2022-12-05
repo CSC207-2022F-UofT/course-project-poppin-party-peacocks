@@ -1,6 +1,8 @@
 package UseCases.Notification;
 import Controller.Scheduler;
 import Entities.*;
+import ExternalInterface.ItemUpdateChecker;
+
 import java.util.TimerTask;
 
 /** A price drop notification use case that tells us if a product drops below the user's desired price */
@@ -13,7 +15,8 @@ public class PriceDropNotification implements BaseNotification {
         TimerTask checkSale = new TimerTask() {
             @Override
             public void run() {
-                // TODO: Add refactored item search api call
+                ItemUpdateChecker itemUpdateChecker = new ItemUpdateChecker();
+                itemUpdateChecker.updatePriceCheck(product);
                 checkNotification();
             }
         };
