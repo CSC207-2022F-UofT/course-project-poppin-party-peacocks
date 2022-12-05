@@ -19,7 +19,7 @@ public class AddItemPage extends JFrame {
     private JPanel contentPanel;
     private JList<JPanel> itemJList;
     private final Wishlist currWishlist;
-    private Item[] itemList;
+    private Product[] itemList;
 
     public JPanel getMainPanel() {
         return mainPanel;
@@ -114,7 +114,7 @@ public class AddItemPage extends JFrame {
                 JPanel[] array1 = new JPanel[10];
                 String keyword = searchBar.getText();
                 ItemSearcher itemSearcher = new ItemSearcher();
-                itemList = new Item[1];
+                itemList = new Product[1];
                 if (keyword.contains("amazon.")){
                     itemList[0] = itemSearcher.searchItemUrl(keyword, false);
                     array1 = new JPanel[1];
