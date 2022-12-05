@@ -65,5 +65,4 @@ public class Wishlist implements ProductList{
         itemList.remove(product);
         return true;
     }
-
 }

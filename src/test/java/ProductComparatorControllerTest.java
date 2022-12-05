@@ -1,11 +1,12 @@
+import Controller.ProductComparatorController;
+import Entities.Item;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import Entities.*;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class WishlistTest {
+public class ProductComparatorControllerTest {
     Date date1 = new Date(2022, Calendar.DECEMBER, 15);
     Date date2 = new Date(2022, Calendar.NOVEMBER, 15);
     Date date3 = new Date(2022, Calendar.SEPTEMBER, 15);
@@ -16,7 +17,7 @@ public class WishlistTest {
     Item plushie = new Item("Whale Plushie", 40.99, 30.00, "www.amazon.com/WhalePlushie",
             "Giant Whale Plushie", 1050, 4.3, "www.amazonimage.com/OhWhale", date1, new String[]{"toys"});
 
-    Wishlist christmasWishlist = new Wishlist("Christmas Wishlist");
+    ProductComparatorController christmasWishlist = new ProductComparatorController("Christmas Wishlist");
 
     @Test
     public void getNameTest() {

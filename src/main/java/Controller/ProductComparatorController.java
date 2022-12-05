@@ -15,10 +15,10 @@ import UseCases.Comparator.ProductComparatorFactory;
  */
 public class ProductComparatorController implements ProductList {
     private String name;
-    private ArrayList<Product> itemList;
-    private ArrayList<Product> displayedList;
+    private final ArrayList<Product> itemList;
+    private final ArrayList<Product> displayedList;
     private Date dateAdded;
-    private ArrayList<String> selectedTags;
+    private final ArrayList<String> selectedTags;
 
     public ProductComparatorController(String name){
         this.name = name;
@@ -26,18 +26,6 @@ public class ProductComparatorController implements ProductList {
         this.displayedList = new ArrayList<>();
         this.dateAdded = new Date();
         this.selectedTags = new ArrayList<>();
-    }
-
-    public ProductComparatorController(String name, ArrayList<Product> itemList, ArrayList<Product> displayedList, Date dateAdded, ArrayList<String> selectedTags){
-        this.name = name;
-        this.itemList = itemList;
-        this.displayedList = displayedList;
-        this.dateAdded = dateAdded;
-        this.selectedTags = selectedTags;
-    }
-
-    public ProductComparatorController (ArrayList<Product> itemList) {
-        this.itemList = itemList;
     }
 
     /**
@@ -108,6 +96,7 @@ public class ProductComparatorController implements ProductList {
      */
     public boolean addProduct(Product product) {
         itemList.add(product);
+        displayedList.add(product);
         return false;
     }
 
