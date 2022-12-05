@@ -13,7 +13,7 @@ public class DataBaseControllerTest {
     @Test
     public void TestDataBaseWritesAndSavesListOfWishLists() throws ParseException {
         DataBaseController dataBaseController = new DataBaseController();
-        ListofProductLists wishlists = new ListOfWishlists();
+        ListOfProductLists wishlists = new ListOfWishlists();
         Wishlist wishlist = new Wishlist("Exam Celebration Wish List");
         wishlist.setDateAdded(new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").parse(testDate));
         wishlists.addWishlist(wishlist);

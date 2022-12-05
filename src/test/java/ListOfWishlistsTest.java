@@ -3,15 +3,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
-public class ListofWishlistsTest {
+public class ListOfWishlistsTest {
     ProductList christmasWishlist = new Wishlist("Christmas Wishlist");
 
     ProductList birthdayWishlist = new Wishlist("Christmas Wishlist");
 
-    ListofProductLists listofProductLists = new ListOfWishlists();
+    ListOfProductLists listofProductLists = new ListOfWishlists();
 
 
 

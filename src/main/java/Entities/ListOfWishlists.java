@@ -1,7 +1,7 @@
 package Entities;
 import java.util.*;
 
-public class ListOfWishlists implements ListofProductLists {
+public class ListOfWishlists implements ListOfProductLists {
 
     private ArrayList<ProductList> listWishlist;
 

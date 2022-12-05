@@ -18,7 +18,7 @@ public class DataBaseController {
      * @param userName Unique name of the user
      * @returns list of wishlists
      * */
-    public ListofProductLists getListOfWishlists(String userName) {
+    public ListOfProductLists getListOfWishlists(String userName) {
         DataBaseParser dataBaseParser = new DataBaseParser();
         try {
             File myObj = new File(DataBase.getWishlistPath(userName));
@@ -93,7 +93,7 @@ public class DataBaseController {
      * */
     // JSONArray's library has errors, can ignore
     @SuppressWarnings("unchecked")
-    public boolean saveListOfWishlists(ListofProductLists listOfWishlists, User user) {
+    public boolean saveListOfWishlists(ListOfProductLists listOfWishlists, User user) {
         DataBaseFormatter dataBaseFormatter = new DataBaseFormatter();
         String wishlistPath = DataBase.getWishlistPath(user.getName());
         File file = new File(wishlistPath);
