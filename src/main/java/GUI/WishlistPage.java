@@ -115,6 +115,8 @@ public class WishlistPage extends JFrame {
             generateListOfItems();
         });
         sortButton.addActionListener(e -> {
+
+
         });
         deleteButton.addActionListener(e -> {
             mainPanel.remove(itemScrollPane);
