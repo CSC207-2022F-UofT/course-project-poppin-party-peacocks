@@ -5,6 +5,8 @@ import Entities.Wishlist;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
 
+import ExternalInterface.ItemUpdateChecker;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,13 +23,6 @@ public class WishlistPage extends JFrame {
     private JList<ItemPanel> itemPanelJList;
     private JScrollPane itemScrollPane;
 
-    public WishlistPage(){
-        super();
-        wl = new Wishlist("New Wishlist");
-        this.setTitle(wl.getName());
-        initialiseJFrame();
-        initialiseMainPanel();
-    }
     public WishlistPage(Wishlist wishlist) {
         super(wishlist.getName());
         wl = wishlist;
@@ -59,9 +54,13 @@ public class WishlistPage extends JFrame {
         JPanel topPanel = new JPanel(null);
         topPanel.setBackground(new Color(106, 189, 154));
         topPanel.setBounds(0,0,360,56);
-        JLabel titleLabel = new JLabel(wl.getName());
+        String titleString = wl.getName();
+        if (titleString.length() > 20){
+            titleString = titleString.substring(0,19);
+        }
+        JLabel titleLabel = new JLabel(titleString);
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBounds(50,20,300,20);
+        titleLabel.setBounds(50,20,280,20);
         titleLabel.setFont(new Font("Montserrat", Font.PLAIN, 20));
         topPanel.add(titleLabel);
 
@@ -102,7 +101,17 @@ public class WishlistPage extends JFrame {
             homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
         });
-        refreshButton.addActionListener(e -> wl.refreshListPrices());
+        refreshButton.addActionListener(e -> {
+            System.out.println("updating");
+            mainPanel.remove(itemScrollPane);
+            ItemUpdateChecker IUC = new ItemUpdateChecker();
+            mainPanel.repaint();
+            for(int i = 0; i < wl.getProductList().size(); i++){
+                IUC.updatePriceCheck(wl.getDisplayedList().get(i));
+                itemPanelJList.getModel().getElementAt(i).setUpdateSuccess(true);
+            }
+            generateListOfItems();
+        });
         sortButton.addActionListener(e -> {
 
         });
@@ -124,7 +133,7 @@ public class WishlistPage extends JFrame {
         viewItemButton.addActionListener(e -> {
             if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
                 Product selectedItem = itemList.get(itemPanelJList.getSelectedIndex());
-                ItemPage itemPage = new ItemPage();
+                ItemPage itemPage = new ItemPage(selectedItem, wl);
                 itemPage.setContentPane(itemPage.getMainPanel());
                 itemPage.setVisible(true);
                 itemPage.setLocationRelativeTo(null);
@@ -143,7 +152,7 @@ public class WishlistPage extends JFrame {
         itemList = wl.getProductList();
         for (Product product : itemList) {
             ItemPanel itemPanel = new ItemPanel(product.getProductImageURL(),
-                    product.getProductName(), product.getProductPriceString());
+                    product.getProductName(), product.getProductPriceString(), product.getProductDateLastUpdated());
             SaleNotification saleNotification = new SaleNotification(product);
             PriceDropNotification priceDropNotification = new PriceDropNotification(product);
 

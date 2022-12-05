@@ -10,8 +10,6 @@ import UseCases.Notification.SaleNotification;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 
@@ -174,13 +172,12 @@ public class AddItemPage extends JFrame {
             renderer.setBackground(isSelected ? Color.red : list.getBackground());
             Color defaultColor = new Color(194, 234, 186);
             Color selectedColor = new Color(106, 189, 154);
+            BorderLayout layout = (BorderLayout) renderer.getLayout();
             if (isSelected) {
-                BorderLayout layout = (BorderLayout) renderer.getLayout();
                 layout.getLayoutComponent(BorderLayout.CENTER).setBackground(selectedColor);
                 renderer.setBackground(selectedColor);
                 renderer.setForeground(selectedColor);
             } else {
-                BorderLayout layout = (BorderLayout) renderer.getLayout();
                 layout.getLayoutComponent(BorderLayout.CENTER).setBackground(defaultColor);
                 renderer.setBackground(defaultColor);
                 renderer.setForeground(defaultColor);

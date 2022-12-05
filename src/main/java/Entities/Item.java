@@ -112,6 +112,7 @@ public class Item implements Product {
     public Date getProductDateAdded(){
         return this.dateAdded;
     }
+    public Date getProductDateLastUpdated() {return this.dateLastUpdated;}
     public String[] getTags(){
         return this.tags;
     }

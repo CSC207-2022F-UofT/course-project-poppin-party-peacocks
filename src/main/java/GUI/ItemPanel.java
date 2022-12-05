@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 
 /**
  * A GUI class used to create a visual representation of an item inside a list.
@@ -18,9 +19,10 @@ public class ItemPanel extends JPanel {
     Color borderColor;
     Color panelColor;
     ImageIcon img;
+    Date dateLastUpdated;
+    boolean updateSuccess;
 
-
-    public ItemPanel(String imgURL, String itemName, String itemPrice) {
+    public ItemPanel(String imgURL, String itemName, String itemPrice, Date lastUpated) {
         super(null);
         this.imgURL = imgURL;
         if (itemName.length() > 20){
@@ -29,9 +31,18 @@ public class ItemPanel extends JPanel {
             this.itemName = itemName;
         }
         this.itemPrice = itemPrice;
+        this.dateLastUpdated = lastUpated;
         this.setSize(300,100);
         borderColor = Color.WHITE;
         panelColor = new Color(236, 236, 236);
+        updateSuccess = true;
+    }
+    /**
+     * Sets updateSuccess to the passed parameter. Used in WishlistPage to determine if an item successfully updated.
+     * @param success - color to set the panel to
+     */
+    public void setUpdateSuccess(boolean success){
+        updateSuccess = success;
     }
 
     /**
@@ -79,7 +90,7 @@ public class ItemPanel extends JPanel {
                 img = new ImageIcon(scaledImg);
                 img.paintIcon(null, g2, 10,10);
             }
-            catch (IOException e1){
+            catch (IOException e1) {
                 e1.printStackTrace();
             }
         }
@@ -91,6 +102,12 @@ public class ItemPanel extends JPanel {
         g2.setFont(new Font("Montserrat", Font.PLAIN, 18));
         g2.drawString(itemName, 100,25);
         g2.setFont(new Font("Montserrat", Font.PLAIN, 12));
-        g2.drawString(itemPrice, 100, 60);
+        g2.drawString(itemPrice, 100, 50);
+        g2.setFont(new Font("Montserrat", Font.PLAIN, 8));
+        if(!updateSuccess){
+            g2.drawString("Price update failed. Please try again later", 100, 70);
+        }
+        String lastUpdated = dateLastUpdated.toString();
+        g2.drawString("Last Updated: " + lastUpdated,100,90);
     }
 }

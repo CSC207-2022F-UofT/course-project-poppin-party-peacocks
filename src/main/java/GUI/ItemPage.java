@@ -8,12 +8,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import Entities.Wishlist;
+import Entities.Product;
 
 /**
  * This ItemPage class is a JFrame that displays the attributes of a given item from a wishlist.
  */
 public class ItemPage extends JFrame {
     private final GradientJPanel mainPanel;
+    private Product item;
+    private Wishlist wl;
 
     /**
      * mainPanel getter method.
@@ -27,13 +31,16 @@ public class ItemPage extends JFrame {
      * ItemPage constructor.
      */
 
-    public ItemPage() {
+    public ItemPage(Product item, Wishlist wl) {
 
         // JFrame setup
         super("Item name here");
         setLayout(null);
         setSize(360, 640);
         setResizable(false);
+
+        this.item = item;
+        this.wl = wl;
 
         // constants
         final Color color1 = new Color(194, 234, 186);
@@ -54,7 +61,11 @@ public class ItemPage extends JFrame {
         backButton.setIcon(new ImageIcon("src/main/java/Assets/backArrow.png"));
         backButton.setBounds(15, 15, 25, 25);
         headerPanel.add(backButton);
-        CustomJLabel thisItemLabel = new CustomJLabel("Get this item title", Color.WHITE, titleFont);
+        String productName = item.getProductName();
+        if (productName.length() > 24){
+            productName = productName.substring(0,23) + "...";
+        }
+        CustomJLabel thisItemLabel = new CustomJLabel(productName, Color.WHITE, titleFont);
         thisItemLabel.setBounds(75, 17, 360, 24);
         headerPanel.add(thisItemLabel);
         mainPanel.add(headerPanel);
@@ -65,31 +76,37 @@ public class ItemPage extends JFrame {
         Image image;
         Image resizedImage;
         try {
-            URL url = new URL("https://www.gardeningknowhow.com/wp-content/uploads/2021/05/whole-and-slices-watermelon.jpg");
+            URL url = new URL(item.getProductImageURL());
             image = ImageIO.read(url);
             resizedImage = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
             imageLabel.setIcon(new ImageIcon(resizedImage));
         } catch (IOException e) {
-            System.out.println("Image not found!");
+            try{
+                URL url = new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png");
+                image = ImageIO.read(url);
+                resizedImage = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                imageLabel.setIcon(new ImageIcon(resizedImage));
+            }
+            catch (IOException e1){
+                e1.printStackTrace();
+            }
         }
         imageLabel.setBounds(75, 76, 200, 200);
         mainPanel.add(imageLabel);
 
         // Item Information
-        String currency = "USD";
-        double itemPrice = 56.78;
-        double reviewStars = 4.5;
-        int reviewCount = 258;
-        String itemDescription = "This product is bubly.\n Hello watermelon1 watermelon2 watermelon3. Herms " +
-                "likes bubly in the following flavours: lime, orange, mango, everything else, grapefruit. " +
-                "He was not joking.";
-        double desiredPrice = 60;
-        double itemPriceChange = 3.00;
-        Date itemDateAdded = new Date();
+        String currency = item.getProductCurrency();
+        String itemPrice = item.getProductPriceString();
+        double reviewStars = item.getReviewStars();
+        int reviewCount = item.getReviewCount();
+        String itemDescription = item.getProductDescription();
+        double desiredPrice = item.getProductDesiredPrice();
+        double itemPriceChange = item.getPriceChange();
+        Date itemDateAdded = item.getProductDateAdded();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String itemDateAddedFormatted = dateFormat.format(itemDateAdded);
-        String url = "https://www.amazon.ca/gp/product/B0B2449PY2/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&th=1";
-        String[] tags = {"a", "b", "f"};
+        String url = item.getProductURL();
+        String[] tags = item.getTags();
         StringBuilder totalTag = new StringBuilder();
         for (String tag : tags) {
             totalTag.append(tag);
@@ -107,6 +124,7 @@ public class ItemPage extends JFrame {
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollBar.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+        scrollBar.getVerticalScrollBar().setUnitIncrement(20);
         scrollBar.setBorder(null);
         scrollBar.setBounds(75, 300, 200, 200);
 
@@ -162,7 +180,7 @@ public class ItemPage extends JFrame {
         // Button Logic
         // Navigates back to WishlistPage.
         backButton.addActionListener(e -> {
-            WishlistPage wlPage = new WishlistPage();
+            WishlistPage wlPage = new WishlistPage(wl);
             wlPage.setContentPane(wlPage.getMainPanel());
             wlPage.setVisible(true);
             wlPage.setLocationRelativeTo(null);
@@ -174,8 +192,8 @@ public class ItemPage extends JFrame {
         desiredPriceButton.addActionListener(e -> {
             String priceText = desiredPriceInput.getText();
 
-            Double updatedDesiredPrice =  Double.parseDouble(priceText);
-
+            double updatedDesiredPrice = Double.parseDouble(priceText);
+            this.item.setDesiredPrice(updatedDesiredPrice);
         });
     }
 }

@@ -20,4 +20,15 @@ public class ListOfWishlists {
     public void addWishlist(Wishlist wishlist){
         this.listWishlist.add(wishlist);
     }
+
+    public void removeWishlist(String wishlistName){
+        listWishlist.removeIf(w -> Objects.equals(w.getName(), wishlistName));
+    }
+    public ArrayList<String> getWishlistNames(){
+        ArrayList<String> wishlistNames = new ArrayList<>();
+        for(Wishlist w : listWishlist){
+            wishlistNames.add(w.getName());
+        }
+        return wishlistNames;
+    }
 }
