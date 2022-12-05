@@ -8,10 +8,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -153,6 +150,52 @@ public class DataBaseController {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    /** Deletes user from the database
+     * @param userName username to delete from the database
+     * @returns whether user was successfully deleted
+     * */
+    // JSONArray's library has errors, can ignore
+    @SuppressWarnings("unchecked")
+    public boolean deleteUser(String userName) throws IOException {
+        File tempUserFile = new File(DataBase.getTempUserFilePath());
+        File userFile = new File(DataBase.getUserFilePath());
+        // If the tempUserFile directory doesn't exist, create a new tempUserFile
+        if (!tempUserFile.isFile()) {
+            DataBase.createFile(DataBase.getTempUserFilePath());
+        }
+
+        if (!userFile.isFile()) {
+            DataBase.createFile(DataBase.getUserFilePath());
+        }
+
+        BufferedReader reader = new BufferedReader(new FileReader(userFile));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tempUserFile));
+        String currentLine;
+        try {
+            while((currentLine = reader.readLine()) != null) {
+                JSONParser jsonParser = new JSONParser();
+                JSONObject parsedData = (JSONObject) jsonParser.parse(currentLine);
+                if (!(Objects.equals(parsedData.get("user").toString(), userName))) {
+                    writer.write(parsedData.toJSONString()+ '\n');
+                }
+
+            }
+            reader.close();
+            writer.close();
+
+            if (userFile.delete()) {
+                System.out.println("File deleted!");
+            }
+
+            return tempUserFile.renameTo(userFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 

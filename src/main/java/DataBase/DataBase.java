@@ -1,16 +1,7 @@
 package DataBase;
 import Entities.*;
 
-import Entities.ListOfWishlists;
-import Entities.Wishlist;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import java.io.*;
-import java.util.*;
 
 /** A class that manages user and wishlist read and write to files */
 public class DataBase {
@@ -32,54 +23,12 @@ public class DataBase {
         try {
             File file = new File(fileDirectory);
 
-            file.createNewFile();
+            if (file.createNewFile()) {
+                System.out.println("File created!");
+            }
         } catch (IOException e) {
             System.out.println("An error occurred creating file.");
             e.printStackTrace();
         }
     }
-
-
-    /** Deletes user from the database
-     * @param userName username to delete from the database
-     * @returns whether user was successfully deleted
-     * */
-    // JSONArray's library has errors, can ignore
-    @SuppressWarnings("unchecked")
-    public static boolean deleteUser(String userName) throws IOException {
-        File tempUserFile = new File(getTempUserFilePath());
-        File userFile = new File(getUserFilePath());
-        // If the tempUserFile directory doesn't exist, create a new tempUserFile
-        if (!tempUserFile.isFile()) {
-            createFile(DataBase.getTempUserFilePath());
-        }
-
-        if (!userFile.isFile()) {
-            createFile(DataBase.getUserFilePath());
-        }
-
-        BufferedReader reader = new BufferedReader(new FileReader(userFile));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(tempUserFile));
-        String currentLine;
-        try {
-            while((currentLine = reader.readLine()) != null) {
-                JSONParser jsonParser = new JSONParser();
-                JSONObject parsedData = (JSONObject) jsonParser.parse(currentLine);
-                if (!(Objects.equals(parsedData.get("user").toString(), userName))) {
-                    writer.write(parsedData.toJSONString()+ '\n');
-                }
-
-            }
-            reader.close();
-            writer.close();
-            userFile.delete();
-            return tempUserFile.renameTo(userFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }
