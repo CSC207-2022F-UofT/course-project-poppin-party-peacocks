@@ -1,6 +1,6 @@
 package UseCases.UserRegister;
 
-import DataBase.DataBase;
+import DataBase.DataBaseController;
 
 public class UserRegister implements UserRegisterCreateUser {
     final UserRegisterStatus status;
@@ -16,6 +16,7 @@ public class UserRegister implements UserRegisterCreateUser {
      */
     @Override
     public UserRegisterInputs create(UserRegisterInputs inputs){
+        DataBaseController dataBaseController = new DataBaseController();
         if (inputs.checkUserExists()){
             return status.showFailure("User already exists, pick a new username.");
         } else if (inputs.getInputtedUsername().length() < 3) {
@@ -25,7 +26,7 @@ public class UserRegister implements UserRegisterCreateUser {
         } else if (inputs.getInputtedPassword().length() < 3) {
             return status.showFailure("Password is too short. Password must have at least 3 characters.");
         }
-        DataBase.addUser(inputs.getTempUser());
+        dataBaseController.addUser(inputs.getTempUser());
         return status.showSuccess(inputs);
     }
 }

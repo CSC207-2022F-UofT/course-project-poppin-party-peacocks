@@ -1,10 +1,7 @@
 package GUI;
 
-import GUI.RoundedBorder;
-import GUI.WishlistPage;
 import javax.swing.*;
 import java.awt.*;
-import Entities.*;
 
 /**
  * A graphic user interface for the AddWishlistPage with the purpose of giving an opportunity to the user to customize
@@ -89,7 +86,7 @@ public class AddWishlistPage extends JFrame {
             dispose();
         });
         cancelButton.addActionListener(e -> {
-            // Returns to GUI.ListOfWishlistsPage
+            // Returns to GUI.HomePage
             HomePage listOfWL = new HomePage();
             listOfWL.setContentPane(listOfWL.getMainPanel());
             listOfWL.setVisible(true);
