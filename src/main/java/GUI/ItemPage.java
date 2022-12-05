@@ -140,9 +140,9 @@ public class ItemPage extends JFrame {
         contentPanel.add(desiredPriceLabel);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        JTextField desiredPriceInput = new JTextField("", 10);
-        desiredPriceInput.setForeground(Color.white);
-        JButton desiredPriceButton = new JButton("Go");
+        JTextField desiredPriceInput = new JTextField("", 5);
+        desiredPriceInput.setForeground(Color.black);
+        JButton desiredPriceButton = new JButton("Set Desired Price");
 
         contentPanel.add(desiredPriceInput);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
