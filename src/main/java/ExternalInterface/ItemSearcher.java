@@ -16,6 +16,16 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ItemSearcher {
+
+    private String userCurrency = "CAD";
+    private double currencyChange = 1.36;
+    public ItemSearcher(){
+    }
+
+    public ItemSearcher(String userCurrency){
+        this.userCurrency = userCurrency;
+    }
+
     /**
      * Calls Amazon Api search tool to return json string of search results of specified keyword and marketplace
      *
@@ -179,7 +189,12 @@ public class ItemSearcher {
             String sellingPriceStr = price.text().replace(",", "").substring(1);
 
             if (!sellingPriceStr.matches(".*[a-zA-Z]+.*")) {
+
                 sellingPrice = Double.parseDouble(sellingPriceStr);
+
+                if (!userCurrency.equals("CAD")){
+                    sellingPrice *= currencyChange;
+                }
             }
             if (htmlCountRating != null) {
                 countRating = Integer.parseInt(htmlCountRating.text().replace(",", "").split(" ")[0]);

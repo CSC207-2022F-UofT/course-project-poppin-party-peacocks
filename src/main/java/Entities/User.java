@@ -1,11 +1,13 @@
 package Entities;
 
+import java.util.ArrayList;
+
 public class User {
     private String currency;
     private String name;
     private String password;
-    private ListOfWishlists wishlists;
-    private static final String[] currencyBank = {"USD", "CAD", "YUAN"};
+    private ListOfProductLists wishlists;
+    private static final String[] currencyBank = {"USD", "CAD"};
 
     public User(String name, String password){
         this.name = name;
@@ -50,5 +52,24 @@ public class User {
             }
         }
         return false;
+    }
+
+    /**
+     * Toggles current currency to user given currency
+     */
+    public void toggleCurrency(){
+        if (currency.equals("CAD")){
+            currency = "USD";
+        }
+        else{
+            currency = "CAD";
+        }
+
+        for (ProductList wishlist: wishlists.getListOfWishlist()){
+            for (Product item: wishlist.getProductList()){
+                item.setProductCurrency(currency);
+            }
+        }
+
     }
 }
