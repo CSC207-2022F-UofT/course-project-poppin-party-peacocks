@@ -19,48 +19,11 @@ public class AddItemPage extends JFrame {
     private final Wishlist currWishlist;
     private Item[] itemList;
 
-    public JPanel getMainPanel() {
-        return mainPanel;
-    }
-
-    public static JPanel createPanel(Product item, int index) {
-        JPanel panel = new JPanel(new BorderLayout());
-        // icon
-        JLabel imageLabel = new JLabel();
-        Image image;
-        Image resizedImage;
-        try {
-            URL url = new URL(item.getProductImageURL());
-            image = ImageIO.read(url);
-            resizedImage = image.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
-            imageLabel.setIcon(new ImageIcon(resizedImage));
-        } catch (IOException e) {
-            System.out.println("Image not found!");
-        }
-        // text
-        JPanel centrePanel = new JPanel();
-        centrePanel.setLayout(new BoxLayout(centrePanel, BoxLayout.Y_AXIS));
-        JLabel nameLabel = new JLabel(item.getProductName());
-        JLabel costLabel = new JLabel(Double.toString(item.getProductPrice()));
-        centrePanel.add(nameLabel);
-        centrePanel.add(costLabel);
-        JLabel indexLabel = new JLabel(Integer.toString(index));
-
-        panel.add(indexLabel, BorderLayout.EAST);
-        panel.add(centrePanel, BorderLayout.CENTER);
-        panel.add(imageLabel, BorderLayout.WEST);
-        return panel;
-    }
-
-    public void renderCentre() {
-        mainPanel.add(contentPanel, BorderLayout.CENTER);
-    }
-
     public AddItemPage(Wishlist wishlist) {
         super("Add Item");
         setLayout(null);
-        setSize(400, 600);
-        setResizable(true);
+        setSize(360, 640);
+        setResizable(false);
 
         this.currWishlist = wishlist;
         // constants
@@ -148,14 +111,53 @@ public class AddItemPage extends JFrame {
         });
 
         addSelectedItemButton.addActionListener(e -> {
-            currWishlist.addProduct(itemList[itemJList.getSelectedIndex()]);
-            WishlistPage updatedWishlistPage = new WishlistPage(currWishlist);
-            updatedWishlistPage.setContentPane(updatedWishlistPage.getMainPanel());
-            updatedWishlistPage.setVisible(true);
-            updatedWishlistPage.setLocationRelativeTo(null);
-            updatedWishlistPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            dispose();
+            if (itemJList.getSelectedIndex() >= 0){
+                currWishlist.addProduct(itemList[itemJList.getSelectedIndex()]);
+                WishlistPage updatedWishlistPage = new WishlistPage(currWishlist);
+                updatedWishlistPage.setContentPane(updatedWishlistPage.getMainPanel());
+                updatedWishlistPage.setVisible(true);
+                updatedWishlistPage.setLocationRelativeTo(null);
+                updatedWishlistPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                dispose();
+            }
         });
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
+    public static JPanel createPanel(Product item, int index) {
+        JPanel panel = new JPanel(new BorderLayout());
+        // icon
+        JLabel imageLabel = new JLabel();
+        Image image;
+        Image resizedImage;
+        try {
+            URL url = new URL(item.getProductImageURL());
+            image = ImageIO.read(url);
+            resizedImage = image.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+            imageLabel.setIcon(new ImageIcon(resizedImage));
+        } catch (IOException e) {
+            System.out.println("Image not found!");
+        }
+        // text
+        JPanel centrePanel = new JPanel();
+        centrePanel.setLayout(new BoxLayout(centrePanel, BoxLayout.Y_AXIS));
+        JLabel nameLabel = new JLabel(item.getProductName());
+        JLabel costLabel = new JLabel(Double.toString(item.getProductPrice()));
+        centrePanel.add(nameLabel);
+        centrePanel.add(costLabel);
+        JLabel indexLabel = new JLabel(Integer.toString(index));
+
+        panel.add(indexLabel, BorderLayout.EAST);
+        panel.add(centrePanel, BorderLayout.CENTER);
+        panel.add(imageLabel, BorderLayout.WEST);
+        return panel;
+    }
+
+    public void renderCentre() {
+        mainPanel.add(contentPanel, BorderLayout.CENTER);
     }
     public static class PanelRenderer implements ListCellRenderer<Object> {
         public Component getListCellRendererComponent(JList list, Object value, int index,

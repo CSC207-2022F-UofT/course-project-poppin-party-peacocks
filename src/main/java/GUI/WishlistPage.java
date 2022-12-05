@@ -21,6 +21,8 @@ public class WishlistPage extends JFrame {
     private JList<ItemPanel> itemPanelJList;
     private JScrollPane itemScrollPane;
     private boolean isSortFrameOpen = false;
+    String currentSortingMethod;
+    boolean isSortedAscending;
 
     public WishlistPage(Wishlist wishlist) {
         super(wishlist.getName());
@@ -34,6 +36,8 @@ public class WishlistPage extends JFrame {
     public void setSortFrameOpen(boolean isOpen){
         this.isSortFrameOpen = isOpen;
     }
+    public void setCurrentSortingMethod(String s) {this.currentSortingMethod = s; }
+    public void setIsAscending(boolean b) {this.isSortedAscending = b; }
     /**
      * @return the main panel for this JFrame
      */
@@ -95,6 +99,9 @@ public class WishlistPage extends JFrame {
         mainPanel.setComponentZOrder(titleLabel, 1);
         mainPanel.setComponentZOrder(topPanel, 2);
 
+        currentSortingMethod = "Sort By Date";
+        isSortedAscending = true;
+
         generateListOfItems();
         backButton.addActionListener(e -> {
             HomePage homePage = new HomePage();
@@ -121,7 +128,7 @@ public class WishlistPage extends JFrame {
         });
         sortButton.addActionListener(e -> {
             if(!isSortFrameOpen){
-                SortFrame sortFrame = new SortFrame(this, wl);
+                SortFrame sortFrame = new SortFrame(this, wl, currentSortingMethod, isSortedAscending);
                 isSortFrameOpen = true;
             }
         });
@@ -152,14 +159,17 @@ public class WishlistPage extends JFrame {
             }
         });
     }
-
+    public void refreshMainPanel(){
+        mainPanel.remove(itemScrollPane);
+        generateListOfItems();
+    }
     /**
      * creates a JScrollPane from a JList from a list from the wishlist
      * Configures the JScrollPane and adds it to the main panel
      */
     public void generateListOfItems(){
         ArrayList<ItemPanel> panelList = new ArrayList<>();
-        itemList = wl.getProductList();
+        itemList = wl.getDisplayedList();
         for (Product product : itemList) {
             panelList.add(new ItemPanel(product.getProductImageURL(),
                     product.getProductName(), product.getProductPriceString(), product.getProductDateLastUpdated()));

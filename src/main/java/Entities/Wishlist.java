@@ -6,10 +6,10 @@ import java.util.*;
  */
 public class Wishlist implements ProductList {
     private String name;
-    private ArrayList<Product> productList;
+    private final ArrayList<Product> productList;
     private ArrayList<Product> displayedList;
     private Date dateAdded;
-    private ArrayList<String> selectedTags;
+    private final ArrayList<String> selectedTags;
 
     public Wishlist(String name) {
         this.name = name;
@@ -108,10 +108,10 @@ public class Wishlist implements ProductList {
         Comparator<Product> itemReviewStarComparator = new ItemReviewStarComparator();
 
         switch (order.toLowerCase()) {
-            case "descending":
+            case "ascending":
                 displayedList.sort(itemReviewStarComparator);
                 break;
-            case "ascending":
+            case "descending":
                 displayedList.sort(Collections.reverseOrder(itemReviewStarComparator));
                 break;
             default:
@@ -128,10 +128,10 @@ public class Wishlist implements ProductList {
         Comparator<Product> itemReviewCount = new ItemReviewCountComparator();
 
         switch (order.toLowerCase()) {
-            case "descending":
+            case "ascending":
                 displayedList.sort(itemReviewCount);
                 break;
-            case "ascending":
+            case "descending":
                 displayedList.sort(Collections.reverseOrder(itemReviewCount));
                 break;
             default:
@@ -148,10 +148,10 @@ public class Wishlist implements ProductList {
         Comparator<Product> itemPriceComparator = new ItemPriceComparator();
 
         switch (order.toLowerCase()) {
-            case "descending":
+            case "ascending":
                 displayedList.sort(itemPriceComparator);
                 break;
-            case "ascending":
+            case "descending":
                 displayedList.sort(Collections.reverseOrder(itemPriceComparator));
                 break;
             default:

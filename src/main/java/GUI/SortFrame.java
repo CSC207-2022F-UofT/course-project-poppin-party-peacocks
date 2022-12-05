@@ -16,7 +16,7 @@ public class SortFrame extends JFrame {
 
     ArrayList<CustomJButton> sortButtons;
     String currentSortingMethod;
-    boolean isAscending = true;
+    boolean isAscending;
     CustomJButton sortByName;
     CustomJButton sortByPrice;
     CustomJButton sortByDate;
@@ -26,12 +26,14 @@ public class SortFrame extends JFrame {
     CustomJButton descending;
     CustomJButton sort;
     JLabel sortingText;
-    public SortFrame(WishlistPage wlp, Wishlist wl){
+    public SortFrame(WishlistPage wlp, Wishlist wl, String curSortMethod, boolean b){
         super("Sort");
-        initializeJFrame();
-        initializeMainPanel();
         this.wl = wl;
         this.wlp = wlp;
+        this.currentSortingMethod = curSortMethod;
+        this.isAscending = b;
+        initializeJFrame();
+        initializeMainPanel();
     }
     public void initializeJFrame(){
         setLayout(null);
@@ -80,15 +82,12 @@ public class SortFrame extends JFrame {
         sort.setBounds(230, 170,100,30);
         mainPanel.add(sort);
 
-
-
         sortButtons.add(sortByName);
         sortButtons.add(sortByPrice);
         sortButtons.add(sortByDate);
         sortButtons.add(sortByReviewCount);
         sortButtons.add(sortByReviewStars);
 
-        currentSortingMethod = sortByDate.getText();
         sortingText = new JLabel(currentSortingMethod + " | Ascending");
         sortingText.setBounds(10,170,200,30);
         mainPanel.add(sortingText);
@@ -148,20 +147,20 @@ public class SortFrame extends JFrame {
                 }
             }
             wlp.setWishlist(wl);
-            wlp.generateListOfItems();
             wlp.setSortFrameOpen(false);
             dispose();
         });
         this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
-                super.windowClosing(e);
+            public void windowClosed(WindowEvent e) {
+                super.windowClosed(e);
                 wlp.setSortFrameOpen(false);
+                wlp.refreshMainPanel();
+                wlp.setCurrentSortingMethod(currentSortingMethod);
+                wlp.setIsAscending(isAscending);
             }
         });
-
         updateSelection();
-
     }
 
     public void updateSelection(){
@@ -187,8 +186,9 @@ public class SortFrame extends JFrame {
         sortByPrice.repaint();
         sortByReviewCount.repaint();
         sortByReviewStars.repaint();
-        mainPanel.repaint();
         ascending.repaint();
         descending.repaint();
+        sortingText.repaint();
+        mainPanel.repaint();
     }
 }
