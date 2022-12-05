@@ -19,7 +19,7 @@ public class DataBaseControllerTest {
         wishlists.addWishlist(wishlist);
 
         User user = new User("TestUser", "Test");
-        DataBase.saveListOfWishlists(wishlists, user);
+        dataBaseController.saveListOfWishlists(wishlists, user);
 
         Assertions.assertEquals(dataBaseController.getListOfWishlists("TestUser").getListOfWishlist().get(0).getName(), "Exam Celebration Wish List");
     }

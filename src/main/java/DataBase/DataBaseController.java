@@ -10,6 +10,8 @@ import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -87,6 +89,71 @@ public class DataBaseController {
         }
         // Return a default user if user doesn't exist
         return new User("Default User", "Password");
+    }
+
+    /** Adds a list of wishlists data to a user's database
+     * @param listOfWishlists list of wishlists data to add to database
+     * @param user user of the data it belongs to
+     * @returns whether wishlist was successfully saved
+     * */
+    // JSONArray's library has errors, can ignore
+    @SuppressWarnings("unchecked")
+    public boolean saveListOfWishlists(ListOfWishlists listOfWishlists, User user) {
+        DataBaseFormatter dataBaseFormatter = new DataBaseFormatter();
+        String wishlistPath = DataBase.getWishlistPath(user.getName());
+        File file = new File(wishlistPath);
+
+        // If the file directory doesn't exist, create a new file
+        if (!file.isFile()) {
+            DataBase.createFile(DataBase.getUserFilePath());
+        }
+
+        try {
+            FileWriter fileWriter = new FileWriter(wishlistPath);
+            JSONObject listOfWishlistsObject = new JSONObject();
+            JSONArray wishlistsObjects = new JSONArray();
+
+            for (Wishlist wishlist : listOfWishlists.getListOfWishlist()) {
+                wishlistsObjects.add(dataBaseFormatter.createWishlistJSON(wishlist));
+            }
+            listOfWishlistsObject.put("wishlists", wishlistsObjects);
+
+            fileWriter.write(listOfWishlistsObject.toJSONString());
+            fileWriter.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /** Adds a new user to the database in JSON format
+     * @param user user to add to the database
+     * @returns whether user was successfully saved
+     * */
+    // JSONArray's library has errors, can ignore
+    @SuppressWarnings("unchecked")
+    public boolean addUser(User user) {
+        File file = new File(DataBase.getUserFilePath());
+
+        // If the file directory doesn't exist, create a new file
+        if (!file.isFile()) {
+            DataBase.createFile(DataBase.getUserFilePath());
+        }
+
+        try {
+            FileWriter fileWriter = new FileWriter(DataBase.getUserFilePath(), true);
+            JSONObject userObject = new JSONObject();
+            userObject.put("user", user.getName());
+            userObject.put("password", user.getPassword());
+            userObject.put("currency", user.getCurrency());
+            fileWriter.write(userObject.toJSONString() + '\n');
+            fileWriter.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /** Retrieves the current active user

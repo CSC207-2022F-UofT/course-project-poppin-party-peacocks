@@ -1,5 +1,8 @@
 //package GUI;
 //
+//import Controller.UserRegisterController;
+//import UseCases.UserRegister.UserRegister;
+//
 //import javax.swing.*;
 //import java.awt.*;
 //import java.awt.event.ActionEvent;
@@ -35,18 +38,18 @@
 //        return label;
 //    }
 //
-////    public JButton createButton(String text, int prefWidth, int prefHeight, Color background, Color foreground, Font font) {
-////        JButton button = new JButton();
-////        button.setText(text);
-////        button.setFont(font);
-////        button.setBorder(new GUI.GUI.RoundedBorder(20));
-////        if (prefHeight > 0 && prefWidth > 0) {
-////            button.setPreferredSize(new Dimension(prefWidth, prefHeight));
-////        }
-////        button.setBackground(background);
-////        button.setForeground(foreground);
-////        return button;
-////    }
+//    public JButton createButton(String text, int prefWidth, int prefHeight, Color background, Color foreground, Font font) {
+//        JButton button = new JButton();
+//        button.setText(text);
+//        button.setFont(font);
+//        button.setBorder(new GUI.RoundedBorder(20));
+//        if (prefHeight > 0 && prefWidth > 0) {
+//            button.setPreferredSize(new Dimension(prefWidth, prefHeight));
+//        }
+//        button.setBackground(background);
+//        button.setForeground(foreground);
+//        return button;
+//    }
 //
 //    public ListOfWishlistsPage() {
 //        super("My Wishlists");
@@ -149,9 +152,11 @@
 //        signoutButton.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
+//                UserRegister userRegister = new UserRegister();
+//                UserRegisterController controller = new UserRegisterController(userRegister);
 //                // TODO
 //                // Currently, this navigates to GUI.MainAppLoginSignupPage.
-//                WelcomePage loginSignupPage = new WelcomePage();
+//                WelcomePage loginSignupPage = new WelcomePage(controller);
 //                loginSignupPage.setContentPane(loginSignupPage.getMainPanel());
 //                loginSignupPage.setVisible(true);
 //                loginSignupPage.setLocationRelativeTo(null);

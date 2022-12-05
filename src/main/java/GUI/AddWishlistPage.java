@@ -87,14 +87,14 @@ public class AddWishlistPage extends JFrame {
             wlPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
         });
-        cancelButton.addActionListener(e -> {
-            // Returns to GUI.ListOfWishlistsPage
-            ListOfWishlistsPage listOfWL = new ListOfWishlistsPage();
-            listOfWL.setContentPane(listOfWL.getMainPanel());
-            listOfWL.setVisible(true);
-            listOfWL.setLocationRelativeTo(null);
-            listOfWL.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            dispose();
-        });
+//        cancelButton.addActionListener(e -> {
+//            // Returns to GUI.ListOfWishlistsPage
+//            ListOfWishlistsPage listOfWL = new ListOfWishlistsPage();
+//            listOfWL.setContentPane(listOfWL.getMainPanel());
+//            listOfWL.setVisible(true);
+//            listOfWL.setLocationRelativeTo(null);
+//            listOfWL.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//            dispose();
+//        });
     }
 }
