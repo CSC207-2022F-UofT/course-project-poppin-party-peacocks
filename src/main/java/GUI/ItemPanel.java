@@ -43,6 +43,14 @@ public class ItemPanel extends JPanel {
     }
 
     /**
+     * Sets the color of the border of the ItemPanel to c
+     * @param c - color to set the panel to
+     */
+    public void setBorderColor(Color c){
+        this.borderColor = c;
+    }
+
+    /**
      * Overrides the paintComponent method inheritted from JPanel.
      * Creates a visual representation of an item, which is displayed in the wishlist.
      * @param g the Graphics object to protect

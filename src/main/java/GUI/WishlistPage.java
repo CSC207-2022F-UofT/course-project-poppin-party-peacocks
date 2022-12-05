@@ -2,6 +2,9 @@ package GUI;
 
 import Entities.Product;
 import Entities.Wishlist;
+import UseCases.Notification.PriceDropNotification;
+import UseCases.Notification.SaleNotification;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -139,8 +142,16 @@ public class WishlistPage extends JFrame {
         ArrayList<ItemPanel> panelList = new ArrayList<>();
         itemList = wl.getProductList();
         for (Product product : itemList) {
-            panelList.add(new ItemPanel(product.getProductImageURL(),
-                    product.getProductName(), product.getProductPriceString()));
+            ItemPanel itemPanel = new ItemPanel(product.getProductImageURL(),
+                    product.getProductName(), product.getProductPriceString());
+            SaleNotification saleNotification = new SaleNotification(product);
+
+            System.out.println(saleNotification.checkNotificationAction());
+            if (saleNotification.checkNotificationAction()) {
+                itemPanel.setBorderColor(new Color(255, 0 ,0));
+            }
+
+            panelList.add(itemPanel);
         }
         ItemPanel[] tempPanelList = new ItemPanel[panelList.size()];
         tempPanelList = panelList.toArray(tempPanelList);

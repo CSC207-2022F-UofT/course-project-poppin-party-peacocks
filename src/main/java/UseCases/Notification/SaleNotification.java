@@ -3,7 +3,6 @@ import Controller.Scheduler;
 import Entities.*;
 import ExternalInterface.ItemUpdateChecker;
 
-import java.io.IOException;
 import java.util.TimerTask;
 
 /** A sale notification use case that tells us if a product is on sale */
@@ -17,14 +16,21 @@ public class SaleNotification implements BaseNotification {
         TimerTask checkSale = new TimerTask() {
             @Override
             public void run() {
-                ItemUpdateChecker itemUpdateChecker = new ItemUpdateChecker();
-                itemUpdateChecker.updatePriceCheck(product);
-                checkNotification();
+                checkNotificationAction();
             }
         };
 
-        this.scheduler = new Scheduler(checkSale, 1000 * 60 * 60 * 24);
+        // 1000 * 60 * 60 * 24
+        this.scheduler = new Scheduler(checkSale, 1000);
         this.product = product;
+    }
+
+    public Boolean checkNotificationAction() {
+        ItemUpdateChecker itemUpdateChecker = new ItemUpdateChecker();
+        itemUpdateChecker.updatePriceCheck(this.product);
+        // return checkNotification();
+        System.out.println("HHELLO");
+        return Boolean.TRUE;
     }
 
     public Boolean getShowNotification() {
@@ -47,6 +53,7 @@ public class SaleNotification implements BaseNotification {
      * @returns boolean if notification should be shown */
     public boolean checkNotification() {
         this.showNotification = product.getPriceChange() < 0;
+        System.out.println(product.getPriceChange());
         return this.showNotification;
     }
 }
