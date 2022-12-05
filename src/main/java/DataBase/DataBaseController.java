@@ -93,7 +93,7 @@ public class DataBaseController {
      * */
     // JSONArray's library has errors, can ignore
     @SuppressWarnings("unchecked")
-    public boolean saveListOfWishlists(ListOfWishlists listOfWishlists, User user) {
+    public boolean saveListOfWishlists(ListofProductLists listOfWishlists, User user) {
         DataBaseFormatter dataBaseFormatter = new DataBaseFormatter();
         String wishlistPath = DataBase.getWishlistPath(user.getName());
         File file = new File(wishlistPath);
