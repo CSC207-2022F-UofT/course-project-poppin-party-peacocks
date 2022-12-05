@@ -202,7 +202,4 @@ public class Wishlist implements ProductList {
         }
         displayedList = tempList;
     }
-    public void refreshListPrices(){
-
-    }
 }
