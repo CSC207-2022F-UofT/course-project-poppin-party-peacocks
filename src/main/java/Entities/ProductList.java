@@ -16,13 +16,6 @@ public interface ProductList {
     int getListSize();
     void setDateAdded(Date date);
     void setName(String name);
-    void sortProductListByDate(String order);
-    void sortProductListByName(String order);
-    void sortProductListByReviewStars(String order);
-    void sortProductListByReviewCount(String order);
-    void sortProductListByPrice(String order);
     boolean addProduct(Product product);
     boolean removeProduct(Product product);
-    void filterProductList(String[] tags);
-    void refreshListPrices();
 }

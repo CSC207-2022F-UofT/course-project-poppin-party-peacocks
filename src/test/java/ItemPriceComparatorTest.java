@@ -11,37 +11,37 @@ public class ItemPriceComparatorTest {
 
     Wishlist christmasWishlist = new Wishlist("Christmas Wishlist");
 
-    @Test
-    public void ItemPriceComparatorTestAscending() {
-        christmasWishlist.addProduct(myFavDrink);
-        christmasWishlist.addProduct(animeFigure);
-        christmasWishlist.addProduct(plushie);
-
-        Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addProduct(myFavDrink);
-        testingWishlist.addProduct(animeFigure);
-        testingWishlist.addProduct(plushie);
-
-        christmasWishlist.sortProductListByPrice("ascending");
-        testingWishlist.sortProductListByPrice("ascending");
-
-        Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
-    }
-
-    @Test
-    public void ItemPriceComparatorTestDescending() {
-        christmasWishlist.addProduct(myFavDrink);
-        christmasWishlist.addProduct(animeFigure);
-        christmasWishlist.addProduct(plushie);
-
-        Wishlist testingWishlist = new Wishlist("Testing Wishlist");
-        testingWishlist.addProduct(myFavDrink);
-        testingWishlist.addProduct(animeFigure);
-        testingWishlist.addProduct(plushie);
-
-        christmasWishlist.sortProductListByPrice("descending");
-        testingWishlist.sortProductListByPrice("descending");
-
-        Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
-    }
+//    @Test
+//    public void ItemPriceComparatorTestAscending() {
+//        christmasWishlist.addProduct(myFavDrink);
+//        christmasWishlist.addProduct(animeFigure);
+//        christmasWishlist.addProduct(plushie);
+//
+//        Wishlist testingWishlist = new Wishlist("Testing Wishlist");
+//        testingWishlist.addProduct(myFavDrink);
+//        testingWishlist.addProduct(animeFigure);
+//        testingWishlist.addProduct(plushie);
+//
+//        christmasWishlist.sortProductListByPrice("ascending");
+//        testingWishlist.sortProductListByPrice("ascending");
+//
+//        Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
+//    }
+//
+//    @Test
+//    public void ItemPriceComparatorTestDescending() {
+//        christmasWishlist.addProduct(myFavDrink);
+//        christmasWishlist.addProduct(animeFigure);
+//        christmasWishlist.addProduct(plushie);
+//
+//        Wishlist testingWishlist = new Wishlist("Testing Wishlist");
+//        testingWishlist.addProduct(myFavDrink);
+//        testingWishlist.addProduct(animeFigure);
+//        testingWishlist.addProduct(plushie);
+//
+//        christmasWishlist.sortProductListByPrice("descending");
+//        testingWishlist.sortProductListByPrice("descending");
+//
+//        Assertions.assertTrue(true, String.valueOf(testingWishlist.equals(christmasWishlist)));
+//    }
 }

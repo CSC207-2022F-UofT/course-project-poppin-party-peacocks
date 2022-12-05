@@ -99,7 +99,7 @@ public class WishlistPage extends JFrame {
             homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
         });
-        refreshButton.addActionListener(e -> wl.refreshListPrices());
+        //refreshButton.addActionListener(e -> wl.refreshListPrices());
         sortButton.addActionListener(e -> {
 
         });
