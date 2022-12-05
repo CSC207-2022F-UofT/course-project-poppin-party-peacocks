@@ -57,6 +57,9 @@ public class ItemPage extends JFrame {
         CustomJLabel thisItemLabel = new CustomJLabel("Get this item title", Color.WHITE, titleFont);
         thisItemLabel.setBounds(75, 17, 360, 24);
         headerPanel.add(thisItemLabel);
+        CustomJButton graphButton = new CustomJButton("Details", 0, 0, color2, Color.WHITE, textFont);
+        graphButton.setBounds(250, 13, 90, 30);
+        headerPanel.add(graphButton);
         mainPanel.add(headerPanel);
 
         // image
@@ -158,6 +161,10 @@ public class ItemPage extends JFrame {
             wlPage.setLocationRelativeTo(null);
             wlPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
+        });
+        // Opens up graph page alongside current ItemPage.
+        graphButton.addActionListener(e -> {
+            System.out.println("TODO");
         });
     }
 }
