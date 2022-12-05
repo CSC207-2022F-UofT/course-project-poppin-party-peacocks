@@ -145,9 +145,9 @@ public class WishlistPage extends JFrame {
             ItemPanel itemPanel = new ItemPanel(product.getProductImageURL(),
                     product.getProductName(), product.getProductPriceString());
             SaleNotification saleNotification = new SaleNotification(product);
+            PriceDropNotification priceDropNotification = new PriceDropNotification(product);
 
-            System.out.println(saleNotification.checkNotificationAction());
-            if (saleNotification.checkNotificationAction()) {
+            if (saleNotification.checkNotificationAction() || priceDropNotification.checkNotificationAction()) {
                 itemPanel.setBorderColor(new Color(255, 0 ,0));
             }
 

@@ -9,10 +9,10 @@ import java.util.TimerTask;
 public class SaleNotification implements BaseNotification {
     private final Scheduler scheduler;
     private final Product product;
-    private Boolean showNotification;
+    private boolean showNotification;
 
     public SaleNotification(Product product) {
-        this.showNotification = Boolean.FALSE;
+        this.showNotification = false;
         TimerTask checkSale = new TimerTask() {
             @Override
             public void run() {
@@ -20,21 +20,20 @@ public class SaleNotification implements BaseNotification {
             }
         };
 
-        // 1000 * 60 * 60 * 24
-        this.scheduler = new Scheduler(checkSale, 1000);
+        this.scheduler = new Scheduler(checkSale, 10000);
         this.product = product;
     }
 
-    public Boolean checkNotificationAction() {
-        ItemUpdateChecker itemUpdateChecker = new ItemUpdateChecker();
-        itemUpdateChecker.updatePriceCheck(this.product);
-        // return checkNotification();
-        System.out.println("HHELLO");
-        return Boolean.TRUE;
+    public boolean getShowNotification() {
+        return showNotification;
     }
 
-    public Boolean getShowNotification() {
-        return showNotification;
+    /** Updates item from amazon and calls check logic
+     * @returns whether notification should be shown */
+    public boolean checkNotificationAction() {
+        ItemUpdateChecker itemUpdateChecker = new ItemUpdateChecker();
+        itemUpdateChecker.updatePriceCheck(this.product);
+        return checkNotification();
     }
 
     /** Starts scheduler */
@@ -53,7 +52,6 @@ public class SaleNotification implements BaseNotification {
      * @returns boolean if notification should be shown */
     public boolean checkNotification() {
         this.showNotification = product.getPriceChange() < 0;
-        System.out.println(product.getPriceChange());
         return this.showNotification;
     }
 }
