@@ -4,6 +4,8 @@ import Entities.Item;
 import Entities.Product;
 import Entities.Wishlist;
 import ExternalInterface.ItemSearcher;
+import UseCases.Notification.PriceDropNotification;
+import UseCases.Notification.SaleNotification;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -148,6 +150,13 @@ public class AddItemPage extends JFrame {
         });
 
         addSelectedItemButton.addActionListener(e -> {
+            // Create notification timers
+            Item selectedItem = itemList[itemJList.getSelectedIndex()];
+            SaleNotification saleNotification = new SaleNotification(selectedItem);
+            PriceDropNotification priceDropNotification = new PriceDropNotification(selectedItem);
+            saleNotification.startNotificationListener();
+            priceDropNotification.startNotificationListener();
+
             currWishlist.addProduct(itemList[itemJList.getSelectedIndex()]);
             WishlistPage updatedWishlistPage = new WishlistPage(currWishlist);
             updatedWishlistPage.setContentPane(updatedWishlistPage.getMainPanel());

@@ -2,11 +2,13 @@ package GUI;
 
 import Entities.Product;
 import Entities.Wishlist;
+import UseCases.Notification.PriceDropNotification;
+import UseCases.Notification.SaleNotification;
+
 import ExternalInterface.ItemUpdateChecker;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -105,17 +107,12 @@ public class WishlistPage extends JFrame {
             ItemUpdateChecker IUC = new ItemUpdateChecker();
             mainPanel.repaint();
             for(int i = 0; i < wl.getProductList().size(); i++){
-                try{
-                    IUC.updatePriceCheck(wl.getDisplayedList().get(i));
-                    itemPanelJList.getModel().getElementAt(i).setUpdateSuccess(true);
-                }catch(IOException e1){
-                    itemPanelJList.getModel().getElementAt(i).setUpdateSuccess(false);
-                }
+                IUC.updatePriceCheck(wl.getDisplayedList().get(i));
+                itemPanelJList.getModel().getElementAt(i).setUpdateSuccess(true);
             }
             generateListOfItems();
         });
         sortButton.addActionListener(e -> {
-
 
         });
         deleteButton.addActionListener(e -> {
@@ -154,8 +151,16 @@ public class WishlistPage extends JFrame {
         ArrayList<ItemPanel> panelList = new ArrayList<>();
         itemList = wl.getProductList();
         for (Product product : itemList) {
-            panelList.add(new ItemPanel(product.getProductImageURL(),
-                    product.getProductName(), product.getProductPriceString(), product.getProductDateLastUpdated()));
+            ItemPanel itemPanel = new ItemPanel(product.getProductImageURL(),
+                    product.getProductName(), product.getProductPriceString(), product.getProductDateLastUpdated());
+            SaleNotification saleNotification = new SaleNotification(product);
+            PriceDropNotification priceDropNotification = new PriceDropNotification(product);
+
+            if (saleNotification.checkNotificationAction() || priceDropNotification.checkNotificationAction()) {
+                itemPanel.setBorderColor(new Color(255, 0 ,0));
+            }
+
+            panelList.add(itemPanel);
         }
         ItemPanel[] tempPanelList = new ItemPanel[panelList.size()];
         tempPanelList = panelList.toArray(tempPanelList);

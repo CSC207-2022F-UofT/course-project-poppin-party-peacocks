@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import Entities.Item;
 import Entities.Wishlist;
 import Entities.Product;
 
@@ -144,10 +143,7 @@ public class ItemPage extends JFrame {
         CustomJLabel description = new CustomJLabel(String.format(html, 130, "Description: " + itemDescription), Color.WHITE, textFont);
         contentPanel.add(description);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        // desired price
-        CustomJLabel desiredPriceLabel = new CustomJLabel("Desired Price: " + desiredPrice + " " + currency, Color.WHITE, textFont);
-        contentPanel.add(desiredPriceLabel);
-        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
         // price chance
         CustomJLabel priceChange = new CustomJLabel("Price Change: " + itemPriceChange + " " + currency, Color.WHITE, textFont);
         contentPanel.add(priceChange);
@@ -159,6 +155,20 @@ public class ItemPage extends JFrame {
         // tags
         CustomJLabel tagLabel = new CustomJLabel("Tags: " + totalTag, Color.WHITE, textFont);
         contentPanel.add(tagLabel);
+
+
+        // desired price
+        CustomJLabel desiredPriceLabel = new CustomJLabel("Desired Price: " + desiredPrice + " " + currency, Color.WHITE, textFont);
+        contentPanel.add(desiredPriceLabel);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JTextField desiredPriceInput = new JTextField("", 5);
+        desiredPriceInput.setForeground(Color.black);
+        JButton desiredPriceButton = new JButton("Set Desired Price");
+
+        contentPanel.add(desiredPriceInput);
+        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        contentPanel.add(desiredPriceButton);
 
         mainPanel.add(scrollBar);
 
@@ -184,6 +194,14 @@ public class ItemPage extends JFrame {
         // Opens up graph page alongside current ItemPage.
         graphButton.addActionListener(e -> {
             System.out.println("TODO");
+        });
+
+        // Button logic for desired price chnage
+        desiredPriceButton.addActionListener(e -> {
+            String priceText = desiredPriceInput.getText();
+
+            double updatedDesiredPrice = Double.parseDouble(priceText);
+            this.item.setDesiredPrice(updatedDesiredPrice);
         });
     }
 }

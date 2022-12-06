@@ -20,8 +20,6 @@ public class WelcomePageActionListenerNavigation {
             homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             currJFrame.dispose();
         };
-
-
     }
 
     public ActionListener getLoginActionListener(){
