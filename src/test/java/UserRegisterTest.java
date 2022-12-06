@@ -1,5 +1,5 @@
 import DataBase.*;
-import UseCases.LoginAction;
+import UseCases.LoginAction.LoginAction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

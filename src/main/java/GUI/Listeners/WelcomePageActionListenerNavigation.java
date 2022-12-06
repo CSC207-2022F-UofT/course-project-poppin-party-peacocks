@@ -1,6 +1,5 @@
 package GUI.Listeners;
 import GUI.HomePage;
-import UseCases.LoginAction;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
