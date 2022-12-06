@@ -6,17 +6,15 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class WishlistTest {
-    Date date1 = new Date(2022, Calendar.DECEMBER, 15);
-    Date date2 = new Date(2022, Calendar.NOVEMBER, 15);
-    Date date3 = new Date(2022, Calendar.SEPTEMBER, 15);
     Item myFavDrink = new Item("Lime Bubbly", 5.47, 5.00, "www.shoppers.com/bubbly",
-            "my favorite drink, bubbly", 69, 4.19,"www.shoppersimage.com/bubbly", date3, new String[]{"drink"});
+            "my favorite drink, bubbly", 69, 4.19,"www.shoppersimage.com/bubbly", null, new String[]{"drink"});
     Item animeFigure = new Item("Starlight Anya Forger", 100, 85.00, "www.amazon.com/AnyaPeanuts",
-            "new Anya figure", 150, 4.8,"www.amazonimage.com/AnyaPeanuts", date2, new String[]{"figure"});
+            "new Anya figure", 150, 4.8,"www.amazonimage.com/AnyaPeanuts", null, new String[]{"figure"});
     Item plushie = new Item("Whale Plushie", 40.99, 30.00, "www.amazon.com/WhalePlushie",
-            "Giant Whale Plushie", 1050, 4.3, "www.amazonimage.com/OhWhale", date1, new String[]{"toys"});
+            "Giant Whale Plushie", 1050, 4.3, "www.amazonimage.com/OhWhale", null, new String[]{"toys"});
 
     Wishlist christmasWishlist = new Wishlist("Christmas Wishlist");
+    Calendar dateInstance = Calendar.getInstance();
 
     @Test
     public void getNameTest() {
@@ -50,18 +48,26 @@ public class WishlistTest {
         christmasWishlist.addProduct(myFavDrink);
         christmasWishlist.addProduct(animeFigure);
         christmasWishlist.addProduct(plushie);
-        Date testDate1 = new Date(2022, Calendar.DECEMBER, 15);
-        Date testDate2 = new Date(2022, Calendar.NOVEMBER, 15);
-        Date testDate3 = new Date(2022, Calendar.SEPTEMBER, 15);
+
+        dateInstance.set(2022, Calendar.SEPTEMBER, 15);
+        Date date1 = dateInstance.getTime();
+        dateInstance.set(2022, Calendar.NOVEMBER, 15);
+        Date date2 = dateInstance.getTime();
+        dateInstance.set(2022, Calendar.DECEMBER, 15);
+        Date date3 = dateInstance.getTime();
+
+        myFavDrink.setDateAdded(date3);
+        animeFigure.setDateAdded(date2);
+        plushie.setDateAdded(date1);
 
         //myFavDrink testing
-        Assertions.assertEquals(christmasWishlist.getProductList().get(0).getProductDateAdded().getDate(), testDate3.getDate());
+        Assertions.assertEquals(christmasWishlist.getProductList().get(0).getProductDateAdded(), date3);
 
         //animeFigure testing
-        Assertions.assertEquals(christmasWishlist.getProductList().get(1).getProductDateAdded().getDate(), testDate2.getDate());
+        Assertions.assertEquals(christmasWishlist.getProductList().get(1).getProductDateAdded(), date2);
 
         //plushie testing
-        Assertions.assertEquals(christmasWishlist.getProductList().get(2).getProductDateAdded().getDate(), testDate1.getDate());
+        Assertions.assertEquals(christmasWishlist.getProductList().get(2).getProductDateAdded(), date1);
     }
 
     @Test
@@ -82,18 +88,26 @@ public class WishlistTest {
         christmasWishlist.addProduct(myFavDrink);
         christmasWishlist.addProduct(animeFigure);
         christmasWishlist.addProduct(plushie);
-        Date testDate1 = new Date(2022, Calendar.DECEMBER, 15);
-        Date testDate2 = new Date(2022, Calendar.NOVEMBER, 15);
-        Date testDate3 = new Date(2022, Calendar.SEPTEMBER, 15);
+
+        dateInstance.set(2022, Calendar.SEPTEMBER, 15);
+        Date date1 = dateInstance.getTime();
+        dateInstance.set(2022, Calendar.NOVEMBER, 15);
+        Date date2 = dateInstance.getTime();
+        dateInstance.set(2022, Calendar.DECEMBER, 15);
+        Date date3 = dateInstance.getTime();
+
+        myFavDrink.setDateAdded(date3);
+        animeFigure.setDateAdded(date2);
+        plushie.setDateAdded(date1);
 
         //myFavDrink testing
-        Assertions.assertEquals(testDate3.getDate(), christmasWishlist.getProductList().get(0).getProductDateAdded().getDate());
+        Assertions.assertEquals(christmasWishlist.getProductList().get(0).getProductDateAdded(), date3);
 
         //animeFigure testing
-        Assertions.assertEquals(testDate2.getDate(), christmasWishlist.getProductList().get(1).getProductDateAdded().getDate());
+        Assertions.assertEquals(christmasWishlist.getProductList().get(1).getProductDateAdded(), date2);
 
         //plushie testing
-        Assertions.assertEquals(testDate1.getDate(), christmasWishlist.getProductList().get(2).getProductDateAdded().getDate());
+        Assertions.assertEquals(christmasWishlist.getProductList().get(2).getProductDateAdded(), date1);
     }
 
     @Test void setNameTest(){

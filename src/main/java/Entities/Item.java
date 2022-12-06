@@ -124,6 +124,7 @@ public class Item implements Product {
         this.priceHistoryData = priceHistoryData;
         this.priceHistoryDates = priceHistoryDates;
     }
+
      /** Constructor for comparators*/
      public Item (String name, double price, double desiredPrice, String url, String itemDescription, int reviewCount, double reviewStars, String imageUrl, Date dateAdded, String[] tags) {
          this.itemName = name;
