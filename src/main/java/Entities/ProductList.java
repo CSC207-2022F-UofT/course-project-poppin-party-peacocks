@@ -24,5 +24,4 @@ public interface ProductList {
     boolean addProduct(Product product);
     boolean removeProduct(Product product);
     void filterProductList(String[] tags);
-    void refreshListPrices();
 }

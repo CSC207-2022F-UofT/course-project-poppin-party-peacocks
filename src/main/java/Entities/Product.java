@@ -16,6 +16,7 @@ public interface Product {
     double getPriceChange();
     double getProductDesiredPrice();
     Date getProductDateAdded();
+    Date getProductDateLastUpdated();
     String[] getTags();
     ArrayList<Double> getPriceHistoryData();
     ArrayList<Date> getPriceHistoryDates();
