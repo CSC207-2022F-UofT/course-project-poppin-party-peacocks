@@ -1,6 +1,6 @@
 package GUI;
 import GUI.Listeners.WelcomePageActionListenerNavigation;
-import UseCases.LoginAction.LoginAction;
+import UseCases.LoginAction;
 
 import javax.swing.*;
 import java.awt.*;

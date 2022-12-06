@@ -1,4 +1,4 @@
-package UseCases.LoginAction;
+package UseCases;
 
 import DataBase.*;
 import Entities.*;
