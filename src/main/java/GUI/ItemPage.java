@@ -68,6 +68,9 @@ public class ItemPage extends JFrame {
         CustomJLabel thisItemLabel = new CustomJLabel(productName, Color.WHITE, titleFont);
         thisItemLabel.setBounds(75, 17, 360, 24);
         headerPanel.add(thisItemLabel);
+        CustomJButton graphButton = new CustomJButton("Details", 0, 0, color2, Color.WHITE, textFont);
+        graphButton.setBounds(250, 13, 90, 30);
+        headerPanel.add(graphButton);
         mainPanel.add(headerPanel);
 
         // image
@@ -140,6 +143,7 @@ public class ItemPage extends JFrame {
         CustomJLabel description = new CustomJLabel(String.format(html, 130, "Description: " + itemDescription), Color.WHITE, textFont);
         contentPanel.add(description);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
         // price chance
         CustomJLabel priceChange = new CustomJLabel("Price Change: " + itemPriceChange + " " + currency, Color.WHITE, textFont);
         contentPanel.add(priceChange);
@@ -186,6 +190,10 @@ public class ItemPage extends JFrame {
             wlPage.setLocationRelativeTo(null);
             wlPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
+        });
+        // Opens up graph page alongside current ItemPage.
+        graphButton.addActionListener(e -> {
+            System.out.println("TODO");
         });
 
         // Button logic for desired price chnage
