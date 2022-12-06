@@ -5,10 +5,6 @@ import Entities.*;
 
 import java.util.Objects;
 
-/**
- * A class that implements LoginActionUserCredentials calls upon DataBase and User in order to implement a login
- * functionality
- */
 public class LoginAction {
     private final String inputtedUsername;
     private final String inputtedPassword;
