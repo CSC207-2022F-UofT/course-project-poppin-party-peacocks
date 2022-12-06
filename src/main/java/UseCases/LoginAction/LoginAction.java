@@ -2,10 +2,6 @@ package UseCases.LoginAction;
 
 import DataBase.*;
 import Entities.*;
-/**
- * A class that implements LoginActionUserCredentials calls upon DataBase and User in order to implement a login
- * functionality
- */
 public class LoginAction {
     private String inputtedUsername;
     private String inputtedPassword;
