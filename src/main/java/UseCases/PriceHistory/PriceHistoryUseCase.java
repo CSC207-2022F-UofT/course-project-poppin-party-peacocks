@@ -150,7 +150,7 @@ public class PriceHistoryUseCase {
         }
     }
 
-    public void generatePriceChart() {
+    public void generatePriceChart() throws IOException {
         DefaultCategoryDataset chartDataSet = new DefaultCategoryDataset();
         ArrayList<Double> prices = this.item.getPriceHistoryData();
         ArrayList<Date> dates = this.item.getPriceHistoryDates();
@@ -164,10 +164,6 @@ public class PriceHistoryUseCase {
 
         JFreeChart priceChart = ChartFactory.createLineChart("Price History", "Date", "Price", chartDataSet);
 
-        try {
-            ChartUtils.saveChartAsJPEG(new File("src/main/java/Assets/price_history.jpeg"), priceChart, 450, 400);
-        } catch (IOException var9) {
-            throw new RuntimeException(var9);
-        }
+        ChartUtils.saveChartAsJPEG(new File("src/main/java/Assets/price_history.jpeg"), priceChart, 450, 400);
     }
 }
