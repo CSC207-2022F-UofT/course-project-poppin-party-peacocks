@@ -1,3 +1,5 @@
+package EntitiesTest;
+
 import Entities.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,10 +12,6 @@ public class ListOfWishlistsTest {
     ProductList birthdayWishlist = new Wishlist("Christmas Wishlist");
 
     ListOfProductLists listofProductLists = new ListOfWishlists();
-
-
-
-
 
     ///////////////////////////////
     //testing getters and setters//

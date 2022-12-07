@@ -1,3 +1,5 @@
+package UseCasesTest.Notification;
+
 import Entities.Item;
 import UseCases.Notification.PriceDropNotification;
 import org.junit.jupiter.api.Test;
