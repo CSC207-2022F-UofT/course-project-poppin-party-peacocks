@@ -127,7 +127,7 @@ public class ItemSearcher {
         ArrayList<String> listUrls = new ArrayList<>();
 
         try {
-            Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
+            Document doc = Jsoup.connect(url).timeout(10000).userAgent("Chrome/107.0.0.0").get();
             Elements productUrls = doc.select("h2.a-size-mini.a-spacing-none.a-color-base a");
             for (Element item : productUrls) {
                 String newUrl = "https://www.amazon.ca" + item.attr("href");
@@ -158,15 +158,17 @@ public class ItemSearcher {
     public Item searchItemUrl(String url, boolean searchByKeyword) throws IOException {
         try {
             // This line specifies window type and layout of amazon page based on  Window Version and browser for webscraping
-            Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
+            Document doc = Jsoup.connect(url).timeout(10000).userAgent("Chrome/96.0.4664.93").get();
             Element htmlName = doc.select(".a-size-large.product-title-word-break").first();
             Element price = doc.select(".a-offscreen").first();
+            System.out.println("price:"+price.text());
             Element htmlDescription = doc.select("div.a-row.feature").select("div.a-section.a-spacing-small").select("span").first();
             Element htmlCountRating = doc.select("div.a-row.a-spacing-medium.averageStarRatingNumerical").select("span.a-size-base.a-color-secondary").first();
             Element htmlImgUrl = doc.select("ul.a-unordered-list.a-nostyle.a-horizontal.list.maintain-height").select("span.a-list-item span.a-declarative").select("span.a-declarative").select("div.imgTagWrapper").select("img").first();
             Element htmlStarRating = doc.select("div.a-fixed-left-grid-col.aok-align-center.a-col-right").select("div.a-row").select("span.a-size-base.a-nowrap").first();
 
             if ((htmlName == null || price == null || htmlDescription == null || htmlCountRating == null || htmlImgUrl == null || htmlStarRating == null) && searchByKeyword) {
+                System.out.println("returning empty item");
                 return new Item("", 0, 0, "", "", new String[]{}, 0, 0, "");
             }
             double sellingPrice = 0;
