@@ -1,4 +1,4 @@
-package UseCasesTest;
+package ControllerTest;
 
 import DataBase.*;
 import UseCases.LoginAction;

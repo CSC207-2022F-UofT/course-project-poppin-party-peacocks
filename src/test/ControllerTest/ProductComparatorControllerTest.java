@@ -1,3 +1,5 @@
+package ControllerTest;
+
 import Controller.ProductComparatorController;
 import Entities.*;
 import UseCases.Comparator.ProductComparator;
