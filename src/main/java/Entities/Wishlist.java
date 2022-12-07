@@ -1,5 +1,4 @@
 package Entities;
-
 import java.util.*;
 
 /**
@@ -7,25 +6,22 @@ import java.util.*;
  */
 public class Wishlist implements ProductList{
     private String name;
-    private ArrayList<Product> productList;
+    private final ArrayList<Product> productList;
     private ArrayList<Product> displayedList;
     private Date dateAdded;
-    private ArrayList<String> selectedTags;
 
     public Wishlist(String name){
         this.name = name;
         this.productList = new ArrayList<>();
         this.displayedList = new ArrayList<>();
         this.dateAdded = new Date();
-        this.selectedTags = new ArrayList<>();
     }
 
-    public Wishlist(String name, ArrayList<Product> itemList, ArrayList<Product> displayedList, Date dateAdded, ArrayList<String> selectedTags){
+    public Wishlist(String name, ArrayList<Product> itemList, ArrayList<Product> displayedList, Date dateAdded){
         this.name = name;
         this.productList = itemList;
         this.displayedList = displayedList;
         this.dateAdded = dateAdded;
-        this.selectedTags = selectedTags;
     }
 
     public Wishlist (ArrayList<Product> itemList) {
@@ -36,7 +32,6 @@ public class Wishlist implements ProductList{
     public ArrayList<Product> getProductList() {return this.productList; }
     public ArrayList<Product> getDisplayedList() {return this.displayedList; }
     public Date getDateAdded() {return this.dateAdded; }
-    public ArrayList<String> getSelectedTags() {return this.selectedTags; }
     public int getListSize(){
         return productList.size();
     }
@@ -63,6 +58,7 @@ public class Wishlist implements ProductList{
      */
     public boolean removeProduct(Product product){
         productList.remove(product);
+        displayedList.remove(product);
         return true;
     }
 }

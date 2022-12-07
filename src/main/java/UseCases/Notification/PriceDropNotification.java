@@ -24,7 +24,7 @@ public class PriceDropNotification implements BaseNotification {
             }
         };
 
-        this.scheduler = new Scheduler(checkSale, 1000);
+        this.scheduler = new Scheduler(checkSale, 1000 * 60);
         this.product = product;
     }
     public boolean getShowNotification() {

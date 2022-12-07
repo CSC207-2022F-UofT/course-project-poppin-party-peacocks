@@ -19,10 +19,13 @@ import java.util.ArrayList;
 public class WishlistPage extends JFrame {
 
     private GradientJPanel mainPanel;
-    private final Wishlist wl;
+    private Wishlist wl;
     private ArrayList<Product> itemList;
     private JList<ItemPanel> itemPanelJList;
     private JScrollPane itemScrollPane;
+    private boolean isSortFrameOpen = false;
+    String currentSortingMethod;
+    boolean isSortedAscending;
 
     public WishlistPage(Wishlist wishlist) throws IOException {
         super(wishlist.getName());
@@ -30,12 +33,18 @@ public class WishlistPage extends JFrame {
         initialiseJFrame();
         initialiseMainPanel();
     }
-
+    public void setWishlist(Wishlist wl){
+        this.wl = wl;
+    }
+    public void setSortFrameOpen(boolean isOpen){
+        this.isSortFrameOpen = isOpen;
+    }
+    public void setCurrentSortingMethod(String s) {this.currentSortingMethod = s; }
+    public void setIsAscending(boolean b) {this.isSortedAscending = b; }
     /**
      * @return the main panel for this JFrame
      */
     public JPanel getMainPanel(){return mainPanel;}
-
     /**
      * sets up the JFrame
      */
@@ -93,7 +102,10 @@ public class WishlistPage extends JFrame {
         mainPanel.setComponentZOrder(titleLabel, 1);
         mainPanel.setComponentZOrder(topPanel, 2);
 
-        generateListOfItems();
+        currentSortingMethod = "Sort By Date";
+        isSortedAscending = true;
+
+        generateListOfItems(false);
         backButton.addActionListener(e -> {
             HomePage homePage = new HomePage();
             homePage.setContentPane(homePage.getMainPanel());
@@ -103,7 +115,6 @@ public class WishlistPage extends JFrame {
             dispose();
         });
         refreshButton.addActionListener(e -> {
-            System.out.println("updating");
             mainPanel.remove(itemScrollPane);
             ItemUpdateChecker IUC = new ItemUpdateChecker();
             mainPanel.repaint();
@@ -116,20 +127,24 @@ public class WishlistPage extends JFrame {
                 itemPanelJList.getModel().getElementAt(i).setUpdateSuccess(true);
             }
             try {
-                generateListOfItems();
+                generateListOfItems(true);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
         sortButton.addActionListener(e -> {
-
+            if(!isSortFrameOpen){
+                @SuppressWarnings("unused")
+                SortFrame sortFrame = new SortFrame(this, wl, currentSortingMethod, isSortedAscending);
+                isSortFrameOpen = true;
+            }
         });
         deleteButton.addActionListener(e -> {
             mainPanel.remove(itemScrollPane);
             if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
                 wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
                 try {
-                    generateListOfItems();
+                    generateListOfItems(false);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -155,24 +170,32 @@ public class WishlistPage extends JFrame {
             }
         });
     }
-
+    public void refreshMainPanel(){
+        mainPanel.remove(itemScrollPane);
+        try {
+            generateListOfItems(false);
+        }catch(IOException ex){
+            throw new RuntimeException(ex);
+        }
+    }
     /**
      * creates a JScrollPane from a JList from a list from the wishlist
      * Configures the JScrollPane and adds it to the main panel
      */
-    private void generateListOfItems() throws IOException {
+    private void generateListOfItems(boolean raiseNotification) throws IOException {
         ArrayList<ItemPanel> panelList = new ArrayList<>();
-        itemList = wl.getProductList();
+        itemList = wl.getDisplayedList();
         for (Product product : itemList) {
             ItemPanel itemPanel = new ItemPanel(product.getProductImageURL(),
                     product.getProductName(), product.getProductPriceString(), product.getProductDateLastUpdated());
-            SaleNotification saleNotification = new SaleNotification(product);
-            PriceDropNotification priceDropNotification = new PriceDropNotification(product);
+            if(raiseNotification){
+                SaleNotification saleNotification = new SaleNotification(product);
+                PriceDropNotification priceDropNotification = new PriceDropNotification(product);
 
-            if (saleNotification.checkNotificationAction() || priceDropNotification.checkNotificationAction()) {
-                itemPanel.setBorderColor(new Color(255, 0 ,0));
+                if (saleNotification.checkNotificationAction() || priceDropNotification.checkNotificationAction()) {
+                    itemPanel.setBorderColor(new Color(255, 0 ,0));
+                }
             }
-
             panelList.add(itemPanel);
         }
         ItemPanel[] tempPanelList = new ItemPanel[panelList.size()];
