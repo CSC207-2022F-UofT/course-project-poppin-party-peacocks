@@ -9,7 +9,8 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import Entities.Wishlist;
+
+import Entities.ProductList;
 import Entities.Product;
 
 /**
@@ -31,7 +32,7 @@ public class ItemPage extends JFrame {
      * ItemPage constructor.
      */
 
-    public ItemPage(Product item, Wishlist wl) {
+    public ItemPage(Product item, ProductList wl) {
 
         // JFrame setup
         super("Item name here");

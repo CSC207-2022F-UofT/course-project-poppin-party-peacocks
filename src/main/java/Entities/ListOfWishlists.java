@@ -4,32 +4,32 @@ import java.util.*;
 /**
  * a class that manages constructors for a list of Wishlists
  */
-public class ListOfWishlists {
+public class ListOfWishlists implements ListOfProductLists {
 
-    private final ArrayList<Wishlist> listWishlist;
+    private ArrayList<ProductList> listWishlist;
 
     public ListOfWishlists(){
         this.listWishlist = new ArrayList<>();
     }
 
-    public ListOfWishlists(ArrayList<Wishlist> wishlists){
+    public ListOfWishlists(ArrayList<ProductList> wishlists){
         this.listWishlist = wishlists;
     }
 
-    public ArrayList<Wishlist> getListOfWishlist() {
+    public ArrayList<ProductList> getListOfWishlist() {
         return this.listWishlist;
     }
 
-    public void addWishlist(Wishlist wishlist){
+    public void addWishlist(ProductList wishlist){
         this.listWishlist.add(wishlist);
     }
 
-    public void removeWishlist(Wishlist wishlist){listWishlist.remove(wishlist);}
-    public void setWishlist(int index, Wishlist newWishlist){
+    public void removeWishlist(ProductList wishlist){listWishlist.remove(wishlist);}
+    public void setWishlist(int index, ProductList newWishlist){
         listWishlist.set(index,newWishlist);
     }
     public int getIndexByName(String name){
-        for(Wishlist wl : listWishlist){
+        for(ProductList wl : listWishlist){
             if (wl.getName().equals(name)){
                 return listWishlist.indexOf(wl);
             }
@@ -38,7 +38,7 @@ public class ListOfWishlists {
     }
     public ArrayList<String> getWishlistNames(){
         ArrayList<String> wishlistNames = new ArrayList<>();
-        for(Wishlist w : listWishlist){
+        for(ProductList w : listWishlist){
             wishlistNames.add(w.getName());
         }
         return wishlistNames;

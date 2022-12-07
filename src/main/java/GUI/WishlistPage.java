@@ -1,6 +1,7 @@
 package GUI;
 
 import Entities.Product;
+import Entities.ProductList;
 import Entities.Wishlist;
 import Entities.ListOfWishlists;
 import UseCases.Notification.PriceDropNotification;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 public class WishlistPage extends JFrame {
 
     private GradientJPanel mainPanel;
-    private Wishlist wl;
+    private ProductList wl;
     private ArrayList<Product> itemList;
     private JList<ItemPanel> itemPanelJList;
     private JScrollPane itemScrollPane;
@@ -38,7 +39,7 @@ public class WishlistPage extends JFrame {
      * constructor.
      * @param wishlist wishlist to be loaded
      */
-    public WishlistPage(Wishlist wishlist) throws IOException, ParseException, org.json.simple.parser.ParseException {
+    public WishlistPage(ProductList wishlist) throws IOException, ParseException, org.json.simple.parser.ParseException {
         super(wishlist.getName());
         wl = wishlist;
         dbc = new DataBaseController();
@@ -52,7 +53,7 @@ public class WishlistPage extends JFrame {
      * sets current wishlist to be displayed.
      * @param wl the new wishlist
      */
-    public void setWishlist(Wishlist wl){
+    public void setWishlist(ProductList wl){
         this.wl = wl;
     }
 

@@ -1,5 +1,6 @@
 import DataBase.DataBase;
 import DataBase.DataBaseController;
+import Entities.ListOfProductLists;
 import Entities.ListOfWishlists;
 import Entities.User;
 import Entities.Wishlist;
@@ -17,7 +18,7 @@ public class DataBaseControllerTest {
     @Test
     public void TestDataBaseWritesAndSavesListOfWishLists() throws ParseException, IOException, org.json.simple.parser.ParseException {
         DataBaseController dataBaseController = new DataBaseController();
-        ListOfWishlists wishlists = new ListOfWishlists();
+        ListOfProductLists wishlists = new ListOfWishlists();
         Wishlist wishlist = new Wishlist("Exam Celebration Wish List");
         wishlist.setDateAdded(new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").parse(testDate));
         wishlists.addWishlist(wishlist);

@@ -1,6 +1,7 @@
 package GUI;
 
 import Entities.ListOfWishlists;
+import Entities.ProductList;
 import Entities.Wishlist;
 import DataBase.DataBaseController;
 
@@ -159,7 +160,7 @@ public class HomePage extends JFrame {
     private void generateListOfWishlists(){
         ArrayList<WishlistPanel> panelList = new ArrayList<>();
 
-        for (Wishlist wishlist : lwl.getListOfWishlist()) {
+        for (ProductList wishlist : lwl.getListOfWishlist()) {
             WishlistPanel wishlistPanel = new WishlistPanel(wishlist.getName());
 
             panelList.add(wishlistPanel);
