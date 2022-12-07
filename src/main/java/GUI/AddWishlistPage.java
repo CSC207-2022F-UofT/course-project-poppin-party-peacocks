@@ -70,12 +70,10 @@ public class AddWishlistPage extends JFrame {
 
         CustomJButton cancelButton = new CustomJButton("Cancel", 0 , 0,
                 Color.WHITE, Color.WHITE, headerFont);
-        cancelButton.setBorder(new RoundedBorder(20));
         cancelButton.setBounds(187, 221, 119, 51);
 
         CustomJButton createButton = new CustomJButton("Add", 0 , 0,
                 Color.WHITE, Color.WHITE, headerFont);
-        createButton.setBorder(new RoundedBorder(20));
         createButton.setBounds(53, 221, 119, 51);
 
         middlePanel.add(cancelButton);

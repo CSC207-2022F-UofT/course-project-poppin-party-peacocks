@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import Entities.ProductList;
 import Entities.Wishlist;
 import Entities.Product;
 import ExternalInterface.PriceHistoryInterface;
@@ -18,7 +20,7 @@ import ExternalInterface.PriceHistoryInterface;
 public class ItemPage extends JFrame {
     private final GradientJPanel mainPanel;
     private Product item;
-    private Wishlist wl;
+    private ProductList wl;
 
     /**
      * mainPanel getter method.
@@ -32,7 +34,7 @@ public class ItemPage extends JFrame {
      * ItemPage constructor.
      */
 
-    public ItemPage(Product item, Wishlist wl) {
+    public ItemPage(Product item, ProductList wl) {
 
         // JFrame setup
         super("Item name here");

@@ -12,7 +12,6 @@ public interface ProductList {
     ArrayList<Product> getProductList();
     ArrayList<Product> getDisplayedList();
     Date getDateAdded();
-    ArrayList<String> getSelectedTags();
     int getListSize();
     void setDateAdded(Date date);
     void setName(String name);

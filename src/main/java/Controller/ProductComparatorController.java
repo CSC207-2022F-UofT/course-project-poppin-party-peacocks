@@ -12,9 +12,9 @@ import UseCases.Comparator.ProductComparatorFactory;
  * and sorts the wishlist using that comparator
  */
 public class ProductComparatorController {
-    private final Wishlist productList;
+    private final ProductList productList;
 
-    public ProductComparatorController(Wishlist wishlist){
+    public ProductComparatorController(ProductList wishlist){
         this.productList = wishlist;
     }
 
@@ -37,17 +37,17 @@ public class ProductComparatorController {
     public void sortingHelper(String order, ProductComparator productComparator) {
         switch (order.toLowerCase()) {
             case "ascending":
-                this.productList.getProductList().sort(productComparator);
+                this.productList.getDisplayedList().sort(productComparator);
                 break;
             case "descending":
-                this.productList.getProductList().sort(Collections.reverseOrder(productComparator));
+                this.productList.getDisplayedList().sort(Collections.reverseOrder(productComparator));
                 break;
             default:
                 throw new IllegalArgumentException();
         }
     }
 
-    public Wishlist getProductList() {
+    public ProductList getProductList() {
         return productList;
     }
 }

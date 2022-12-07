@@ -2,6 +2,7 @@ package GUI;
 
 import Entities.Item;
 import Entities.Product;
+import Entities.ProductList;
 import Entities.Wishlist;
 import ExternalInterface.ItemSearcher;
 import UseCases.Notification.PriceDropNotification;
@@ -18,8 +19,8 @@ public class AddItemPage extends JFrame {
     private final JTextField searchBar;
     private JPanel contentPanel;
     private JList<JPanel> itemJList;
-    private final Wishlist currWishlist;
-    private Item[] itemList;
+    private final ProductList currWishlist;
+    private Product[] itemList;
 
     public JPanel getMainPanel() {
         return mainPanel;
@@ -58,7 +59,7 @@ public class AddItemPage extends JFrame {
         mainPanel.add(contentPanel, BorderLayout.CENTER);
     }
 
-    public AddItemPage(Wishlist wishlist) {
+    public AddItemPage(ProductList wishlist) {
         super("Add Item");
         setLayout(null);
         setSize(400, 600);
@@ -114,7 +115,7 @@ public class AddItemPage extends JFrame {
                 JPanel[] array1 = new JPanel[10];
                 String keyword = searchBar.getText();
                 ItemSearcher itemSearcher = new ItemSearcher();
-                itemList = new Item[1];
+                itemList = new Product[1];
                 if (keyword.contains("amazon.")){
                     itemList[0] = itemSearcher.searchItemUrl(keyword, false);
                     array1 = new JPanel[1];
@@ -156,7 +157,7 @@ public class AddItemPage extends JFrame {
 
         addSelectedItemButton.addActionListener(e -> {
             // Create notification timers
-            Item selectedItem = itemList[itemJList.getSelectedIndex()];
+            Product selectedItem = itemList[itemJList.getSelectedIndex()];
             SaleNotification saleNotification = new SaleNotification(selectedItem);
             PriceDropNotification priceDropNotification = new PriceDropNotification(selectedItem);
             saleNotification.startNotificationListener();
