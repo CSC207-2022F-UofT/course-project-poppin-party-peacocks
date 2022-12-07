@@ -1,6 +1,7 @@
 package GUI;
 
 import Entities.ListOfWishlists;
+import Entities.ProductList;
 import Entities.Wishlist;
 
 import javax.swing.*;
@@ -121,7 +122,7 @@ public class HomePage extends JFrame {
 
         viewWishlistButton.addActionListener(e -> {
             if (listOfWishlists.getListOfWishlist().size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
-                Wishlist selectedWishlist = listOfWishlists.getListOfWishlist().get(itemPanelJList.getSelectedIndex());
+                ProductList selectedWishlist = listOfWishlists.getListOfWishlist().get(itemPanelJList.getSelectedIndex());
                 WishlistPage wishlistPage = null;
                 try {
                     wishlistPage = new WishlistPage(selectedWishlist);
@@ -144,7 +145,7 @@ public class HomePage extends JFrame {
     private void generateListOfWishlists(){
         ArrayList<WishlistPanel> panelList = new ArrayList<>();
 
-        for (Wishlist wishlist : listOfWishlists.getListOfWishlist()) {
+        for (ProductList wishlist : listOfWishlists.getListOfWishlist()) {
             WishlistPanel wishlistPanel = new WishlistPanel(wishlist.getName());
 
             panelList.add(wishlistPanel);

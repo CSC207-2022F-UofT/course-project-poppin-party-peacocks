@@ -1,3 +1,5 @@
 {"password":"Password","currency":"CAD","user":"Herman1"}
 {"password":"password","currency":"CAD","user":"kevin"}
+{"password":"password","currency":"CAD","user":"kevin"}
 {"password":"password123","currency":"CAD","user":"kevin1"}
+{"password":"password","currency":"CAD","user":"kevin123"}

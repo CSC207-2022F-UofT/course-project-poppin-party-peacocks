@@ -27,7 +27,7 @@ public class ListOfWishlists implements ListOfProductLists {
     }
     public ArrayList<String> getWishlistNames(){
         ArrayList<String> wishlistNames = new ArrayList<>();
-        for(Wishlist w : listWishlist){
+        for(ProductList w : listWishlist){
             wishlistNames.add(w.getName());
         }
         return wishlistNames;

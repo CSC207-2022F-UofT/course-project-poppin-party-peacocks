@@ -1,5 +1,6 @@
 import DataBase.DataBase;
 import DataBase.DataBaseController;
+import Entities.ListOfProductLists;
 import Entities.ListOfWishlists;
 import Entities.User;
 import Entities.Wishlist;

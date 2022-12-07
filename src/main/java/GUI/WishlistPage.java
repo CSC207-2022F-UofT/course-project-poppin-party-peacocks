@@ -1,6 +1,7 @@
 package GUI;
 
 import Entities.Product;
+import Entities.ProductList;
 import Entities.Wishlist;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
@@ -19,12 +20,12 @@ import java.util.ArrayList;
 public class WishlistPage extends JFrame {
 
     private GradientJPanel mainPanel;
-    private final Wishlist wl;
+    private final ProductList wl;
     private ArrayList<Product> itemList;
     private JList<ItemPanel> itemPanelJList;
     private JScrollPane itemScrollPane;
 
-    public WishlistPage(Wishlist wishlist) throws IOException {
+    public WishlistPage(ProductList wishlist) throws IOException {
         super(wishlist.getName());
         wl = wishlist;
         initialiseJFrame();

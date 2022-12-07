@@ -20,7 +20,7 @@ public class DataBaseController {
      * @param userName Unique name of the user
      * @returns list of wishlists
      */
-    public ListOfWishlists getListOfWishlists(String userName) throws FileNotFoundException, java.text.ParseException, ParseException {
+    public ListOfProductLists getListOfWishlists(String userName) throws FileNotFoundException, java.text.ParseException, ParseException {
         DataBaseParser dataBaseParser = new DataBaseParser();
 
         File myObj = new File(DataBase.getWishlistPath(userName));
@@ -31,7 +31,7 @@ public class DataBaseController {
             JSONParser jsonParser = new JSONParser();
             JSONObject parsedData = (JSONObject) jsonParser.parse(data);
             JSONArray wishlistsObject = (JSONArray) parsedData.get("wishlists");
-            ArrayList<Wishlist> wishlists = new ArrayList<>();
+            ArrayList<ProductList> wishlists = new ArrayList<>();
 
             if (!Objects.isNull(wishlistsObject)) {
                 for (Object wishlist : wishlistsObject) {
@@ -82,7 +82,7 @@ public class DataBaseController {
     // JSONArray's library has errors, can ignore
     @SuppressWarnings("unchecked")
 
-    public boolean saveListOfWishlists(ListOfWishlists listOfWishlists, User user) throws IOException {
+    public boolean saveListOfWishlists(ListOfProductLists listOfWishlists, User user) throws IOException {
         DataBaseFormatter dataBaseFormatter = new DataBaseFormatter();
         String wishlistPath = DataBase.getWishlistPath(user.getName());
         File file = new File(wishlistPath);
