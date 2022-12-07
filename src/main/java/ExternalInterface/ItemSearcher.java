@@ -136,7 +136,7 @@ public class ItemSearcher {
         ArrayList<Product> itemList = new ArrayList<>();
         ArrayList<String> listUrls = new ArrayList<>();
 
-        try {
+
             Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
             Elements productUrls = doc.select("h2.a-size-mini.a-spacing-none.a-color-base a");
             for (Element item : productUrls) {
@@ -155,9 +155,8 @@ public class ItemSearcher {
                 }
             }
             return itemList;
-        } catch (IOException e) {
-            return new ArrayList<>();
-        }
+
+
     }
 
     /**
@@ -166,7 +165,7 @@ public class ItemSearcher {
      * @param url url of amazon item
      */
     public Product searchItemUrl(String url, boolean searchByKeyword) throws IOException {
-        try {
+
             // This line specifies window type and layout of amazon page based on  Window Version and browser for webscraping
             Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
             Element htmlName = doc.select(".a-size-large.product-title-word-break").first();
@@ -212,8 +211,6 @@ public class ItemSearcher {
                 description = htmlDescription.text();
             }
             return new Item(name, sellingPrice, sellingPrice, url, description, new String[]{}, countRating, starRating, imgUrl);
-        } catch (IOException e) {
-            return new Item("", 0, 0, "", "", new String[]{}, 0, 0, "", "CAD");
-        }
+
     }
 }
