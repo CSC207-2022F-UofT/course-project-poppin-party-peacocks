@@ -11,31 +11,57 @@ public class ProductSortByReviewStarTest {
     Item plushie = new Item("Whale Plushie", 40.99, 30.00, "www.amazon.com/WhalePlushie",
             "Giant Whale Plushie", new String[]{"toys"}, 1050, 4.3, "www.amazonimage.com/OhWhale");
 
-    ProductComparatorController christmasWishlist = new ProductComparatorController("Christmas Wishlist");
-
     @Test
     public void ItemReviewStarComparatorTestAscending() {
-        christmasWishlist.addProduct(myFavDrink);
-        christmasWishlist.addProduct(animeFigure);
-        christmasWishlist.addProduct(plushie);
+        Wishlist list1 = new Wishlist("wishlist 1");
+        Wishlist list2 = new Wishlist("wishlist 2");
 
-        christmasWishlist.sortList("ascending", "review star");
+        ProductComparatorController controller1 = new ProductComparatorController(list1);
+        ProductComparatorController controller2 = new ProductComparatorController(list2);
 
-        Assertions.assertEquals(4.19, christmasWishlist.getProductList().get(0).getReviewStars());
-        Assertions.assertEquals(4.3, christmasWishlist.getProductList().get(1).getReviewStars());
-        Assertions.assertEquals(4.8, christmasWishlist.getProductList().get(2).getReviewStars());
+        list1.addProduct(myFavDrink);
+        list1.addProduct(animeFigure);
+        list1.addProduct(plushie);
+        list2.addProduct(myFavDrink);
+        list2.addProduct(animeFigure);
+        list2.addProduct(plushie);
+
+        controller1.sortList("ascending", "review star");
+        controller2.sortList("ascending", "review star");
+
+        Assertions.assertEquals(4.19, list1.getProductList().get(0).getReviewStars());
+        Assertions.assertEquals(4.3,list1.getProductList().get(1).getReviewStars());
+        Assertions.assertEquals(4.8, list1.getProductList().get(2).getReviewStars());
+
+        Assertions.assertEquals(4.19, list2.getProductList().get(0).getReviewStars());
+        Assertions.assertEquals(4.3, list2.getProductList().get(1).getReviewStars());
+        Assertions.assertEquals(4.8,list2.getProductList().get(2).getReviewStars());
     }
 
     @Test
     public void ItemReviewStarComparatorTestDescending() {
-        christmasWishlist.addProduct(myFavDrink);
-        christmasWishlist.addProduct(animeFigure);
-        christmasWishlist.addProduct(plushie);
+        Wishlist list1 = new Wishlist("wishlist 1");
+        Wishlist list2 = new Wishlist("wishlist 2");
 
-        christmasWishlist.sortList("descending", "review star");
+        ProductComparatorController controller1 = new ProductComparatorController(list1);
+        ProductComparatorController controller2 = new ProductComparatorController(list2);
 
-        Assertions.assertEquals(4.19, christmasWishlist.getProductList().get(2).getReviewStars());
-        Assertions.assertEquals(4.3, christmasWishlist.getProductList().get(1).getReviewStars());
-        Assertions.assertEquals(4.8, christmasWishlist.getProductList().get(0).getReviewStars());
+        list1.addProduct(myFavDrink);
+        list1.addProduct(animeFigure);
+        list1.addProduct(plushie);
+        list2.addProduct(myFavDrink);
+        list2.addProduct(animeFigure);
+        list2.addProduct(plushie);
+
+        controller1.sortList("descending", "review star");
+        controller2.sortList("descending", "review star");
+
+        Assertions.assertEquals(4.19, list1.getProductList().get(2).getReviewStars());
+        Assertions.assertEquals(4.3,list1.getProductList().get(1).getReviewStars());
+        Assertions.assertEquals(4.8, list1.getProductList().get(0).getReviewStars());
+
+        Assertions.assertEquals(4.19, list2.getProductList().get(2).getReviewStars());
+        Assertions.assertEquals(4.3, list2.getProductList().get(1).getReviewStars());
+        Assertions.assertEquals(4.8,list2.getProductList().get(0).getReviewStars());
     }
 }

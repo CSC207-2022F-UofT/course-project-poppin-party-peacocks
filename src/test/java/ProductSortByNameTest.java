@@ -10,31 +10,57 @@ public class ProductSortByNameTest {
     Item plushie = new Item("Whale Plushie", 40.99, 30.00, "www.amazon.com/WhalePlushie",
             "Giant Whale Plushie", new String[]{"toys"}, 1050, 4.3, "www.amazonimage.com/OhWhale");
 
-    ProductComparatorController christmasWishlist = new ProductComparatorController("Christmas Wishlist");
-
     @Test
     public void ProductSortByNameTestAscending() {
-        christmasWishlist.addProduct(myFavDrink);
-        christmasWishlist.addProduct(animeFigure);
-        christmasWishlist.addProduct(plushie);
+        Wishlist list1 = new Wishlist("wishlist 1");
+        Wishlist list2 = new Wishlist("wishlist 2");
 
-        christmasWishlist.sortList("ascending", "name");
+        ProductComparatorController controller1 = new ProductComparatorController(list1);
+        ProductComparatorController controller2 = new ProductComparatorController(list2);
 
-        Assertions.assertEquals("Lime Bubbly", christmasWishlist.getProductList().get(0).getProductName());
-        Assertions.assertEquals("Starlight Anya Forger", christmasWishlist.getProductList().get(1).getProductName());
-        Assertions.assertEquals("Whale Plushie", christmasWishlist.getProductList().get(2).getProductName());
+        list1.addProduct(myFavDrink);
+        list1.addProduct(animeFigure);
+        list1.addProduct(plushie);
+        list2.addProduct(myFavDrink);
+        list2.addProduct(animeFigure);
+        list2.addProduct(plushie);
+
+        controller1.sortList("ascending", "name");
+        controller2.sortList("ascending", "name");
+
+        Assertions.assertEquals("Lime Bubbly", list1.getProductList().get(0).getProductName());
+        Assertions.assertEquals("Starlight Anya Forger",list1.getProductList().get(1).getProductName());
+        Assertions.assertEquals("Whale Plushie", list1.getProductList().get(2).getProductName());
+
+        Assertions.assertEquals("Lime Bubbly", list2.getProductList().get(0).getProductName());
+        Assertions.assertEquals("Starlight Anya Forger", list2.getProductList().get(1).getProductName());
+        Assertions.assertEquals("Whale Plushie",list2.getProductList().get(2).getProductName());
     }
 
     @Test
     public void ProductSortByNameTestDescending() {
-        christmasWishlist.addProduct(myFavDrink);
-        christmasWishlist.addProduct(animeFigure);
-        christmasWishlist.addProduct(plushie);
+        Wishlist list1 = new Wishlist("wishlist 1");
+        Wishlist list2 = new Wishlist("wishlist 2");
 
-        christmasWishlist.sortList("descending", "name");
+        ProductComparatorController controller1 = new ProductComparatorController(list1);
+        ProductComparatorController controller2 = new ProductComparatorController(list2);
 
-        Assertions.assertEquals("Lime Bubbly", christmasWishlist.getProductList().get(2).getProductName());
-        Assertions.assertEquals("Starlight Anya Forger", christmasWishlist.getProductList().get(1).getProductName());
-        Assertions.assertEquals("Whale Plushie", christmasWishlist.getProductList().get(0).getProductName());
+        list1.addProduct(myFavDrink);
+        list1.addProduct(animeFigure);
+        list1.addProduct(plushie);
+        list2.addProduct(myFavDrink);
+        list2.addProduct(animeFigure);
+        list2.addProduct(plushie);
+
+        controller1.sortList("descending", "name");
+        controller2.sortList("descending", "name");
+
+        Assertions.assertEquals("Lime Bubbly", list1.getProductList().get(2).getProductName());
+        Assertions.assertEquals("Starlight Anya Forger",list1.getProductList().get(1).getProductName());
+        Assertions.assertEquals("Whale Plushie", list1.getProductList().get(0).getProductName());
+
+        Assertions.assertEquals("Lime Bubbly", list2.getProductList().get(2).getProductName());
+        Assertions.assertEquals("Starlight Anya Forger", list2.getProductList().get(1).getProductName());
+        Assertions.assertEquals("Whale Plushie",list2.getProductList().get(0).getProductName());
     }
 }
