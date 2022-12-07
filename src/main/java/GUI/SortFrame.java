@@ -1,12 +1,14 @@
 package GUI;
 
 import Entities.Wishlist;
+import Controller.ProductComparatorController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.*;
+
 
 public class SortFrame extends JFrame {
     JPanel mainPanel;
@@ -121,29 +123,30 @@ public class SortFrame extends JFrame {
             updateSelection();
         });
         sort.addActionListener(e -> {
+            ProductComparatorController comparator = new ProductComparatorController(wl);
             if(isAscending){
                 if(currentSortingMethod.equals(sortByDate.getText())){
-                    wl.sortProductListByDate("ascending");
+                    comparator.sortList("ascending", "date");
                 } else if (currentSortingMethod.equals(sortByName.getText())) {
-                    wl.sortProductListByName("ascending");
+                    comparator.sortList("ascending", "name");
                 } else if (currentSortingMethod.equals(sortByPrice.getText())) {
-                    wl.sortProductListByPrice("ascending");
+                    comparator.sortList("ascending", "price");
                 } else if (currentSortingMethod.equals(sortByReviewCount.getText())) {
-                    wl.sortProductListByReviewCount("ascending");
+                    comparator.sortList("ascending", "review count");
                 } else if (currentSortingMethod.equals(sortByReviewStars.getText())) {
-                    wl.sortProductListByReviewStars("ascending");
+                    comparator.sortList("ascending", "review star");
                 }
             } else {
                 if(currentSortingMethod.equals(sortByDate.getText())){
-                    wl.sortProductListByDate("descending");
+                    comparator.sortList("descending", "date");
                 } else if (currentSortingMethod.equals(sortByName.getText())) {
-                    wl.sortProductListByName("descending");
+                    comparator.sortList("descending", "name");
                 } else if (currentSortingMethod.equals(sortByPrice.getText())) {
-                    wl.sortProductListByPrice("descending");
+                    comparator.sortList("descending", "price");
                 } else if (currentSortingMethod.equals(sortByReviewCount.getText())) {
-                    wl.sortProductListByReviewCount("descending");
+                    comparator.sortList("descending", "review count");
                 } else if (currentSortingMethod.equals(sortByReviewStars.getText())) {
-                    wl.sortProductListByReviewStars("descending");
+                    comparator.sortList("descending", "review star");
                 }
             }
             wlp.setWishlist(wl);

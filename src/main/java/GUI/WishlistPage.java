@@ -106,7 +106,6 @@ public class WishlistPage extends JFrame {
         isSortedAscending = true;
 
         generateListOfItems(false);
-        //generateListOfItems(true);
         backButton.addActionListener(e -> {
             HomePage homePage = new HomePage();
             homePage.setContentPane(homePage.getMainPanel());
@@ -116,7 +115,6 @@ public class WishlistPage extends JFrame {
             dispose();
         });
         refreshButton.addActionListener(e -> {
-            System.out.println("updating");
             mainPanel.remove(itemScrollPane);
             ItemUpdateChecker IUC = new ItemUpdateChecker();
             mainPanel.repaint();
@@ -136,7 +134,8 @@ public class WishlistPage extends JFrame {
         });
         sortButton.addActionListener(e -> {
             if(!isSortFrameOpen){
-                @SuppressWarnings("unused") SortFrame sortFrame = new SortFrame(this, wl, currentSortingMethod, isSortedAscending);
+                @SuppressWarnings("unused")
+                SortFrame sortFrame = new SortFrame(this, wl, currentSortingMethod, isSortedAscending);
                 isSortFrameOpen = true;
             }
         });
@@ -173,7 +172,11 @@ public class WishlistPage extends JFrame {
     }
     public void refreshMainPanel(){
         mainPanel.remove(itemScrollPane);
-        generateListOfItems(false);
+        try {
+            generateListOfItems(false);
+        }catch(IOException ex){
+            throw new RuntimeException(ex);
+        }
     }
     /**
      * creates a JScrollPane from a JList from a list from the wishlist
