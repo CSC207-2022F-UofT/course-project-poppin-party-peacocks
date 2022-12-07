@@ -1,7 +1,11 @@
 package Entities;
-import java.util.Comparator;
 
-public class ItemNameComparator implements Comparator<Product> {
+import UseCases.Comparator.ProductComparator;
+
+/**
+ * a class that compares 2 Products with respect to their name
+ */
+public class ProductNameComparator implements ProductComparator {
     /**
      * Takes 2 Items and compares their names using .getItemName()
      * Default saved comparison: A-Z (ascending)
