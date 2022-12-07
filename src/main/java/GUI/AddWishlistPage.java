@@ -1,7 +1,5 @@
 package GUI;
 
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -9,16 +7,16 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
 
+import Entities.ListOfProductLists;
 import Entities.Wishlist;
-import Entities.ListOfWishlists;
-import DataBase.DataBaseController;
+import DataBase.*;
 /**
  * A graphic user interface for the AddWishlistPage with the purpose of giving an opportunity to the user to customize
  * the name of their wishlist.
  */
 public class AddWishlistPage extends JFrame {
     private final JPanel mainPanel;
-    private final ListOfWishlists lwl;
+    private final ListOfProductLists lwl;
     private final DataBaseController dbc;
     /**
      * getter method for mainPanel

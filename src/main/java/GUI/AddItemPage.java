@@ -1,9 +1,7 @@
 package GUI;
 
-import Entities.Item;
 import Entities.Product;
 import Entities.ProductList;
-import Entities.Wishlist;
 import ExternalInterface.ItemSearcher;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
@@ -128,10 +126,10 @@ public class AddItemPage extends JFrame {
                 saleNotification.startNotificationListener();
                 priceDropNotification.startNotificationListener();
                 currWishlist.addProduct(itemList[itemJList.getSelectedIndex()]);
-                WishlistPage updatedWishlistPage = null;
+                WishlistPage updatedWishlistPage;
                 try {
                     updatedWishlistPage = new WishlistPage(currWishlist);
-                } catch (IOException ex) {
+                } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
                     throw new RuntimeException(ex);
                 }
                 updatedWishlistPage.setContentPane(updatedWishlistPage.getMainPanel());

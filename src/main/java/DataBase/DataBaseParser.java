@@ -47,7 +47,7 @@ public class DataBaseParser {
             }
         }
 
-       return new Wishlist(name, items, displayedItems, dateAdded);
+       return new Wishlist(name, items, displayedItems, dateAdded, tags);
     }
 
     /** Parses an item in JSON format

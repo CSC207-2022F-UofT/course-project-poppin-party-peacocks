@@ -1,9 +1,8 @@
 package GUI;
 
-import Entities.ListOfWishlists;
+import DataBase.*;
+import Entities.ListOfProductLists;
 import Entities.ProductList;
-import Entities.Wishlist;
-import DataBase.DataBaseController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
  */
 public class HomePage extends JFrame {
     private GradientJPanel mainPanel;
-    private final ListOfWishlists lwl;
+    private final ListOfProductLists lwl;
     private JList<WishlistPanel> wishlistPanelJList;
     private JScrollPane wishlistScrollPane;
     private final DataBaseController dbc;
@@ -137,7 +136,7 @@ public class HomePage extends JFrame {
 
         viewWishlistButton.addActionListener(e -> {
             if (lwl.getListOfWishlist().size() > 0 & wishlistPanelJList.getSelectedIndex() >= 0){
-                Wishlist selectedWishlist = lwl.getListOfWishlist().get(wishlistPanelJList.getSelectedIndex());
+                ProductList selectedWishlist = lwl.getListOfWishlist().get(wishlistPanelJList.getSelectedIndex());
                 WishlistPage wishlistPage;
                 try {
                     wishlistPage = new WishlistPage(selectedWishlist);

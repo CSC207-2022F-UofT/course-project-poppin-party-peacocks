@@ -1,12 +1,9 @@
 package GUI;
 
-import Entities.Product;
-import Entities.ProductList;
-import Entities.Wishlist;
-import Entities.ListOfWishlists;
+import Entities.*;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
-import DataBase.DataBaseController;
+import DataBase.*;
 
 import ExternalInterface.ItemUpdateChecker;
 
@@ -32,7 +29,7 @@ public class WishlistPage extends JFrame {
     String currentSortingMethod;
     boolean isSortedAscending;
     private final DataBaseController dbc;
-    private final ListOfWishlists lwl;
+    private final ListOfProductLists lwl;
 
 
     /**
