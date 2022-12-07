@@ -6,10 +6,10 @@ import java.util.*;
  */
 public class ListOfWishlists {
 
-    private ArrayList<Wishlist> listWishlist;
+    private final ArrayList<Wishlist> listWishlist;
 
     public ListOfWishlists(){
-        this.listWishlist = new ArrayList<Wishlist>();
+        this.listWishlist = new ArrayList<>();
     }
 
     public ListOfWishlists(ArrayList<Wishlist> wishlists){
@@ -24,8 +24,17 @@ public class ListOfWishlists {
         this.listWishlist.add(wishlist);
     }
 
-    public void removeWishlist(String wishlistName){
-        listWishlist.removeIf(w -> Objects.equals(w.getName(), wishlistName));
+    public void removeWishlist(Wishlist wishlist){listWishlist.remove(wishlist);}
+    public void setWishlist(int index, Wishlist newWishlist){
+        listWishlist.set(index,newWishlist);
+    }
+    public int getIndexByName(String name){
+        for(Wishlist wl : listWishlist){
+            if (wl.getName().equals(name)){
+                return listWishlist.indexOf(wl);
+            }
+        }
+        return -1;
     }
     public ArrayList<String> getWishlistNames(){
         ArrayList<String> wishlistNames = new ArrayList<>();

@@ -18,7 +18,6 @@ public class Item implements Product {
     private double priceChange;
     private double desiredPrice;
     private Date dateAdded;
-    private Date dateLastUpdated;
     private double reviewStars;
     private int reviewCount;
     private ArrayList<Double> priceHistoryData;
@@ -34,11 +33,12 @@ public class Item implements Product {
         this.imageUrl = imageUrl;
         this.itemDescription = itemDescription;
         this.tags = tags;
-        this.dateLastUpdated = new Date();
         this.reviewCount = reviewCount;
         this.reviewStars = reviewStars;
         this.priceHistoryData = new ArrayList<>();
         this.priceHistoryData.add(this.itemPrice);
+        this.priceHistoryDates = new ArrayList<>();
+        this.priceHistoryDates.add(new Date());
         this.itemCurrency = "CAD";
     }
 
@@ -52,7 +52,6 @@ public class Item implements Product {
         this.imageUrl = imageUrl;
         this.itemDescription = itemDescription;
         this.tags = tags;
-        this.dateLastUpdated = new Date();
         this.reviewCount = reviewCount;
         this.reviewStars = reviewStars;
         this.priceHistoryData = new ArrayList<>();
@@ -128,7 +127,6 @@ public class Item implements Product {
     public Date getProductDateAdded(){
         return this.dateAdded;
     }
-    public Date getProductDateLastUpdated() {return this.dateLastUpdated;}
     public String[] getTags(){
         return this.tags;
     }
@@ -160,6 +158,4 @@ public class Item implements Product {
     public int getReviewCount() { return reviewCount;}
     public void setProductPrice(double newPrice) {this.itemPrice = newPrice;}
     public void setProductCurrency(String newCurrency) {this.itemCurrency = newCurrency;}
-    public void setDateLastUpdated(Date date) {this.dateLastUpdated = date;}
-
 }

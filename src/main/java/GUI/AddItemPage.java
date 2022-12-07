@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 
 public class AddItemPage extends JFrame {
     private final JPanel mainPanel;
@@ -105,10 +106,10 @@ public class AddItemPage extends JFrame {
         });
 
         cancelButton.addActionListener(e -> {
-            WishlistPage wlPage = null;
+            WishlistPage wlPage;
             try {
                 wlPage = new WishlistPage(currWishlist);
-            } catch (IOException ex) {
+            } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
                 throw new RuntimeException(ex);
             }
             wlPage.setContentPane(wlPage.getMainPanel());
@@ -127,10 +128,10 @@ public class AddItemPage extends JFrame {
                 saleNotification.startNotificationListener();
                 priceDropNotification.startNotificationListener();
                 currWishlist.addProduct(itemList[itemJList.getSelectedIndex()]);
-                WishlistPage updatedWishlistPage = null;
+                WishlistPage updatedWishlistPage;
                 try {
                     updatedWishlistPage = new WishlistPage(currWishlist);
-                } catch (IOException ex) {
+                } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
                     throw new RuntimeException(ex);
                 }
                 updatedWishlistPage.setContentPane(updatedWishlistPage.getMainPanel());

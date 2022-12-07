@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import Entities.Wishlist;
@@ -16,8 +17,7 @@ import Entities.Product;
  */
 public class ItemPage extends JFrame {
     private final GradientJPanel mainPanel;
-    private Product item;
-    private Wishlist wl;
+    private final Product item;
 
     /**
      * mainPanel getter method.
@@ -40,7 +40,6 @@ public class ItemPage extends JFrame {
         setResizable(false);
 
         this.item = item;
-        this.wl = wl;
 
         // constants
         final Color color1 = new Color(194, 234, 186);
@@ -184,10 +183,10 @@ public class ItemPage extends JFrame {
         // Button Logic
         // Navigates back to WishlistPage.
         backButton.addActionListener(e -> {
-            WishlistPage wlPage = null;
+            WishlistPage wlPage;
             try {
                 wlPage = new WishlistPage(wl);
-            } catch (IOException ex) {
+            } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
                 throw new RuntimeException(ex);
             }
             wlPage.setContentPane(wlPage.getMainPanel());
