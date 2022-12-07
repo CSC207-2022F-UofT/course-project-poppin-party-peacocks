@@ -1,8 +1,11 @@
 package Controller;
 import UseCases.UserRegister.*;
 
+/**
+ * An interface adapter class that receives the request to create a user and adapts the user's inputs in order to
+ * create a new user in the system
+ */
 
-// role : receive the request and send the response to the user
 public class UserRegisterController {
     final UserRegisterCreateUser createUserInputs;
 
