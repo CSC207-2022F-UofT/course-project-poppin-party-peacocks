@@ -1,7 +1,7 @@
+import Entities.Item;
 import UseCases.Notification.SaleNotification;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import Entities.*;
 
 public class SaleNotificationTest {
     Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",

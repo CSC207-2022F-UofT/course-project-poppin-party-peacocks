@@ -2,8 +2,14 @@ package GUI;
 
 import Entities.Product;
 import Entities.Wishlist;
+import UseCases.Notification.PriceDropNotification;
+import UseCases.Notification.SaleNotification;
+
+import ExternalInterface.ItemUpdateChecker;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -18,14 +24,7 @@ public class WishlistPage extends JFrame {
     private JList<ItemPanel> itemPanelJList;
     private JScrollPane itemScrollPane;
 
-    public WishlistPage(){
-        super();
-        wl = new Wishlist("New Wishlist");
-        this.setTitle(wl.getName());
-        initialiseJFrame();
-        initialiseMainPanel();
-    }
-    public WishlistPage(Wishlist wishlist) {
+    public WishlistPage(Wishlist wishlist) throws IOException {
         super(wishlist.getName());
         wl = wishlist;
         initialiseJFrame();
@@ -52,13 +51,17 @@ public class WishlistPage extends JFrame {
      * Initialises the main panel to contain all of its buttons and items
      * Adds action listeners to the buttons to facilitate page navigation and other functionality
      */
-    private void initialiseMainPanel(){
+    private void initialiseMainPanel() throws IOException {
         JPanel topPanel = new JPanel(null);
         topPanel.setBackground(new Color(106, 189, 154));
         topPanel.setBounds(0,0,360,56);
-        JLabel titleLabel = new JLabel(wl.getName());
+        String titleString = wl.getName();
+        if (titleString.length() > 20){
+            titleString = titleString.substring(0,19);
+        }
+        JLabel titleLabel = new JLabel(titleString);
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBounds(50,20,300,20);
+        titleLabel.setBounds(50,20,280,20);
         titleLabel.setFont(new Font("Montserrat", Font.PLAIN, 20));
         topPanel.add(titleLabel);
 
@@ -99,7 +102,25 @@ public class WishlistPage extends JFrame {
             homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
         });
-        refreshButton.addActionListener(e -> wl.refreshListPrices());
+        refreshButton.addActionListener(e -> {
+            System.out.println("updating");
+            mainPanel.remove(itemScrollPane);
+            ItemUpdateChecker IUC = new ItemUpdateChecker();
+            mainPanel.repaint();
+            for(int i = 0; i < wl.getProductList().size(); i++){
+                try {
+                    IUC.updatePriceCheck(wl.getDisplayedList().get(i));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                itemPanelJList.getModel().getElementAt(i).setUpdateSuccess(true);
+            }
+            try {
+                generateListOfItems();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         sortButton.addActionListener(e -> {
 
         });
@@ -107,7 +128,11 @@ public class WishlistPage extends JFrame {
             mainPanel.remove(itemScrollPane);
             if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
                 wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
-                generateListOfItems();
+                try {
+                    generateListOfItems();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         addButton.addActionListener(e -> {
@@ -121,7 +146,7 @@ public class WishlistPage extends JFrame {
         viewItemButton.addActionListener(e -> {
             if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
                 Product selectedItem = itemList.get(itemPanelJList.getSelectedIndex());
-                ItemPage itemPage = new ItemPage();
+                ItemPage itemPage = new ItemPage(selectedItem, wl);
                 itemPage.setContentPane(itemPage.getMainPanel());
                 itemPage.setVisible(true);
                 itemPage.setLocationRelativeTo(null);
@@ -135,12 +160,20 @@ public class WishlistPage extends JFrame {
      * creates a JScrollPane from a JList from a list from the wishlist
      * Configures the JScrollPane and adds it to the main panel
      */
-    private void generateListOfItems(){
+    private void generateListOfItems() throws IOException {
         ArrayList<ItemPanel> panelList = new ArrayList<>();
         itemList = wl.getProductList();
         for (Product product : itemList) {
-            panelList.add(new ItemPanel(product.getProductImageURL(),
-                    product.getProductName(), product.getProductPriceString()));
+            ItemPanel itemPanel = new ItemPanel(product.getProductImageURL(),
+                    product.getProductName(), product.getProductPriceString(), product.getProductDateLastUpdated());
+            SaleNotification saleNotification = new SaleNotification(product);
+            PriceDropNotification priceDropNotification = new PriceDropNotification(product);
+
+            if (saleNotification.checkNotificationAction() || priceDropNotification.checkNotificationAction()) {
+                itemPanel.setBorderColor(new Color(255, 0 ,0));
+            }
+
+            panelList.add(itemPanel);
         }
         ItemPanel[] tempPanelList = new ItemPanel[panelList.size()];
         tempPanelList = panelList.toArray(tempPanelList);

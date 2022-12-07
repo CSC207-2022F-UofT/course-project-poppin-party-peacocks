@@ -14,78 +14,66 @@ import java.util.Scanner;
 /** A class that helps fetches user and wishlists from the data */
 public class DataBaseController {
 
-    /** Retrieves and returns a list of wishlist object based on name
+    /**
+     * Retrieves and returns a list of wishlist object based on name
+     *
      * @param userName Unique name of the user
      * @returns list of wishlists
-     * */
-    public ListOfProductLists getListOfWishlists(String userName) {
+     */
+    public ListOfWishlists getListOfWishlists(String userName) throws FileNotFoundException, java.text.ParseException, ParseException {
         DataBaseParser dataBaseParser = new DataBaseParser();
-        try {
-            File myObj = new File(DataBase.getWishlistPath(userName));
-            Scanner myReader = new Scanner(myObj);
-            // Find the first user with the correct name
-            if (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                JSONParser jsonParser = new JSONParser();
-                JSONObject parsedData = (JSONObject) jsonParser.parse(data);
-                JSONArray wishlistsObject = (JSONArray) parsedData.get("wishlists");
-                ArrayList<ProductList> wishlists = new ArrayList<>();
 
-                if (!Objects.isNull(wishlistsObject)) {
-                    for (Object wishlist : wishlistsObject) {
-                        wishlists.add(dataBaseParser.parseWishlist(wishlist));
-                    }
+        File myObj = new File(DataBase.getWishlistPath(userName));
+        Scanner myReader = new Scanner(myObj);
+        // Find the first user with the correct name
+        if (myReader.hasNextLine()) {
+            String data = myReader.nextLine();
+            JSONParser jsonParser = new JSONParser();
+            JSONObject parsedData = (JSONObject) jsonParser.parse(data);
+            JSONArray wishlistsObject = (JSONArray) parsedData.get("wishlists");
+            ArrayList<Wishlist> wishlists = new ArrayList<>();
+
+            if (!Objects.isNull(wishlistsObject)) {
+                for (Object wishlist : wishlistsObject) {
+                    wishlists.add(dataBaseParser.parseWishlist(wishlist));
                 }
-                return new ListOfWishlists(wishlists);
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred file not found.");
-            e.printStackTrace();
-        } catch (ParseException e) {
-            System.out.println("An error occurred failed to parse user data." + e);
-            e.printStackTrace();
-        } catch (java.text.ParseException e) {
-            throw new RuntimeException(e);
+            return new ListOfWishlists(wishlists);
         }
+        myReader.close();
+
         // Return a default wishlist if wishlist does not exist
         return new ListOfWishlists();
     }
 
-    /** Retrieves and returns a Entities.User object based on name
+    /**
+     * Retrieves and returns a Entities.User object based on name
+     *
      * @param name Unique name of the user
      * @returns user
-     * */
-    public User getUser(String name) {
-        try {
-            File myObj = new File(DataBase.getUserFilePath());
-            Scanner myReader = new Scanner(myObj);
-            // Find the first user with the correct name
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                JSONParser jsonParser = new JSONParser();
-                JSONObject parsedData = (JSONObject) jsonParser.parse(data);
-                if (Objects.equals(parsedData.get("user").toString(), name)) {
-                    String userName = (String) parsedData.get("user");
-                    String password = (String) parsedData.get("password");
-                    String currency = (String) parsedData.get("currency");
-                    User newUser = new User(userName, password, currency);
-                    DataBase.currentUser = newUser;
-                    return newUser;
-                }
+     */
+    public User getUser(String name) throws FileNotFoundException, ParseException {
+        File myObj = new File(DataBase.getUserFilePath());
+        Scanner myReader = new Scanner(myObj);
+        // Find the first user with the correct name
+        while (myReader.hasNextLine()) {
+            String data = myReader.nextLine();
+            JSONParser jsonParser = new JSONParser();
+            JSONObject parsedData = (JSONObject) jsonParser.parse(data);
+            if (Objects.equals(parsedData.get("user").toString(), name)) {
+                String userName = (String) parsedData.get("user");
+                String password = (String) parsedData.get("password");
+                String currency = (String) parsedData.get("currency");
+                User newUser = new User(userName, password, currency);
+                DataBase.currentUser = newUser;
+                return newUser;
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred file not found.");
-            e.printStackTrace();
-        } catch (ParseException e) {
-            System.out.println("An error occurred failed to parse user data.");
-            e.printStackTrace();
         }
-        // Return a default user if user doesn't exist
-        return new User("Default User", "Password");
-    }
+        myReader.close();
+    // Return a default user if user doesn't exist
+        return new User("Default User","Password");
 
+    }
     /** Adds a list of wishlists data to a user's database
      * @param listOfWishlists list of wishlists data to add to database
      * @param user user of the data it belongs to
@@ -93,7 +81,8 @@ public class DataBaseController {
      * */
     // JSONArray's library has errors, can ignore
     @SuppressWarnings("unchecked")
-    public boolean saveListOfWishlists(ListOfProductLists listOfWishlists, User user) {
+
+    public boolean saveListOfWishlists(ListOfWishlists listOfWishlists, User user) throws IOException {
         DataBaseFormatter dataBaseFormatter = new DataBaseFormatter();
         String wishlistPath = DataBase.getWishlistPath(user.getName());
         File file = new File(wishlistPath);
@@ -128,7 +117,7 @@ public class DataBaseController {
      * */
     // JSONArray's library has errors, can ignore
     @SuppressWarnings("unchecked")
-    public boolean addUser(User user) {
+    public boolean addUser(User user) throws IOException {
         File file = new File(DataBase.getUserFilePath());
 
         // If the file directory doesn't exist, create a new file
@@ -136,19 +125,14 @@ public class DataBaseController {
             DataBase.createFile(DataBase.getUserFilePath());
         }
 
-        try {
-            FileWriter fileWriter = new FileWriter(DataBase.getUserFilePath(), true);
-            JSONObject userObject = new JSONObject();
-            userObject.put("user", user.getName());
-            userObject.put("password", user.getPassword());
-            userObject.put("currency", user.getCurrency());
-            fileWriter.write(userObject.toJSONString() + '\n');
-            fileWriter.close();
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
+        FileWriter fileWriter = new FileWriter(DataBase.getUserFilePath(), true);
+        JSONObject userObject = new JSONObject();
+        userObject.put("user", user.getName());
+        userObject.put("password", user.getPassword());
+        userObject.put("currency", user.getCurrency());
+        fileWriter.write(userObject.toJSONString() + '\n');
+        fileWriter.close();
+        return true;
     }
 
     /** Deletes user from the database
@@ -157,7 +141,7 @@ public class DataBaseController {
      * */
     // JSONArray's library has errors, can ignore
     @SuppressWarnings("unchecked")
-    public boolean deleteUser(String userName) throws IOException {
+    public boolean deleteUser(String userName) throws IOException, ParseException {
         File tempUserFile = new File(DataBase.getTempUserFilePath());
         File userFile = new File(DataBase.getUserFilePath());
         // If the tempUserFile directory doesn't exist, create a new tempUserFile
@@ -169,32 +153,25 @@ public class DataBaseController {
             DataBase.createFile(DataBase.getUserFilePath());
         }
 
-        BufferedReader reader = new BufferedReader(new FileReader(userFile));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(tempUserFile));
-        String currentLine;
-        try {
-            while((currentLine = reader.readLine()) != null) {
-                JSONParser jsonParser = new JSONParser();
-                JSONObject parsedData = (JSONObject) jsonParser.parse(currentLine);
-                if (!(Objects.equals(parsedData.get("user").toString(), userName))) {
-                    writer.write(parsedData.toJSONString()+ '\n');
-                }
-
-            }
-            reader.close();
-            writer.close();
-
-            if (userFile.delete()) {
-                System.out.println("File deleted!");
+    BufferedReader reader = new BufferedReader(new FileReader(userFile));
+    BufferedWriter writer = new BufferedWriter(new FileWriter(tempUserFile));
+    String currentLine;
+        while((currentLine = reader.readLine()) != null) {
+            JSONParser jsonParser = new JSONParser();
+            JSONObject parsedData = (JSONObject) jsonParser.parse(currentLine);
+            if (!(Objects.equals(parsedData.get("user").toString(), userName))) {
+                writer.write(parsedData.toJSONString()+ '\n');
             }
 
-            return tempUserFile.renameTo(userFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
         }
+        reader.close();
+        writer.close();
+
+        if (userFile.delete()) {
+            System.out.println("File deleted!");
+        }
+
+        return tempUserFile.renameTo(userFile);
     }
 
     /** Retrieves the current active user

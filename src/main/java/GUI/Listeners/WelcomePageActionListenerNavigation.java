@@ -1,6 +1,5 @@
 package GUI.Listeners;
 import GUI.HomePage;
-import UseCases.LoginAction;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -20,8 +19,6 @@ public class WelcomePageActionListenerNavigation {
             homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             currJFrame.dispose();
         };
-
-
     }
 
     public ActionListener getLoginActionListener(){
