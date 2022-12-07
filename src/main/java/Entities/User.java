@@ -35,6 +35,10 @@ public class User {
         return this.password;
     }
 
+    public ListOfProductLists getWishlists(){
+        return this.wishlists;
+    }
+
     public void setName(String newName){
         this.name = newName;
     }
@@ -52,24 +56,5 @@ public class User {
             }
         }
         return false;
-    }
-
-    /**
-     * Toggles current currency to user given currency
-     */
-    public void toggleCurrency(){
-        if (currency.equals("CAD")){
-            currency = "USD";
-        }
-        else{
-            currency = "CAD";
-        }
-
-        for (ProductList wishlist: wishlists.getListOfWishlist()){
-            for (Product item: wishlist.getProductList()){
-                item.setProductCurrency(currency);
-            }
-        }
-
     }
 }

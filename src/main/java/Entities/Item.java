@@ -188,24 +188,7 @@ public class Item implements Product {
     public void setReviewCount(int reviewCount) { this.reviewCount = reviewCount;}
     public int getReviewCount() { return reviewCount;}
     public void setProductPrice(double newPrice) {this.itemPrice = newPrice;}
-    public void setProductCurrency(String newCurrency) {
-
-        if (itemCurrency.equals(newCurrency)){
-            return;
-        }
-        double priceConversion = 1.36;
-        this.itemCurrency = newCurrency;
-
-        double currentPrice = getProductPrice();
-
-        if (newCurrency.equals("CAD")){
-            setProductPrice(currentPrice/priceConversion);
-        }
-        else {
-            setProductPrice(currentPrice*priceConversion);
-        }
-
-    }
+    public void setProductCurrency(String newCurrency) {this.itemCurrency = newCurrency;}
     public void setDateLastUpdated(Date date) {this.dateLastUpdated = date;}
 
 }

@@ -213,7 +213,7 @@ public class ItemSearcher {
             }
             return new Item(name, sellingPrice, sellingPrice, url, description, new String[]{}, countRating, starRating, imgUrl);
         } catch (IOException e) {
-            return new Item("", 0, 0, "", "", new String[]{}, 0, 0, "");
+            return new Item("", 0, 0, "", "", new String[]{}, 0, 0, "", "CAD");
         }
     }
 }
