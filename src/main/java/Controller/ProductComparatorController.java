@@ -12,9 +12,9 @@ import UseCases.Comparator.ProductComparatorFactory;
  * and sorts the wishlist using that comparator
  */
 public class ProductComparatorController {
-    private final Wishlist productList;
+    private final ProductList productList;
 
-    public ProductComparatorController(Wishlist wishlist){
+    public ProductComparatorController(ProductList wishlist){
         this.productList = wishlist;
     }
 
@@ -47,7 +47,7 @@ public class ProductComparatorController {
         }
     }
 
-    public Wishlist getProductList() {
+    public ProductList getProductList() {
         return productList;
     }
 }

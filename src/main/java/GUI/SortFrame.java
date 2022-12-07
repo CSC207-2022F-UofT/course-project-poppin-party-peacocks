@@ -1,5 +1,6 @@
 package GUI;
 
+import Entities.ProductList;
 import Entities.Wishlist;
 import Controller.ProductComparatorController;
 
@@ -12,7 +13,7 @@ import java.util.*;
 
 public class SortFrame extends JFrame {
     JPanel mainPanel;
-    Wishlist wl;
+    ProductList wl;
     WishlistPage wlp;
     Font textFont = new Font("Arial", Font.PLAIN, 12);
 
@@ -28,7 +29,7 @@ public class SortFrame extends JFrame {
     CustomJButton descending;
     CustomJButton sort;
     JLabel sortingText;
-    public SortFrame(WishlistPage wlp, Wishlist wl, String curSortMethod, boolean b){
+    public SortFrame(WishlistPage wlp, ProductList wl, String curSortMethod, boolean b){
         super("Sort");
         this.wl = wl;
         this.wlp = wlp;
