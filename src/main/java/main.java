@@ -1,23 +1,16 @@
 import Controller.UserRegisterController;
-import DataBase.DataBase;
-import Entities.*;
-import GUI.WelcomePage;
 import GUI.WelcomePage;
 import UseCases.UserRegister.*;
 
 import javax.swing.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class main {
     /**
      * main
      */
 
     public static void main(String[] args) {
-        System.out.println(new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").format(new Date()));
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
+        // Schedule a job for the event-dispatching thread:
+        // creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(main::createAndShowGUI);
     }
 
