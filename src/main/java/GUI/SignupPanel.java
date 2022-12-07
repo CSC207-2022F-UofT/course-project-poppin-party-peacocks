@@ -3,7 +3,6 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 import Controller.UserRegisterController;
-import Entities.User;
 
 public class SignupPanel extends JPanel {
     private final JFrame currJFrame;

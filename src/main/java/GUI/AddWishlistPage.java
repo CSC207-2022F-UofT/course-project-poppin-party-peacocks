@@ -4,8 +4,8 @@ import Entities.ListOfWishlists;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.*;
-import java.util.List;
 import Entities.Wishlist;
 
 /**
@@ -102,7 +102,12 @@ public class AddWishlistPage extends JFrame {
                     mainPanel.repaint();
                 }else{
                     Wishlist newWl = new Wishlist(wishlistName);
-                    WishlistPage wlPage = new WishlistPage(newWl);
+                    WishlistPage wlPage = null;
+                    try {
+                        wlPage = new WishlistPage(newWl);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     wlPage.setContentPane(wlPage.getMainPanel());
                     wlPage.setVisible(true);
                     wlPage.setLocationRelativeTo(null);

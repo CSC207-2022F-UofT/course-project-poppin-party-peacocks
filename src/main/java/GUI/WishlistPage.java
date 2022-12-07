@@ -2,6 +2,9 @@ package GUI;
 
 import Entities.Product;
 import Entities.Wishlist;
+import UseCases.Notification.PriceDropNotification;
+import UseCases.Notification.SaleNotification;
+
 import ExternalInterface.ItemUpdateChecker;
 
 import javax.swing.*;
@@ -21,7 +24,7 @@ public class WishlistPage extends JFrame {
     private JList<ItemPanel> itemPanelJList;
     private JScrollPane itemScrollPane;
 
-    public WishlistPage(Wishlist wishlist) {
+    public WishlistPage(Wishlist wishlist) throws IOException {
         super(wishlist.getName());
         wl = wishlist;
         initialiseJFrame();
@@ -48,7 +51,7 @@ public class WishlistPage extends JFrame {
      * Initialises the main panel to contain all of its buttons and items
      * Adds action listeners to the buttons to facilitate page navigation and other functionality
      */
-    private void initialiseMainPanel(){
+    private void initialiseMainPanel() throws IOException {
         JPanel topPanel = new JPanel(null);
         topPanel.setBackground(new Color(106, 189, 154));
         topPanel.setBounds(0,0,360,56);
@@ -105,24 +108,31 @@ public class WishlistPage extends JFrame {
             ItemUpdateChecker IUC = new ItemUpdateChecker();
             mainPanel.repaint();
             for(int i = 0; i < wl.getProductList().size(); i++){
-                try{
+                try {
                     IUC.updatePriceCheck(wl.getDisplayedList().get(i));
-                    itemPanelJList.getModel().getElementAt(i).setUpdateSuccess(true);
-                }catch(IOException e1){
-                    itemPanelJList.getModel().getElementAt(i).setUpdateSuccess(false);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
                 }
+                itemPanelJList.getModel().getElementAt(i).setUpdateSuccess(true);
             }
-            generateListOfItems();
+            try {
+                generateListOfItems();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         sortButton.addActionListener(e -> {
-
 
         });
         deleteButton.addActionListener(e -> {
             mainPanel.remove(itemScrollPane);
             if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
                 wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
-                generateListOfItems();
+                try {
+                    generateListOfItems();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         addButton.addActionListener(e -> {
@@ -150,12 +160,20 @@ public class WishlistPage extends JFrame {
      * creates a JScrollPane from a JList from a list from the wishlist
      * Configures the JScrollPane and adds it to the main panel
      */
-    private void generateListOfItems(){
+    private void generateListOfItems() throws IOException {
         ArrayList<ItemPanel> panelList = new ArrayList<>();
         itemList = wl.getProductList();
         for (Product product : itemList) {
-            panelList.add(new ItemPanel(product.getProductImageURL(),
-                    product.getProductName(), product.getProductPriceString(), product.getProductDateLastUpdated()));
+            ItemPanel itemPanel = new ItemPanel(product.getProductImageURL(),
+                    product.getProductName(), product.getProductPriceString(), product.getProductDateLastUpdated());
+            SaleNotification saleNotification = new SaleNotification(product);
+            PriceDropNotification priceDropNotification = new PriceDropNotification(product);
+
+            if (saleNotification.checkNotificationAction() || priceDropNotification.checkNotificationAction()) {
+                itemPanel.setBorderColor(new Color(255, 0 ,0));
+            }
+
+            panelList.add(itemPanel);
         }
         ItemPanel[] tempPanelList = new ItemPanel[panelList.size()];
         tempPanelList = panelList.toArray(tempPanelList);

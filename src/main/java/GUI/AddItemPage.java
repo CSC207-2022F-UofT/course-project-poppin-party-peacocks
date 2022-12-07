@@ -4,6 +4,8 @@ import Entities.Item;
 import Entities.Product;
 import Entities.Wishlist;
 import ExternalInterface.ItemSearcher;
+import UseCases.Notification.PriceDropNotification;
+import UseCases.Notification.SaleNotification;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -139,7 +141,12 @@ public class AddItemPage extends JFrame {
         });
 
         cancelButton.addActionListener(e -> {
-            WishlistPage wlPage = new WishlistPage(currWishlist);
+            WishlistPage wlPage = null;
+            try {
+                wlPage = new WishlistPage(currWishlist);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             wlPage.setContentPane(wlPage.getMainPanel());
             wlPage.setVisible(true);
             wlPage.setLocationRelativeTo(null);
@@ -148,8 +155,20 @@ public class AddItemPage extends JFrame {
         });
 
         addSelectedItemButton.addActionListener(e -> {
+            // Create notification timers
+            Item selectedItem = itemList[itemJList.getSelectedIndex()];
+            SaleNotification saleNotification = new SaleNotification(selectedItem);
+            PriceDropNotification priceDropNotification = new PriceDropNotification(selectedItem);
+            saleNotification.startNotificationListener();
+            priceDropNotification.startNotificationListener();
+
             currWishlist.addProduct(itemList[itemJList.getSelectedIndex()]);
-            WishlistPage updatedWishlistPage = new WishlistPage(currWishlist);
+            WishlistPage updatedWishlistPage = null;
+            try {
+                updatedWishlistPage = new WishlistPage(currWishlist);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             updatedWishlistPage.setContentPane(updatedWishlistPage.getMainPanel());
             updatedWishlistPage.setVisible(true);
             updatedWishlistPage.setLocationRelativeTo(null);

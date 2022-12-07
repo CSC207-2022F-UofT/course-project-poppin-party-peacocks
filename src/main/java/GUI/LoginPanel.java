@@ -1,9 +1,11 @@
 package GUI;
 import GUI.Listeners.WelcomePageActionListenerNavigation;
-import UseCases.LoginAction;
+import UseCases.LoginAction.LoginAction;
+import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class LoginPanel extends JPanel{
     private JFrame currJFrame;
@@ -46,18 +48,31 @@ public class LoginPanel extends JPanel{
         loginButton.addActionListener(e->{
             LoginAction login = new LoginAction(usernameField.getText(),
                     String.valueOf(passwordField.getPassword()));
-            if (!login.checkUsername() | !login.checkUserMatchesPassword()){
-                JOptionPane.showMessageDialog(loginButton,
-                        "User and/or password does not match the records in our system. Please try again.");
-            }
-            else if (login.checkUserMatchesPassword()) {
-//                wpaln.getLoginActionListener();
-                HomePage homePage = new HomePage();
-                homePage.setContentPane(homePage.getMainPanel());
-                homePage.setVisible(true);
-                homePage.setLocationRelativeTo(null);
-                homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                currJFrame.dispose();
+            try {
+                if (!login.checkUsername() | !login.checkUserMatchesPassword()){
+                    JOptionPane.showMessageDialog(loginButton,
+                            "User and/or password does not match the records in our system. Please try again.");
+                }
+                else {
+                    try {
+                        if (login.checkUserMatchesPassword()) {
+                            HomePage homePage = new HomePage();
+                            homePage.setContentPane(homePage.getMainPanel());
+                            homePage.setVisible(true);
+                            homePage.setLocationRelativeTo(null);
+                            homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                            currJFrame.dispose();
+                        }
+                    } catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (ParseException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            } catch (ParseException ex) {
+                throw new RuntimeException(ex);
             }
         });
 

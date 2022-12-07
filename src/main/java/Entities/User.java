@@ -1,7 +1,9 @@
 package Entities;
-
 import java.util.ArrayList;
 
+/**
+ * a class that manages User attributes and currency exchange
+ */
 public class User {
     private String currency;
     private String name;
