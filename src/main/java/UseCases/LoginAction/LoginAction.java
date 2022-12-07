@@ -1,8 +1,9 @@
-package UseCases;
+package UseCases.LoginAction;
 
 import DataBase.*;
+import org.json.simple.parser.ParseException;
+import java.io.FileNotFoundException;
 import Entities.*;
-
 import java.util.Objects;
 
 public class LoginAction {
@@ -19,10 +20,13 @@ public class LoginAction {
      *
      * @return True if inputtedUsername exists in DataBase
      */
-    public boolean checkUsername() {
+    public boolean checkUsername() throws FileNotFoundException, ParseException {
         DataBaseController dataBaseController = new DataBaseController();
         User existingUser = dataBaseController.getUser(this.inputtedUsername);
-        return !Objects.equals(existingUser.getName(), "Default User");
+        if (existingUser.getName() == "Default User") {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -31,7 +35,7 @@ public class LoginAction {
      *
      * @return True if inputtedUsername exists in DataBase and inputtedPassword matches existingPassword
      */
-    public boolean checkUserMatchesPassword() {
+    public boolean checkUserMatchesPassword() throws FileNotFoundException, ParseException {
         DataBaseController dataBaseController = new DataBaseController();
         if (this.checkUsername()) {
             User existingUser = dataBaseController.getUser(this.inputtedUsername);

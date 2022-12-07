@@ -9,6 +9,7 @@ import ExternalInterface.ItemUpdateChecker;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +27,7 @@ public class WishlistPage extends JFrame {
     String currentSortingMethod;
     boolean isSortedAscending;
 
-    public WishlistPage(Wishlist wishlist) {
+    public WishlistPage(Wishlist wishlist) throws IOException {
         super(wishlist.getName());
         wl = wishlist;
         initialiseJFrame();
@@ -59,7 +60,7 @@ public class WishlistPage extends JFrame {
      * Initialises the main panel to contain all of its buttons and items
      * Adds action listeners to the buttons to facilitate page navigation and other functionality
      */
-    private void initialiseMainPanel(){
+    private void initialiseMainPanel() throws IOException {
         JPanel topPanel = new JPanel(null);
         topPanel.setBackground(new Color(106, 189, 154));
         topPanel.setBounds(0,0,360,56);
@@ -120,10 +121,18 @@ public class WishlistPage extends JFrame {
             ItemUpdateChecker IUC = new ItemUpdateChecker();
             mainPanel.repaint();
             for(int i = 0; i < wl.getProductList().size(); i++){
-                IUC.updatePriceCheck(wl.getDisplayedList().get(i));
+                try {
+                    IUC.updatePriceCheck(wl.getDisplayedList().get(i));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 itemPanelJList.getModel().getElementAt(i).setUpdateSuccess(true);
             }
-            generateListOfItems(true);
+            try {
+                generateListOfItems(true);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         sortButton.addActionListener(e -> {
             if(!isSortFrameOpen){
@@ -135,7 +144,11 @@ public class WishlistPage extends JFrame {
             mainPanel.remove(itemScrollPane);
             if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
                 wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
-                generateListOfItems(false);
+                try {
+                    generateListOfItems(false);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         addButton.addActionListener(e -> {
@@ -166,7 +179,7 @@ public class WishlistPage extends JFrame {
      * creates a JScrollPane from a JList from a list from the wishlist
      * Configures the JScrollPane and adds it to the main panel
      */
-    public void generateListOfItems(boolean raiseNotification){
+    private void generateListOfItems(boolean raiseNotification) throws IOException {
         ArrayList<ItemPanel> panelList = new ArrayList<>();
         itemList = wl.getDisplayedList();
         for (Product product : itemList) {

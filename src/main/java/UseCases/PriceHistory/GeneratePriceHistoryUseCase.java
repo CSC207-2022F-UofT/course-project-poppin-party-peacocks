@@ -1,6 +1,6 @@
 package UseCases.PriceHistory;
 
-import Entities.*;
+import Entities.Item;
 import Controller.Scheduler;
 
 import java.text.DateFormat;

@@ -14,6 +14,12 @@ public class ItemReviewCountComparator implements Comparator<Product> {
      */
     @Override
     public int compare(Product item1, Product item2) {
-        return Integer.compare(item2.getReviewCount(), item1.getReviewCount());
+        if (item1.getReviewCount() <= item2.getReviewCount()) {
+            return 1;
+        } else if (item1.getReviewCount() >= item2.getReviewCount()) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }
