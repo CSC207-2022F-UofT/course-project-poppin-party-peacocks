@@ -1,4 +1,5 @@
 package Entities;
+import java.util.ArrayList;
 
 /**
  * a class that manages User attributes and currency exchange
@@ -7,8 +8,8 @@ public class User {
     private String currency;
     private String name;
     private String password;
-    private ListOfWishlists wishlists;
-    private static final String[] currencyBank = {"USD", "CAD", "YUAN"};
+    private ListOfProductLists wishlists;
+    private static final String[] currencyBank = {"USD", "CAD"};
 
     public User(String name, String password){
         this.name = name;
@@ -34,6 +35,10 @@ public class User {
 
     public String getPassword(){
         return this.password;
+    }
+
+    public ListOfProductLists getWishlists(){
+        return this.wishlists;
     }
 
     public void setName(String newName){

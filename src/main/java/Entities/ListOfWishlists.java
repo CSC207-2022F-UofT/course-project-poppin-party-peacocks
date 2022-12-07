@@ -1,26 +1,24 @@
 package Entities;
 import java.util.*;
 
-/**
- * a class that manages constructors for a list of Wishlists
- */
-public class ListOfWishlists {
+public class ListOfWishlists implements ListOfProductLists {
 
-    private ArrayList<Wishlist> listWishlist;
+    private ArrayList<ProductList> listWishlist;
 
     public ListOfWishlists(){
-        this.listWishlist = new ArrayList<Wishlist>();
+        this.listWishlist = new ArrayList<ProductList>();
     }
 
-    public ListOfWishlists(ArrayList<Wishlist> wishlists){
+    public ListOfWishlists(ArrayList<ProductList> wishlists){
         this.listWishlist = wishlists;
     }
 
-    public ArrayList<Wishlist> getListOfWishlist() {
+    public ArrayList<ProductList> getListOfWishlist() {
         return this.listWishlist;
     }
 
-    public void addWishlist(Wishlist wishlist){
+
+    public void addWishlist(ProductList wishlist){
         this.listWishlist.add(wishlist);
     }
 
@@ -29,7 +27,7 @@ public class ListOfWishlists {
     }
     public ArrayList<String> getWishlistNames(){
         ArrayList<String> wishlistNames = new ArrayList<>();
-        for(Wishlist w : listWishlist){
+        for(ProductList w : listWishlist){
             wishlistNames.add(w.getName());
         }
         return wishlistNames;

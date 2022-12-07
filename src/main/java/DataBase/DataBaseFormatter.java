@@ -1,7 +1,7 @@
 package DataBase;
 
 import Entities.Product;
-import Entities.Wishlist;
+import Entities.ProductList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -52,7 +52,7 @@ public class DataBaseFormatter {
      * */
     // JSONArray's library has errors, can ignore
     @SuppressWarnings("unchecked")
-    public JSONObject createWishlistJSON(Wishlist wishlist) {
+    public JSONObject createWishlistJSON(ProductList wishlist) {
         JSONObject wishlistObject = new JSONObject();
         wishlistObject.put("name", wishlist.getName());
         wishlistObject.put("dateAdded", new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").format(wishlist.getDateAdded()));

@@ -1,6 +1,7 @@
 package GUI;
 
 import Entities.Product;
+import Entities.ProductList;
 import Entities.Wishlist;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
@@ -9,7 +10,9 @@ import ExternalInterface.ItemUpdateChecker;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +22,7 @@ import java.util.ArrayList;
 public class WishlistPage extends JFrame {
 
     private GradientJPanel mainPanel;
-    private Wishlist wl;
+    private ProductList wl;
     private ArrayList<Product> itemList;
     private JList<ItemPanel> itemPanelJList;
     private JScrollPane itemScrollPane;
@@ -27,13 +30,13 @@ public class WishlistPage extends JFrame {
     String currentSortingMethod;
     boolean isSortedAscending;
 
-    public WishlistPage(Wishlist wishlist) throws IOException {
+    public WishlistPage(ProductList wishlist) throws IOException {
         super(wishlist.getName());
         wl = wishlist;
         initialiseJFrame();
         initialiseMainPanel();
     }
-    public void setWishlist(Wishlist wl){
+    public void setWishlist(ProductList wl){
         this.wl = wl;
     }
     public void setSortFrameOpen(boolean isOpen){
@@ -107,7 +110,8 @@ public class WishlistPage extends JFrame {
 
         generateListOfItems(false);
         backButton.addActionListener(e -> {
-            HomePage homePage = new HomePage();
+            HomePage homePage = null;
+            homePage = new HomePage();
             homePage.setContentPane(homePage.getMainPanel());
             homePage.setVisible(true);
             homePage.setLocationRelativeTo(null);

@@ -2,6 +2,7 @@ package DataBase;
 
 import Entities.Item;
 import Entities.Product;
+import Entities.ProductList;
 import Entities.Wishlist;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,7 +18,7 @@ public class DataBaseParser {
      * @param wishlistObject wishlist to convert to wish list object
      * @return wishlist object
      * */
-    public Wishlist parseWishlist(Object wishlistObject) throws java.text.ParseException {
+    public ProductList parseWishlist(Object wishlistObject) throws java.text.ParseException {
         JSONObject wishlistData = (JSONObject) wishlistObject;
         String name = (String) wishlistData.get("name");
 
