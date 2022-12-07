@@ -1,30 +1,44 @@
 package UseCases.Notification;
 import Controller.Scheduler;
 import Entities.*;
+import ExternalInterface.ItemUpdateChecker;
+
+import java.io.IOException;
 import java.util.TimerTask;
 
 /** A sale notification use case that tells us if a product is on sale */
 public class SaleNotification implements BaseNotification {
     private final Scheduler scheduler;
     private final Product product;
-    private Boolean showNotification;
+    private boolean showNotification;
 
     public SaleNotification(Product product) {
-        this.showNotification = Boolean.FALSE;
+        this.showNotification = false;
         TimerTask checkSale = new TimerTask() {
             @Override
             public void run() {
-                // TODO: Add refactored item search api call
-                checkNotification();
+                try {
+                    checkNotificationAction();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         };
 
-        this.scheduler = new Scheduler(checkSale, 1000 * 60 * 60 * 24);
+        this.scheduler = new Scheduler(checkSale, 1000);
         this.product = product;
     }
 
-    public Boolean getShowNotification() {
+    public boolean getShowNotification() {
         return showNotification;
+    }
+
+    /** Updates item from amazon and calls check logic
+     * @returns whether notification should be shown */
+    public boolean checkNotificationAction() throws IOException {
+        ItemUpdateChecker itemUpdateChecker = new ItemUpdateChecker();
+        itemUpdateChecker.updatePriceCheck(this.product);
+        return checkNotification();
     }
 
     /** Starts scheduler */

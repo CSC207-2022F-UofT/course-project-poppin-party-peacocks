@@ -1,11 +1,3 @@
-
-import Entities.Product;
-import ExternalInterface.ItemSearcher;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-
 public class ItemSearchTest {
 //    /**
 //     * Testing search item by keyword feature and if all items in the return list are of Object Entities.Item
