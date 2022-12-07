@@ -3,6 +3,9 @@ package Entities;
 import java.util.Date;
 import java.util.*;
 
+/**
+ * a class that manages attributes for an Item
+ */
 public class Item implements Product {
     private String itemName;
     private final String url;
@@ -76,6 +79,19 @@ public class Item implements Product {
         this.priceHistoryDates = priceHistoryDates;
     }
 
+     /** Constructor for comparators*/
+     public Item (String name, double price, double desiredPrice, String url, String itemDescription, int reviewCount, double reviewStars, String imageUrl, Date dateAdded, String[] tags) {
+         this.itemName = name;
+         this.itemPrice = price;
+         this.desiredPrice = desiredPrice;
+         this.url = url;
+         this.itemDescription = itemDescription;
+         this.reviewStars = reviewStars;
+         this.reviewCount = reviewCount;
+         this.imageUrl = imageUrl;
+         this.dateAdded = dateAdded;
+         this.tags = tags;
+     }
     public String getProductName(){
         return this.itemName;
     }
