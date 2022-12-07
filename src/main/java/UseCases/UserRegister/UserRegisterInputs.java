@@ -1,6 +1,8 @@
 package UseCases.UserRegister;
 import DataBase.DataBaseController;
 import Entities.User;
+import org.json.simple.parser.ParseException;
+import java.io.FileNotFoundException;
 
 /**
  * A use case class to receive the inputted username and password from the new user
@@ -41,7 +43,7 @@ public class UserRegisterInputs {
      * Check if tempUser exists in DataBase.
      * @return True if tempUser exists in DataBase
      */
-    public boolean checkUserExists(){
+    public boolean checkUserExists() throws FileNotFoundException, ParseException {
         DataBaseController dataBaseController = new DataBaseController();
         User existingUser = dataBaseController.getUser(this.getInputtedUsername());
         if (existingUser.getName() == "Default User") {

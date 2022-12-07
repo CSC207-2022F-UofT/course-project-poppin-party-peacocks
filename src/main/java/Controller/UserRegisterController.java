@@ -1,5 +1,8 @@
 package Controller;
 import UseCases.UserRegister.*;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 
 /**
  * An interface adapter class that receives the request to create a user and adapts the user's inputs in order to
@@ -19,7 +22,7 @@ public class UserRegisterController {
      * @param password String for desired password of new user
      * @return UseCases.UseCases.UseCases.UserRegister.UserRegister.UserRegisterCreateUser
      */
-    public UserRegisterInputs create(String username, String password){
+    public UserRegisterInputs create(String username, String password) throws IOException, ParseException {
         UserRegisterInputs userInputs = new UserRegisterInputs(username, password);
 
         return createUserInputs.create(userInputs);
