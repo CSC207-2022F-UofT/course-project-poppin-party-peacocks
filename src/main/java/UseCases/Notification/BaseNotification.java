@@ -1,5 +1,7 @@
 package UseCases.Notification;
 
+import java.io.IOException;
+
 /** An interface defining common methods for price notifications */
 interface BaseNotification {
     /** Starts a notification schedule */
@@ -11,5 +13,5 @@ interface BaseNotification {
     boolean checkNotification();
     /** Updates item from amazon and calls check logic
      * @returns whether notification should be shown */
-    boolean checkNotificationAction();
+    boolean checkNotificationAction() throws IOException;
 }

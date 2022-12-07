@@ -5,6 +5,7 @@ import Entities.Wishlist;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -121,7 +122,12 @@ public class HomePage extends JFrame {
         viewWishlistButton.addActionListener(e -> {
             if (listOfWishlists.getListOfWishlist().size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
                 Wishlist selectedWishlist = listOfWishlists.getListOfWishlist().get(itemPanelJList.getSelectedIndex());
-                WishlistPage wishlistPage = new WishlistPage(selectedWishlist);
+                WishlistPage wishlistPage = null;
+                try {
+                    wishlistPage = new WishlistPage(selectedWishlist);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 wishlistPage.setContentPane(wishlistPage.getMainPanel());
                 wishlistPage.setVisible(true);
                 wishlistPage.setLocationRelativeTo(null);
