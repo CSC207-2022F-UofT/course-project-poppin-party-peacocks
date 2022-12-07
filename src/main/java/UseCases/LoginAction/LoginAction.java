@@ -1,4 +1,4 @@
-package UseCases;
+package UseCases.LoginAction;
 
 import DataBase.*;
 import org.json.simple.parser.ParseException;
