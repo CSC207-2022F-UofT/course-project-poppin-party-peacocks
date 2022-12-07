@@ -1,28 +1,42 @@
 package UseCases.Notification;
 import Controller.Scheduler;
 import Entities.*;
+import ExternalInterface.ItemUpdateChecker;
+
+import java.io.IOException;
 import java.util.TimerTask;
 
 /** A price drop notification use case that tells us if a product drops below the user's desired price */
 public class PriceDropNotification implements BaseNotification {
     private final Scheduler scheduler;
     private final Product product;
-    private Boolean showNotification;
+    private boolean showNotification;
     public PriceDropNotification(Product product) {
-        this.showNotification = Boolean.FALSE;
+        this.showNotification = false;
         TimerTask checkSale = new TimerTask() {
             @Override
             public void run() {
-                // TODO: Add refactored item search api call
-                checkNotification();
+                try {
+                    checkNotificationAction();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         };
 
-        this.scheduler = new Scheduler(checkSale, 1000 * 60 * 60 * 24);
+        this.scheduler = new Scheduler(checkSale, 1000 * 60);
         this.product = product;
     }
-    public Boolean getShowNotification() {
+    public boolean getShowNotification() {
         return showNotification;
+    }
+
+    /** Updates item from amazon and calls check logic
+     * @returns whether notification should be shown */
+    public boolean checkNotificationAction() throws IOException {
+        ItemUpdateChecker itemUpdateChecker = new ItemUpdateChecker();
+        itemUpdateChecker.updatePriceCheck(this.product);
+        return checkNotification();
     }
 
     /** Starts scheduler */
@@ -40,7 +54,7 @@ public class PriceDropNotification implements BaseNotification {
     /** Logic to check if price drop notification should be seen
      * @returns boolean if notification should be shown */
     public boolean checkNotification() {
-        this.showNotification = this.product.getProductPrice() <= this.product.getProductDesiredPrice();
+        this.showNotification = this.product.getProductPrice() < this.product.getProductDesiredPrice();
         return this.showNotification;
     }
 }

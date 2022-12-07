@@ -1,7 +1,14 @@
 package UseCases.UserRegister;
 
-import DataBase.DataBase;
+import DataBase.DataBaseController;
+import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
+
+/**
+ * A use case class that implements the UserRegisterCreateUser interface to create a new User in DataBase by calling
+ * upon UserRegisterStatus interface
+ */
 public class UserRegister implements UserRegisterCreateUser {
     final UserRegisterStatus status;
 
@@ -15,7 +22,8 @@ public class UserRegister implements UserRegisterCreateUser {
      * @return UseCases.UserRegisterStatus status with status failure or success, depending on if the User could be created
      */
     @Override
-    public UserRegisterInputs create(UserRegisterInputs inputs){
+    public UserRegisterInputs create(UserRegisterInputs inputs) throws IOException, ParseException {
+        DataBaseController dataBaseController = new DataBaseController();
         if (inputs.checkUserExists()){
             return status.showFailure("User already exists, pick a new username.");
         } else if (inputs.getInputtedUsername().length() < 3) {
@@ -25,7 +33,7 @@ public class UserRegister implements UserRegisterCreateUser {
         } else if (inputs.getInputtedPassword().length() < 3) {
             return status.showFailure("Password is too short. Password must have at least 3 characters.");
         }
-        DataBase.addUser(inputs.getTempUser());
+        dataBaseController.addUser(inputs.getTempUser());
         return status.showSuccess(inputs);
     }
 }

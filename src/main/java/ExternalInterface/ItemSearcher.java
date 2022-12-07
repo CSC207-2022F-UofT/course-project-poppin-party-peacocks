@@ -16,6 +16,16 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ItemSearcher {
+
+    private String userCurrency = "CAD";
+    private double currencyChange = 1.36;
+    public ItemSearcher(){
+    }
+
+    public ItemSearcher(String userCurrency){
+        this.userCurrency = userCurrency;
+    }
+
     /**
      * Calls Amazon Api search tool to return json string of search results of specified keyword and marketplace
      *
@@ -59,14 +69,14 @@ public class ItemSearcher {
     public ArrayList<Product> searchToList(String keyword, String marketplace) throws IOException, InterruptedException {
         String response = apiSearch(keyword, marketplace);
         response = cleanResponse(response);
-        ArrayList<Product> itemList = new ArrayList<Product>();
+        ArrayList<Product> itemList = new ArrayList<>();
         String[] pairs = response.split(" , ");
-        ArrayList<String> titleList = new ArrayList<String>();
-        ArrayList<String> priceList = new ArrayList<String>();
-        ArrayList<String> urlList = new ArrayList<String>();
-        ArrayList<String> reviewCountList = new ArrayList<String>();
-        ArrayList<String> reviewStarList = new ArrayList<String>();
-        ArrayList<String> imageUrlList = new ArrayList<String>();
+        ArrayList<String> titleList = new ArrayList<>();
+        ArrayList<String> priceList = new ArrayList<>();
+        ArrayList<String> urlList = new ArrayList<>();
+        ArrayList<String> reviewCountList = new ArrayList<>();
+        ArrayList<String> reviewStarList = new ArrayList<>();
+        ArrayList<String> imageUrlList = new ArrayList<>();
         for (String pair : pairs) {
             String[] keyValue = pair.split(" :");
             if (keyValue[0].contains("title") && !keyValue[0].contains("subtitle")) {
@@ -126,7 +136,7 @@ public class ItemSearcher {
         ArrayList<Product> itemList = new ArrayList<>();
         ArrayList<String> listUrls = new ArrayList<>();
 
-        try {
+
             Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
             Elements productUrls = doc.select("h2.a-size-mini.a-spacing-none.a-color-base a");
             for (Element item : productUrls) {
@@ -145,9 +155,8 @@ public class ItemSearcher {
                 }
             }
             return itemList;
-        } catch (IOException e) {
-            return new ArrayList<>();
-        }
+
+
     }
 
     /**
@@ -155,8 +164,8 @@ public class ItemSearcher {
      *
      * @param url url of amazon item
      */
-    public Item searchItemUrl(String url, boolean searchByKeyword) throws IOException {
-        try {
+    public Product searchItemUrl(String url, boolean searchByKeyword) throws IOException {
+
             // This line specifies window type and layout of amazon page based on  Window Version and browser for webscraping
             Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
             Element htmlName = doc.select(".a-size-large.product-title-word-break").first();
@@ -179,7 +188,12 @@ public class ItemSearcher {
             String sellingPriceStr = price.text().replace(",", "").substring(1);
 
             if (!sellingPriceStr.matches(".*[a-zA-Z]+.*")) {
+
                 sellingPrice = Double.parseDouble(sellingPriceStr);
+
+                if (!userCurrency.equals("CAD")){
+                    sellingPrice /= currencyChange;
+                }
             }
             if (htmlCountRating != null) {
                 countRating = Integer.parseInt(htmlCountRating.text().replace(",", "").split(" ")[0]);
@@ -197,8 +211,6 @@ public class ItemSearcher {
                 description = htmlDescription.text();
             }
             return new Item(name, sellingPrice, sellingPrice, url, description, new String[]{}, countRating, starRating, imgUrl);
-        } catch (IOException e) {
-            return new Item("", 0, 0, "", "", new String[]{}, 0, 0, "");
-        }
+
     }
 }

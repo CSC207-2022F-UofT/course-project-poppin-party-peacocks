@@ -1,9 +1,7 @@
-package UseCasesTest.Notification;
-
+import Entities.Item;
 import UseCases.Notification.PriceDropNotification;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import Entities.*;
 
 public class PriceDropNotificationTest {
     Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",

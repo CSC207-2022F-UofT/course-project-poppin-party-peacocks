@@ -1,7 +1,9 @@
 package DataBaseTest;
 
 import DataBase.DataBaseFormatter;
-import Entities.*;
+import Entities.Item;
+import Entities.Product;
+import Entities.Wishlist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

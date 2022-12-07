@@ -1,7 +1,10 @@
 package DataBaseTest;
 
 import DataBase.DataBaseParser;
-import Entities.*;
+import Entities.Item;
+import Entities.Product;
+import Entities.ProductList;
+import Entities.Wishlist;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -54,7 +57,7 @@ public class DataBaseParserTest {
         Wishlist wishlist = new Wishlist("Singles Day List", items, items, new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").parse(testDate), tags);
         JSONParser jsonParser = new JSONParser();
         JSONObject listObject = (JSONObject) jsonParser.parse("{\"displayedList\":[{\"priceChange\":40.99,\"itemName\":\"Plushie\",\"desiredPrice\":30.0,\"reviewCount\":0,\"imageURL\":\"www.amazonimage.com\\/keyboard\",\"itemPrice\":40.99,\"itemDescription\":\"Description from amazon (or you write your own)\",\"reviewStars\":0.0,\"url\":\"www.amazon.com\\/plushie\",\"dateAdded\":\"Tue. Nov. 29 20:49:30 2022\",\"tags\":[\"toys\"]}],\"name\":\"Singles Day List\",\"selectedTags\":[\"Blue\"],\"itemList\":[{\"priceChange\":40.99,\"itemName\":\"Plushie\",\"desiredPrice\":30.0,\"reviewCount\":0,\"imageURL\":\"www.amazonimage.com\\/keyboard\",\"itemPrice\":40.99,\"itemDescription\":\"Description from amazon (or you write your own)\",\"reviewStars\":0.0,\"url\":\"www.amazon.com\\/plushie\",\"dateAdded\":\"Tue. Nov. 29 20:49:30 2022\",\"tags\":[\"toys\"]}],\"dateAdded\":\"Tue. Nov. 29 20:49:30 2022\"}");
-        Wishlist parsedList = dataBaseParser.parseWishlist(listObject);
+        ProductList parsedList = dataBaseParser.parseWishlist(listObject);
         Assertions.assertEquals(parsedList.getName(), wishlist.getName());
         Assertions.assertEquals(parsedList.getDateAdded(), wishlist.getDateAdded());
         Assertions.assertEquals(parsedList.getDisplayedList().toArray().length, wishlist.getDisplayedList().toArray().length);

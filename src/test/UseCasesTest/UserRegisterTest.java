@@ -2,6 +2,7 @@ package UseCasesTest;
 
 import DataBase.*;
 import UseCases.LoginAction;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,25 +13,26 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class UserRegisterTest {
 
     @Test
-    public void testCreateUserSuccess() throws IOException {
+    public void testCreateUserSuccess() throws IOException, ParseException {
         DataBaseController dataBaseController = new DataBaseController();
         UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser","Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
         UserRegister register = new UserRegister(formatter);
         register.create(inputs);
         Assertions.assertEquals(inputs.getTempUser().getName(), dataBaseController.getUser("StarlightUser").getName());
-        DataBase.deleteUser("StarlightUser");
+        dataBaseController.deleteUser("StarlightUser");
     }
 
     @Test
-    public void testLoginNewUserSuccess() throws IOException {
+    public void testLoginNewUserSuccess() throws IOException, ParseException {
+        DataBaseController dataBaseController = new DataBaseController();
         UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser","Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
         UserRegister register = new UserRegister(formatter);
         register.create(inputs);
         LoginAction userInput = new LoginAction("StarlightUser", "Fuzzy321");
         Assertions.assertTrue(userInput.checkUserMatchesPassword());
-        DataBase.deleteUser("StarlightUser");
+        dataBaseController.deleteUser("StarlightUser");
     }
 
     @Test
