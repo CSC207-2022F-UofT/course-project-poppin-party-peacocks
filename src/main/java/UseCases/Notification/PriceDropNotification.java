@@ -3,6 +3,7 @@ import Controller.Scheduler;
 import Entities.*;
 import ExternalInterface.ItemUpdateChecker;
 
+import java.io.IOException;
 import java.util.TimerTask;
 
 /** A price drop notification use case that tells us if a product drops below the user's desired price */
@@ -15,7 +16,11 @@ public class PriceDropNotification implements BaseNotification {
         TimerTask checkSale = new TimerTask() {
             @Override
             public void run() {
-                checkNotificationAction();
+                try {
+                    checkNotificationAction();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         };
 
@@ -28,7 +33,7 @@ public class PriceDropNotification implements BaseNotification {
 
     /** Updates item from amazon and calls check logic
      * @returns whether notification should be shown */
-    public boolean checkNotificationAction() {
+    public boolean checkNotificationAction() throws IOException {
         ItemUpdateChecker itemUpdateChecker = new ItemUpdateChecker();
         itemUpdateChecker.updatePriceCheck(this.product);
         return checkNotification();

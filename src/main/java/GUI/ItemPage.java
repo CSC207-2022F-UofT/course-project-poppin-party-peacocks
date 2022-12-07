@@ -184,7 +184,12 @@ public class ItemPage extends JFrame {
         // Button Logic
         // Navigates back to WishlistPage.
         backButton.addActionListener(e -> {
-            WishlistPage wlPage = new WishlistPage(wl);
+            WishlistPage wlPage = null;
+            try {
+                wlPage = new WishlistPage(wl);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             wlPage.setContentPane(wlPage.getMainPanel());
             wlPage.setVisible(true);
             wlPage.setLocationRelativeTo(null);
