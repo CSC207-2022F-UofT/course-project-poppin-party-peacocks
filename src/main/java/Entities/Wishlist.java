@@ -5,6 +5,7 @@ import java.util.*;
  * A class that stores a list of products. Implements ProductList functionalities.
  */
 public class Wishlist implements ProductList {
+
     private String name;
     private ArrayList<Product> productList;
     private ArrayList<Product> displayedList;
@@ -201,8 +202,5 @@ public class Wishlist implements ProductList {
             }
         }
         displayedList = tempList;
-    }
-    public void refreshListPrices(){
-
     }
 }

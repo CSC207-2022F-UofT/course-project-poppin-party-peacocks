@@ -12,9 +12,8 @@ public class ItemUpdateChecker {
     /**
      * Using Jsoup library to fetch updated price of specific item on Amazon.
      *
-     * @param item   takes product item and checks for price change, if so, price will be updated respective to the object
+     * @param item takes product item and checks for price change, if so, price will be updated respective to the object
      */
-
 
     public Double updatePriceCheck(Product item) throws IOException {
         // This line specifies window type and layout of amazon page based on  Window Version and browser for webscraping
@@ -26,5 +25,6 @@ public class ItemUpdateChecker {
         item.setProductPrice(sellingPrice);
         item.setDateLastUpdated(new Date());
         return 0.0;
+
     }
 }

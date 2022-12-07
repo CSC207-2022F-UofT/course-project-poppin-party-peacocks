@@ -5,6 +5,8 @@ import UseCases.UserRegister.UserRegister;
 import UseCases.UserRegister.UserRegisterCreateUser;
 import UseCases.UserRegister.UserRegisterResponseFormatter;
 import UseCases.UserRegister.UserRegisterStatus;
+import Entities.ListOfWishlists;
+import DataBase.DataBaseController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +32,7 @@ public class HomePage extends JFrame {
 
     private JButton dummyButton;
     UserRegisterController userRegisterController;
+    private ListOfWishlists lwl;
 
     public JPanel getMainPanel() {
         return leftPanel;
@@ -44,6 +47,9 @@ public class HomePage extends JFrame {
 
     public HomePage() {
         super("My Wishlists");
+        DataBaseController dbc = new DataBaseController();
+        lwl = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
+
         setLayout(null);
         setSize(400, 638);
 
@@ -130,8 +136,7 @@ public class HomePage extends JFrame {
         addWishlistButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO
-                AddWishlistPage addPage = new AddWishlistPage();
+                AddWishlistPage addPage = new AddWishlistPage(lwl);
                 addPage.setContentPane(addPage.getMainPanel());
                 addPage.setVisible(true);
                 addPage.setLocationRelativeTo(null);
@@ -143,8 +148,6 @@ public class HomePage extends JFrame {
         signoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO
-                // Currently, this navigates to GUI.MainAppLoginSignupPage.
                 UserRegisterStatus presenter = new UserRegisterResponseFormatter();
                 UserRegisterCreateUser interactor = new UserRegister(presenter);
                 UserRegisterController userRegisterController = new UserRegisterController(

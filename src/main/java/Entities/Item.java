@@ -1,8 +1,5 @@
 package Entities;
-import Controller.*;
 
-import UseCases.Notification.PriceDropNotification;
-import UseCases.Notification.SaleNotification;
 import java.util.Date;
 import java.util.*;
 
@@ -23,9 +20,6 @@ public class Item implements Product {
     private int reviewCount;
     private ArrayList<Double> priceHistoryData;
     private ArrayList<Date> priceHistoryDates;
-    private Scheduler scheduler;
-    private PriceDropNotification priceDropNotification;
-    private SaleNotification saleNotification;
 
     public Item(String name, double price, double desiredPrice, String url, String itemDescription, String[] tags, int reviewCount, double reviewStars, String imageUrl){
         this.itemName = name;
@@ -42,22 +36,6 @@ public class Item implements Product {
         this.reviewStars = reviewStars;
         this.priceHistoryData = new ArrayList<>();
         this.priceHistoryData.add(this.itemPrice);
-
-//        TimerTask updatePriceTask = new TimerTask() {
-//            @Override
-//            public void run() {
-//                try {
-//                    updatePrice();
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        };
-//
-//        Scheduler updatePriceScheduler = new Scheduler(updatePriceTask, 1000 * 60 * 60 * 24);
-//        this.scheduler = updatePriceScheduler;
-//        this.priceDropNotification = new PriceDropNotification(this);
-//        this.saleNotification = new SaleNotification(this);
         this.itemCurrency = "CAD";
     }
 
@@ -78,18 +56,6 @@ public class Item implements Product {
         this.priceHistoryData.add(this.itemPrice);
         this.priceHistoryDates = new ArrayList<>();
         this.priceHistoryDates.add(new Date());
-
-//        TimerTask t = new TimerTask() {
-//            @Override
-//            public void run() {
-//                try {
-//                    updatePrice();
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        };
-//        this.scheduler = new Scheduler(t, 1000 * 60 * 60);
         this.itemCurrency = itemCurrency;
     }
     /** Constructor for database */
@@ -105,18 +71,6 @@ public class Item implements Product {
         this.reviewCount = reviewCount;
         this.reviewStars = reviewStars;
         this.imageUrl = imageUrl;
-        this.itemCurrency = itemCurrency;
-//        TimerTask t = new TimerTask() {
-//            @Override
-//            public void run() {
-//                try {
-//                    updatePrice();
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-////        };
-//        this.scheduler = new Scheduler(t, 1000 * 60 * 60);
         this.itemCurrency = itemCurrency;
         this.priceHistoryData = priceHistoryData;
         this.priceHistoryDates = priceHistoryDates;
@@ -158,6 +112,7 @@ public class Item implements Product {
     public Date getProductDateAdded(){
         return this.dateAdded;
     }
+    public Date getProductDateLastUpdated() {return this.dateLastUpdated;}
     public String[] getTags(){
         return this.tags;
     }
