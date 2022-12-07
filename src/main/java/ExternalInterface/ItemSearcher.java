@@ -69,14 +69,14 @@ public class ItemSearcher {
     public ArrayList<Product> searchToList(String keyword, String marketplace) throws IOException, InterruptedException {
         String response = apiSearch(keyword, marketplace);
         response = cleanResponse(response);
-        ArrayList<Product> itemList = new ArrayList<Product>();
+        ArrayList<Product> itemList = new ArrayList<>();
         String[] pairs = response.split(" , ");
-        ArrayList<String> titleList = new ArrayList<String>();
-        ArrayList<String> priceList = new ArrayList<String>();
-        ArrayList<String> urlList = new ArrayList<String>();
-        ArrayList<String> reviewCountList = new ArrayList<String>();
-        ArrayList<String> reviewStarList = new ArrayList<String>();
-        ArrayList<String> imageUrlList = new ArrayList<String>();
+        ArrayList<String> titleList = new ArrayList<>();
+        ArrayList<String> priceList = new ArrayList<>();
+        ArrayList<String> urlList = new ArrayList<>();
+        ArrayList<String> reviewCountList = new ArrayList<>();
+        ArrayList<String> reviewStarList = new ArrayList<>();
+        ArrayList<String> imageUrlList = new ArrayList<>();
         for (String pair : pairs) {
             String[] keyValue = pair.split(" :");
             if (keyValue[0].contains("title") && !keyValue[0].contains("subtitle")) {

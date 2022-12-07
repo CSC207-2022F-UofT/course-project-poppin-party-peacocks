@@ -68,7 +68,6 @@ public class DataBaseFormatter {
         }
 
         JSONArray selectedTagsObject = new JSONArray();
-        selectedTagsObject.addAll(wishlist.getSelectedTags());
         wishlistObject.put("itemList", itemObjects);
         wishlistObject.put("displayedList", displayedListObject);
         wishlistObject.put("selectedTags", selectedTagsObject);

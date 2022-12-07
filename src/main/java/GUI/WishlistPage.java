@@ -1,7 +1,6 @@
 package GUI;
 
 import Entities.Product;
-import Entities.ProductList;
 import Entities.Wishlist;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
@@ -25,7 +24,7 @@ public class WishlistPage extends JFrame {
     private JList<ItemPanel> itemPanelJList;
     private JScrollPane itemScrollPane;
 
-    public WishlistPage(ProductList wishlist) throws IOException {
+    public WishlistPage(Wishlist wishlist) throws IOException {
         super(wishlist.getName());
         wl = wishlist;
         initialiseJFrame();

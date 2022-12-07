@@ -37,10 +37,10 @@ public class ProductComparatorController {
     public void sortingHelper(String order, ProductComparator productComparator) {
         switch (order.toLowerCase()) {
             case "ascending":
-                this.productList.getProductList().sort(productComparator);
+                this.productList.getDisplayedList().sort(productComparator);
                 break;
             case "descending":
-                this.productList.getProductList().sort(Collections.reverseOrder(productComparator));
+                this.productList.getDisplayedList().sort(Collections.reverseOrder(productComparator));
                 break;
             default:
                 throw new IllegalArgumentException();
