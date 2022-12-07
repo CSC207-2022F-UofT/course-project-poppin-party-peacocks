@@ -67,7 +67,7 @@ public class PriceHistoryPage extends JFrame {
         this.mainPanel.add(headerPanel);
         JLabel imageLabel = new JLabel();
         imageLabel.setHorizontalAlignment(0);
-        ImageIcon img = new ImageIcon("src/main/java/Assets/price_history.png");
+        ImageIcon img = new ImageIcon("src/main/java/Assets/price_history.jpeg");
         Image image = img.getImage();
         Image resizedImage = image.getScaledInstance(300, 250, 4);
         imageLabel.setIcon(new ImageIcon(resizedImage));
