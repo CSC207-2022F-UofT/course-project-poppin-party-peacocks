@@ -6,6 +6,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ItemUpdateChecker {
@@ -23,6 +24,11 @@ public class ItemUpdateChecker {
         double sellingPrice = Double.parseDouble(price.text().substring(1));
         item.setPriceChange(item.getProductPrice() - sellingPrice);
         item.setProductPrice(sellingPrice);
-        item.setDateLastUpdated(new Date());
+        ArrayList<Double> priceList = item.getPriceHistoryData();
+        ArrayList<Date> dateList = item.getPriceHistoryDates();
+        priceList.add(sellingPrice);
+        dateList.add(new Date());
+        item.setPriceHistoryData(priceList);
+        item.setPriceHistoryDates(dateList);
     }
 }

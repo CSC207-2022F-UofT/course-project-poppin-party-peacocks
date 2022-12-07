@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GradientJPanel extends JPanel{
-    private Color topColor;
-    private Color bottomColor;
+    private final Color topColor;
+    private final Color bottomColor;
     public GradientJPanel(LayoutManager lm){
         super(lm);
         this.topColor = new Color(194, 234, 186);
@@ -27,7 +27,7 @@ public class GradientJPanel extends JPanel{
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         int w = getWidth(), h = getHeight();
-        GradientPaint gp = new GradientPaint(w/2, 0, topColor, w/2, h, bottomColor);
+        GradientPaint gp = new GradientPaint(w/2.0f, 0, topColor, w/2.0f, h, bottomColor);
         g2d.setPaint(gp);
         g2d.fillRect(0, 0, w, h);
     }
