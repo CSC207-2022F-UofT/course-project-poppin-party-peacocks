@@ -22,7 +22,7 @@ public class DataBaseParser {
         String name = (String) wishlistData.get("name");
 
         Date dateAdded =  new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").parse(wishlistData.get("dateAdded").toString());
-        new Date().;
+
         ArrayList<Product> items = new ArrayList<>();
         JSONArray itemsObjects = (JSONArray) wishlistData.get("itemList");
         if (!Objects.isNull(itemsObjects)) {

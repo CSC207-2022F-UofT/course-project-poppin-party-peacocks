@@ -1,5 +1,6 @@
 import DataBase.*;
-import UseCases.LoginAction.LoginAction;
+import UseCases.LoginAction;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class UserRegisterTest {
 
     @Test
-    public void testCreateUserSuccess() throws IOException {
+    public void testCreateUserSuccess() throws IOException, ParseException {
         DataBaseController dataBaseController = new DataBaseController();
         UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser","Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();
@@ -21,7 +22,7 @@ class UserRegisterTest {
     }
 
     @Test
-    public void testLoginNewUserSuccess() throws IOException {
+    public void testLoginNewUserSuccess() throws IOException, ParseException {
         DataBaseController dataBaseController = new DataBaseController();
         UserRegisterInputs inputs = new UserRegisterInputs("StarlightUser","Fuzzy321");
         UserRegisterResponseFormatter formatter = new UserRegisterResponseFormatter();

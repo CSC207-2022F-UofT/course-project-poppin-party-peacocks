@@ -1,5 +1,5 @@
 package DataBase;
-import Entities.*;
+import Entities.User;
 
 import java.io.*;
 
@@ -19,16 +19,12 @@ public class DataBase {
     /** Creates a new file at the specified directory
      * @param fileDirectory File directory to create a new file at
      * */
-    public static void createFile(String fileDirectory) {
-        try {
-            File file = new File(fileDirectory);
+    public static void createFile(String fileDirectory) throws IOException {
+        File file = new File(fileDirectory);
 
-            if (file.createNewFile()) {
+        if (file.createNewFile()) {
                 System.out.println("File created!");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred creating file.");
-            e.printStackTrace();
         }
+
     }
 }
