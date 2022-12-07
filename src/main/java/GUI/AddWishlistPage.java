@@ -5,7 +5,6 @@ import Entities.ListOfWishlists;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 import Entities.Wishlist;
 
 /**
