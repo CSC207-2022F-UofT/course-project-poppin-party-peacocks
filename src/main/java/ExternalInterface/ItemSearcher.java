@@ -59,14 +59,14 @@ public class ItemSearcher {
     public ArrayList<Product> searchToList(String keyword, String marketplace) throws IOException, InterruptedException {
         String response = apiSearch(keyword, marketplace);
         response = cleanResponse(response);
-        ArrayList<Product> itemList = new ArrayList<Product>();
+        ArrayList<Product> itemList = new ArrayList<>();
         String[] pairs = response.split(" , ");
-        ArrayList<String> titleList = new ArrayList<String>();
-        ArrayList<String> priceList = new ArrayList<String>();
-        ArrayList<String> urlList = new ArrayList<String>();
-        ArrayList<String> reviewCountList = new ArrayList<String>();
-        ArrayList<String> reviewStarList = new ArrayList<String>();
-        ArrayList<String> imageUrlList = new ArrayList<String>();
+        ArrayList<String> titleList = new ArrayList<>();
+        ArrayList<String> priceList = new ArrayList<>();
+        ArrayList<String> urlList = new ArrayList<>();
+        ArrayList<String> reviewCountList = new ArrayList<>();
+        ArrayList<String> reviewStarList = new ArrayList<>();
+        ArrayList<String> imageUrlList = new ArrayList<>();
         for (String pair : pairs) {
             String[] keyValue = pair.split(" :");
             if (keyValue[0].contains("title") && !keyValue[0].contains("subtitle")) {
@@ -158,17 +158,15 @@ public class ItemSearcher {
     public Item searchItemUrl(String url, boolean searchByKeyword) throws IOException {
         try {
             // This line specifies window type and layout of amazon page based on  Window Version and browser for webscraping
-            Document doc = Jsoup.connect(url).timeout(10000).userAgent("Chrome/96.0.4664.93").get();
+            Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.121 Safari/535.2").get();
             Element htmlName = doc.select(".a-size-large.product-title-word-break").first();
             Element price = doc.select(".a-offscreen").first();
-            System.out.println("price:"+price.text());
             Element htmlDescription = doc.select("div.a-row.feature").select("div.a-section.a-spacing-small").select("span").first();
             Element htmlCountRating = doc.select("div.a-row.a-spacing-medium.averageStarRatingNumerical").select("span.a-size-base.a-color-secondary").first();
             Element htmlImgUrl = doc.select("ul.a-unordered-list.a-nostyle.a-horizontal.list.maintain-height").select("span.a-list-item span.a-declarative").select("span.a-declarative").select("div.imgTagWrapper").select("img").first();
             Element htmlStarRating = doc.select("div.a-fixed-left-grid-col.aok-align-center.a-col-right").select("div.a-row").select("span.a-size-base.a-nowrap").first();
 
             if ((htmlName == null || price == null || htmlDescription == null || htmlCountRating == null || htmlImgUrl == null || htmlStarRating == null) && searchByKeyword) {
-                System.out.println("returning empty item");
                 return new Item("", 0, 0, "", "", new String[]{}, 0, 0, "");
             }
             double sellingPrice = 0;

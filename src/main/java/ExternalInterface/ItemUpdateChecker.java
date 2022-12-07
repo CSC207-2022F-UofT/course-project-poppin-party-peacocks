@@ -17,7 +17,7 @@ public class ItemUpdateChecker {
     public void updatePriceCheck(Product item) {
         try {
             // This line specifies window type and layout of amazon page based on  Window Version and browser for webscraping
-            Document doc = Jsoup.connect(item.getProductURL()).timeout(10000).userAgent("Chrome/107.0.0.0").get();
+            Document doc = Jsoup.connect(item.getProductURL()).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.121 Safari/535.2").get();
             Element price = doc.select(".a-offscreen").first();
             assert price != null;
             double sellingPrice = Double.parseDouble(price.text().substring(1));

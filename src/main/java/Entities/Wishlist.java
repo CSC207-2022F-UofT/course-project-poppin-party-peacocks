@@ -181,6 +181,7 @@ public class Wishlist implements ProductList {
      */
     public boolean removeProduct(Product product) {
         productList.remove(product);
+        displayedList.remove(product);
         return true;
     }
 

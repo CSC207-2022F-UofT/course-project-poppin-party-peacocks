@@ -104,7 +104,8 @@ public class WishlistPage extends JFrame {
         currentSortingMethod = "Sort By Date";
         isSortedAscending = true;
 
-        generateListOfItems();
+        generateListOfItems(false);
+        //generateListOfItems(true);
         backButton.addActionListener(e -> {
             HomePage homePage = new HomePage();
             homePage.setContentPane(homePage.getMainPanel());
@@ -122,11 +123,11 @@ public class WishlistPage extends JFrame {
                 IUC.updatePriceCheck(wl.getDisplayedList().get(i));
                 itemPanelJList.getModel().getElementAt(i).setUpdateSuccess(true);
             }
-            generateListOfItems();
+            generateListOfItems(true);
         });
         sortButton.addActionListener(e -> {
             if(!isSortFrameOpen){
-                SortFrame sortFrame = new SortFrame(this, wl, currentSortingMethod, isSortedAscending);
+                @SuppressWarnings("unused") SortFrame sortFrame = new SortFrame(this, wl, currentSortingMethod, isSortedAscending);
                 isSortFrameOpen = true;
             }
         });
@@ -134,7 +135,7 @@ public class WishlistPage extends JFrame {
             mainPanel.remove(itemScrollPane);
             if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
                 wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
-                generateListOfItems();
+                generateListOfItems(false);
             }
         });
         addButton.addActionListener(e -> {
@@ -159,25 +160,26 @@ public class WishlistPage extends JFrame {
     }
     public void refreshMainPanel(){
         mainPanel.remove(itemScrollPane);
-        generateListOfItems();
+        generateListOfItems(false);
     }
     /**
      * creates a JScrollPane from a JList from a list from the wishlist
      * Configures the JScrollPane and adds it to the main panel
      */
-    public void generateListOfItems(){
+    public void generateListOfItems(boolean raiseNotification){
         ArrayList<ItemPanel> panelList = new ArrayList<>();
         itemList = wl.getDisplayedList();
         for (Product product : itemList) {
             ItemPanel itemPanel = new ItemPanel(product.getProductImageURL(),
                     product.getProductName(), product.getProductPriceString(), product.getProductDateLastUpdated());
-            SaleNotification saleNotification = new SaleNotification(product);
-            PriceDropNotification priceDropNotification = new PriceDropNotification(product);
+            if(raiseNotification){
+                SaleNotification saleNotification = new SaleNotification(product);
+                PriceDropNotification priceDropNotification = new PriceDropNotification(product);
 
-            if (saleNotification.checkNotificationAction() || priceDropNotification.checkNotificationAction()) {
-                itemPanel.setBorderColor(new Color(255, 0 ,0));
+                if (saleNotification.checkNotificationAction() || priceDropNotification.checkNotificationAction()) {
+                    itemPanel.setBorderColor(new Color(255, 0 ,0));
+                }
             }
-
             panelList.add(itemPanel);
         }
         ItemPanel[] tempPanelList = new ItemPanel[panelList.size()];

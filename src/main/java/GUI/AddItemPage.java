@@ -83,6 +83,7 @@ public class AddItemPage extends JFrame {
                     array1 = new JPanel[1];
                 }
                 else{
+                    //noinspection SuspiciousToArrayCall
                     itemList = itemSearcher.searchItemKeywords(keyword).toArray(itemList);
                 }
 
@@ -113,14 +114,13 @@ public class AddItemPage extends JFrame {
         });
 
         addSelectedItemButton.addActionListener(e -> {
-            // Create notification timers
-            Item selectedItem = itemList[itemJList.getSelectedIndex()];
-            SaleNotification saleNotification = new SaleNotification(selectedItem);
-            PriceDropNotification priceDropNotification = new PriceDropNotification(selectedItem);
-            saleNotification.startNotificationListener();
-            priceDropNotification.startNotificationListener();
-
             if (itemJList.getSelectedIndex() >= 0){
+                Item selectedItem = itemList[itemJList.getSelectedIndex()];
+                // Create notification timers
+                SaleNotification saleNotification = new SaleNotification(selectedItem);
+                PriceDropNotification priceDropNotification = new PriceDropNotification(selectedItem);
+                saleNotification.startNotificationListener();
+                priceDropNotification.startNotificationListener();
                 currWishlist.addProduct(itemList[itemJList.getSelectedIndex()]);
                 WishlistPage updatedWishlistPage = new WishlistPage(currWishlist);
                 updatedWishlistPage.setContentPane(updatedWishlistPage.getMainPanel());
