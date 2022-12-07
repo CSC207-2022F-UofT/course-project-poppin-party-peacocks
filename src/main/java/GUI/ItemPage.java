@@ -12,6 +12,7 @@ import java.util.Date;
 
 import Entities.ProductList;
 import Entities.Product;
+import ExternalInterface.PriceHistoryInterface;
 
 /**
  * This ItemPage class is a JFrame that displays the attributes of a given item from a wishlist.
@@ -198,7 +199,18 @@ public class ItemPage extends JFrame {
         });
         // Opens up graph page alongside current ItemPage.
         graphButton.addActionListener(e -> {
-            System.out.println("TODO");
+            PriceHistoryInterface ph = new PriceHistoryInterface(item);
+            try {
+                ph.createPriceHistoryChart();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            PriceHistoryPage priceHistoryPage = new PriceHistoryPage(item, wl);
+            priceHistoryPage.setContentPane(priceHistoryPage.getMainPanel());
+            priceHistoryPage.setVisible(true);
+            priceHistoryPage.setLocationRelativeTo((Component)null);
+            priceHistoryPage.setDefaultCloseOperation(2);
+            this.dispose();
         });
 
         // Button logic for desired price chnage
