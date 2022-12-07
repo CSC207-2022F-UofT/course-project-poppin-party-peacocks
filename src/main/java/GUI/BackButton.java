@@ -16,6 +16,5 @@ public class BackButton extends JButton{
         this.setBorderPainted(false);
         ImageIcon img = new ImageIcon("src/main/java/Assets/backArrow.png");
         img.paintIcon(this,g,0,0);
-
     }
 }
