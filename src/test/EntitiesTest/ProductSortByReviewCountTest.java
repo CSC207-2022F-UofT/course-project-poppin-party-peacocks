@@ -31,13 +31,13 @@ public class ProductSortByReviewCountTest {
         controller1.sortList("ascending", "review count");
         controller2.sortList("ascending", "review count");
 
-        Assertions.assertEquals(69, list1.getProductList().get(0).getReviewCount());
-        Assertions.assertEquals(150,list1.getProductList().get(1).getReviewCount());
-        Assertions.assertEquals(1050, list1.getProductList().get(2).getReviewCount());
+        Assertions.assertEquals(69, list1.getDisplayedList().get(0).getReviewCount());
+        Assertions.assertEquals(150,list1.getDisplayedList().get(1).getReviewCount());
+        Assertions.assertEquals(1050, list1.getDisplayedList().get(2).getReviewCount());
 
-        Assertions.assertEquals(69, list2.getProductList().get(0).getReviewCount());
-        Assertions.assertEquals(150, list2.getProductList().get(1).getReviewCount());
-        Assertions.assertEquals(1050,list2.getProductList().get(2).getReviewCount());
+        Assertions.assertEquals(69, list2.getDisplayedList().get(0).getReviewCount());
+        Assertions.assertEquals(150, list2.getDisplayedList().get(1).getReviewCount());
+        Assertions.assertEquals(1050,list2.getDisplayedList().get(2).getReviewCount());
     }
 
     @Test
@@ -58,12 +58,12 @@ public class ProductSortByReviewCountTest {
         controller1.sortList("descending", "review count");
         controller2.sortList("descending", "review count");
 
-        Assertions.assertEquals(69, list1.getProductList().get(2).getReviewCount());
-        Assertions.assertEquals(150,list1.getProductList().get(1).getReviewCount());
-        Assertions.assertEquals(1050, list1.getProductList().get(0).getReviewCount());
+        Assertions.assertEquals(69, list1.getDisplayedList().get(2).getReviewCount());
+        Assertions.assertEquals(150,list1.getDisplayedList().get(1).getReviewCount());
+        Assertions.assertEquals(1050, list1.getDisplayedList().get(0).getReviewCount());
 
-        Assertions.assertEquals(69, list2.getProductList().get(2).getReviewCount());
-        Assertions.assertEquals(150, list2.getProductList().get(1).getReviewCount());
-        Assertions.assertEquals(1050,list2.getProductList().get(0).getReviewCount());
+        Assertions.assertEquals(69, list2.getDisplayedList().get(2).getReviewCount());
+        Assertions.assertEquals(150, list2.getDisplayedList().get(1).getReviewCount());
+        Assertions.assertEquals(1050,list2.getDisplayedList().get(0).getReviewCount());
     }
 }

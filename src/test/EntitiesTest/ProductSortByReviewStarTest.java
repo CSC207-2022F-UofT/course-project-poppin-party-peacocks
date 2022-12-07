@@ -31,13 +31,13 @@ public class ProductSortByReviewStarTest {
         controller1.sortList("ascending", "review star");
         controller2.sortList("ascending", "review star");
 
-        Assertions.assertEquals(4.19, list1.getProductList().get(0).getReviewStars());
-        Assertions.assertEquals(4.3,list1.getProductList().get(1).getReviewStars());
-        Assertions.assertEquals(4.8, list1.getProductList().get(2).getReviewStars());
+        Assertions.assertEquals(4.19, list1.getDisplayedList().get(0).getReviewStars());
+        Assertions.assertEquals(4.3,list1.getDisplayedList().get(1).getReviewStars());
+        Assertions.assertEquals(4.8, list1.getDisplayedList().get(2).getReviewStars());
 
-        Assertions.assertEquals(4.19, list2.getProductList().get(0).getReviewStars());
-        Assertions.assertEquals(4.3, list2.getProductList().get(1).getReviewStars());
-        Assertions.assertEquals(4.8,list2.getProductList().get(2).getReviewStars());
+        Assertions.assertEquals(4.19, list2.getDisplayedList().get(0).getReviewStars());
+        Assertions.assertEquals(4.3, list2.getDisplayedList().get(1).getReviewStars());
+        Assertions.assertEquals(4.8,list2.getDisplayedList().get(2).getReviewStars());
     }
 
     @Test
@@ -58,12 +58,12 @@ public class ProductSortByReviewStarTest {
         controller1.sortList("descending", "review star");
         controller2.sortList("descending", "review star");
 
-        Assertions.assertEquals(4.19, list1.getProductList().get(2).getReviewStars());
-        Assertions.assertEquals(4.3,list1.getProductList().get(1).getReviewStars());
-        Assertions.assertEquals(4.8, list1.getProductList().get(0).getReviewStars());
+        Assertions.assertEquals(4.19, list1.getDisplayedList().get(2).getReviewStars());
+        Assertions.assertEquals(4.3,list1.getDisplayedList().get(1).getReviewStars());
+        Assertions.assertEquals(4.8, list1.getDisplayedList().get(0).getReviewStars());
 
-        Assertions.assertEquals(4.19, list2.getProductList().get(2).getReviewStars());
-        Assertions.assertEquals(4.3, list2.getProductList().get(1).getReviewStars());
-        Assertions.assertEquals(4.8,list2.getProductList().get(0).getReviewStars());
+        Assertions.assertEquals(4.19, list2.getDisplayedList().get(2).getReviewStars());
+        Assertions.assertEquals(4.3, list2.getDisplayedList().get(1).getReviewStars());
+        Assertions.assertEquals(4.8,list2.getDisplayedList().get(0).getReviewStars());
     }
 }

@@ -49,13 +49,13 @@ public class ProductSortByDateTest {
         controller1.sortList("ascending", "name");
         controller2.sortList("ascending", "name");
 
-        Assertions.assertEquals(date3, list1.getProductList().get(0).getProductDateAdded());
-        Assertions.assertEquals(date2,list1.getProductList().get(1).getProductDateAdded());
-        Assertions.assertEquals(date1, list1.getProductList().get(2).getProductDateAdded());
+        Assertions.assertEquals(date3, list1.getDisplayedList().get(0).getProductDateAdded());
+        Assertions.assertEquals(date2,list1.getDisplayedList().get(1).getProductDateAdded());
+        Assertions.assertEquals(date1, list1.getDisplayedList().get(2).getProductDateAdded());
 
-        Assertions.assertEquals(date3, list2.getProductList().get(0).getProductDateAdded());
-        Assertions.assertEquals(date2, list2.getProductList().get(1).getProductDateAdded());
-        Assertions.assertEquals(date1,list2.getProductList().get(2).getProductDateAdded());
+        Assertions.assertEquals(date3, list2.getDisplayedList().get(0).getProductDateAdded());
+        Assertions.assertEquals(date2, list2.getDisplayedList().get(1).getProductDateAdded());
+        Assertions.assertEquals(date1,list2.getDisplayedList().get(2).getProductDateAdded());
     }
 
     @Test
@@ -89,12 +89,12 @@ public class ProductSortByDateTest {
         controller1.sortList("descending", "name");
         controller2.sortList("descending", "name");
 
-        Assertions.assertEquals(date3, list1.getProductList().get(2).getProductDateAdded());
-        Assertions.assertEquals(date2,list1.getProductList().get(1).getProductDateAdded());
-        Assertions.assertEquals(date1, list1.getProductList().get(0).getProductDateAdded());
+        Assertions.assertEquals(date3, list1.getDisplayedList().get(2).getProductDateAdded());
+        Assertions.assertEquals(date2,list1.getDisplayedList().get(1).getProductDateAdded());
+        Assertions.assertEquals(date1, list1.getDisplayedList().get(0).getProductDateAdded());
 
-        Assertions.assertEquals(date3, list2.getProductList().get(2).getProductDateAdded());
-        Assertions.assertEquals(date2, list2.getProductList().get(1).getProductDateAdded());
-        Assertions.assertEquals(date1,list2.getProductList().get(0).getProductDateAdded());
+        Assertions.assertEquals(date3, list2.getDisplayedList().get(2).getProductDateAdded());
+        Assertions.assertEquals(date2, list2.getDisplayedList().get(1).getProductDateAdded());
+        Assertions.assertEquals(date1,list2.getDisplayedList().get(0).getProductDateAdded());
     }
 }

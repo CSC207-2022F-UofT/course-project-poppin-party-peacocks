@@ -1,7 +1,6 @@
 package EntitiesTest;
 
 import Entities.Item;
-import Entities.Product;
 import Entities.Wishlist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -72,11 +71,6 @@ public class WishlistTest {
 
         //plushie testing
         Assertions.assertEquals(christmasWishlist.getProductList().get(2).getProductDateAdded(), date1);
-    }
-
-    @Test
-    public void getSelectedTagsTest() {
-        //no implementation needed, tag related things will be deleted project wide
     }
 
     @Test

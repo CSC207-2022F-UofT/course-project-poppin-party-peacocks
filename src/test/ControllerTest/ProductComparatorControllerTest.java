@@ -52,7 +52,7 @@ public class ProductComparatorControllerTest {
         controller1.sortList("ascending", "date");
         controller2.sortingHelper("ascending", newComparator);
 
-        Assertions.assertEquals(list1.getProductList(), list2.getProductList());
+        Assertions.assertEquals(list1.getDisplayedList(), list2.getDisplayedList());
     }
 
     @Test
@@ -86,7 +86,7 @@ public class ProductComparatorControllerTest {
         controller1.sortList("descending", "date");
         controller2.sortingHelper("descending", newComparator);
 
-        Assertions.assertEquals(list1.getProductList(), list2.getProductList());
+        Assertions.assertEquals(list1.getDisplayedList(), list2.getDisplayedList());
     }
 
     //name
@@ -110,17 +110,17 @@ public class ProductComparatorControllerTest {
         controller1.sortList("ascending", "name");
         controller2.sortingHelper("ascending", newComparator);
 
-        Assertions.assertEquals("Lime Bubbly", list1.getProductList().get(0).getProductName());
-        Assertions.assertEquals("Starlight Anya Forger",list1.getProductList().get(1).getProductName());
-        Assertions.assertEquals("Whale Plushie", list1.getProductList().get(2).getProductName());
+        Assertions.assertEquals("Lime Bubbly", list1.getDisplayedList().get(0).getProductName());
+        Assertions.assertEquals("Starlight Anya Forger",list1.getDisplayedList().get(1).getProductName());
+        Assertions.assertEquals("Whale Plushie", list1.getDisplayedList().get(2).getProductName());
 
-        Assertions.assertEquals("Lime Bubbly", list2.getProductList().get(0).getProductName());
-        Assertions.assertEquals("Starlight Anya Forger", list2.getProductList().get(1).getProductName());
-        Assertions.assertEquals("Whale Plushie",list2.getProductList().get(2).getProductName());
+        Assertions.assertEquals("Lime Bubbly", list2.getDisplayedList().get(0).getProductName());
+        Assertions.assertEquals("Starlight Anya Forger", list2.getDisplayedList().get(1).getProductName());
+        Assertions.assertEquals("Whale Plushie",list2.getDisplayedList().get(2).getProductName());
 
-        Assertions.assertEquals(list1.getProductList().get(0).getProductName(), list2.getProductList().get(0).getProductName());
-        Assertions.assertEquals(list1.getProductList().get(1).getProductName(), list2.getProductList().get(1).getProductName());
-        Assertions.assertEquals(list1.getProductList().get(2).getProductName(), list2.getProductList().get(2).getProductName());
+        Assertions.assertEquals(list1.getDisplayedList().get(0).getProductName(), list2.getDisplayedList().get(0).getProductName());
+        Assertions.assertEquals(list1.getDisplayedList().get(1).getProductName(), list2.getDisplayedList().get(1).getProductName());
+        Assertions.assertEquals(list1.getDisplayedList().get(2).getProductName(), list2.getDisplayedList().get(2).getProductName());
     }
 
     @Test
@@ -143,17 +143,17 @@ public class ProductComparatorControllerTest {
         controller1.sortList("descending", "name");
         controller2.sortingHelper("descending", newComparator);
 
-        Assertions.assertEquals("Lime Bubbly", list1.getProductList().get(2).getProductName());
-        Assertions.assertEquals("Starlight Anya Forger",list1.getProductList().get(1).getProductName());
-        Assertions.assertEquals("Whale Plushie", list1.getProductList().get(0).getProductName());
+        Assertions.assertEquals("Lime Bubbly", list1.getDisplayedList().get(2).getProductName());
+        Assertions.assertEquals("Starlight Anya Forger",list1.getDisplayedList().get(1).getProductName());
+        Assertions.assertEquals("Whale Plushie", list1.getDisplayedList().get(0).getProductName());
 
-        Assertions.assertEquals("Lime Bubbly", list2.getProductList().get(2).getProductName());
-        Assertions.assertEquals("Starlight Anya Forger", list2.getProductList().get(1).getProductName());
-        Assertions.assertEquals("Whale Plushie",list2.getProductList().get(0).getProductName());
+        Assertions.assertEquals("Lime Bubbly", list2.getDisplayedList().get(2).getProductName());
+        Assertions.assertEquals("Starlight Anya Forger", list2.getDisplayedList().get(1).getProductName());
+        Assertions.assertEquals("Whale Plushie",list2.getDisplayedList().get(0).getProductName());
 
-        Assertions.assertEquals(list1.getProductList().get(0).getProductName(), list2.getProductList().get(0).getProductName());
-        Assertions.assertEquals(list1.getProductList().get(1).getProductName(), list2.getProductList().get(1).getProductName());
-        Assertions.assertEquals(list1.getProductList().get(2).getProductName(), list2.getProductList().get(2).getProductName());
+        Assertions.assertEquals(list1.getDisplayedList().get(0).getProductName(), list2.getDisplayedList().get(0).getProductName());
+        Assertions.assertEquals(list1.getDisplayedList().get(1).getProductName(), list2.getDisplayedList().get(1).getProductName());
+        Assertions.assertEquals(list1.getDisplayedList().get(2).getProductName(), list2.getDisplayedList().get(2).getProductName());
     }
 
     //price
@@ -177,17 +177,17 @@ public class ProductComparatorControllerTest {
         controller1.sortList("ascending", "price");
         controller2.sortingHelper("ascending", newComparator);
 
-        Assertions.assertEquals(5.47, list1.getProductList().get(0).getProductPrice());
-        Assertions.assertEquals(40.99,list1.getProductList().get(1).getProductPrice());
-        Assertions.assertEquals(100, list1.getProductList().get(2).getProductPrice());
+        Assertions.assertEquals(5.47, list1.getDisplayedList().get(0).getProductPrice());
+        Assertions.assertEquals(40.99,list1.getDisplayedList().get(1).getProductPrice());
+        Assertions.assertEquals(100, list1.getDisplayedList().get(2).getProductPrice());
 
-        Assertions.assertEquals(5.47, list2.getProductList().get(0).getProductPrice());
-        Assertions.assertEquals(40.99, list2.getProductList().get(1).getProductPrice());
-        Assertions.assertEquals(100,list2.getProductList().get(2).getProductPrice());
+        Assertions.assertEquals(5.47, list2.getDisplayedList().get(0).getProductPrice());
+        Assertions.assertEquals(40.99, list2.getDisplayedList().get(1).getProductPrice());
+        Assertions.assertEquals(100,list2.getDisplayedList().get(2).getProductPrice());
 
-        Assertions.assertEquals(list1.getProductList().get(0).getPriceChange(), list2.getProductList().get(0).getPriceChange());
-        Assertions.assertEquals(list1.getProductList().get(1).getPriceChange(), list2.getProductList().get(1).getPriceChange());
-        Assertions.assertEquals(list1.getProductList().get(2).getPriceChange(), list2.getProductList().get(2).getPriceChange());
+        Assertions.assertEquals(list1.getDisplayedList().get(0).getPriceChange(), list2.getDisplayedList().get(0).getPriceChange());
+        Assertions.assertEquals(list1.getDisplayedList().get(1).getPriceChange(), list2.getDisplayedList().get(1).getPriceChange());
+        Assertions.assertEquals(list1.getDisplayedList().get(2).getPriceChange(), list2.getDisplayedList().get(2).getPriceChange());
     }
 
     @Test
@@ -210,17 +210,17 @@ public class ProductComparatorControllerTest {
         controller1.sortList("descending", "price");
         controller2.sortingHelper("descending", newComparator);
 
-        Assertions.assertEquals(5.47, list1.getProductList().get(2).getProductPrice());
-        Assertions.assertEquals(40.99,list1.getProductList().get(1).getProductPrice());
-        Assertions.assertEquals(100, list1.getProductList().get(0).getProductPrice());
+        Assertions.assertEquals(5.47, list1.getDisplayedList().get(2).getProductPrice());
+        Assertions.assertEquals(40.99,list1.getDisplayedList().get(1).getProductPrice());
+        Assertions.assertEquals(100, list1.getDisplayedList().get(0).getProductPrice());
 
-        Assertions.assertEquals(5.47, list2.getProductList().get(2).getProductPrice());
-        Assertions.assertEquals(40.99, list2.getProductList().get(1).getProductPrice());
-        Assertions.assertEquals(100,list2.getProductList().get(0).getProductPrice());
+        Assertions.assertEquals(5.47, list2.getDisplayedList().get(2).getProductPrice());
+        Assertions.assertEquals(40.99, list2.getDisplayedList().get(1).getProductPrice());
+        Assertions.assertEquals(100,list2.getDisplayedList().get(0).getProductPrice());
 
-        Assertions.assertEquals(list1.getProductList().get(0).getPriceChange(), list2.getProductList().get(0).getPriceChange());
-        Assertions.assertEquals(list1.getProductList().get(1).getPriceChange(), list2.getProductList().get(1).getPriceChange());
-        Assertions.assertEquals(list1.getProductList().get(2).getPriceChange(), list2.getProductList().get(2).getPriceChange());
+        Assertions.assertEquals(list1.getDisplayedList().get(0).getPriceChange(), list2.getDisplayedList().get(0).getPriceChange());
+        Assertions.assertEquals(list1.getDisplayedList().get(1).getPriceChange(), list2.getDisplayedList().get(1).getPriceChange());
+        Assertions.assertEquals(list1.getDisplayedList().get(2).getPriceChange(), list2.getDisplayedList().get(2).getPriceChange());
     }
 
     //review count
@@ -244,17 +244,17 @@ public class ProductComparatorControllerTest {
         controller1.sortList("ascending", "review count");
         controller2.sortingHelper("ascending", newComparator);
 
-        Assertions.assertEquals(69, list1.getProductList().get(0).getReviewCount());
-        Assertions.assertEquals(150,list1.getProductList().get(1).getReviewCount());
-        Assertions.assertEquals(1050, list1.getProductList().get(2).getReviewCount());
+        Assertions.assertEquals(69, list1.getDisplayedList().get(0).getReviewCount());
+        Assertions.assertEquals(150,list1.getDisplayedList().get(1).getReviewCount());
+        Assertions.assertEquals(1050, list1.getDisplayedList().get(2).getReviewCount());
 
-        Assertions.assertEquals(69, list2.getProductList().get(0).getReviewCount());
-        Assertions.assertEquals(150, list2.getProductList().get(1).getReviewCount());
-        Assertions.assertEquals(1050,list2.getProductList().get(2).getReviewCount());
+        Assertions.assertEquals(69, list2.getDisplayedList().get(0).getReviewCount());
+        Assertions.assertEquals(150, list2.getDisplayedList().get(1).getReviewCount());
+        Assertions.assertEquals(1050,list2.getDisplayedList().get(2).getReviewCount());
 
-        Assertions.assertEquals(list1.getProductList().get(0).getReviewCount(), list2.getProductList().get(0).getReviewCount());
-        Assertions.assertEquals(list1.getProductList().get(1).getReviewCount(), list2.getProductList().get(1).getReviewCount());
-        Assertions.assertEquals(list1.getProductList().get(2).getReviewCount(), list2.getProductList().get(2).getReviewCount());
+        Assertions.assertEquals(list1.getDisplayedList().get(0).getReviewCount(), list2.getDisplayedList().get(0).getReviewCount());
+        Assertions.assertEquals(list1.getDisplayedList().get(1).getReviewCount(), list2.getDisplayedList().get(1).getReviewCount());
+        Assertions.assertEquals(list1.getDisplayedList().get(2).getReviewCount(), list2.getDisplayedList().get(2).getReviewCount());
     }
 
     @Test
@@ -277,17 +277,17 @@ public class ProductComparatorControllerTest {
         controller1.sortList("descending", "review count");
         controller2.sortingHelper("descending", newComparator);
 
-        Assertions.assertEquals(69, list1.getProductList().get(2).getReviewCount());
-        Assertions.assertEquals(150,list1.getProductList().get(1).getReviewCount());
-        Assertions.assertEquals(1050, list1.getProductList().get(0).getReviewCount());
+        Assertions.assertEquals(69, list1.getDisplayedList().get(2).getReviewCount());
+        Assertions.assertEquals(150,list1.getDisplayedList().get(1).getReviewCount());
+        Assertions.assertEquals(1050, list1.getDisplayedList().get(0).getReviewCount());
 
-        Assertions.assertEquals(69, list2.getProductList().get(2).getReviewCount());
-        Assertions.assertEquals(150, list2.getProductList().get(1).getReviewCount());
-        Assertions.assertEquals(1050,list2.getProductList().get(0).getReviewCount());
+        Assertions.assertEquals(69, list2.getDisplayedList().get(2).getReviewCount());
+        Assertions.assertEquals(150, list2.getDisplayedList().get(1).getReviewCount());
+        Assertions.assertEquals(1050,list2.getDisplayedList().get(0).getReviewCount());
 
-        Assertions.assertEquals(list1.getProductList().get(0).getReviewCount(), list2.getProductList().get(0).getReviewCount());
-        Assertions.assertEquals(list1.getProductList().get(1).getReviewCount(), list2.getProductList().get(1).getReviewCount());
-        Assertions.assertEquals(list1.getProductList().get(2).getReviewCount(), list2.getProductList().get(2).getReviewCount());
+        Assertions.assertEquals(list1.getDisplayedList().get(0).getReviewCount(), list2.getDisplayedList().get(0).getReviewCount());
+        Assertions.assertEquals(list1.getDisplayedList().get(1).getReviewCount(), list2.getDisplayedList().get(1).getReviewCount());
+        Assertions.assertEquals(list1.getDisplayedList().get(2).getReviewCount(), list2.getDisplayedList().get(2).getReviewCount());
     }
 
     //review star
@@ -311,17 +311,17 @@ public class ProductComparatorControllerTest {
         controller1.sortList("ascending", "review star");
         controller2.sortingHelper("ascending", newComparator);
 
-        Assertions.assertEquals(4.19, list1.getProductList().get(0).getReviewStars());
-        Assertions.assertEquals(4.3,list1.getProductList().get(1).getReviewStars());
-        Assertions.assertEquals(4.8, list1.getProductList().get(2).getReviewStars());
+        Assertions.assertEquals(4.19, list1.getDisplayedList().get(0).getReviewStars());
+        Assertions.assertEquals(4.3,list1.getDisplayedList().get(1).getReviewStars());
+        Assertions.assertEquals(4.8, list1.getDisplayedList().get(2).getReviewStars());
 
-        Assertions.assertEquals(4.19, list2.getProductList().get(0).getReviewStars());
-        Assertions.assertEquals(4.3, list2.getProductList().get(1).getReviewStars());
-        Assertions.assertEquals(4.8,list2.getProductList().get(2).getReviewStars());
+        Assertions.assertEquals(4.19, list2.getDisplayedList().get(0).getReviewStars());
+        Assertions.assertEquals(4.3, list2.getDisplayedList().get(1).getReviewStars());
+        Assertions.assertEquals(4.8,list2.getDisplayedList().get(2).getReviewStars());
 
-        Assertions.assertEquals(list1.getProductList().get(0).getReviewStars(), list2.getProductList().get(0).getReviewStars());
-        Assertions.assertEquals(list1.getProductList().get(1).getReviewStars(), list2.getProductList().get(1).getReviewStars());
-        Assertions.assertEquals(list1.getProductList().get(2).getReviewStars(), list2.getProductList().get(2).getReviewStars());
+        Assertions.assertEquals(list1.getDisplayedList().get(0).getReviewStars(), list2.getDisplayedList().get(0).getReviewStars());
+        Assertions.assertEquals(list1.getDisplayedList().get(1).getReviewStars(), list2.getDisplayedList().get(1).getReviewStars());
+        Assertions.assertEquals(list1.getDisplayedList().get(2).getReviewStars(), list2.getDisplayedList().get(2).getReviewStars());
     }
 
     @Test
@@ -344,21 +344,21 @@ public class ProductComparatorControllerTest {
         controller1.sortList("descending", "review star");
         controller2.sortingHelper("descending", newComparator);
 
-        Assertions.assertEquals(4.19, list1.getProductList().get(2).getReviewStars());
-        Assertions.assertEquals(4.3,list1.getProductList().get(1).getReviewStars());
-        Assertions.assertEquals(4.8, list1.getProductList().get(0).getReviewStars());
+        Assertions.assertEquals(4.19, list1.getDisplayedList().get(2).getReviewStars());
+        Assertions.assertEquals(4.3,list1.getDisplayedList().get(1).getReviewStars());
+        Assertions.assertEquals(4.8, list1.getDisplayedList().get(0).getReviewStars());
 
-        Assertions.assertEquals(4.19, list2.getProductList().get(2).getReviewStars());
-        Assertions.assertEquals(4.3, list2.getProductList().get(1).getReviewStars());
-        Assertions.assertEquals(4.8,list2.getProductList().get(0).getReviewStars());
+        Assertions.assertEquals(4.19, list2.getDisplayedList().get(2).getReviewStars());
+        Assertions.assertEquals(4.3, list2.getDisplayedList().get(1).getReviewStars());
+        Assertions.assertEquals(4.8,list2.getDisplayedList().get(0).getReviewStars());
 
-        Assertions.assertEquals(list1.getProductList().get(0).getReviewStars(), list2.getProductList().get(0).getReviewStars());
-        Assertions.assertEquals(list1.getProductList().get(1).getReviewStars(), list2.getProductList().get(1).getReviewStars());
-        Assertions.assertEquals(list1.getProductList().get(2).getReviewStars(), list2.getProductList().get(2).getReviewStars());
+        Assertions.assertEquals(list1.getDisplayedList().get(0).getReviewStars(), list2.getDisplayedList().get(0).getReviewStars());
+        Assertions.assertEquals(list1.getDisplayedList().get(1).getReviewStars(), list2.getDisplayedList().get(1).getReviewStars());
+        Assertions.assertEquals(list1.getDisplayedList().get(2).getReviewStars(), list2.getDisplayedList().get(2).getReviewStars());
     }
 
     @Test
-    public void getProductListTest() {
+    public void getDisplayedListTest() {
         Wishlist list1 = new Wishlist("wishlist 1");
         list1.addProduct(myFavDrink);
         list1.addProduct(animeFigure);
@@ -369,7 +369,7 @@ public class ProductComparatorControllerTest {
         testList.add(animeFigure);
         testList.add(plushie);
 
-        Assertions.assertEquals(list1.getProductList(), testList);
+        Assertions.assertEquals(list1.getDisplayedList(), testList);
 
     }
 }
