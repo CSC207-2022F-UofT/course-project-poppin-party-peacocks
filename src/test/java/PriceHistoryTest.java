@@ -1,5 +1,5 @@
 import Entities.Item;
-import UseCases.PriceHistory.GeneratePriceHistoryUseCase;
+import UseCases.PriceHistory.PriceHistoryUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ public class PriceHistoryTest {
     Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
             "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
     Calendar calendar = Calendar.getInstance();
-    GeneratePriceHistoryUseCase priceHistory = new GeneratePriceHistoryUseCase(plushie);
+    PriceHistoryUseCase priceHistory = new PriceHistoryUseCase(plushie);
 
     /**
      * Testing setter and getter for the priceHistoryData field
@@ -72,42 +72,6 @@ public class PriceHistoryTest {
         Assertions.assertEquals(updatedPriceHistoryDates, plushie.getPriceHistoryDates());
     }
 
-
-    /**
-     * Testing the formatPriceHistoryXAxisForGraphing method
-     * @throws ParseException a parse exception
-     */
-    @Test
-    public void TestFormatPriceHistoryXAxisForGraphing() throws ParseException {
-        ArrayList<Date> priceHistoryDates = new ArrayList<>();
-        calendar.set(2022,
-                NOVEMBER, 18, 12, 0, 0);
-        priceHistoryDates.add(calendar.getTime());
-        calendar.set(2022,
-                NOVEMBER, 19, 12, 0, 0);
-        priceHistoryDates.add(calendar.getTime());
-        calendar.set(2022,
-                NOVEMBER, 20, 12, 0, 0);
-        priceHistoryDates.add(calendar.getTime());
-        plushie.setPriceHistoryDates(priceHistoryDates);
-        String[] tester = {"2022-11-18", "2022-11-19", "2022-11-20"};
-        Assertions.assertArrayEquals(priceHistory.formatPriceHistoryXAxisForGraphing(), tester);
-    }
-
-    /**
-     * Testing the formatPriceHistoryYForGraphing method
-     * @throws ParseException a parse exception
-     */
-    @Test
-    public void TestFormatPriceHistoryYForGraphing() throws ParseException {
-        ArrayList<Double> priceHistoryData = new ArrayList<>();
-        priceHistoryData.add(23.45);
-        priceHistoryData.add(34.56);
-        priceHistoryData.add(45.67);
-        plushie.setPriceHistoryData(priceHistoryData);
-        Double[] tester = {23.45, 34.56, 45.67};
-        Assertions.assertArrayEquals(tester, priceHistory.formatPriceHistoryYAxisForGraphing());
-    }
 
     /**
      * testing that the convertValidTimePeriodToDaysHelper method returns correct outputs with valid inputs (reaching
@@ -431,7 +395,7 @@ public class PriceHistoryTest {
     public void testCompareToHighestPriceInvalidInputs(){
         Item plushieTester = new Item("Plushie", 0, 30.00, "www.amazon.com/plushie",
                 "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
-        GeneratePriceHistoryUseCase priceHistoryTester = new GeneratePriceHistoryUseCase(plushieTester);
+        PriceHistoryUseCase priceHistoryTester = new PriceHistoryUseCase(plushieTester);
 
         // will get average price in last 24 hours = 0
         ArrayList<Double> priceHistoryDataTester = new ArrayList<>();
