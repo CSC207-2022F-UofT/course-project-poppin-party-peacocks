@@ -149,6 +149,8 @@ public class WishlistPage extends JFrame {
                 homePage = new HomePage();
             } catch (FileNotFoundException | org.json.simple.parser.ParseException | ParseException ex) {
                 throw new RuntimeException(ex);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
             homePage.setContentPane(homePage.getMainPanel());
             homePage.setVisible(true);

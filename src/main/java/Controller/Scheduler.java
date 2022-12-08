@@ -4,9 +4,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Scheduler {
-    private Timer timer;
-    private TimerTask timerTask;
-    private int timerDuration;
+    private final Timer timer;
+    private final TimerTask timerTask;
+    private final int timerDuration;
 
     public Scheduler(TimerTask timerTask, int timerDuration) {
         this.timer = new Timer();

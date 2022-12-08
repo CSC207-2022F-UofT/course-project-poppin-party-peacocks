@@ -6,7 +6,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+
 /** A class that helps the database format item and wishlist data for storage */
 public class DataBaseFormatter {
     /** Creates an item in JSON format
@@ -20,7 +22,9 @@ public class DataBaseFormatter {
         productObject.put("itemName", product.getProductName());
         productObject.put("url", product.getProductURL());
         productObject.put("itemDescription", product.getProductDescription());
-
+        JSONArray tagsObject = new JSONArray();
+        tagsObject.addAll(Arrays.asList(product.getTags()));
+        productObject.put("tags", tagsObject);
         productObject.put("itemPrice", product.getProductPrice());
         productObject.put("priceChange", product.getPriceChange());
         productObject.put("desiredPrice", product.getProductDesiredPrice());
@@ -34,6 +38,7 @@ public class DataBaseFormatter {
             historyDateObject.add(new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").format(date));
         }
         JSONArray historyDataObject = new JSONArray();
+        historyDataObject.addAll(product.getPriceHistoryData());
 
         productObject.put("historyDate", historyDateObject);
         productObject.put("historyData", historyDataObject);
@@ -63,10 +68,13 @@ public class DataBaseFormatter {
             displayedListObject.add(createItemJSON(item));
         }
 
+        JSONArray selectedTagsObject = new JSONArray();
         wishlistObject.put("itemList", itemObjects);
         wishlistObject.put("displayedList", displayedListObject);
+        wishlistObject.put("selectedTags", selectedTagsObject);
 
         return wishlistObject;
     }
 
 }
+

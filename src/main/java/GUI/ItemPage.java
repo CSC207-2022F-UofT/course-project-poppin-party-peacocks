@@ -1,5 +1,8 @@
 package GUI;
 
+import Entities.Product;
+import Entities.ProductList;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -67,11 +70,14 @@ public class ItemPage extends JFrame {
             productName = productName.substring(0,23) + "...";
         }
         CustomJLabel thisItemLabel = new CustomJLabel(productName, Color.WHITE, titleFont);
+
         thisItemLabel.setBounds(75, 17, 170, 24);
+
         headerPanel.add(thisItemLabel);
         CustomJButton graphButton = new CustomJButton("Details", 0, 0, color2, Color.WHITE, textFont);
-        graphButton.setBounds(250, 13, 90, 30);
-        headerPanel.add(graphButton);
+        graphButton.setBounds(130, 580, 90, 30);
+
+        mainPanel.add(graphButton);
         mainPanel.add(headerPanel);
 
         // image
@@ -189,16 +195,12 @@ public class ItemPage extends JFrame {
         });
         // Opens up graph page alongside current ItemPage.
         graphButton.addActionListener(e -> {
-            PriceHistoryInterface ph = new PriceHistoryInterface(item);
-            try {
-                ph.createPriceHistoryChart();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+
             PriceHistoryPage priceHistoryPage = new PriceHistoryPage(item, wl);
             priceHistoryPage.setContentPane(priceHistoryPage.getMainPanel());
             priceHistoryPage.setVisible(true);
             priceHistoryPage.setLocationRelativeTo(null);
+
             priceHistoryPage.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             this.dispose();
         });
