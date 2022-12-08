@@ -5,12 +5,27 @@ import GUI.Listeners.WelcomePageActionListenerSwitchPanels;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The first page the user sees. Include the login and signup page.
+ */
 public class WelcomePage extends JFrame{
+    // a controller for the logic used to log in and sign up
     UserRegisterController userRegisterController;
+    // the main panel that contains the center of the frame
     private final JPanel mainPanel;
+
+    /**
+     * returns the main panel for setting content pane
+     * @return the maain panel, called by other classes
+     */
     public JPanel getMainPanel() {
         return mainPanel;
     }
+
+    /**
+     * constructor. Creates a WelcomePage object with a user register controller
+     * @param controller the user register controller
+     */
 
     public WelcomePage(UserRegisterController controller) {
         super("Login Page");

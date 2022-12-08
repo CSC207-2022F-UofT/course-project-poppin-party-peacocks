@@ -25,6 +25,17 @@ public class ListOfWishlists implements ListOfProductLists {
     }
 
     public void removeWishlist(ProductList wishlist){listWishlist.remove(wishlist);}
+
+    public void removeWishlistByName(String name){
+
+        for (ProductList wishlist: listWishlist){
+            if (wishlist.getName().equals(name)){
+                listWishlist.remove(wishlist);
+                break;
+            }
+
+        }
+    }
     public void setWishlist(int index, ProductList newWishlist){
         listWishlist.set(index,newWishlist);
     }

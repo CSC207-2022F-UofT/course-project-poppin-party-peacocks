@@ -36,11 +36,11 @@ public class PriceHistoryPage extends JFrame {
      */
     private String compareDesired;
     /**
-     * compareLowest: % comparison of current price to lowest historical price
+     * compareLowest: % comparison of current price to the lowest historical price
      */
     private String compareLowest;
     /**
-     * compareHighest: % comparison of current price to highest historical price
+     * compareHighest: % comparison of current price to the highest historical price
      */
     private String compareHighest;
     /**
@@ -226,7 +226,7 @@ public class PriceHistoryPage extends JFrame {
         this.mainPanel.add(priceButton6);
 
 
-        // button logic for back logic -> navigates to itempage
+        // button logic for back logic -> navigates to itemPage
         backButton.addActionListener((e) -> {
             ItemPage itemPage = new ItemPage(this.item, this.wl);
             itemPage.setContentPane(itemPage.getMainPanel());

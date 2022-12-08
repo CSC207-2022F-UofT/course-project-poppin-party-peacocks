@@ -16,4 +16,6 @@ public interface ListOfProductLists {
     void setWishlist(int index, ProductList wl);
 
     ArrayList<String> getWishlistNames();
+
+    void removeWishlistByName(String name);
 }
