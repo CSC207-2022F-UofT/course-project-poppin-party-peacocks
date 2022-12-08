@@ -170,7 +170,7 @@ public class WishlistPage extends JFrame {
             }
             try {
                 generateListOfItems(true);
-            } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
+            } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
@@ -187,7 +187,7 @@ public class WishlistPage extends JFrame {
                 wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
                 try {
                     generateListOfItems(false);
-                } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
+                } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
@@ -221,7 +221,7 @@ public class WishlistPage extends JFrame {
         mainPanel.remove(itemScrollPane);
         try {
             generateListOfItems(false);
-        }catch(IOException | ParseException | org.json.simple.parser.ParseException ex){
+        }catch(IOException ex){
             throw new RuntimeException(ex);
         }
     }

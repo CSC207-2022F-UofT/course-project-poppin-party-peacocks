@@ -33,4 +33,6 @@ public interface Product {
     int getReviewCount();
     void setProductPrice(double newPrice);
     void setProductCurrency(String newCurrency);
+
+    Date getProductDateLastUpdated();
 }

@@ -12,6 +12,7 @@ import java.util.Date;
 import Entities.ProductList;
 import Entities.Product;
 import ExternalInterface.PriceHistoryInterface;
+import org.json.simple.parser.ParseException;
 
 /**
  * This ItemPage class is a JFrame that displays the attributes of a given item from a wishlist.
@@ -19,6 +20,7 @@ import ExternalInterface.PriceHistoryInterface;
 public class ItemPage extends JFrame {
     private final GradientJPanel mainPanel;
     private final Product item;
+    private final ProductList wl;
 
     /**
      * mainPanel getter method.
@@ -188,7 +190,7 @@ public class ItemPage extends JFrame {
             WishlistPage wlPage;
             try {
                 wlPage = new WishlistPage(wl);
-            } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
+            } catch (IOException | ParseException | java.text.ParseException ex) {
                 throw new RuntimeException(ex);
             }
             wlPage.setContentPane(wlPage.getMainPanel());
