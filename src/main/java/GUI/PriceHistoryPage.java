@@ -3,50 +3,70 @@ package GUI;
 
 import Entities.Product;
 import Entities.ProductList;
+
 import ExternalInterface.PriceHistoryInterface;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Image;
-import java.io.IOException;
+
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 
 /**
- * A page for displaying the details of an item's price history and certain statistics.
+ * This PriceHistoryPage is a JFrame that shows the price history chart and data of a product.
+ * @author Chin Chin
  */
 public class PriceHistoryPage extends JFrame {
-    // the main panel. Contains all the buttons and labels used in the page.
+    /**
+     * GradientJPanel: background image JPanel with the gradient colours
+     */
     private final GradientJPanel mainPanel;
-    // the item which price history is being displayed.
+    /**
+     * item: The product that the PriceHistoryPage is corresponding to
+     */
     private final Product item;
-    // the wishlist the product is from
+    /**
+     * ProductList: The ProductList that the item which the PriceHistoryPage is corresponding to is found in
+     */
     private final ProductList wl;
-    // the current price compared to the original listing price, as a percentage.
+    /**
+     * compareOriginal: % comparison of current price to original price
+     */
     private String compareOriginal;
-    // the current price compared to the desired price, as a percentage.
+    /**
+     * compareDesired: % comparison of current price to desired price
+     */
     private String compareDesired;
-    // the current price compared to the lowest price, as a percentage.
+    /**
+     * compareLowest: % comparison of current price to lowest historical price
+     */
     private String compareLowest;
-    // the current price compared to the highest price, as a percentage.
+    /**
+     * compareHighest: % comparison of current price to highest historical price
+     */
     private String compareHighest;
-    // the current price compared to the average price, as a percentage.
+    /**
+     * compareAverage: % comparison of current price to average historical price
+     */
     private String compareAverage;
 
     /**
-     * @return the main panel
+     * getter for the MainPanel
+     * @return the mainPanel
      */
     public JPanel getMainPanel() {
         return this.mainPanel;
     }
 
+
     /**
-     * constructor. Creates an instance of price history page, containing the graph of the price history
-     * as well as the detailed comparisons.
-     * @param product the item to generate data for
-     * @param wishlist the wishlist the item is from
+     * initializer for PriceHistoryPage
+     * @param product product that the PriceHistoryPage is corresponding to
+     * @param wishlist wishlist that the product is in
      */
     public PriceHistoryPage(Product product, ProductList wishlist) {
+        // setting up header panel
         super("Price History");
         this.setLayout(null);
+
         this.setSize(360, 640);
         this.setResizable(false);
         this.item = product;
@@ -58,12 +78,14 @@ public class PriceHistoryPage extends JFrame {
         this.compareOriginal = "";
         Color color1 = new Color(194, 234, 186);
         Color color2 = new Color(106, 189, 154);
+
         Font textFont = new Font("Montserrat", Font.PLAIN, 14);
         Font titleFont = new Font("Montserrat", Font.PLAIN, 20);
         Font headingFont = new Font("Montserrat", Font.PLAIN, 17);
         this.mainPanel = new GradientJPanel(null, color1, color2);
         this.mainPanel.setBounds(0, 0, 360, 640);
         JPanel headerPanel = new JPanel(null);
+
         headerPanel.setBackground(color2);
         headerPanel.setBounds(0, 0, 360, 56);
         CustomJButton backButton = new CustomJButton("", 0, 0, color2, color2, textFont);
@@ -74,6 +96,19 @@ public class PriceHistoryPage extends JFrame {
         if (productName.length() > 24) {
             productName = productName.substring(0, 23) + "...";
         }
+
+
+        // generating fresh price history chart to display
+        PriceHistoryInterface ph = new PriceHistoryInterface(this.item);
+        try {
+            ph.createPriceHistoryChart();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+        // creating label for price history graph image
 
         CustomJLabel thisItemLabel = new CustomJLabel(productName, Color.WHITE, titleFont);
         thisItemLabel.setBounds(75, 17, 170, 24);
@@ -87,9 +122,15 @@ public class PriceHistoryPage extends JFrame {
         imageLabel.setIcon(new ImageIcon(resizedImage));
         imageLabel.setBounds(30, 76, 300, 250);
         this.mainPanel.add(imageLabel);
+
+
+        // creating new panel for text
         CustomJLabel firstTextLabel = new CustomJLabel("Compare Current Price to:", Color.WHITE, textFont);
         firstTextLabel.setBounds(75, 330, 300, 24);
         this.mainPanel.add(firstTextLabel);
+
+        // creating panels to display price history comparisons (original and desired price)
+
         CustomJLabel originalLabel = new CustomJLabel("Original Price", Color.WHITE, headingFont);
         originalLabel.setBounds(50, 352, 120, 30);
         originalLabel.setOpaque(true);
@@ -114,9 +155,15 @@ public class PriceHistoryPage extends JFrame {
         desiredLabelBox.setBackground(color1);
         desiredLabelBox.setHorizontalAlignment(0);
         this.mainPanel.add(desiredLabelBox);
+
+        // creating panel to display text for historical price history comparisons
         CustomJLabel secondTextLabel = new CustomJLabel("Compare Current Price to Historical:", Color.WHITE, textFont);
         secondTextLabel.setBounds(60, 420, 300, 24);
         this.mainPanel.add(secondTextLabel);
+
+        // panels to display the comparisons
+
+
         CustomJLabel lowestLabel = new CustomJLabel("Lowest", Color.WHITE, headingFont);
         lowestLabel.setBounds(30, 442, 75, 30);
         lowestLabel.setOpaque(true);
@@ -153,6 +200,10 @@ public class PriceHistoryPage extends JFrame {
         averageLabelBox.setBackground(color1);
         averageLabelBox.setHorizontalAlignment(0);
         this.mainPanel.add(averageLabelBox);
+
+
+        // buttons to select time ranges for the history comparison labels
+
         CustomJLabel thirdTextLabel = new CustomJLabel("Select Time Range for Comparison:", Color.WHITE, textFont);
         thirdTextLabel.setBounds(60, 520, 350, 24);
         this.mainPanel.add(thirdTextLabel);
@@ -174,15 +225,20 @@ public class PriceHistoryPage extends JFrame {
         CustomJButton priceButton6 = new CustomJButton("All Time", 0, 0, color2, Color.WHITE, textFont);
         priceButton6.setBounds(245, 580, 110, 20);
         this.mainPanel.add(priceButton6);
+
+
+        // button logic for back logic -> navigates to itempage
         backButton.addActionListener((e) -> {
             ItemPage itemPage = new ItemPage(this.item, this.wl);
             itemPage.setContentPane(itemPage.getMainPanel());
             itemPage.setVisible(true);
             itemPage.setLocationRelativeTo(null);
-            itemPage.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            this.dispose();
+            itemPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            dispose();
         });
-        PriceHistoryInterface ph = new PriceHistoryInterface(this.item);
+
+        // button logic for all time period buttons
+
         priceButton1.addActionListener((e) -> {
             try {
                 ph.createPriceHistoryChart();
