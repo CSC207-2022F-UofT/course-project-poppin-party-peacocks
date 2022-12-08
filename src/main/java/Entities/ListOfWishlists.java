@@ -42,7 +42,7 @@ public class ListOfWishlists implements ListOfProductLists {
         }
     }
     /**
-     * add the wishlist to the listOfWishList at the user's specified index
+     * sets the wishlist to the listOfWishList at the user's specified index and replaces the old wishlist at said index
      * @param index of where the user wants to set the wishlist at
      * @param newWishlist the wishlist the user set into the listOfWishList
      */
