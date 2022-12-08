@@ -1,5 +1,14 @@
 package ExternallnterfaceTest;
 
+import Entities.Item;
+import Entities.Product;
+import ExternalInterface.ItemSearcher;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class ItemSearchTest {
 //    /**
 //     * Testing search item by keyword feature and if all items in the return list are of Object Entities.Item
@@ -8,9 +17,9 @@ public class ItemSearchTest {
 //    public void searchItemTestItemInstance() throws IOException, InterruptedException {
 //        ExternalInterface.ItemSearcher itemSearcher = new ExternalInterface.ItemSearcher();
 //
-//        ArrayList itemSearchList = itemSearcher.searchItemKeywords("mechanical keyboard");
+//        ArrayList<Product> itemSearchList = itemSearcher.searchItemKeywords("mechanical keyboard");
 //        for (Object item : itemSearchList) {
-//            Assertions.assertEquals(true, item instanceof Item);
+//            Assertions.assertTrue(item instanceof Item);
 //        }
 //    }
 //
@@ -21,11 +30,11 @@ public class ItemSearchTest {
 //    public void searchItemTestListLengthReturn() throws IOException, InterruptedException {
 //        ExternalInterface.ItemSearcher itemSearcher = new ExternalInterface.ItemSearcher();
 //
-//        ArrayList itemSearchList = itemSearcher.searchItemKeywords("mechanical keyboard");
+//        ArrayList<Product> itemSearchList = itemSearcher.searchItemKeywords("mechanical keyboard");
 //
 //        Assertions.assertEquals(10, itemSearchList.size());
 //    }
-
+//
 //    /**
 //     * Testing search item by url feature and if it is scraping the correct value of price
 //     */
@@ -37,10 +46,9 @@ public class ItemSearchTest {
 //
 //        Product kittenplushitem = itemSearcher.searchItemUrl(kittenplush, false);
 //
-//        Double price = kittenplushitem.getProductPrice();
+//        double price = kittenplushitem.getProductPrice();
 //
-//        Assertions.assertEquals(price > 0.0 ,true); // as long as its a price above 0 then the price has been obtained
-//
+//        Assertions.assertTrue(price > 0.0); // as long as its a price above 0 then the price has been obtained
 //    }
 //
 //    /**
@@ -54,9 +62,10 @@ public class ItemSearchTest {
 //        Product kittenplushitem = itemSearcher.searchItemUrl(toadplush, false);
 //
 //        // as long as a string of length greater than 0, then item name has been obtained.
-//        Assertions.assertEquals(kittenplushitem.getProductName().length() >= 0, true);
 //
+//        Assertions.assertTrue(kittenplushitem.getProductName().length() >= 0);
 //    }
+//
 //    /**
 //     * Testing search item by url feature and if it is scraping the correct value of number of ratings for the product
 //     */
@@ -67,8 +76,7 @@ public class ItemSearchTest {
 //        String carnivalplush = "https://www.amazon.ca/BB-Funhouse-Stuffed-Carnival-3-14inch/dp/B09NRGTT1R/ref=sr_1_7?crid=1QCCDI9NB8WIQ&keywords=whale+plush&qid=1669082056&qu=eyJxc2MiOiI2LjAyIiwicXNhIjoiNS4xMiIsInFzcCI6IjQuNTQifQ%3D%3D&sprefix=whale+plushie%2Caps%2C95&sr=8-7";
 //        Product kittenplushitem = itemSearcher.searchItemUrl(carnivalplush, false);
 //
-//        Assertions.assertEquals(kittenplushitem.getReviewCount() >= 0, true);
-//
+//        Assertions.assertTrue(kittenplushitem.getReviewCount() >= 0);
 //    }
 }
 

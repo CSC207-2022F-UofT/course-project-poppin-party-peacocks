@@ -1,9 +1,11 @@
 package EntitiesTest;
 
 import Entities.Item;
+import Entities.Product;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ItemTest {
 //    /**
@@ -13,9 +15,9 @@ public class ItemTest {
 //    public void searchItemTestItemInstance() throws IOException, InterruptedException {
 //        SearchitemsApi apiSearcher = new SearchitemsApi();
 //
-//        ArrayList itemSearchList = apiSearcher.searchToList("mechanical keyboard", "CA");
+//        ArrayList<Product> itemSearchList = apiSearcher.searchToList("mechanical keyboard", "CA");
 //        for (Object item : itemSearchList) {
-//            Assertions.assertEquals(true, item instanceof Item);
+//            Assertions.assertTrue(item instanceof Item);
 //        }
 //    }
 //
@@ -26,11 +28,11 @@ public class ItemTest {
 //    public void searchItemTestListLengthReturn() throws IOException, InterruptedException {
 //        SearchitemsApi apiSearcher = new SearchitemsApi();
 //
-//        ArrayList itemSearchList = apiSearcher.searchToList("mechanical keyboard", "CA");
+//        ArrayList<Product> itemSearchList = apiSearcher.searchToList("mechanical keyboard", "CA");
 //
 //        Assertions.assertEquals(10, itemSearchList.size());
 //    }
-
+//
 //    /**
 //     * Testing updatePrice feature and if price has been updated (different price than initial price)
 //     */
@@ -41,7 +43,7 @@ public class ItemTest {
 //                        "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
 //                        "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
 //                        "Backed by One-year Amazon Basics Warranty\n" +
-//                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "www.imageurl.com");
+//                        "Ships in Certified Frustration-free Packaging", 0, 0, "www.imageurl.com");
 //
 //        double initialPrice = priceUpdateTestItem.getProductPrice();
 //
@@ -49,7 +51,7 @@ public class ItemTest {
 //
 //        double newPrice = priceUpdateTestItem.getProductPrice();
 //
-//        Assertions.assertEquals(true, initialPrice != newPrice);
+//        Assertions.assertTrue(initialPrice != newPrice);
 //    }
 
     /**
@@ -65,9 +67,7 @@ public class ItemTest {
                         "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
         // Test 1:  Set and Get Name
         TestItem.setName("AmazonBasics Wired Office Keyboard");
-        Assertions.assertEquals(true, "AmazonBasics Wired Office Keyboard".equals(TestItem.getProductName()));
-
-
+        Assertions.assertEquals("AmazonBasics Wired Office Keyboard", TestItem.getProductName());
     }
 
     /**
@@ -82,7 +82,7 @@ public class ItemTest {
                         "Backed by One-year Amazon Basics Warranty\n" +
                         "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
 
-        Assertions.assertEquals(true, 20.00 == TestItem.getProductPrice());
+        Assertions.assertEquals(20.00, TestItem.getProductPrice());
     }
 
     /**
@@ -98,7 +98,7 @@ public class ItemTest {
                         "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
 
         TestItem.setDesiredPrice(17.00);
-        Assertions.assertEquals(true, 17.00 == TestItem.getProductDesiredPrice());
+        Assertions.assertEquals(17.00, TestItem.getProductDesiredPrice());
     }
 
     /**
@@ -114,7 +114,7 @@ public class ItemTest {
                         "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
         String testUrl = "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1";
 
-        Assertions.assertEquals(true, testUrl.equals(TestItem.getProductURL()));
+        Assertions.assertEquals(testUrl, TestItem.getProductURL());
     }
 
     /**
@@ -130,7 +130,7 @@ public class ItemTest {
                         "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
         String testImageUrl = "imageurl";
 
-        Assertions.assertEquals(true, testImageUrl.equals(TestItem.getProductImageURL()));
+        Assertions.assertEquals(testImageUrl, TestItem.getProductImageURL());
     }
 
     /**
@@ -147,7 +147,7 @@ public class ItemTest {
         String newDescription = "This is a new set item description for AmazonBasics Wired Office Keyboard";
 
         TestItem.setProductDescription(newDescription);
-        Assertions.assertEquals(true, newDescription.equals(TestItem.getProductDescription()));
+        Assertions.assertEquals(newDescription, TestItem.getProductDescription());
     }
 
     /**
@@ -163,7 +163,7 @@ public class ItemTest {
                         "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
 
         TestItem.setReviewCount(30);
-        Assertions.assertEquals(true, 30 == TestItem.getReviewCount());
+        Assertions.assertEquals(30, TestItem.getReviewCount());
     }
 
     /**
@@ -179,6 +179,6 @@ public class ItemTest {
                         "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
 
         TestItem.setReviewStars(4.2);
-        Assertions.assertEquals(true, 4.2 == TestItem.getReviewStars());
+        Assertions.assertEquals(4.2, TestItem.getReviewStars());
     }
 }
