@@ -20,7 +20,7 @@ public class HomePage extends JFrame {
     private GradientJPanel mainPanel;
     private JList<WishlistPanel> wishlistPanelJList;
     private JScrollPane wishlistScrollPane;
-    private final DataBaseController dbc = new DataBaseController();
+    private DataBaseController dbc = new DataBaseController();
     Color color2 = new Color(106, 189, 154);
     Font headerFont = new Font("Montserrat", Font.PLAIN, 20);
 
@@ -28,12 +28,14 @@ public class HomePage extends JFrame {
 
     private String userCurrency;
 
-    public HomePage() throws FileNotFoundException, ParseException, org.json.simple.parser.ParseException {
+    public HomePage() throws IOException, ParseException, org.json.simple.parser.ParseException {
          // # TODO how to initialize listOfWishlist
-        DataBaseController dbc = new DataBaseController();
         CurrencyUseCase currencyUseCase = new CurrencyUseCase();
         currencyUseCase.toggleCurrency();
         currencyUseCase.toggleCurrency();
+        DataBaseController dbc = new DataBaseController();
+
+
 
 
         listOfWishlists = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
@@ -154,18 +156,12 @@ public class HomePage extends JFrame {
 
             // TODO: implement price conversion use case here
             CurrencyUseCase currencyUseCase = new CurrencyUseCase();
+
             try {
                 currencyUseCase.toggleCurrency();
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            } catch (ParseException ex) {
-                throw new RuntimeException(ex);
-            } catch (org.json.simple.parser.ParseException ex) {
-                throw new RuntimeException(ex);
-            }
-            try {
-                dbc.saveListOfWishlists(listOfWishlists, dbc.getCurrentUser());
+                dbc = new DataBaseController();
                 listOfWishlists = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
+                dbc.saveListOfWishlists(listOfWishlists, dbc.getCurrentUser());
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             } catch (ParseException ex) {
@@ -186,6 +182,14 @@ public class HomePage extends JFrame {
                 listOfWishlists.removeWishlist(listOfWishlists.getListOfWishlist().get(wishlistPanelJList.getSelectedIndex()));
                 try {
                     dbc.saveListOfWishlists(listOfWishlists, dbc.getCurrentUser());
+                    dbc = new DataBaseController();
+                    listOfWishlists = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
+                } catch (FileNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                } catch (org.json.simple.parser.ParseException ex) {
+                    throw new RuntimeException(ex);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }

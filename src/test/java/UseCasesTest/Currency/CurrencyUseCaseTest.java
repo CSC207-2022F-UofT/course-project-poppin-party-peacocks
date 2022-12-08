@@ -1,3 +1,5 @@
+package UseCasesTest.Currency;
+
 import Entities.Item;
 import Entities.User;
 import UseCases.Currency.CurrencyUseCase;

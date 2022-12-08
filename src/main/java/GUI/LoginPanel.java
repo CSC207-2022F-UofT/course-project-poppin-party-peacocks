@@ -5,6 +5,7 @@ import org.json.simple.parser.ParseException;
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class LoginPanel extends JPanel{
 
@@ -58,6 +59,8 @@ public class LoginPanel extends JPanel{
                             currJFrame.dispose();
                         }
                     } catch (FileNotFoundException | ParseException | java.text.ParseException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
