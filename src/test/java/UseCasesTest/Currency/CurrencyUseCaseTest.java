@@ -71,10 +71,5 @@ public class CurrencyUseCaseTest {
         currencyUseCase.toggleCurrency();
         currencyUseCase.updateProductCurrency(testItem);
         Assertions.assertEquals(testItem.getProductCurrency(), "USD");
-
-
     }
-
-
-
 }

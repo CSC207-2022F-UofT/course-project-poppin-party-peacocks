@@ -18,6 +18,6 @@ public interface ListOfProductLists {
     void setWishlist(int index, ProductList wl);
     /** returns the name of the ProductList*/
     ArrayList<String> getWishlistNames();
-
+    /** removes ProductList by its name from listOfProductList*/
     void removeWishlistByName(String name);
 }
