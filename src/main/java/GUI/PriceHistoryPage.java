@@ -3,36 +3,50 @@ package GUI;
 
 import Entities.Product;
 import Entities.ProductList;
-import Entities.Wishlist;
 import ExternalInterface.PriceHistoryInterface;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.LayoutManager;
 import java.io.IOException;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
+/**
+ * A page for displaying the details of an item's price history and certain statistics.
+ */
 public class PriceHistoryPage extends JFrame {
+    // the main panel. Contains all the buttons and labels used in the page.
     private final GradientJPanel mainPanel;
+    // the item which price history is being displayed.
     private final Product item;
+    // the wishlist the product is from
     private final ProductList wl;
+    // the current price compared to the original listing price, as a percentage.
     private String compareOriginal;
+    // the current price compared to the desired price, as a percentage.
     private String compareDesired;
+    // the current price compared to the lowest price, as a percentage.
     private String compareLowest;
+    // the current price compared to the highest price, as a percentage.
     private String compareHighest;
+    // the current price compared to the average price, as a percentage.
     private String compareAverage;
 
+    /**
+     * @return the main panel
+     */
     public JPanel getMainPanel() {
         return this.mainPanel;
     }
 
+    /**
+     * constructor. Creates an instance of price history page, containing the graph of the price history
+     * as well as the detailed comparisons.
+     * @param product the item to generate data for
+     * @param wishlist the wishlist the item is from
+     */
     public PriceHistoryPage(Product product, ProductList wishlist) {
         super("Price History");
-        this.setLayout((LayoutManager)null);
+        this.setLayout(null);
         this.setSize(360, 640);
         this.setResizable(false);
         this.item = product;
@@ -44,12 +58,12 @@ public class PriceHistoryPage extends JFrame {
         this.compareOriginal = "";
         Color color1 = new Color(194, 234, 186);
         Color color2 = new Color(106, 189, 154);
-        Font textFont = new Font("Montserrat", 0, 14);
-        Font titleFont = new Font("Montserrat", 0, 20);
-        Font headingFont = new Font("Montserrat", 0, 17);
-        this.mainPanel = new GradientJPanel((LayoutManager)null, color1, color2);
+        Font textFont = new Font("Montserrat", Font.PLAIN, 14);
+        Font titleFont = new Font("Montserrat", Font.PLAIN, 20);
+        Font headingFont = new Font("Montserrat", Font.PLAIN, 17);
+        this.mainPanel = new GradientJPanel(null, color1, color2);
         this.mainPanel.setBounds(0, 0, 360, 640);
-        JPanel headerPanel = new JPanel((LayoutManager)null);
+        JPanel headerPanel = new JPanel(null);
         headerPanel.setBackground(color2);
         headerPanel.setBounds(0, 0, 360, 56);
         CustomJButton backButton = new CustomJButton("", 0, 0, color2, color2, textFont);
@@ -161,11 +175,11 @@ public class PriceHistoryPage extends JFrame {
         priceButton6.setBounds(245, 580, 110, 20);
         this.mainPanel.add(priceButton6);
         backButton.addActionListener((e) -> {
-            ItemPage itemPage = new ItemPage(this.item, (Wishlist)this.wl);
+            ItemPage itemPage = new ItemPage(this.item, this.wl);
             itemPage.setContentPane(itemPage.getMainPanel());
             itemPage.setVisible(true);
-            itemPage.setLocationRelativeTo((Component)null);
-            itemPage.setDefaultCloseOperation(2);
+            itemPage.setLocationRelativeTo(null);
+            itemPage.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             this.dispose();
         });
         PriceHistoryInterface ph = new PriceHistoryInterface(this.item);
