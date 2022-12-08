@@ -8,8 +8,12 @@ import java.util.TimerTask;
 
 /** A price drop notification use case that tells us if a product drops below the user's desired price */
 public class PriceDropNotification implements BaseNotification {
+
+    /** A scheduler for timing tasks */
     private final Scheduler scheduler;
+    /** The product of the notification */
     private final Product product;
+    /** Whether notification should be shown or not */
     private boolean showNotification;
     public PriceDropNotification(Product product) {
         this.showNotification = false;

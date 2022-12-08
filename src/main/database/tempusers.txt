@@ -1,3 +1,2 @@
 {"password":"Password","currency":"CAD","user":"Herman1"}
 {"password":"aaa","currency":"CAD","user":"arky"}
-{"password":"Fuzzy321","currency":"CAD","user":"StarlightUser"}

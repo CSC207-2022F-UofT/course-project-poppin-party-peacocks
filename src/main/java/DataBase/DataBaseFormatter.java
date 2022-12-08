@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+
 /** A class that helps the database format item and wishlist data for storage */
 public class DataBaseFormatter {
     /** Creates an item in JSON format
@@ -37,7 +38,7 @@ public class DataBaseFormatter {
             historyDateObject.add(new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").format(date));
         }
         JSONArray historyDataObject = new JSONArray();
-        tagsObject.add(product.getPriceHistoryData());
+        historyDataObject.addAll(product.getPriceHistoryData());
 
         productObject.put("historyDate", historyDateObject);
         productObject.put("historyData", historyDataObject);
