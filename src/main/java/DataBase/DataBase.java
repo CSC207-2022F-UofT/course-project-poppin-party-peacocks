@@ -43,6 +43,7 @@ public class DataBase {
         File file = new File(fileDirectory);
         FileWriter fileWriter = new FileWriter(fileDirectory, true);
         fileWriter.write("{}");
+        fileWriter.close();
         if (file.createNewFile()) {
             System.out.println("File created!");
         }
