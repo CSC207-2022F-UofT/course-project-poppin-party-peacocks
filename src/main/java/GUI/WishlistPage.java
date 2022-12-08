@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.TimerTask;
 
 /**
  * A GUI class that handles the visual representation of a product list. Handles navigation to adjacent pages and logic
@@ -236,8 +237,20 @@ public class WishlistPage extends JFrame {
             ItemPanel itemPanel = new ItemPanel(product.getProductImageURL(),
                     product.getProductName(), product.getProductPriceString(), product.getProductDateLastUpdated());
             if(raiseNotification){
-                SaleNotification saleNotification = new SaleNotification(product);
-                PriceDropNotification priceDropNotification = new PriceDropNotification(product);
+                ItemUpdateChecker itemUpdateChecker = new ItemUpdateChecker();
+                TimerTask checkSale = new TimerTask() {
+                    @Override
+                    public void run() {
+                        try {
+                            itemUpdateChecker.updatePriceCheck(product);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                };
+
+                SaleNotification saleNotification = new SaleNotification(product, checkSale);
+                PriceDropNotification priceDropNotification = new PriceDropNotification(product, checkSale);
 
                 if (saleNotification.checkNotificationAction() || priceDropNotification.checkNotificationAction()) {
                     itemPanel.setBorderColor(new Color(255, 0 ,0));

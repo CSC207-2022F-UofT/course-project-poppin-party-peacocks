@@ -3,6 +3,7 @@ package GUI;
 import Entities.Product;
 import Entities.ProductList;
 import ExternalInterface.ItemSearcher;
+import ExternalInterface.ItemUpdateChecker;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
 
@@ -12,6 +13,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
+import java.util.TimerTask;
 
 public class AddItemPage extends JFrame {
     private final JPanel mainPanel;
@@ -120,10 +122,21 @@ public class AddItemPage extends JFrame {
         addSelectedItemButton.addActionListener(e -> {
             if (itemJList.getSelectedIndex() >= 0){
                 Product selectedItem = itemList[itemJList.getSelectedIndex()];
+                ItemUpdateChecker itemUpdateChecker = new ItemUpdateChecker();
+                TimerTask checkSale = new TimerTask() {
+                    @Override
+                    public void run() {
+                        try {
+                            itemUpdateChecker.updatePriceCheck(selectedItem);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                };
 
                 // Create notification timers
-                SaleNotification saleNotification = new SaleNotification(selectedItem);
-                PriceDropNotification priceDropNotification = new PriceDropNotification(selectedItem);
+                SaleNotification saleNotification = new SaleNotification(selectedItem, checkSale);
+                PriceDropNotification priceDropNotification = new PriceDropNotification(selectedItem, checkSale);
                 saleNotification.startNotificationListener();
                 priceDropNotification.startNotificationListener();
                 currWishlist.addProduct(itemList[itemJList.getSelectedIndex()]);

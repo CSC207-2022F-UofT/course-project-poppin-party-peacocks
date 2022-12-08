@@ -15,20 +15,9 @@ public class SaleNotification implements BaseNotification {
     /** Whether notification should be shown or not */
     private boolean showNotification;
 
-    public SaleNotification(Product product) {
+    public SaleNotification(Product product, TimerTask timerTask) {
         this.showNotification = false;
-        TimerTask checkSale = new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    checkNotificationAction();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-
-        this.scheduler = new Scheduler(checkSale, 1000 * 60);
+        this.scheduler = new Scheduler(timerTask, 1000 * 60);
         this.product = product;
     }
 
