@@ -26,6 +26,12 @@ public class AddWishlistPage extends JFrame {
         return mainPanel;
     }
 
+    /**
+     * AddWishlistPage constructor.
+     * @throws FileNotFoundException for when the user cancels and returns to the wishlist page.
+     * @throws ParseException when a wishlist is incorrectly parsed when creating a new wishlist.
+     * @throws org.json.simple.parser.ParseException more specific parse error for json structure.
+     */
     public AddWishlistPage() throws FileNotFoundException, ParseException, org.json.simple.parser.ParseException {
         super("Add Wishlist");
         setLayout(null);
@@ -125,6 +131,8 @@ public class AddWishlistPage extends JFrame {
                 }
             }
         });
+
+        // Cancel button logic: navigates back to the list of wishlists.
         cancelButton.addActionListener(e -> {
             HomePage listOfWL;
             try {

@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 
+/**
+ *  This AddItemPage class is a JFrame that allows the user to search for a new item to add to the current wishlist.
+ */
 public class AddItemPage extends JFrame {
     private final JPanel mainPanel;
     private final JTextField searchBar;
@@ -21,6 +24,10 @@ public class AddItemPage extends JFrame {
     private final ProductList currWishlist;
     private Product[] itemList;
 
+    /**
+     * AddItemPage constructor.
+     * @param wishlist the wishlist to add the item to.
+     */
     public AddItemPage(ProductList wishlist) {
         super("Add Item");
         setLayout(null);
@@ -142,10 +149,19 @@ public class AddItemPage extends JFrame {
         });
     }
 
+    /**
+     * @return mainPanel
+     */
     public JPanel getMainPanel() {
         return mainPanel;
     }
 
+    /**
+     * Creates JPanel instance to store and display the information of an item.
+     * @param item the item being represented.
+     * @param index index of the item from the search.
+     * @return JPanel of item.
+     */
     public static JPanel createPanel(Product item, int index) {
         JPanel panel = new JPanel(new BorderLayout());
         // icon
@@ -175,27 +191,10 @@ public class AddItemPage extends JFrame {
         return panel;
     }
 
+    /**
+     * Adds contentPanel to mainPanel.
+     */
     public void renderCentre() {
         mainPanel.add(contentPanel, BorderLayout.CENTER);
-    }
-    public static class PanelRenderer implements ListCellRenderer<Object> {
-        public Component getListCellRendererComponent(JList list, Object value, int index,
-                                                      boolean isSelected, boolean cellHasFocus) {
-            JPanel renderer = (JPanel) value;
-            renderer.setBackground(isSelected ? Color.red : list.getBackground());
-            Color defaultColor = new Color(194, 234, 186);
-            Color selectedColor = new Color(106, 189, 154);
-            BorderLayout layout = (BorderLayout) renderer.getLayout();
-            if (isSelected) {
-                layout.getLayoutComponent(BorderLayout.CENTER).setBackground(selectedColor);
-                renderer.setBackground(selectedColor);
-                renderer.setForeground(selectedColor);
-            } else {
-                layout.getLayoutComponent(BorderLayout.CENTER).setBackground(defaultColor);
-                renderer.setBackground(defaultColor);
-                renderer.setForeground(defaultColor);
-            }
-            return renderer;
-        }
     }
 }

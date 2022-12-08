@@ -11,10 +11,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import Entities.ProductList;
-import Entities.Product;
-import ExternalInterface.PriceHistoryInterface;
 import org.json.simple.parser.ParseException;
 
 /**
@@ -34,8 +30,9 @@ public class ItemPage extends JFrame {
 
     /**
      * ItemPage constructor.
+     * @param item item to display in this page.
+     * @param wl that the item belongs to in order to return.
      */
-
     public ItemPage(Product item, ProductList wl) {
 
         // JFrame setup
