@@ -5,9 +5,13 @@ import java.util.*;
  * A class that stores a list of products. Implements ProductList functionalities.
  */
 public class Wishlist implements ProductList{
+    /** field that contains the name of the Wishlist*/
     private String name;
+    /** field that contains the productList as an ArrayList*/
     private final ArrayList<Product> productList;
+    /** field that contains the displayedList as an ArrayList*/
     private ArrayList<Product> displayedList;
+    /** field that contains added date of the Wishlist*/
     private Date dateAdded;
 
     public Wishlist(String name){
@@ -17,7 +21,7 @@ public class Wishlist implements ProductList{
         this.dateAdded = new Date();
     }
 
-    public Wishlist(String name, ArrayList<Product> itemList, ArrayList<Product> displayedList, Date dateAdded, ArrayList<String> tags){
+    public Wishlist(String name, ArrayList<Product> itemList, ArrayList<Product> displayedList, Date dateAdded){
         this.name = name;
         this.productList = itemList;
         this.displayedList = displayedList;
@@ -28,12 +32,11 @@ public class Wishlist implements ProductList{
         this.productList = itemList;
     }
 
-
-
     public String getName() { return  this.name; }
     public ArrayList<Product> getProductList() {return this.productList; }
     public ArrayList<Product> getDisplayedList() {return this.displayedList; }
     public Date getDateAdded() {return this.dateAdded; }
+    /** */
     public int getListSize(){
         return productList.size();
     }
@@ -62,10 +65,5 @@ public class Wishlist implements ProductList{
         productList.remove(product);
         displayedList.remove(product);
         return true;
-    }
-
-    @Override
-    public Collection<Object> getSelectedTags() {
-        return null;
     }
 }

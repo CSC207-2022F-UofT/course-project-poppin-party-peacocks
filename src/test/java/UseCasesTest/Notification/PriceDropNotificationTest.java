@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 
 public class PriceDropNotificationTest {
     Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
-            "Description from amazon (or you write your own)", new String[]{"toys"}, 0,
+            "Description from amazon (or you write your own)", 0,
             0, "www.amazonimage.com/keyboard");
 
     @Test

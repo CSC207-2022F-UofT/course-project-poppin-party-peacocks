@@ -39,15 +39,7 @@ public class DataBaseParser {
             }
         }
 
-        ArrayList<String> tags = new ArrayList<>();
-        JSONArray tagObjects = (JSONArray) wishlistData.get("selectedTags");
-        if (!Objects.isNull(tagObjects)) {
-            for (Object tagObject : tagObjects) {
-                tags.add(tagObject.toString());
-            }
-        }
-
-       return new Wishlist(name, items, displayedItems, dateAdded, tags);
+       return new Wishlist(name, items, displayedItems, dateAdded);
     }
 
     /** Parses an item in JSON format
@@ -66,18 +58,6 @@ public class DataBaseParser {
 
         Date dateAdded =  new SimpleDateFormat("E MMM dd HH:mm:ss yyyy").parse(itemData.get("dateAdded").toString());
 
-        ArrayList<String> tags = new ArrayList<>();
-        JSONArray tagsObject = (JSONArray) itemData.get("tags");
-        if (!Objects.isNull(tagsObject)) {
-            for (Object tag : tagsObject) {
-                tags.add(tag.toString());
-            }
-        }
-
-        String[] tagsArray = new String[tags.size()];
-        for (int i = 0; i < tags.size(); i++) {
-            tagsArray[i] = tags.get(i);
-        }
         Double reviewStars = (Double) itemData.get("reviewStars");
         int reviewCount = Integer.parseInt(itemData.get("reviewCount").toString());
         String imageURL = (String) itemData.get("imageURL");
@@ -100,7 +80,7 @@ public class DataBaseParser {
         }
 
         String currency = (String) itemData.get("currency");
-        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, tagsArray, priceChange, dateAdded, reviewCount, reviewStars, imageURL, currency, historyData, historyDates);
+        return new Item(itemName, itemPrice, desiredPrice, url, itemDescription, priceChange, dateAdded, reviewCount, reviewStars, imageURL, currency, historyData, historyDates);
     }
 
 }

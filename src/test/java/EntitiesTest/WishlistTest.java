@@ -9,12 +9,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class WishlistTest {
+    Date nullDate = new Date();
     Item myFavDrink = new Item("Lime Bubbly", 5.47, 5.00, "www.shoppers.com/bubbly",
-            "my favorite drink, bubbly", 69, 4.19,"www.shoppersimage.com/bubbly", null, new String[]{"drink"});
+            "my favorite drink, bubbly", 69, 4.19,"www.shoppersimage.com/bubbly", nullDate);
     Item animeFigure = new Item("Starlight Anya Forger", 100, 85.00, "www.amazon.com/AnyaPeanuts",
-            "new Anya figure", 150, 4.8,"www.amazonimage.com/AnyaPeanuts", null, new String[]{"figure"});
+            "new Anya figure", 150, 4.8,"www.amazonimage.com/AnyaPeanuts", nullDate);
     Item plushie = new Item("Whale Plushie", 40.99, 30.00, "www.amazon.com/WhalePlushie",
-            "Giant Whale Plushie", 1050, 4.3, "www.amazonimage.com/OhWhale", null, new String[]{"toys"});
+            "Giant Whale Plushie", 1050, 4.3, "www.amazonimage.com/OhWhale", nullDate);
 
     Wishlist christmasWishlist = new Wishlist("Christmas Wishlist");
     Calendar dateInstance = Calendar.getInstance();

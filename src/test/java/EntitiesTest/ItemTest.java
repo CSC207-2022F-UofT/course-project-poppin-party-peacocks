@@ -62,7 +62,7 @@ public class ItemTest {
                         "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
                         "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
                         "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
+                        "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
         // Test 1:  Set and Get Name
         TestItem.setName("AmazonBasics Wired Office Keyboard");
         Assertions.assertEquals(true, "AmazonBasics Wired Office Keyboard".equals(TestItem.getProductName()));
@@ -80,7 +80,7 @@ public class ItemTest {
                         "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
                         "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
                         "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
+                        "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
 
         Assertions.assertEquals(true, 20.00 == TestItem.getProductPrice());
     }
@@ -95,7 +95,7 @@ public class ItemTest {
                         "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
                         "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
                         "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
+                        "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
 
         TestItem.setDesiredPrice(17.00);
         Assertions.assertEquals(true, 17.00 == TestItem.getProductDesiredPrice());
@@ -111,7 +111,7 @@ public class ItemTest {
                         "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
                         "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
                         "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
+                        "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
         String testUrl = "https://www.amazon.ca/AmazonBasics-KU-0833-Wired-Keyboard/dp/B005EOWBHC/ref=sr_1_6?crid=LXQRVB06NTVV&keywords=keyboard&qid=1668040664&qu=eyJxc2MiOiI3LjM4IiwicXNhIjoiNi42NSIsInFzcCI6IjUuOTMifQ%3D%3D&sprefix=keyboard%2Caps%2C90&sr=8-6&th=1";
 
         Assertions.assertEquals(true, testUrl.equals(TestItem.getProductURL()));
@@ -127,7 +127,7 @@ public class ItemTest {
                         "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
                         "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
                         "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
+                        "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
         String testImageUrl = "imageurl";
 
         Assertions.assertEquals(true, testImageUrl.equals(TestItem.getProductImageURL()));
@@ -143,7 +143,7 @@ public class ItemTest {
                         "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
                         "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
                         "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
+                        "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
         String newDescription = "This is a new set item description for AmazonBasics Wired Office Keyboard";
 
         TestItem.setProductDescription(newDescription);
@@ -160,7 +160,7 @@ public class ItemTest {
                         "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
                         "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
                         "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
+                        "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
 
         TestItem.setReviewCount(30);
         Assertions.assertEquals(true, 30 == TestItem.getReviewCount());
@@ -176,7 +176,7 @@ public class ItemTest {
                         "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
                         "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
                         "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl");
+                        "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl");
 
         TestItem.setReviewStars(4.2);
         Assertions.assertEquals(true, 4.2 == TestItem.getReviewStars());

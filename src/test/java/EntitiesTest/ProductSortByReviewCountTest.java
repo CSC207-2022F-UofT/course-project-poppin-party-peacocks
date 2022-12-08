@@ -7,11 +7,11 @@ import Entities.*;
 
 public class ProductSortByReviewCountTest {
     Item myFavDrink = new Item("Lime Bubbly", 5.47, 5.00, "www.shoppers.com/bubbly",
-            "my favorite drink, bubbly", new String[]{"Drink"}, 69, 4.19,"www.shoppersimage.com/bubbly");
+            "my favorite drink, bubbly",69, 4.19,"www.shoppersimage.com/bubbly");
     Item animeFigure = new Item("Starlight Anya Forger", 100, 85.00, "www.amazon.com/AnyaPeanuts",
-            "new Anya figure", new String[]{"Figure"}, 150, 4.8,"www.amazonimage.com/AnyaPeanuts" );
+            "new Anya figure", 150, 4.8,"www.amazonimage.com/AnyaPeanuts" );
     Item plushie = new Item("Whale Plushie", 40.99, 30.00, "www.amazon.com/WhalePlushie",
-            "Giant Whale Plushie", new String[]{"toys"}, 1050, 4.3, "www.amazonimage.com/OhWhale");
+            "Giant Whale Plushie",1050, 4.3, "www.amazonimage.com/OhWhale");
 
     @Test
     public void ProductSortByReviewCountTestAscending() {
