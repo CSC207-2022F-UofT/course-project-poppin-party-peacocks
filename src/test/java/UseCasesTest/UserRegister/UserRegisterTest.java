@@ -4,8 +4,6 @@ import DataBase.*;
 import UseCases.LoginAction.LoginAction;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Assertions;
-
-
 import java.io.IOException;
 import UseCases.UserRegister.*;
 import org.junit.jupiter.api.Test;
