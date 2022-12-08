@@ -1,6 +1,6 @@
 package GUI;
 
-import DataBase.DataBaseController;
+import DataBase.*;
 import Entities.*;
 import UseCases.Currency.CurrencyUseCase;
 
@@ -188,7 +188,7 @@ public class HomePage extends JFrame {
         });
 
         addButton.addActionListener(e -> {
-            AddWishlistPage addPage = null;
+            AddWishlistPage addPage;
             try {
                 addPage = new AddWishlistPage();
             } catch (FileNotFoundException | ParseException | org.json.simple.parser.ParseException ex) {
@@ -204,7 +204,7 @@ public class HomePage extends JFrame {
         viewWishlistButton.addActionListener(e -> {
             if (listOfWishlists.getListOfWishlist().size() > 0 & wishlistPanelJList.getSelectedIndex() >= 0){
                 ProductList selectedWishlist = listOfWishlists.getListOfWishlist().get(wishlistPanelJList.getSelectedIndex());
-                WishlistPage wishlistPage = null;
+                WishlistPage wishlistPage;
                 try {
                     wishlistPage = new WishlistPage(selectedWishlist);
                 } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {

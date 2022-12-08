@@ -3,12 +3,21 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * a custom JButton used by all the sorting buttons
+ */
 public class SortButton extends JButton {
+    /**
+     * constructor. Calls default JButton constructor.
+     */
     public SortButton(){
         super();
-
     }
 
+    /**
+     * Overrides the paintComponent method to paint the button
+     * @param g the Graphics object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;

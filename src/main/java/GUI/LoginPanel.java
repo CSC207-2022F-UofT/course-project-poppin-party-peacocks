@@ -7,8 +7,15 @@ import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * the login panel displayed in the welcome page. Contains GUI components for logging in.
+ */
 public class LoginPanel extends JPanel{
 
+    /**
+     * constructor. Creates an instance of login panel which has a reference to the JFrame it is added to.
+     * @param currJFrame the current JFrame the login panel is added to
+     */
     public LoginPanel(JFrame currJFrame){
         super(null);
         this.setBounds(0,80,360,460);
@@ -20,7 +27,6 @@ public class LoginPanel extends JPanel{
         logo.setBounds(85,22,180,180);
         this.add(logo);
 
-        // login panel
         JLabel usernameLabel = new JLabel("Username");
         usernameLabel.setBounds(42,266,100,15);
 
@@ -58,9 +64,7 @@ public class LoginPanel extends JPanel{
                             homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                             currJFrame.dispose();
                         }
-                    } catch (FileNotFoundException | ParseException | java.text.ParseException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (IOException ex) {
+                    } catch (ParseException | java.text.ParseException | IOException ex) {
                         throw new RuntimeException(ex);
                     }
                 }

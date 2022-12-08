@@ -4,9 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import Controller.UserRegisterController;
 
+/**
+ * The panel inlaid in the welcome page that contains the contents of the signup page.
+ */
 public class SignupPanel extends JPanel {
+    // user registration controller containing logic for signing up
     UserRegisterController userRegisterController;
 
+    /**
+     * constructor. Creates an instance of the signup panel with a user registration controller.
+     * @param userRegisterController the controller containing logic for sign up.
+     */
     public SignupPanel(UserRegisterController userRegisterController) {
         super(null);
 
