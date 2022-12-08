@@ -29,7 +29,6 @@ public class HomePage extends JFrame {
     private String userCurrency;
 
     public HomePage() throws IOException, ParseException, org.json.simple.parser.ParseException {
-         // # TODO how to initialize listOfWishlist
         CurrencyUseCase currencyUseCase = new CurrencyUseCase();
         currencyUseCase.toggleCurrency();
         currencyUseCase.toggleCurrency();
@@ -152,9 +151,6 @@ public class HomePage extends JFrame {
             mainPanel.setComponentZOrder(newTopPanel, 2);
             mainPanel.revalidate();
             mainPanel.repaint();
-
-
-            // TODO: implement price conversion use case here
             CurrencyUseCase currencyUseCase = new CurrencyUseCase();
 
             try {
