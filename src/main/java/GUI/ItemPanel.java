@@ -22,7 +22,7 @@ public class ItemPanel extends JPanel {
     Date dateLastUpdated;
     boolean updateSuccess;
 
-    public ItemPanel(String imgURL, String itemName, String itemPrice, Date lastUpated) {
+    public ItemPanel(String imgURL, String itemName, String itemPrice, Date lastUpdated) {
         super(null);
         this.imgURL = imgURL;
         if (itemName.length() > 20){
@@ -31,7 +31,7 @@ public class ItemPanel extends JPanel {
             this.itemName = itemName;
         }
         this.itemPrice = itemPrice;
-        this.dateLastUpdated = lastUpated;
+        this.dateLastUpdated = lastUpdated;
         this.setSize(300,100);
         borderColor = Color.WHITE;
         panelColor = new Color(236, 236, 236);

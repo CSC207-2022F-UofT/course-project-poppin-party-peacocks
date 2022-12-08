@@ -16,7 +16,6 @@ public interface Product {
     double getPriceChange();
     double getProductDesiredPrice();
     Date getProductDateAdded();
-    Date getProductDateLastUpdated();
     String[] getTags();
     ArrayList<Double> getPriceHistoryData();
     ArrayList<Date> getPriceHistoryDates();
@@ -34,5 +33,6 @@ public interface Product {
     int getReviewCount();
     void setProductPrice(double newPrice);
     void setProductCurrency(String newCurrency);
-    void setDateLastUpdated(Date date);
+
+    Date getProductDateLastUpdated();
 }

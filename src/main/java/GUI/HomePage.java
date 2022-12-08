@@ -1,12 +1,14 @@
 package GUI;
 
-import Entities.ListOfWishlists;
-import Entities.ProductList;
-import Entities.Wishlist;
+import DataBase.DataBaseController;
+import Entities.*;
+import UseCases.Currency.CurrencyUseCase;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
@@ -16,16 +18,31 @@ import java.util.ArrayList;
 public class HomePage extends JFrame {
 
     private GradientJPanel mainPanel;
+    private JList<WishlistPanel> wishlistPanelJList;
+    private JScrollPane wishlistScrollPane;
+    private DataBaseController dbc = new DataBaseController();
+    Color color2 = new Color(106, 189, 154);
+    Font headerFont = new Font("Montserrat", Font.PLAIN, 20);
 
-    private final ListOfWishlists listOfWishlists;
-    private JList<ItemPanel> itemPanelJList;
-    private JScrollPane itemScrollPane;
+    private ListOfProductLists listOfWishlists;
 
-    public HomePage() {
+    private String userCurrency;
+
+    public HomePage() throws IOException, ParseException, org.json.simple.parser.ParseException {
          // # TODO how to initialize listOfWishlist
-        listOfWishlists = new ListOfWishlists();
+        CurrencyUseCase currencyUseCase = new CurrencyUseCase();
+        currencyUseCase.toggleCurrency();
+        currencyUseCase.toggleCurrency();
+        DataBaseController dbc = new DataBaseController();
+
+
+
+
+        listOfWishlists = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
+        userCurrency = dbc.getCurrentUser().getCurrency();
         initialiseJFrame();
         initialiseMainPanel();
+        generateListOfWishlists();
     }
 
     /**
@@ -49,29 +66,26 @@ public class HomePage extends JFrame {
      * Adds action listeners to the buttons to facilitate page navigation and other functionality
      */
 
-    // constants
-    Color color2 = new Color(106, 189, 154);
-    Font headerFont = new Font("Montserrat", Font.PLAIN, 20);
-
     private void initialiseMainPanel(){
         JPanel topPanel = new JPanel(null);
         topPanel.setBackground(color2);
         topPanel.setBounds(0,0,360,56);
         String titleString = "My Wishlists";
-        if (titleString.length() > 20){
-            titleString = titleString.substring(0,19);
-        }
         JLabel titleLabel = new CustomJLabel(titleString, Color.WHITE, headerFont);
-        titleLabel.setBounds(125,17,119,24);
+        titleLabel.setBounds(122,17,130,24);
         topPanel.add(titleLabel);
 
-        // currency button
-        JButton currencyButton = new JButton(new ImageIcon("src/main/java/Assets/moneySymbol.png"));
-        currencyButton.setBounds(320, 12, 28, 28);
-        currencyButton.setContentAreaFilled(false);
-        currencyButton.setBorderPainted(true);
-        currencyButton.setBorder(null);
-        topPanel.add(currencyButton);
+        // currency indicator
+
+        JButton currencyIcon = new JButton(new ImageIcon("src/main/java/Assets/cadIcon.png"));
+        if (!userCurrency.equals("CAD")) {
+            currencyIcon = new JButton(new ImageIcon("src/main/java/Assets/usdIcon.png"));
+        }
+        currencyIcon.setBounds(320, 12, 28, 28);
+        currencyIcon.setContentAreaFilled(false);
+        currencyIcon.setBorderPainted(true);
+        currencyIcon.setBorder(null);
+        topPanel.add(currencyIcon);
 
         mainPanel.add(topPanel);
 
@@ -85,6 +99,12 @@ public class HomePage extends JFrame {
         logo.setIcon(new ImageIcon("src/main/java/Assets/smallerLogo.png"));
         logo.setBounds(130,60,180,180);
         mainPanel.add(logo);
+
+
+        // toggle currency button
+        JButton currencyButton = new ToggleCurrencyButton();
+        currencyButton.setBounds(20, 515, 60 ,60);
+        mainPanel.add(currencyButton);
 
         // buttons
         DeleteButton deleteButton = new DeleteButton();
@@ -102,17 +122,78 @@ public class HomePage extends JFrame {
         mainPanel.setComponentZOrder(titleLabel, 1);
         mainPanel.setComponentZOrder(topPanel, 2);
 
+        currencyButton.addActionListener(e -> {
+            mainPanel.remove(topPanel);
+
+            if (userCurrency.equals("CAD")){
+                userCurrency = "USD";
+            }
+            else {
+                userCurrency = "CAD";
+            }
+
+            JPanel newTopPanel = new JPanel(null);
+            newTopPanel.setBackground(color2);
+            newTopPanel.setBounds(0,0,360,56);
+            newTopPanel.add(titleLabel);
+
+            // currency indicator
+
+            JButton newCurrencyIcon = new JButton(new ImageIcon("src/main/java/Assets/cadIcon.png"));
+            if (!userCurrency.equals("CAD")) {
+                newCurrencyIcon = new JButton(new ImageIcon("src/main/java/Assets/usdIcon.png"));
+            }
+            newCurrencyIcon.setBounds(320, 12, 28, 28);
+            newCurrencyIcon.setContentAreaFilled(false);
+            newCurrencyIcon.setBorderPainted(true);
+            newCurrencyIcon.setBorder(null);
+            newTopPanel.add(newCurrencyIcon);
+            mainPanel.add(newTopPanel);
+            mainPanel.setComponentZOrder(newTopPanel, 2);
+            mainPanel.revalidate();
+            mainPanel.repaint();
+
+
+            // TODO: implement price conversion use case here
+            CurrencyUseCase currencyUseCase = new CurrencyUseCase();
+
+            try {
+                currencyUseCase.toggleCurrency();
+                dbc = new DataBaseController();
+                listOfWishlists = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
+                dbc.saveListOfWishlists(listOfWishlists, dbc.getCurrentUser());
+            } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
+                throw new RuntimeException(ex);
+            }
+            userCurrency = dbc.getCurrentUser().getCurrency();
+
+            mainPanel.remove(wishlistScrollPane);
+            generateListOfWishlists();
+        });
+
 
         deleteButton.addActionListener(e -> {
-            mainPanel.remove(itemScrollPane);
-            if (listOfWishlists.getListOfWishlist().size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
-                listOfWishlists.removeWishlist(listOfWishlists.getListOfWishlist().get(itemPanelJList.getSelectedIndex()).getName());
+            mainPanel.remove(wishlistScrollPane);
+            if (listOfWishlists.getListOfWishlist().size() > 0 & wishlistPanelJList.getSelectedIndex() >= 0){
+                listOfWishlists.removeWishlist(listOfWishlists.getListOfWishlist().get(wishlistPanelJList.getSelectedIndex()));
+                try {
+                    dbc.saveListOfWishlists(listOfWishlists, dbc.getCurrentUser());
+                    dbc = new DataBaseController();
+                    listOfWishlists = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
+                } catch (ParseException | org.json.simple.parser.ParseException | IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 generateListOfWishlists();
             }
         });
 
         addButton.addActionListener(e -> {
-            AddWishlistPage addPage = new AddWishlistPage(listOfWishlists);
+            AddWishlistPage addPage = null;
+            try {
+                addPage = new AddWishlistPage();
+            } catch (FileNotFoundException | ParseException | org.json.simple.parser.ParseException ex) {
+                throw new RuntimeException(ex);
+            }
             addPage.setContentPane(addPage.getMainPanel());
             addPage.setVisible(true);
             addPage.setLocationRelativeTo(null);
@@ -121,12 +202,12 @@ public class HomePage extends JFrame {
         });
 
         viewWishlistButton.addActionListener(e -> {
-            if (listOfWishlists.getListOfWishlist().size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
-                ProductList selectedWishlist = listOfWishlists.getListOfWishlist().get(itemPanelJList.getSelectedIndex());
+            if (listOfWishlists.getListOfWishlist().size() > 0 & wishlistPanelJList.getSelectedIndex() >= 0){
+                ProductList selectedWishlist = listOfWishlists.getListOfWishlist().get(wishlistPanelJList.getSelectedIndex());
                 WishlistPage wishlistPage = null;
                 try {
                     wishlistPage = new WishlistPage(selectedWishlist);
-                } catch (IOException ex) {
+                } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
                     throw new RuntimeException(ex);
                 }
                 wishlistPage.setContentPane(wishlistPage.getMainPanel());
@@ -144,25 +225,23 @@ public class HomePage extends JFrame {
      */
     private void generateListOfWishlists(){
         ArrayList<WishlistPanel> panelList = new ArrayList<>();
-
         for (ProductList wishlist : listOfWishlists.getListOfWishlist()) {
             WishlistPanel wishlistPanel = new WishlistPanel(wishlist.getName());
-
             panelList.add(wishlistPanel);
         }
-        ItemPanel[] tempPanelList = new ItemPanel[panelList.size()];
+        WishlistPanel[] tempPanelList = new WishlistPanel[panelList.size()];
         tempPanelList = panelList.toArray(tempPanelList);
-        itemPanelJList = new JList<>(tempPanelList);
-        itemPanelJList.setCellRenderer(new ItemPanelRenderer());
-        itemPanelJList.setFixedCellHeight(100);
-        itemPanelJList.setFixedCellWidth(310);
-        itemPanelJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        itemPanelJList.setBackground(new Color(194, 234, 186));
-        itemScrollPane = new JScrollPane(itemPanelJList);
-        itemScrollPane.setBounds(16,80,310,400);
-        itemScrollPane.setHorizontalScrollBar(null);
-        itemScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
-        mainPanel.add(itemScrollPane);
+        wishlistPanelJList= new JList<>(tempPanelList);
+        wishlistPanelJList.setCellRenderer(new WishlistPanelRenderer());
+        wishlistPanelJList.setFixedCellHeight(100);
+        wishlistPanelJList.setFixedCellWidth(310);
+        wishlistPanelJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        wishlistPanelJList.setBackground(new Color(194, 234, 186));
+        wishlistScrollPane = new JScrollPane(wishlistPanelJList);
+        wishlistScrollPane.setBounds(25,210,310,300);
+        wishlistScrollPane.setHorizontalScrollBar(null);
+        wishlistScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+        mainPanel.add(wishlistScrollPane);
         mainPanel.revalidate();
         mainPanel.repaint();
     }

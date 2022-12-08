@@ -25,6 +25,5 @@ public class DataBase {
         if (file.createNewFile()) {
                 System.out.println("File created!");
         }
-
     }
 }

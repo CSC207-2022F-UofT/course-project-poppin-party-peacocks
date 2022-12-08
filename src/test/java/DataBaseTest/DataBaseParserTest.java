@@ -1,14 +1,15 @@
+package DataBaseTest;
+
+import DataBase.DataBaseController;
 import DataBase.DataBaseParser;
-import Entities.Item;
-import Entities.Product;
-import Entities.ProductList;
-import Entities.Wishlist;
+import Entities.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +20,9 @@ public class DataBaseParserTest {
     String testDate = "Tue. Nov. 29 20:49:30 2022";
     ArrayList<Product> items = new ArrayList<>();
     ArrayList<String> tags = new ArrayList<>();
+
+
+
 
     @Test
     public void TestDataBaseParsesItemObject() throws ParseException, java.text.ParseException {
@@ -59,7 +63,6 @@ public class DataBaseParserTest {
         Assertions.assertEquals(parsedList.getName(), wishlist.getName());
         Assertions.assertEquals(parsedList.getDateAdded(), wishlist.getDateAdded());
         Assertions.assertEquals(parsedList.getDisplayedList().toArray().length, wishlist.getDisplayedList().toArray().length);
-        Assertions.assertArrayEquals(parsedList.getSelectedTags().toArray(), wishlist.getSelectedTags().toArray());
         Assertions.assertEquals(parsedList.getProductList().toArray().length, wishlist.getProductList().toArray().length);
     }
 }
