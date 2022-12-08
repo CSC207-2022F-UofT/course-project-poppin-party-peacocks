@@ -1,3 +1,5 @@
+package UseCasesTest.Comparator;
+
 import Entities.*;
 import UseCases.Comparator.ProductComparator;
 import UseCases.Comparator.ProductComparatorFactory;

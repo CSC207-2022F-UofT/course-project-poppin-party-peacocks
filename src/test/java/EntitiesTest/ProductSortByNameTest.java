@@ -1,3 +1,5 @@
+package EntitiesTest;
+
 import Controller.ProductComparatorController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,13 +30,13 @@ public class ProductSortByNameTest {
         controller1.sortList("ascending", "name");
         controller2.sortList("ascending", "name");
 
-        Assertions.assertEquals("Lime Bubbly", list1.getProductList().get(0).getProductName());
-        Assertions.assertEquals("Starlight Anya Forger",list1.getProductList().get(1).getProductName());
-        Assertions.assertEquals("Whale Plushie", list1.getProductList().get(2).getProductName());
+        Assertions.assertEquals("Lime Bubbly", list1.getDisplayedList().get(0).getProductName());
+        Assertions.assertEquals("Starlight Anya Forger",list1.getDisplayedList().get(1).getProductName());
+        Assertions.assertEquals("Whale Plushie", list1.getDisplayedList().get(2).getProductName());
 
-        Assertions.assertEquals("Lime Bubbly", list2.getProductList().get(0).getProductName());
-        Assertions.assertEquals("Starlight Anya Forger", list2.getProductList().get(1).getProductName());
-        Assertions.assertEquals("Whale Plushie",list2.getProductList().get(2).getProductName());
+        Assertions.assertEquals("Lime Bubbly", list2.getDisplayedList().get(0).getProductName());
+        Assertions.assertEquals("Starlight Anya Forger", list2.getDisplayedList().get(1).getProductName());
+        Assertions.assertEquals("Whale Plushie",list2.getDisplayedList().get(2).getProductName());
     }
 
     @Test
@@ -55,12 +57,12 @@ public class ProductSortByNameTest {
         controller1.sortList("descending", "name");
         controller2.sortList("descending", "name");
 
-        Assertions.assertEquals("Lime Bubbly", list1.getProductList().get(2).getProductName());
-        Assertions.assertEquals("Starlight Anya Forger",list1.getProductList().get(1).getProductName());
-        Assertions.assertEquals("Whale Plushie", list1.getProductList().get(0).getProductName());
+        Assertions.assertEquals("Lime Bubbly", list1.getDisplayedList().get(2).getProductName());
+        Assertions.assertEquals("Starlight Anya Forger",list1.getDisplayedList().get(1).getProductName());
+        Assertions.assertEquals("Whale Plushie", list1.getDisplayedList().get(0).getProductName());
 
-        Assertions.assertEquals("Lime Bubbly", list2.getProductList().get(2).getProductName());
-        Assertions.assertEquals("Starlight Anya Forger", list2.getProductList().get(1).getProductName());
-        Assertions.assertEquals("Whale Plushie",list2.getProductList().get(0).getProductName());
+        Assertions.assertEquals("Lime Bubbly", list2.getDisplayedList().get(2).getProductName());
+        Assertions.assertEquals("Starlight Anya Forger", list2.getDisplayedList().get(1).getProductName());
+        Assertions.assertEquals("Whale Plushie",list2.getDisplayedList().get(0).getProductName());
     }
 }

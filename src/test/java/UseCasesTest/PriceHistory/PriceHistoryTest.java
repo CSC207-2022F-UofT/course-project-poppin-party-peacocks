@@ -1,9 +1,10 @@
+package UseCasesTest.PriceHistory;
+
 import Entities.Item;
 import UseCases.PriceHistory.PriceHistoryUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

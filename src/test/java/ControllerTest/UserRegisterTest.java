@@ -1,11 +1,14 @@
+package ControllerTest;
+
 import DataBase.*;
 import UseCases.LoginAction.LoginAction;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
 
 import java.io.IOException;
 import UseCases.UserRegister.*;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 class UserRegisterTest {

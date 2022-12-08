@@ -1,3 +1,5 @@
+package DataBaseTest;
+
 import DataBase.DataBaseParser;
 import Entities.Item;
 import Entities.Product;
@@ -59,7 +61,6 @@ public class DataBaseParserTest {
         Assertions.assertEquals(parsedList.getName(), wishlist.getName());
         Assertions.assertEquals(parsedList.getDateAdded(), wishlist.getDateAdded());
         Assertions.assertEquals(parsedList.getDisplayedList().toArray().length, wishlist.getDisplayedList().toArray().length);
-        Assertions.assertArrayEquals(parsedList.getSelectedTags().toArray(), wishlist.getSelectedTags().toArray());
         Assertions.assertEquals(parsedList.getProductList().toArray().length, wishlist.getProductList().toArray().length);
     }
 }
