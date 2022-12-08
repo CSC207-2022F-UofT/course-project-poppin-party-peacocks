@@ -8,11 +8,17 @@ import java.awt.*;
  * Contains the name of the wishlist.
  */
 public class WishlistPanel extends JPanel {
-
+    // the name of the wishlist to be displayed on the panel
     String wishlistName;
+    // the color of the border of the panel
     Color borderColor;
+    // the color of the background of the panel
     Color panelColor;
 
+    /**
+     * constructor
+     * @param wishlistName name of the wishlist, passed in when constructing the wishlist panel
+     */
     public WishlistPanel(String wishlistName) {
         super(null);
         if (wishlistName.length() > 20){

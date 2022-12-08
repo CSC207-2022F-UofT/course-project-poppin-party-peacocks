@@ -2,8 +2,6 @@ package GUI;
 
 import Entities.Product;
 import Entities.ProductList;
-import Entities.Wishlist;
-import UseCases.Currency.CurrencyUseCase;
 import Entities.*;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
@@ -13,7 +11,6 @@ import ExternalInterface.ItemUpdateChecker;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -23,16 +20,25 @@ import java.util.ArrayList;
  * for adding and deleting products from the list.
  */
 public class WishlistPage extends JFrame {
-
+    // the main panel that contains all the page's contents.
     private GradientJPanel mainPanel;
+    // the wishlist being loaded and displayed.
     private ProductList wl;
+    // a temporary item list loaded from the wishlist.
     private ArrayList<Product> itemList;
+    // the list of item panels created from the item list. Is displayed through the scroll pane.
     private JList<ItemPanel> itemPanelJList;
+    // the scroll pane that displays a section of the itemPanelJList.
     private JScrollPane itemScrollPane;
+    // a boolean to keep track of whether the sorting frame is already opened.
     private boolean isSortFrameOpen = false;
+    // the current sorting method selected from the sorting frame.
     String currentSortingMethod;
+    // the current ascending/descending setting for sorting
     boolean isSortedAscending;
+    // database controller for reading and writing the wishlist and list of wishlist
     private final DataBaseController dbc;
+    // a temporary list of product list to save to the database after being mutated
     private final ListOfProductLists lwl;
 
 
@@ -147,9 +153,7 @@ public class WishlistPage extends JFrame {
             HomePage homePage;
             try {
                 homePage = new HomePage();
-            } catch (FileNotFoundException | org.json.simple.parser.ParseException | ParseException ex) {
-                throw new RuntimeException(ex);
-            } catch (IOException ex) {
+            } catch (org.json.simple.parser.ParseException | ParseException | IOException ex) {
                 throw new RuntimeException(ex);
             }
             homePage.setContentPane(homePage.getMainPanel());
