@@ -131,6 +131,8 @@ public class AddWishlistPage extends JFrame {
                 listOfWL = new HomePage();
             } catch (FileNotFoundException | ParseException | org.json.simple.parser.ParseException ex) {
                 throw new RuntimeException(ex);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
             listOfWL.setContentPane(listOfWL.getMainPanel());
             listOfWL.setVisible(true);
