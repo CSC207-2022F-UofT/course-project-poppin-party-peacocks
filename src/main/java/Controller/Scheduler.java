@@ -3,14 +3,9 @@ package Controller;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/** A class that runs timer tasks on a scheduled basis */
 public class Scheduler {
-
-    /** The timer to schedule tasks */
     private Timer timer;
-    /** The timer task to execute */
     private TimerTask timerTask;
-    /** The time per execution */
     private int timerDuration;
 
     public Scheduler(TimerTask timerTask, int timerDuration) {
@@ -19,7 +14,7 @@ public class Scheduler {
         this.timerDuration = timerDuration;
     }
 
-    /** Starts the timer to execute timer tasks */
+    /** Starts the timer */
     public void enableTimer() {
         this.timer.schedule(this.timerTask, 0L, this.timerDuration);
     }
