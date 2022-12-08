@@ -6,6 +6,7 @@ import Entities.*;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -64,18 +65,32 @@ public class CurrencyUseCase {
         if (Objects.equals(currentCurrency, newCurrency)) {
             return;
         }
+        double currencyConversion;
 
         switch (currentCurrency) {
             case "CAD":
-                product.setProductPrice(Double.parseDouble(df.format(cadConversion.get(newCurrency) *
-                        product.getProductPrice())));
+                currencyConversion = cadConversion.get(newCurrency);
                 break;
             case "USD":
-                product.setProductPrice(Double.parseDouble(df.format(
-                        product.getProductPrice() * usdConversion.get(newCurrency))));
+                currencyConversion = usdConversion.get(newCurrency);
+                break;
+            default:
+                currencyConversion = 1;
                 break;
         }
-
+        product.setProductPrice(Double.parseDouble(df.format(currencyConversion *
+                product.getProductPrice())));
+        product.setDesiredPrice(Double.parseDouble(df.format(currencyConversion *
+                product.getProductDesiredPrice())));
+        product.setPriceChange(Double.parseDouble(df.format(currencyConversion *
+                product.getPriceChange())));
+        ArrayList<Double> priceData = product.getPriceHistoryData();
+        ArrayList<Double> newPriceData = new ArrayList<>();
+        for (Double price: priceData){
+            newPriceData.add(Double.parseDouble(df.format(currencyConversion *
+                    price)));
+        }
+        product.setPriceHistoryData(newPriceData);
         product.setProductCurrency(newCurrency);
     }
 }
