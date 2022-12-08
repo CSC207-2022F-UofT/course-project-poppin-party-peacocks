@@ -17,11 +17,17 @@ import java.text.ParseException;
  *  This AddItemPage class is a JFrame that allows the user to search for a new item to add to the current wishlist.
  */
 public class AddItemPage extends JFrame {
+    // main panel of JFrame
     private final JPanel mainPanel;
+    // user types what they want to search for here
     private final JTextField searchBar;
+    // sub-panel that contains search results
     private JPanel contentPanel;
+    // J component that contains list of items from search
     private JList<JPanel> itemJList;
+    // current wishlist that is being added to
     private final ProductList currWishlist;
+    // list of items from search
     private Product[] itemList;
 
     /**
@@ -41,6 +47,7 @@ public class AddItemPage extends JFrame {
 
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBounds(0, 0, 400, 600);
+
         // header
         JPanel headerPanel = new JPanel(new FlowLayout());
         headerPanel.setBackground(color2);

@@ -7,7 +7,9 @@ import java.awt.*;
  * JPanel with customisable gradient background.
  */
 public class GradientJPanel extends JPanel{
+    // top colour for panel gradient
     private final Color topColor;
+    // bottom colour for panel gradient
     private final Color bottomColor;
 
     /**

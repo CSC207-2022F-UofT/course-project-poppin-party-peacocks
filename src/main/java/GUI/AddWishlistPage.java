@@ -15,8 +15,11 @@ import DataBase.*;
  * the name of their wishlist.
  */
 public class AddWishlistPage extends JFrame {
+    // main panel
     private final JPanel mainPanel;
+    // list of product lists from database
     private final ListOfProductLists lwl;
+    // controller for the database
     private final DataBaseController dbc;
     /**
      * getter method for mainPanel
@@ -137,9 +140,7 @@ public class AddWishlistPage extends JFrame {
             HomePage listOfWL;
             try {
                 listOfWL = new HomePage();
-            } catch (FileNotFoundException | ParseException | org.json.simple.parser.ParseException ex) {
-                throw new RuntimeException(ex);
-            } catch (IOException ex) {
+            } catch (ParseException | org.json.simple.parser.ParseException | IOException ex) {
                 throw new RuntimeException(ex);
             }
             listOfWL.setContentPane(listOfWL.getMainPanel());

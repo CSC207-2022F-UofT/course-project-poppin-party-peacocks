@@ -6,8 +6,9 @@ import java.awt.event.ActionListener;
  * Logic to switch the content of the WelcomePage.
  */
 public class WelcomePageActionListenerSwitchPanels {
-
+    // listener for show login button click
     private final ActionListener showLoginPanelActionListener;
+    // listener for show signup button click
     private final ActionListener showSignupPanelActionListener;
 
     /**
