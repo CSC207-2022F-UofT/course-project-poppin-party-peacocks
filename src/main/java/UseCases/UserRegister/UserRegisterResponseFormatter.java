@@ -21,7 +21,7 @@ public class UserRegisterResponseFormatter implements UserRegisterStatus {
     /**
      * Shows fail message by calling ExternalInterface.UserRegistrationFailed
      * @param failMessage String describing fail message
-     * @throws new ExternalInterface.UserRegistrationFailed(failMessage) in order to construct an error message with String failMessage
+     * @throws ExternalInterface.UserRegistrationFailed in order to construct an error message with String failMessage
      */
     @Override
     public UserRegisterInputs showFailure(String failMessage) {

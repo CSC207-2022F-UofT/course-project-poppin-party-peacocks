@@ -3,14 +3,15 @@ import DataBase.DataBaseController;
 import Entities.User;
 import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
+import java.util.Objects;
 
 /**
  * A use case class to receive the inputted username and password from the new user
  */
 public class UserRegisterInputs {
-    private String username;
-    private String password;
-    private User tempUser;
+    private final String username;
+    private final String password;
+    private final User tempUser;
 
     public UserRegisterInputs(String username, String password) {
         this.username = username;
@@ -46,11 +47,6 @@ public class UserRegisterInputs {
     public boolean checkUserExists() throws FileNotFoundException, ParseException {
         DataBaseController dataBaseController = new DataBaseController();
         User existingUser = dataBaseController.getUser(this.getInputtedUsername());
-        if (existingUser.getName() == "Default User") {
-            return false;
-        }
-        else {
-            return true;
-        }
+        return !Objects.equals(existingUser.getName(), "Default User");
     }
 }

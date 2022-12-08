@@ -23,7 +23,7 @@ connecting ui to finished logic.
 ### How to run the project (Methods)
 
 1. There is a temporary .jar file in the src folder. To run the project, download the .jar file and run it with Java.
-2. Clone the project on Intellij IDEA and run main.java.
+2. Clone the project on Intellij IDEA and run mainApp.java.
 
 ### Sample Use Case (Making a new account, creating a new wishlist, and searching for an Amazon product)
 1. Launch the application
