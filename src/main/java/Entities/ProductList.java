@@ -1,6 +1,7 @@
 package Entities;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 
@@ -17,4 +18,6 @@ public interface ProductList {
     void setName(String name);
     boolean addProduct(Product product);
     boolean removeProduct(Product product);
+
+    Collection<Object> getSelectedTags();
 }

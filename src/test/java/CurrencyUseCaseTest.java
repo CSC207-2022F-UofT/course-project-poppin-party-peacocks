@@ -62,10 +62,10 @@ public class CurrencyUseCaseTest {
         DataBase.currentUser = new User("A", "B", "CAD");
         CurrencyUseCase currencyUseCase = new CurrencyUseCase();
         currencyUseCase.updateProductCurrency(testItem);
-        Assertions.assertEquals(testItem.getProductCurrency(), "USD");
+        Assertions.assertEquals(testItem.getProductCurrency(), "CAD");
         currencyUseCase.toggleCurrency();
         currencyUseCase.updateProductCurrency(testItem);
-        Assertions.assertEquals(testItem.getProductCurrency(), "CAD");
+        Assertions.assertEquals(testItem.getProductCurrency(), "USD");
 
 
     }
