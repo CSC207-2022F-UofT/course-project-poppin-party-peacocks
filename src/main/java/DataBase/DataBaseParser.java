@@ -39,15 +39,7 @@ public class DataBaseParser {
             }
         }
 
-        ArrayList<String> tags = new ArrayList<>();
-        JSONArray tagObjects = (JSONArray) wishlistData.get("selectedTags");
-        if (!Objects.isNull(tagObjects)) {
-            for (Object tagObject : tagObjects) {
-                tags.add(tagObject.toString());
-            }
-        }
-
-       return new Wishlist(name, items, displayedItems, dateAdded, tags);
+       return new Wishlist(name, items, displayedItems, dateAdded);
     }
 
     /** Parses an item in JSON format
@@ -104,3 +96,4 @@ public class DataBaseParser {
     }
 
 }
+

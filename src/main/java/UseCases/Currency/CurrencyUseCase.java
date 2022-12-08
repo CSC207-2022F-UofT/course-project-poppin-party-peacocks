@@ -1,10 +1,11 @@
 package UseCases.Currency;
 
 import DataBase.*;
-import Entities.Product;
-import Entities.ProductList;
-import Entities.User;
+import Entities.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -27,7 +28,7 @@ public class CurrencyUseCase {
     }
     /** Toggles currency of User Settings, and converts all products from all wishlists of user
      * */
-    public void toggleCurrency(){
+    public void toggleCurrency() throws IOException, ParseException, org.json.simple.parser.ParseException {
         DataBaseController dataBaseController = new DataBaseController();
         User currUser = dataBaseController.getCurrentUser();
 
@@ -37,14 +38,18 @@ public class CurrencyUseCase {
         else{
             currUser.changeCurrency("CAD");
         }
-
-
         // updating all items found in all wishlists of the user
-        for (ProductList wishlist: currUser.getWishlists().getListOfWishlist()){
+
+        ListOfProductLists updatedProductLists = new ListOfWishlists();
+        for (ProductList wishlist: dataBaseController.getListOfWishlists(currUser.getName()).getListOfWishlist()){
+            ProductList updatedWishlist = new Wishlist(wishlist.getName());
             for (Product item: wishlist.getProductList()){
                 updateProductCurrency(item);
+                updatedWishlist.addProduct(item);
             }
+            updatedProductLists.addWishlist(updatedWishlist);
         }
+        dataBaseController.saveListOfWishlists(updatedProductLists, currUser);
 
     }
 
