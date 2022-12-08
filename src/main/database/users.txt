@@ -2,3 +2,4 @@
 {"password":"aaa","currency":"CAD","user":"arky"}
 {"password":"aaa","currency":"CAD","user":"TestUser"}
 {"password":"aaa","currency":"CAD","user":"kevin"}
+{"password":"Fuzzy321","currency":"CAD","user":"StarlightUser"}
