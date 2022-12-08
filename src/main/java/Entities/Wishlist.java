@@ -17,7 +17,7 @@ public class Wishlist implements ProductList{
         this.dateAdded = new Date();
     }
 
-    public Wishlist(String name, ArrayList<Product> itemList, ArrayList<Product> displayedList, Date dateAdded, ArrayList<String> tags){
+    public Wishlist(String name, ArrayList<Product> itemList, ArrayList<Product> displayedList, Date dateAdded){
         this.name = name;
         this.productList = itemList;
         this.displayedList = displayedList;

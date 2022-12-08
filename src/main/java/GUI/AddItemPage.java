@@ -120,6 +120,7 @@ public class AddItemPage extends JFrame {
         addSelectedItemButton.addActionListener(e -> {
             if (itemJList.getSelectedIndex() >= 0){
                 Product selectedItem = itemList[itemJList.getSelectedIndex()];
+
                 // Create notification timers
                 SaleNotification saleNotification = new SaleNotification(selectedItem);
                 PriceDropNotification priceDropNotification = new PriceDropNotification(selectedItem);
