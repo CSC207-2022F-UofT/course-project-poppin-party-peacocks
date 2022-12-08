@@ -1,1 +1,1 @@
-{"wishlists":[{"displayedList":[],"name":"Exam Celebration Wish List","selectedTags":[],"itemList":[],"dateAdded":"Tue. Nov. 29 20:49:30 2022"}]}
+{"wishlists":[{"displayedList":[],"name":"Exam Celebration Wish List","itemList":[],"dateAdded":"Tue. Nov. 29 20:49:30 2022"}]}
