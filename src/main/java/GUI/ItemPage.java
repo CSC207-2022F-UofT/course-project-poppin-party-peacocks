@@ -1,5 +1,8 @@
 package GUI;
 
+import Entities.Product;
+import Entities.ProductList;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,18 +12,13 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import Entities.ProductList;
-import Entities.Wishlist;
-import Entities.Product;
-import ExternalInterface.PriceHistoryInterface;
-
 /**
  * This ItemPage class is a JFrame that displays the attributes of a given item from a wishlist.
  */
 public class ItemPage extends JFrame {
     private final GradientJPanel mainPanel;
-    private Product item;
-    private ProductList wl;
+    private final Product item;
+    private final ProductList wl;
 
     /**
      * mainPanel getter method.
@@ -69,11 +67,12 @@ public class ItemPage extends JFrame {
             productName = productName.substring(0,23) + "...";
         }
         CustomJLabel thisItemLabel = new CustomJLabel(productName, Color.WHITE, titleFont);
-        thisItemLabel.setBounds(75, 17, 360, 24);
+        thisItemLabel.setBounds(75, 17, 230, 24);
         headerPanel.add(thisItemLabel);
         CustomJButton graphButton = new CustomJButton("Details", 0, 0, color2, Color.WHITE, textFont);
-        graphButton.setBounds(250, 13, 90, 30);
-        headerPanel.add(graphButton);
+        graphButton.setBounds(130, 580, 90, 30);
+
+        mainPanel.add(graphButton);
         mainPanel.add(headerPanel);
 
         // image
@@ -187,7 +186,7 @@ public class ItemPage extends JFrame {
         // Button Logic
         // Navigates back to WishlistPage.
         backButton.addActionListener(e -> {
-            WishlistPage wlPage = null;
+            WishlistPage wlPage;
             try {
                 wlPage = new WishlistPage(wl);
             } catch (IOException ex) {
@@ -201,18 +200,12 @@ public class ItemPage extends JFrame {
         });
         // Opens up graph page alongside current ItemPage.
         graphButton.addActionListener(e -> {
-            PriceHistoryInterface ph = new PriceHistoryInterface(item);
-            try {
-                ph.createPriceHistoryChart();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
             PriceHistoryPage priceHistoryPage = new PriceHistoryPage(item, wl);
             priceHistoryPage.setContentPane(priceHistoryPage.getMainPanel());
             priceHistoryPage.setVisible(true);
-            priceHistoryPage.setLocationRelativeTo((Component)null);
-            priceHistoryPage.setDefaultCloseOperation(2);
-            this.dispose();
+            priceHistoryPage.setLocationRelativeTo(null);
+            priceHistoryPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            dispose();
         });
 
         // Button logic for desired price chnage

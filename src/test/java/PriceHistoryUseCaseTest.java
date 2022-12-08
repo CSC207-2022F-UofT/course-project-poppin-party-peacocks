@@ -3,7 +3,6 @@ import UseCases.PriceHistory.PriceHistoryUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,7 +10,7 @@ import java.util.Date;
 import static java.util.Calendar.NOVEMBER;
 
 
-public class PriceHistoryTest {
+public class PriceHistoryUseCaseTest {
     Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
             "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
     Calendar calendar = Calendar.getInstance();
@@ -198,22 +197,22 @@ public class PriceHistoryTest {
      * testing that the calculateHighestPrice method returns correct outputs with valid inputs (reaching
      * all valid input branches/lines of code)
      */
-//    @Test
-//    public void testCalculateHighestPriceValidInputs(){
-//        ArrayList<Double> priceHistoryDataTester = new ArrayList<>();
-//        for (double i = 0; i < 50; i++) {
-//            priceHistoryDataTester.add(i);
-//        }
-//        plushie.setPriceHistoryData(priceHistoryDataTester);
-//        ArrayList<Date> priceHistoryDatesTester = new ArrayList<>();
-//        for (int i = 0; i < 50; i++){
-//            priceHistoryDatesTester.add(new Date());
-//        }
-//        plushie.setPriceHistoryDates(priceHistoryDatesTester);
-//        Assertions.assertEquals(priceHistory.calculateHighestPrice("30 days"), 49);
-//        Assertions.assertEquals(priceHistory.calculateHighestPrice("All Time"), 49);
-//
-//    }
+    @Test
+    public void testCalculateHighestPriceValidInputs(){
+        ArrayList<Double> priceHistoryDataTester = new ArrayList<>();
+        for (double i = 0; i < 50; i++) {
+            priceHistoryDataTester.add(i);
+        }
+        plushie.setPriceHistoryData(priceHistoryDataTester);
+        ArrayList<Date> priceHistoryDatesTester = new ArrayList<>();
+        for (int i = 0; i < 50; i++){
+            priceHistoryDatesTester.add(new Date());
+        }
+        plushie.setPriceHistoryDates(priceHistoryDatesTester);
+        Assertions.assertEquals(priceHistory.calculateHighestPrice("30 days"), 49);
+        Assertions.assertEquals(priceHistory.calculateHighestPrice("All Time"), 49);
+
+    }
 
     /**
      * testing that the calculateHighestPrice method returns correct outputs with invalid inputs (reaching
