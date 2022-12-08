@@ -1,5 +1,4 @@
 import Controller.UserRegisterController;
-import DataBase.DataBaseFormatter;
 import GUI.WelcomePage;
 import UseCases.UserRegister.*;
 
