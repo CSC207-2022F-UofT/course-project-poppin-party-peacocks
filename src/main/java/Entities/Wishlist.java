@@ -63,4 +63,9 @@ public class Wishlist implements ProductList{
         displayedList.remove(product);
         return true;
     }
+
+    @Override
+    public Collection<Object> getSelectedTags() {
+        return null;
+    }
 }

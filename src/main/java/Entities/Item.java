@@ -111,8 +111,6 @@ public class Item implements Product {
         switch (itemCurrency){
             case "USD":
                 priceString =  "$" + itemPrice;
-            case "YUAN":
-                priceString =  "¥" + itemPrice;
             default:
                 priceString =  "$" + itemPrice;
         }
@@ -158,4 +156,7 @@ public class Item implements Product {
     public int getReviewCount() { return reviewCount;}
     public void setProductPrice(double newPrice) {this.itemPrice = newPrice;}
     public void setProductCurrency(String newCurrency) {this.itemCurrency = newCurrency;}
+
+
+    public Date getProductDateLastUpdated() {return new Date();}
 }

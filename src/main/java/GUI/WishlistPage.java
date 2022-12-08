@@ -1,5 +1,9 @@
 package GUI;
 
+import Entities.Product;
+import Entities.ProductList;
+import Entities.Wishlist;
+import UseCases.Currency.CurrencyUseCase;
 import Entities.*;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
@@ -92,7 +96,7 @@ public class WishlistPage extends JFrame {
      * Initialises the main panel to contain all of its buttons and items
      * Adds action listeners to the buttons to facilitate page navigation and other functionality
      */
-    private void initialiseMainPanel() throws IOException, ParseException, org.json.simple.parser.ParseException {
+    private void initialiseMainPanel() throws IOException {
         JPanel topPanel = new JPanel(null);
         topPanel.setBackground(new Color(106, 189, 154));
         topPanel.setBounds(0,0,360,56);
@@ -166,7 +170,7 @@ public class WishlistPage extends JFrame {
             }
             try {
                 generateListOfItems(true);
-            } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
+            } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
@@ -183,7 +187,7 @@ public class WishlistPage extends JFrame {
                 wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
                 try {
                     generateListOfItems(false);
-                } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
+                } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
@@ -217,7 +221,7 @@ public class WishlistPage extends JFrame {
         mainPanel.remove(itemScrollPane);
         try {
             generateListOfItems(false);
-        }catch(IOException | ParseException | org.json.simple.parser.ParseException ex){
+        }catch(IOException ex){
             throw new RuntimeException(ex);
         }
     }
@@ -225,12 +229,12 @@ public class WishlistPage extends JFrame {
      * creates a JScrollPane from a JList from a list from the wishlist
      * Configures the JScrollPane and adds it to the main panel
      */
-    private void generateListOfItems(boolean raiseNotification) throws IOException, ParseException, org.json.simple.parser.ParseException {
+    private void generateListOfItems(boolean raiseNotification) throws IOException {
         ArrayList<ItemPanel> panelList = new ArrayList<>();
         itemList = wl.getDisplayedList();
         for (Product product : itemList) {
             ItemPanel itemPanel = new ItemPanel(product.getProductImageURL(),
-                    product.getProductName(), product.getProductPriceString(), product.getPriceHistoryDates().get(product.getPriceHistoryDates().size()-1));
+                    product.getProductName(), product.getProductPriceString(), product.getProductDateLastUpdated());
             if(raiseNotification){
                 SaleNotification saleNotification = new SaleNotification(product);
                 PriceDropNotification priceDropNotification = new PriceDropNotification(product);

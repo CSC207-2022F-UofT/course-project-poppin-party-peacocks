@@ -8,10 +8,15 @@ import Entities.User;
 import java.util.HashMap;
 import java.util.Objects;
 
+import java.text.DecimalFormat;
+
+
 /** A use case for products to update their price in supported currencies */
 public class CurrencyUseCase {
     private final HashMap<String, Double> cadConversion;
     private final HashMap<String, Double> usdConversion;
+
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public CurrencyUseCase() {
         this.cadConversion = new HashMap<>();
@@ -59,12 +64,15 @@ public class CurrencyUseCase {
 
         switch (currentCurrency) {
             case "CAD":
-                product.setProductPrice(cadConversion.get(newCurrency) * product.getProductPrice());
+                product.setProductPrice(Double.parseDouble(df.format(cadConversion.get(newCurrency) *
+                        product.getProductPrice())));
                 break;
             case "USD":
-                product.setProductPrice(usdConversion.get(newCurrency) * product.getProductPrice());
+                product.setProductPrice(Double.parseDouble(df.format(usdConversion.get(newCurrency) *
+                        product.getProductPrice())));
                 break;
         }
+
         product.setProductCurrency(newCurrency);
     }
 }

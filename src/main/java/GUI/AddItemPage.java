@@ -39,7 +39,7 @@ public class AddItemPage extends JFrame {
         headerPanel.setBackground(color2);
         JLabel searchLabel = new JLabel("Search:");
         searchLabel.setForeground(Color.white);
-        searchBar = new JTextField("", 20);
+        searchBar = new JTextField("", 15);
         JButton searchButton = new JButton("Go");
         headerPanel.add(searchLabel);
         headerPanel.add(searchBar);

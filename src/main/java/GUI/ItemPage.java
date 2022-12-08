@@ -6,13 +6,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import Entities.ProductList;
 import Entities.Product;
 import ExternalInterface.PriceHistoryInterface;
+import org.json.simple.parser.ParseException;
 
 /**
  * This ItemPage class is a JFrame that displays the attributes of a given item from a wishlist.
@@ -20,6 +20,7 @@ import ExternalInterface.PriceHistoryInterface;
 public class ItemPage extends JFrame {
     private final GradientJPanel mainPanel;
     private final Product item;
+    private final ProductList wl;
 
     /**
      * mainPanel getter method.
@@ -42,6 +43,7 @@ public class ItemPage extends JFrame {
         setResizable(false);
 
         this.item = item;
+        this.wl = wl;
 
         // constants
         final Color color1 = new Color(194, 234, 186);
@@ -145,7 +147,7 @@ public class ItemPage extends JFrame {
         contentPanel.add(description);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        // price chance
+        // price change
         CustomJLabel priceChange = new CustomJLabel("Price Change: " + itemPriceChange + " " + currency, Color.WHITE, textFont);
         contentPanel.add(priceChange);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -188,7 +190,7 @@ public class ItemPage extends JFrame {
             WishlistPage wlPage;
             try {
                 wlPage = new WishlistPage(wl);
-            } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
+            } catch (IOException | ParseException | java.text.ParseException ex) {
                 throw new RuntimeException(ex);
             }
             wlPage.setContentPane(wlPage.getMainPanel());
