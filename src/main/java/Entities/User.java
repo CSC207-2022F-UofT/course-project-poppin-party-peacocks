@@ -8,21 +8,19 @@ public class User {
     private String currency;
     private String name;
     private String password;
-    private ListOfProductLists wishlists;
     private static final String[] currencyBank = {"USD", "CAD"};
 
     public User(String name, String password){
         this.name = name;
         this.password = password;
         this.currency = "CAD";
-        wishlists = new ListOfWishlists();
+
     }
 
     public User(String name, String password, String currency){
         this.name = name;
         this.password = password;
         this.currency = currency;
-        wishlists = new ListOfWishlists();
     }
 
     public String getName(){
@@ -37,9 +35,7 @@ public class User {
         return this.password;
     }
 
-    public ListOfProductLists getWishlists(){
-        return this.wishlists;
-    }
+
 
     public void setName(String newName){
         this.name = newName;

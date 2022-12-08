@@ -1,14 +1,23 @@
 import Controller.UserRegisterController;
+import DataBase.DataBaseController;
+import Entities.ListOfProductLists;
+import Entities.ListOfWishlists;
+import Entities.User;
+import Entities.Wishlist;
 import GUI.WelcomePage;
 import UseCases.UserRegister.*;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class main {
     /**
      * main
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException, IOException, org.json.simple.parser.ParseException {
         // Schedule a job for the event-dispatching thread:
         // creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(main::createAndShowGUI);
