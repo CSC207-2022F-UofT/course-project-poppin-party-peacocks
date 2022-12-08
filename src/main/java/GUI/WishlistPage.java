@@ -2,6 +2,8 @@ package GUI;
 
 import Entities.Product;
 import Entities.ProductList;
+import Entities.Wishlist;
+import UseCases.Currency.CurrencyUseCase;
 import Entities.*;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
@@ -11,6 +13,7 @@ import ExternalInterface.ItemUpdateChecker;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -37,7 +40,7 @@ public class WishlistPage extends JFrame {
     // the current ascending/descending setting for sorting
     boolean isSortedAscending;
     // database controller for reading and writing the wishlist and list of wishlist
-    private final DataBaseController dbc;
+    private DataBaseController dbc;
     // a temporary list of product list to save to the database after being mutated
     private final ListOfProductLists lwl;
 
@@ -153,7 +156,9 @@ public class WishlistPage extends JFrame {
             HomePage homePage;
             try {
                 homePage = new HomePage();
-            } catch (org.json.simple.parser.ParseException | ParseException | IOException ex) {
+            } catch (FileNotFoundException | org.json.simple.parser.ParseException | ParseException ex) {
+                throw new RuntimeException(ex);
+            } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
             homePage.setContentPane(homePage.getMainPanel());
@@ -189,14 +194,38 @@ public class WishlistPage extends JFrame {
         });
         deleteButton.addActionListener(e -> {
             mainPanel.remove(itemScrollPane);
-            if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
-                wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
-                try {
-                    generateListOfItems(false);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+            try {
+                ListOfProductLists updateList = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
+                ProductList updateWishList = new Wishlist(wl.getName());
+                updateList.removeWishlistByName(wl.getName());
+                if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
+                    wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
+                    try {
+                        generateListOfItems(false);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
+
+                for (Product item: wl.getDisplayedList()){
+                    updateWishList.addProduct(item);
+                }
+                updateList.addWishlist(updateWishList);
+                dbc.saveListOfWishlists(updateList, dbc.getCurrentUser());
+                wl = updateWishList;
+
+            } catch (ParseException | org.json.simple.parser.ParseException | IOException ex) {
+                throw new RuntimeException(ex);
             }
+//            if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
+//                wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
+//                try {
+//                    generateListOfItems(false);
+//                } catch (IOException ex) {
+//                    throw new RuntimeException(ex);
+//                }
+//            }
+
         });
         addButton.addActionListener(e -> {
             AddItemPage addItemPage = new AddItemPage(wl);
