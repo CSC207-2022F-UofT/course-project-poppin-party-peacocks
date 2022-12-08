@@ -1,15 +1,13 @@
 package UseCases.Currency;
 
-import DataBase.*;
+import DataBase.DataBaseController;
 import Entities.*;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Objects;
-
-import java.text.DecimalFormat;
 
 
 /** A use case for products to update their price in supported currencies */
