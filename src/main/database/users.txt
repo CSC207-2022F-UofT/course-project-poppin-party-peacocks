@@ -1,4 +1,4 @@
 {"password":"Password","currency":"CAD","user":"Herman1"}
 {"password":"aaa","currency":"CAD","user":"arky"}
 {"password":"aaa","currency":"CAD","user":"TestUser"}
-{"password":"Fuzzy321","currency":"CAD","user":"StarlightUser"}
+{"password":"aaa","currency":"CAD","user":"kevin"}

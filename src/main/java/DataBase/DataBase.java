@@ -39,4 +39,16 @@ public class DataBase {
                 System.out.println("File created!");
         }
     }
+    /** Creates a new wishlist file at the specified directory
+     * @param fileDirectory File directory to create a new file at
+     * */
+    public static void createWishListFile(String fileDirectory) throws IOException {
+        File file = new File(fileDirectory);
+        FileWriter fileWriter = new FileWriter(fileDirectory, true);
+        fileWriter.write("{}");
+        fileWriter.close();
+        if (file.createNewFile()) {
+            System.out.println("File created!");
+        }
+    }
 }
