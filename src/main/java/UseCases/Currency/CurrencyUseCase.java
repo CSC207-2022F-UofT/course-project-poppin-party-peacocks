@@ -21,7 +21,7 @@ public class CurrencyUseCase {
 
     public CurrencyUseCase() {
         this.cadConversion = new HashMap<>();
-        cadConversion.put("USD", 0.76);
+        cadConversion.put("USD", (1/1.34));
 
         this.usdConversion = new HashMap<>();
         usdConversion.put("CAD", 1.34);
@@ -73,8 +73,8 @@ public class CurrencyUseCase {
                         product.getProductPrice())));
                 break;
             case "USD":
-                product.setProductPrice(Double.parseDouble(df.format(usdConversion.get(newCurrency) *
-                        product.getProductPrice())));
+                product.setProductPrice(Double.parseDouble(df.format(
+                        product.getProductPrice() * usdConversion.get(newCurrency))));
                 break;
         }
 
