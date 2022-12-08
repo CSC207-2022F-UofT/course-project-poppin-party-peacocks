@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import DataBase.*;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -21,7 +20,7 @@ public class CurrencyUseCaseTest {
                         "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
                         "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
                         "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl", "CAD");
+                        "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl", "CAD");
         DataBase.currentUser = new User("A", "B", "USD");
         CurrencyUseCase currencyUseCase = new CurrencyUseCase();
         currencyUseCase.updateProductCurrency(testItem);
@@ -35,7 +34,7 @@ public class CurrencyUseCaseTest {
                         "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
                         "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
                         "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl", "USD");
+                        "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl", "USD");
         DataBase.currentUser = new User("A", "B", "CAD");
         CurrencyUseCase currencyUseCase = new CurrencyUseCase();
         currencyUseCase.updateProductCurrency(testItem);
@@ -49,7 +48,7 @@ public class CurrencyUseCaseTest {
                         "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
                         "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
                         "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl", "CAD");
+                        "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl", "CAD");
         DataBase.currentUser = new User("A", "B", "CAD");
         CurrencyUseCase currencyUseCase = new CurrencyUseCase();
         currencyUseCase.updateProductCurrency(testItem);
@@ -64,7 +63,7 @@ public class CurrencyUseCaseTest {
                         "Hotkeys Enable Easy Access for Media, My Computer, Mute, Volume down, Volume up, and Calculator; 4 Function Keys Control Previous Track, Stop, Play/pause, next Track on Your Media Player\n" +
                         "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
                         "Backed by One-year Amazon Basics Warranty\n" +
-                        "Ships in Certified Frustration-free Packaging", new String[]{"computer accesssories", "Tech", "office"}, 0, 0, "imageurl", "CAD");
+                        "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl", "CAD");
         DataBase.currentUser = new User("A", "B", "CAD");
         CurrencyUseCase currencyUseCase = new CurrencyUseCase();
         currencyUseCase.updateProductCurrency(testItem);
@@ -72,10 +71,5 @@ public class CurrencyUseCaseTest {
         currencyUseCase.toggleCurrency();
         currencyUseCase.updateProductCurrency(testItem);
         Assertions.assertEquals(testItem.getProductCurrency(), "USD");
-
-
     }
-
-
-
 }

@@ -1,9 +1,7 @@
 package ExternalInterface;
 
-import DataBase.DataBaseController;
 import Entities.Item;
 import Entities.Product;
-import Entities.User;
 import UseCases.Currency.CurrencyUseCase;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -98,7 +96,7 @@ public class ItemSearcher {
         }
 
         for (int i = 0; i < titleList.size(); i++) {
-            Product newItem = new Item(titleList.get(i), Double.parseDouble(priceList.get(i)), Double.parseDouble(priceList.get(i)), urlList.get(i), titleList.get(i), new String[]{keyword}, Integer.parseInt(reviewCountList.get(i).replace(" ", "")), Double.parseDouble(reviewStarList.get(i).replace(" ", "")), imageUrlList.get(i));
+            Product newItem = new Item(titleList.get(i), Double.parseDouble(priceList.get(i)), Double.parseDouble(priceList.get(i)), urlList.get(i), titleList.get(i), Integer.parseInt(reviewCountList.get(i).replace(" ", "")), Double.parseDouble(reviewStarList.get(i).replace(" ", "")), imageUrlList.get(i));
             itemList.add(newItem);
         }
         return itemList;
@@ -174,7 +172,7 @@ public class ItemSearcher {
             Element htmlStarRating = doc.select("div.a-fixed-left-grid-col.aok-align-center.a-col-right").select("div.a-row").select("span.a-size-base.a-nowrap").first();
 
             if ((htmlName == null || price == null || htmlDescription == null || htmlCountRating == null || htmlImgUrl == null || htmlStarRating == null) && searchByKeyword) {
-                return new Item("", 0, 0, "", "", new String[]{}, 0, 0, "");
+                return new Item("", 0, 0, "", "", 0, 0, "");
             }
             double sellingPrice = 0;
             String description = "";
@@ -206,7 +204,7 @@ public class ItemSearcher {
                 description = htmlDescription.text();
             }
 
-            Product itemResult = new Item(name, sellingPrice, sellingPrice, url, description, new String[]{}, countRating, starRating, imgUrl, "CAD");
+            Product itemResult = new Item(name, sellingPrice, sellingPrice, url, description, countRating, starRating, imgUrl, "CAD");
 
             CurrencyUseCase currencyUseCase = new CurrencyUseCase();
             currencyUseCase.updateProductCurrency(itemResult);

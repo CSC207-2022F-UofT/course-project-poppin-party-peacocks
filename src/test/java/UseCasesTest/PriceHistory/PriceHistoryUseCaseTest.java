@@ -1,3 +1,5 @@
+package UseCasesTest.PriceHistory;
+
 import Entities.Item;
 import UseCases.PriceHistory.PriceHistoryUseCase;
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +14,7 @@ import static java.util.Calendar.NOVEMBER;
 
 public class PriceHistoryUseCaseTest {
     Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
-            "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
+            "Description from amazon (or you write your own)", 0, 0, "www.amazonimage.com/keyboard");
     Calendar calendar = Calendar.getInstance();
     PriceHistoryUseCase priceHistory = new PriceHistoryUseCase(plushie);
 
@@ -393,7 +395,7 @@ public class PriceHistoryUseCaseTest {
     @Test
     public void testCompareToHighestPriceInvalidInputs(){
         Item plushieTester = new Item("Plushie", 0, 30.00, "www.amazon.com/plushie",
-                "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
+                "Description from amazon (or you write your own)", 0, 0, "www.amazonimage.com/keyboard");
         PriceHistoryUseCase priceHistoryTester = new PriceHistoryUseCase(plushieTester);
 
         // will get average price in last 24 hours = 0

@@ -1,3 +1,5 @@
+package UseCasesTest.PriceHistory;
+
 import Entities.Item;
 import ExternalInterface.PriceHistoryInterface;
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +14,7 @@ public class PriceHistoryInterfaceTest {
     @Test
     public void TestParseOriginalPrice(){
         Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
-                "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
+                "Description from amazon (or you write your own)", 0, 0, "www.amazonimage.com/keyboard");
 
         ArrayList<Double> prices = new ArrayList<>();
         prices.add(12.23);
@@ -37,7 +39,7 @@ public class PriceHistoryInterfaceTest {
     @Test
     public void TestParseDesiredPrice(){
         Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
-                "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
+                "Description from amazon (or you write your own)", 0, 0, "www.amazonimage.com/keyboard");
 
         ArrayList<Double> prices = new ArrayList<>();
         prices.add(12.23);
@@ -62,7 +64,7 @@ public class PriceHistoryInterfaceTest {
     @Test
     public void TestParseLowestPrice(){
         Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
-                "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
+                "Description from amazon (or you write your own)", 0, 0, "www.amazonimage.com/keyboard");
 
         ArrayList<Double> prices = new ArrayList<>();
         prices.add(12.23);
@@ -88,7 +90,7 @@ public class PriceHistoryInterfaceTest {
     @Test
     public void TestParseHighestPrice(){
         Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
-                "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
+                "Description from amazon (or you write your own)",0, 0, "www.amazonimage.com/keyboard");
 
         ArrayList<Double> prices = new ArrayList<>();
         prices.add(12.23);
@@ -114,7 +116,7 @@ public class PriceHistoryInterfaceTest {
     @Test
     public void TestParseAveragePrice(){
         Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
-                "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
+                "Description from amazon (or you write your own)", 0, 0, "www.amazonimage.com/keyboard");
 
         ArrayList<Double> prices = new ArrayList<>();
         prices.add(12.23);

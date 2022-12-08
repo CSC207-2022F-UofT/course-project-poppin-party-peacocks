@@ -14,7 +14,7 @@ import static java.util.Calendar.NOVEMBER;
 
 public class PriceHistoryTest {
     Item plushie = new Item("Plushie", 40.99, 30.00, "www.amazon.com/plushie",
-            "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
+            "Description from amazon (or you write your own)",0, 0, "www.amazonimage.com/keyboard");
     Calendar calendar = Calendar.getInstance();
     PriceHistoryUseCase priceHistory = new PriceHistoryUseCase(plushie);
 
@@ -395,7 +395,7 @@ public class PriceHistoryTest {
     @Test
     public void testCompareToHighestPriceInvalidInputs(){
         Item plushieTester = new Item("Plushie", 0, 30.00, "www.amazon.com/plushie",
-                "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
+                "Description from amazon (or you write your own)", 0, 0, "www.amazonimage.com/keyboard");
         PriceHistoryUseCase priceHistoryTester = new PriceHistoryUseCase(plushieTester);
 
         // will get average price in last 24 hours = 0
@@ -409,7 +409,6 @@ public class PriceHistoryTest {
         Assertions.assertEquals(priceHistoryTester.compareToHighestPrice("asdf"), -1);
         Assertions.assertEquals(priceHistoryTester.compareToHighestPrice("24 hours"), -1);
     }
-
 
     /**
      * testing that the compareToHighestPrice method returns correct outputs with valid inputs (reaching
@@ -440,8 +439,4 @@ public class PriceHistoryTest {
 
         Assertions.assertEquals(priceHistory.compareToHighestPrice("1 week"), 100);
     }
-
-
-
 }
-
