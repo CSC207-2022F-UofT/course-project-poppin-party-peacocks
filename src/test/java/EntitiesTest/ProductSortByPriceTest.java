@@ -1,3 +1,5 @@
+package EntitiesTest;
+
 import Controller.ProductComparatorController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -29,13 +31,13 @@ public class ProductSortByPriceTest {
         controller1.sortList("ascending", "price");
         controller2.sortList("ascending", "price");
 
-        Assertions.assertEquals(5.47, list1.getProductList().get(0).getProductPrice());
-        Assertions.assertEquals(40.99,list1.getProductList().get(1).getProductPrice());
-        Assertions.assertEquals(100, list1.getProductList().get(2).getProductPrice());
+        Assertions.assertEquals(5.47, list1.getDisplayedList().get(0).getProductPrice());
+        Assertions.assertEquals(40.99,list1.getDisplayedList().get(1).getProductPrice());
+        Assertions.assertEquals(100, list1.getDisplayedList().get(2).getProductPrice());
 
-        Assertions.assertEquals(5.47, list2.getProductList().get(0).getProductPrice());
-        Assertions.assertEquals(40.99, list2.getProductList().get(1).getProductPrice());
-        Assertions.assertEquals(100,list2.getProductList().get(2).getProductPrice());
+        Assertions.assertEquals(5.47, list2.getDisplayedList().get(0).getProductPrice());
+        Assertions.assertEquals(40.99, list2.getDisplayedList().get(1).getProductPrice());
+        Assertions.assertEquals(100,list2.getDisplayedList().get(2).getProductPrice());
     }
 
     @Test
@@ -56,12 +58,12 @@ public class ProductSortByPriceTest {
         controller1.sortList("descending", "price");
         controller2.sortList("descending", "price");
 
-        Assertions.assertEquals(5.47, list1.getProductList().get(2).getProductPrice());
-        Assertions.assertEquals(40.99,list1.getProductList().get(1).getProductPrice());
-        Assertions.assertEquals(100, list1.getProductList().get(0).getProductPrice());
+        Assertions.assertEquals(5.47, list1.getDisplayedList().get(2).getProductPrice());
+        Assertions.assertEquals(40.99,list1.getDisplayedList().get(1).getProductPrice());
+        Assertions.assertEquals(100, list1.getDisplayedList().get(0).getProductPrice());
 
-        Assertions.assertEquals(5.47, list2.getProductList().get(2).getProductPrice());
-        Assertions.assertEquals(40.99, list2.getProductList().get(1).getProductPrice());
-        Assertions.assertEquals(100,list2.getProductList().get(0).getProductPrice());
+        Assertions.assertEquals(5.47, list2.getDisplayedList().get(2).getProductPrice());
+        Assertions.assertEquals(40.99, list2.getDisplayedList().get(1).getProductPrice());
+        Assertions.assertEquals(100,list2.getDisplayedList().get(0).getProductPrice());
     }
 }

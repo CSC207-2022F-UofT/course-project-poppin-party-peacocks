@@ -1,3 +1,5 @@
+package UseCasesTest.LoginAction;
+
 import UseCases.LoginAction.LoginAction;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Assertions;
