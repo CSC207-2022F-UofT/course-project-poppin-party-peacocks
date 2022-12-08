@@ -3,9 +3,19 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A custom JButton. The refresh button at the top right of the wishlist page.
+ */
 public class RefreshButton extends JButton{
+    /**
+     * constructor. Calls the default JButton constructor.
+     */
     public RefreshButton(){super();}
 
+    /**
+     * overrides the paintComponent method. Paints the button's background and icon.
+     * @param g the Graphics object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;

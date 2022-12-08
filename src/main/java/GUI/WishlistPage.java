@@ -23,16 +23,25 @@ import java.util.ArrayList;
  * for adding and deleting products from the list.
  */
 public class WishlistPage extends JFrame {
-
+    // the main panel that contains all the page's contents.
     private GradientJPanel mainPanel;
+    // the wishlist being loaded and displayed.
     private ProductList wl;
+    // a temporary item list loaded from the wishlist.
     private ArrayList<Product> itemList;
+    // the list of item panels created from the item list. Is displayed through the scroll pane.
     private JList<ItemPanel> itemPanelJList;
+    // the scroll pane that displays a section of the itemPanelJList.
     private JScrollPane itemScrollPane;
+    // a boolean to keep track of whether the sorting frame is already opened.
     private boolean isSortFrameOpen = false;
+    // the current sorting method selected from the sorting frame.
     String currentSortingMethod;
+    // the current ascending/descending setting for sorting
     boolean isSortedAscending;
+    // database controller for reading and writing the wishlist and list of wishlist
     private DataBaseController dbc;
+    // a temporary list of product list to save to the database after being mutated
     private final ListOfProductLists lwl;
 
 
@@ -45,7 +54,6 @@ public class WishlistPage extends JFrame {
         wl = wishlist;
         dbc = new DataBaseController();
         lwl = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
-        itemList = wl.getDisplayedList();
         initialiseJFrame();
         initialiseMainPanel();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

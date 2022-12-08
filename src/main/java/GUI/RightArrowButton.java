@@ -3,10 +3,19 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * a custom JButton. The right arrow button used in wishlist page that views an item.
+ */
 public class RightArrowButton extends JButton {
-
+    /**
+     * constructor. Calls the default JButton constructor.
+     */
     public RightArrowButton(){super();}
 
+    /**
+     * overrides the paintComponent method to paint the button's icon and background.
+     * @param g the Graphics object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
