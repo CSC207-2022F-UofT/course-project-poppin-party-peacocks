@@ -31,7 +31,7 @@ public class ItemUpdateChecker {
         DataBaseController dataBaseController = new DataBaseController();
         User currUser = dataBaseController.getCurrentUser();
 
-        if (!currUser.getCurrency().equals("CAD")){
+        if (!item.getProductCurrency().equals("CAD")){
             sellingPrice = Double.parseDouble(df.format(sellingPrice * 0.76));
         }
 
