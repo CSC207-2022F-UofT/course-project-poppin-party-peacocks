@@ -206,7 +206,6 @@ public class ItemPage extends JFrame {
         // Button logic for desired price change.
         desiredPriceButton.addActionListener(e -> {
             String priceText = desiredPriceInput.getText();
-
             double updatedDesiredPrice = Double.parseDouble(priceText);
             this.item.setDesiredPrice(updatedDesiredPrice);
         });
