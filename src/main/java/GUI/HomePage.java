@@ -1,13 +1,15 @@
 package GUI;
 
-import DataBase.DataBaseController;
-import Entities.*;
+import Entities.ListOfWishlists;
+import Entities.ProductList;
+import Entities.Wishlist;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
-import UseCases.Currency.CurrencyUseCase;
 
 /**
  * A GUI class that handles the visual representation of a product list. Handles navigation to adjacent pages and logic
@@ -16,6 +18,12 @@ import UseCases.Currency.CurrencyUseCase;
 public class HomePage extends JFrame {
 
     private GradientJPanel mainPanel;
+    private final ListOfProductLists lwl;
+    private JList<WishlistPanel> wishlistPanelJList;
+    private JScrollPane wishlistScrollPane;
+    private final DataBaseController dbc;
+    Color color2 = new Color(106, 189, 154);
+    Font headerFont = new Font("Montserrat", Font.PLAIN, 20);
 
     private final ListOfProductLists listOfWishlists;
     private JList<ItemPanel> itemPanelJList;
@@ -27,15 +35,11 @@ public class HomePage extends JFrame {
          // # TODO how to initialize listOfWishlist
         DataBaseController dataBaseController = new DataBaseController();
         User currUser = dataBaseController.getCurrentUser();
+        this.lwl = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
         listOfWishlists = currUser.getWishlists();
         userCurrency = currUser.getCurrency();
         initialiseJFrame();
         initialiseMainPanel();
-        generateListOfWishlists();
-
-
-
-
     }
 
     /**
@@ -59,20 +63,13 @@ public class HomePage extends JFrame {
      * Adds action listeners to the buttons to facilitate page navigation and other functionality
      */
 
-    // constants
-    Color color2 = new Color(106, 189, 154);
-    Font headerFont = new Font("Montserrat", Font.PLAIN, 20);
-
     private void initialiseMainPanel(){
         JPanel topPanel = new JPanel(null);
         topPanel.setBackground(color2);
         topPanel.setBounds(0,0,360,56);
         String titleString = "My Wishlists";
-        if (titleString.length() > 20){
-            titleString = titleString.substring(0,19);
-        }
         JLabel titleLabel = new CustomJLabel(titleString, Color.WHITE, headerFont);
-        titleLabel.setBounds(125,17,119,24);
+        titleLabel.setBounds(122,17,130,24);
         topPanel.add(titleLabel);
 
         // currency indicator
@@ -121,49 +118,6 @@ public class HomePage extends JFrame {
 
         mainPanel.setComponentZOrder(titleLabel, 1);
         mainPanel.setComponentZOrder(topPanel, 2);
-
-        currencyButton.addActionListener(e -> {
-            mainPanel.remove(topPanel);
-
-            if (userCurrency.equals("CAD")){
-                userCurrency = "USD";
-            }
-            else {
-                userCurrency = "CAD";
-            }
-
-            JPanel newTopPanel = new JPanel(null);
-            newTopPanel.setBackground(color2);
-            newTopPanel.setBounds(0,0,360,56);
-            newTopPanel.add(titleLabel);
-
-            // currency indicator
-
-            JButton newCurrencyIcon = new JButton(new ImageIcon("src/main/java/Assets/cadIcon.png"));
-            if (!userCurrency.equals("CAD")) {
-                newCurrencyIcon = new JButton(new ImageIcon("src/main/java/Assets/usdIcon.png"));
-            }
-            newCurrencyIcon.setBounds(320, 12, 28, 28);
-            newCurrencyIcon.setContentAreaFilled(false);
-            newCurrencyIcon.setBorderPainted(true);
-            newCurrencyIcon.setBorder(null);
-            newTopPanel.add(newCurrencyIcon);
-            mainPanel.add(newTopPanel);
-            mainPanel.setComponentZOrder(newTopPanel, 2);
-            mainPanel.revalidate();
-            mainPanel.repaint();
-
-
-            // TODO: implement price conversion use case here
-            CurrencyUseCase currencyUseCase = new CurrencyUseCase();
-            currencyUseCase.toggleCurrency();
-            DataBaseController dataBaseController = new DataBaseController();
-            User currUser = dataBaseController.getCurrentUser();
-            userCurrency = currUser.getCurrency();
-            mainPanel.remove(itemScrollPane);
-            generateListOfWishlists();
-
-        });
 
 
         deleteButton.addActionListener(e -> {
@@ -222,7 +176,7 @@ public class HomePage extends JFrame {
         itemPanelJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         itemPanelJList.setBackground(new Color(194, 234, 186));
         itemScrollPane = new JScrollPane(itemPanelJList);
-        itemScrollPane.setBounds(25,210,310,300);
+        itemScrollPane.setBounds(16,80,310,400);
         itemScrollPane.setHorizontalScrollBar(null);
         itemScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
         mainPanel.add(itemScrollPane);

@@ -4,8 +4,10 @@ import Entities.Product;
 import Entities.ProductList;
 import Entities.Wishlist;
 import UseCases.Currency.CurrencyUseCase;
+import Entities.*;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
+import DataBase.*;
 
 import ExternalInterface.ItemUpdateChecker;
 
@@ -30,20 +32,50 @@ public class WishlistPage extends JFrame {
     private boolean isSortFrameOpen = false;
     String currentSortingMethod;
     boolean isSortedAscending;
+    private final DataBaseController dbc;
+    private final ListOfProductLists lwl;
 
-    public WishlistPage(ProductList wishlist) throws IOException {
+
+    /**
+     * constructor.
+     * @param wishlist wishlist to be loaded
+     */
+    public WishlistPage(ProductList wishlist) throws IOException, ParseException, org.json.simple.parser.ParseException {
         super(wishlist.getName());
         wl = wishlist;
+        dbc = new DataBaseController();
+        lwl = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
         initialiseJFrame();
         initialiseMainPanel();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
+    /**
+     * sets current wishlist to be displayed.
+     * @param wl the new wishlist
+     */
     public void setWishlist(ProductList wl){
         this.wl = wl;
     }
+
+    /**
+     * sets isSortFrameOpen. Will not open another sorting frame if a current one is already open.
+     * @param isOpen the new boolean
+     */
     public void setSortFrameOpen(boolean isOpen){
         this.isSortFrameOpen = isOpen;
     }
+
+    /**
+     * saves sorting method to be loaded by the sorting frame
+     * @param s the new sorting method
+     */
     public void setCurrentSortingMethod(String s) {this.currentSortingMethod = s; }
+
+    /**
+     * sets the current ascending/descending setting to be loaded by the sorting frame
+     * @param b the new ascending/descending setting
+     */
     public void setIsAscending(boolean b) {this.isSortedAscending = b; }
     /**
      * @return the main panel for this JFrame
@@ -110,9 +142,14 @@ public class WishlistPage extends JFrame {
         isSortedAscending = true;
 
         generateListOfItems(false);
+
         backButton.addActionListener(e -> {
-            HomePage homePage = null;
-            homePage = new HomePage();
+            HomePage homePage;
+            try {
+                homePage = new HomePage();
+            } catch (FileNotFoundException | org.json.simple.parser.ParseException | ParseException ex) {
+                throw new RuntimeException(ex);
+            }
             homePage.setContentPane(homePage.getMainPanel());
             homePage.setVisible(true);
             homePage.setLocationRelativeTo(null);
@@ -133,7 +170,7 @@ public class WishlistPage extends JFrame {
             }
             try {
                 generateListOfItems(true);
-            } catch (IOException ex) {
+            } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
                 throw new RuntimeException(ex);
             }
         });
@@ -150,7 +187,7 @@ public class WishlistPage extends JFrame {
                 wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
                 try {
                     generateListOfItems(false);
-                } catch (IOException ex) {
+                } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
                     throw new RuntimeException(ex);
                 }
             }
@@ -175,11 +212,16 @@ public class WishlistPage extends JFrame {
             }
         });
     }
+
+    /**
+     * removes the current JScrollPane, updates the item list with the new wishlist, and adds a new JScrollPane
+     * in place of the old one.
+     */
     public void refreshMainPanel(){
         mainPanel.remove(itemScrollPane);
         try {
             generateListOfItems(false);
-        }catch(IOException ex){
+        }catch(IOException | ParseException | org.json.simple.parser.ParseException ex){
             throw new RuntimeException(ex);
         }
     }
@@ -218,5 +260,15 @@ public class WishlistPage extends JFrame {
         mainPanel.add(itemScrollPane);
         mainPanel.revalidate();
         mainPanel.repaint();
+        saveWishlistData();
+    }
+
+    /**
+     * overwrites the wishlist in the list of wishlists and saves it to the database.
+     */
+    private void saveWishlistData() throws IOException {
+        int index = lwl.getIndexByName(wl.getName());
+        lwl.setWishlist(index, wl);
+        dbc.saveListOfWishlists(lwl, dbc.getCurrentUser());
     }
 }

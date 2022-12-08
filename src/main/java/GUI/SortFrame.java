@@ -1,7 +1,6 @@
 package GUI;
 
 import Entities.ProductList;
-import Entities.Wishlist;
 import Controller.ProductComparatorController;
 
 import javax.swing.*;

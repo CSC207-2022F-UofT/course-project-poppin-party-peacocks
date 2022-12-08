@@ -43,7 +43,7 @@ public class Wishlist implements ProductList{
     public void setDateAdded(Date date) { this.dateAdded = date; }
 
     /**
-     * Adding an Entities.Item to the ProductList
+     * Adds an Entities.Item to the productList and displayedList
      * @param product The Entities.Product that the user wants to add to the ProductList
      * @return True when an Entities.Product gets added to the ProductList
      */
@@ -54,7 +54,7 @@ public class Wishlist implements ProductList{
     }
 
     /**
-     * Removing an Entities.Item from the ProductList
+     * Removes an Entities.Item from the productList
      * @param product The Entities.Product the user wants to delete from the ProductList
      * @return True when an Entities.Product gets removed from the ProductList
      */

@@ -46,11 +46,9 @@ public class WishlistPanel extends JPanel {
         g2.fillRoundRect(0,0,getWidth()-1,getHeight()-1,20,20);
         g2.setColor(borderColor);
         g2.drawRoundRect(0,0,getWidth()-1,getHeight()-1,20,20);
-        g2.drawRect(8,8, getHeight()-17, getHeight()-17);
 
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("Montserrat", Font.PLAIN, 18));
-        g2.drawString(wishlistName, 100,25);
-        g2.setFont(new Font("Montserrat", Font.PLAIN, 12));
+        g2.drawString(wishlistName, 10,25);
     }
 }

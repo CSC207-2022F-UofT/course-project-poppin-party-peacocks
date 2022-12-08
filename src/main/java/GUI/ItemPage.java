@@ -10,17 +10,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import Entities.ProductList;
-import Entities.Wishlist;
 import Entities.Product;
-import UseCases.Currency.CurrencyUseCase;
+import ExternalInterface.PriceHistoryInterface;
 
 /**
  * This ItemPage class is a JFrame that displays the attributes of a given item from a wishlist.
  */
 public class ItemPage extends JFrame {
     private final GradientJPanel mainPanel;
-    private Product item;
-    private ProductList wl;
+    private final Product item;
 
     /**
      * mainPanel getter method.
@@ -41,6 +39,7 @@ public class ItemPage extends JFrame {
         setLayout(null);
         setSize(360, 640);
         setResizable(false);
+
         this.item = item;
         this.wl = wl;
 
@@ -186,10 +185,10 @@ public class ItemPage extends JFrame {
         // Button Logic
         // Navigates back to WishlistPage.
         backButton.addActionListener(e -> {
-            WishlistPage wlPage = null;
+            WishlistPage wlPage;
             try {
                 wlPage = new WishlistPage(wl);
-            } catch (IOException ex) {
+            } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
                 throw new RuntimeException(ex);
             }
             wlPage.setContentPane(wlPage.getMainPanel());
@@ -200,7 +199,18 @@ public class ItemPage extends JFrame {
         });
         // Opens up graph page alongside current ItemPage.
         graphButton.addActionListener(e -> {
-            System.out.println("TODO");
+            PriceHistoryInterface ph = new PriceHistoryInterface(item);
+            try {
+                ph.createPriceHistoryChart();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            PriceHistoryPage priceHistoryPage = new PriceHistoryPage(item, wl);
+            priceHistoryPage.setContentPane(priceHistoryPage.getMainPanel());
+            priceHistoryPage.setVisible(true);
+            priceHistoryPage.setLocationRelativeTo((Component)null);
+            priceHistoryPage.setDefaultCloseOperation(2);
+            this.dispose();
         });
 
         // Button logic for desired price chnage

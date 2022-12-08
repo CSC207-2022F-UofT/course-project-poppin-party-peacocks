@@ -9,6 +9,7 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ItemUpdateChecker {
@@ -36,6 +37,11 @@ public class ItemUpdateChecker {
 
         item.setPriceChange(item.getProductPrice() - sellingPrice);
         item.setProductPrice(sellingPrice);
-        item.setDateLastUpdated(new Date());
+        ArrayList<Double> priceList = item.getPriceHistoryData();
+        ArrayList<Date> dateList = item.getPriceHistoryDates();
+        priceList.add(sellingPrice);
+        dateList.add(new Date());
+        item.setPriceHistoryData(priceList);
+        item.setPriceHistoryDates(dateList);
     }
 }
