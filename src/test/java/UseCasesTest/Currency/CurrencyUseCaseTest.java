@@ -24,7 +24,7 @@ public class CurrencyUseCaseTest {
         DataBase.currentUser = new User("A", "B", "USD");
         CurrencyUseCase currencyUseCase = new CurrencyUseCase();
         currencyUseCase.updateProductCurrency(testItem);
-        Assertions.assertEquals(testItem.getProductPrice(), 0.76);
+        Assertions.assertEquals(testItem.getProductPrice(), 0.75);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class CurrencyUseCaseTest {
                         "Simple Wired USB Connection; Works with Windows 2000, XP, Vista, 7, 8, and 10\n" +
                         "Backed by One-year Amazon Basics Warranty\n" +
                         "Ships in Certified Frustration-free Packaging", 0, 0, "imageurl", "CAD");
-        DataBase.currentUser = new User("A", "B", "CAD");
+        DataBase.currentUser = new User("kevin", "aaa", "CAD");
         CurrencyUseCase currencyUseCase = new CurrencyUseCase();
         currencyUseCase.updateProductCurrency(testItem);
         Assertions.assertEquals(testItem.getProductCurrency(), "CAD");
