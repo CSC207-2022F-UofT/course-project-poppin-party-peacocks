@@ -16,16 +16,19 @@ import java.util.ArrayList;
  * for adding and deleting products from the list.
  */
 public class HomePage extends JFrame {
-
+    // main panel
     private GradientJPanel mainPanel;
+    // J component to contain wishlists
     private JList<WishlistPanel> wishlistPanelJList;
+    // J component for scrolling
     private JScrollPane wishlistScrollPane;
+    // controller for database
     private DataBaseController dbc = new DataBaseController();
     Color color2 = new Color(106, 189, 154);
     Font headerFont = new Font("Montserrat", Font.PLAIN, 20);
-
+    // list of product lists from database
     private ListOfProductLists listOfWishlists;
-
+    // currency used
     private String userCurrency;
 
     public HomePage() throws IOException, ParseException, org.json.simple.parser.ParseException {

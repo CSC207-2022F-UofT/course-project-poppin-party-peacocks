@@ -4,11 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AddButton extends JButton {
+
+    /**
+     * AddButton constructor.
+     */
     public AddButton(){
         super();
-
     }
 
+    /**
+     * Paints button gradient and adds "addButton.png" as its icon.
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;

@@ -107,11 +107,10 @@ public class PriceHistoryPage extends JFrame {
         }
 
 
-
         // creating label for price history graph image
 
         CustomJLabel thisItemLabel = new CustomJLabel(productName, Color.WHITE, titleFont);
-        thisItemLabel.setBounds(75, 17, 170, 24);
+        thisItemLabel.setBounds(75, 17, 250, 24);
         headerPanel.add(thisItemLabel);
         this.mainPanel.add(headerPanel);
         JLabel imageLabel = new JLabel();

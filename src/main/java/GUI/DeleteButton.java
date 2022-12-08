@@ -3,12 +3,22 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Custom delete JButton. Used for deleting an entity instance.
+ */
 public class DeleteButton extends JButton {
 
+    /**
+     * DeleteButton constructor.
+     */
     public DeleteButton(){
         super();
     }
 
+    /**
+     * Paints delete button with gradient and adds "deleteButton.png" icon.
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;

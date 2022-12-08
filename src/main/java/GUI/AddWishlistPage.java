@@ -15,8 +15,11 @@ import DataBase.*;
  * the name of their wishlist.
  */
 public class AddWishlistPage extends JFrame {
+    // main panel
     private final JPanel mainPanel;
+    // list of product lists from database
     private final ListOfProductLists lwl;
+    // controller for the database
     private final DataBaseController dbc;
     /**
      * getter method for mainPanel
@@ -26,6 +29,12 @@ public class AddWishlistPage extends JFrame {
         return mainPanel;
     }
 
+    /**
+     * AddWishlistPage constructor.
+     * @throws FileNotFoundException for when the user cancels and returns to the wishlist page.
+     * @throws ParseException when a wishlist is incorrectly parsed when creating a new wishlist.
+     * @throws org.json.simple.parser.ParseException more specific parse error for json structure.
+     */
     public AddWishlistPage() throws FileNotFoundException, ParseException, org.json.simple.parser.ParseException {
         super("Add Wishlist");
         setLayout(null);
@@ -125,13 +134,13 @@ public class AddWishlistPage extends JFrame {
                 }
             }
         });
+
+        // Cancel button logic: navigates back to the list of wishlists.
         cancelButton.addActionListener(e -> {
             HomePage listOfWL;
             try {
                 listOfWL = new HomePage();
-            } catch (FileNotFoundException | ParseException | org.json.simple.parser.ParseException ex) {
-                throw new RuntimeException(ex);
-            } catch (IOException ex) {
+            } catch (ParseException | org.json.simple.parser.ParseException | IOException ex) {
                 throw new RuntimeException(ex);
             }
             listOfWL.setContentPane(listOfWL.getMainPanel());

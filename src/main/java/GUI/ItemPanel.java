@@ -12,16 +12,30 @@ import java.util.Date;
  * Contains an image, name, and price of the item. Details of the item can instead be seen in the ItemPage.
  */
 public class ItemPanel extends JPanel {
-
+    // url of item image
     String imgURL;
+    // item name
     String itemName;
+    // item price
     String itemPrice;
+    // border colour of item panel
     Color borderColor;
+    // panel fill colour
     Color panelColor;
+    // item icon
     ImageIcon img;
+    // last updated Date
     Date dateLastUpdated;
+    // whether the update for the item's info succeeded
     boolean updateSuccess;
 
+    /**
+     * ItemPanel constructor.
+     * @param imgURL url of the item image.
+     * @param itemName name of item.
+     * @param itemPrice price of item.
+     * @param lastUpdated last Date the item was updated/refreshed.
+     */
     public ItemPanel(String imgURL, String itemName, String itemPrice, Date lastUpdated) {
         super(null);
         this.imgURL = imgURL;
@@ -94,7 +108,6 @@ public class ItemPanel extends JPanel {
                 e1.printStackTrace();
             }
         }
-
 
         g2.drawRect(8,8, getHeight()-17, getHeight()-17);
 

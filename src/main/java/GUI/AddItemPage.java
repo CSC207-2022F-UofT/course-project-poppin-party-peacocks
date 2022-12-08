@@ -13,14 +13,27 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 
+/**
+ *  This AddItemPage class is a JFrame that allows the user to search for a new item to add to the current wishlist.
+ */
 public class AddItemPage extends JFrame {
+    // main panel of JFrame
     private final JPanel mainPanel;
+    // user types what they want to search for here
     private final JTextField searchBar;
+    // sub-panel that contains search results
     private JPanel contentPanel;
+    // J component that contains list of items from search
     private JList<JPanel> itemJList;
+    // current wishlist that is being added to
     private final ProductList currWishlist;
+    // list of items from search
     private Product[] itemList;
 
+    /**
+     * AddItemPage constructor.
+     * @param wishlist the wishlist to add the item to.
+     */
     public AddItemPage(ProductList wishlist) {
         super("Add Item");
         setLayout(null);
@@ -34,6 +47,7 @@ public class AddItemPage extends JFrame {
 
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBounds(0, 0, 400, 600);
+
         // header
         JPanel headerPanel = new JPanel(new FlowLayout());
         headerPanel.setBackground(color2);
@@ -142,10 +156,19 @@ public class AddItemPage extends JFrame {
         });
     }
 
+    /**
+     * @return mainPanel
+     */
     public JPanel getMainPanel() {
         return mainPanel;
     }
 
+    /**
+     * Creates JPanel instance to store and display the information of an item.
+     * @param item the item being represented.
+     * @param index index of the item from the search.
+     * @return JPanel of item.
+     */
     public static JPanel createPanel(Product item, int index) {
         JPanel panel = new JPanel(new BorderLayout());
         // icon
@@ -175,27 +198,10 @@ public class AddItemPage extends JFrame {
         return panel;
     }
 
+    /**
+     * Adds contentPanel to mainPanel.
+     */
     public void renderCentre() {
         mainPanel.add(contentPanel, BorderLayout.CENTER);
-    }
-    public static class PanelRenderer implements ListCellRenderer<Object> {
-        public Component getListCellRendererComponent(JList list, Object value, int index,
-                                                      boolean isSelected, boolean cellHasFocus) {
-            JPanel renderer = (JPanel) value;
-            renderer.setBackground(isSelected ? Color.red : list.getBackground());
-            Color defaultColor = new Color(194, 234, 186);
-            Color selectedColor = new Color(106, 189, 154);
-            BorderLayout layout = (BorderLayout) renderer.getLayout();
-            if (isSelected) {
-                layout.getLayoutComponent(BorderLayout.CENTER).setBackground(selectedColor);
-                renderer.setBackground(selectedColor);
-                renderer.setForeground(selectedColor);
-            } else {
-                layout.getLayoutComponent(BorderLayout.CENTER).setBackground(defaultColor);
-                renderer.setBackground(defaultColor);
-                renderer.setForeground(defaultColor);
-            }
-            return renderer;
-        }
     }
 }
