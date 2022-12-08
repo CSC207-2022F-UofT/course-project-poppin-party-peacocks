@@ -44,7 +44,7 @@ public class DataBase {
      * */
     public static void createWishListFile(String fileDirectory) throws IOException {
         File file = new File(fileDirectory);
-        FileWriter fileWriter = new FileWriter(fileDirectory, true);
+        FileWriter fileWriter = new FileWriter(fileDirectory);
         fileWriter.write("{}");
         fileWriter.close();
         if (file.createNewFile()) {
