@@ -22,6 +22,13 @@ public class ItemPanel extends JPanel {
     Date dateLastUpdated;
     boolean updateSuccess;
 
+    /**
+     * ItemPanel constructor.
+     * @param imgURL url of the item image.
+     * @param itemName name of item.
+     * @param itemPrice price of item.
+     * @param lastUpdated last Date the item was updated/refreshed.
+     */
     public ItemPanel(String imgURL, String itemName, String itemPrice, Date lastUpdated) {
         super(null);
         this.imgURL = imgURL;
@@ -94,7 +101,6 @@ public class ItemPanel extends JPanel {
                 e1.printStackTrace();
             }
         }
-
 
         g2.drawRect(8,8, getHeight()-17, getHeight()-17);
 
