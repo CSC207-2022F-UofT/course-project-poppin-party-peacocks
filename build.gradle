@@ -14,13 +14,6 @@ dependencies {
     implementation group: 'org.jfree', name: 'jfreechart', version: '1.5.1'
 }
 
-test {
-    useJUnitPlatform()
-    testLogging {
-        events "passed", "skipped", "failed"
-    }
-}
-
 jar {
     manifest {
         attributes "Main-Class": "main"
@@ -28,4 +21,8 @@ jar {
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
+}
+
+test {
+    useJUnitPlatform()
 }
