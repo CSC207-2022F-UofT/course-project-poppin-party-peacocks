@@ -20,7 +20,6 @@ import org.json.simple.parser.ParseException;
 public class ItemPage extends JFrame {
     private final GradientJPanel mainPanel;
     private final Product item;
-    private final ProductList wl;
 
     /**
      * mainPanel getter method.
@@ -37,13 +36,12 @@ public class ItemPage extends JFrame {
     public ItemPage(Product item, ProductList wl) {
 
         // JFrame setup
-        super("Item name here");
+        super(item.getProductName());
         setLayout(null);
         setSize(360, 640);
         setResizable(false);
 
         this.item = item;
-        this.wl = wl;
 
         // constants
         final Color color1 = new Color(194, 234, 186);
@@ -69,7 +67,7 @@ public class ItemPage extends JFrame {
             productName = productName.substring(0,23) + "...";
         }
         CustomJLabel thisItemLabel = new CustomJLabel(productName, Color.WHITE, titleFont);
-        thisItemLabel.setBounds(75, 17, 360, 24);
+        thisItemLabel.setBounds(75, 17, 170, 24);
         headerPanel.add(thisItemLabel);
         CustomJButton graphButton = new CustomJButton("Details", 0, 0, color2, Color.WHITE, textFont);
         graphButton.setBounds(250, 13, 90, 30);
@@ -112,12 +110,6 @@ public class ItemPage extends JFrame {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String itemDateAddedFormatted = dateFormat.format(itemDateAdded);
         String url = item.getProductURL();
-        String[] tags = item.getTags();
-        StringBuilder totalTag = new StringBuilder();
-        for (String tag : tags) {
-            totalTag.append(tag);
-            totalTag.append(" ");
-        }
 
         String html = "<html><body style='width: %1spx'>%1s";
 
@@ -155,10 +147,6 @@ public class ItemPage extends JFrame {
         CustomJLabel dateAdded = new CustomJLabel("Date Added: " + itemDateAddedFormatted, Color.WHITE, textFont);
         contentPanel.add(dateAdded);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        // tags
-        CustomJLabel tagLabel = new CustomJLabel("Tags: " + totalTag, Color.WHITE, textFont);
-        contentPanel.add(tagLabel);
-
 
         // desired price
         CustomJLabel desiredPriceLabel = new CustomJLabel("Desired Price: " + desiredPrice + " " + currency, Color.WHITE, textFont);
@@ -210,15 +198,14 @@ public class ItemPage extends JFrame {
             PriceHistoryPage priceHistoryPage = new PriceHistoryPage(item, wl);
             priceHistoryPage.setContentPane(priceHistoryPage.getMainPanel());
             priceHistoryPage.setVisible(true);
-            priceHistoryPage.setLocationRelativeTo((Component)null);
-            priceHistoryPage.setDefaultCloseOperation(2);
+            priceHistoryPage.setLocationRelativeTo(null);
+            priceHistoryPage.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             this.dispose();
         });
 
-        // Button logic for desired price chnage
+        // Button logic for desired price change.
         desiredPriceButton.addActionListener(e -> {
             String priceText = desiredPriceInput.getText();
-
             double updatedDesiredPrice = Double.parseDouble(priceText);
             this.item.setDesiredPrice(updatedDesiredPrice);
         });
