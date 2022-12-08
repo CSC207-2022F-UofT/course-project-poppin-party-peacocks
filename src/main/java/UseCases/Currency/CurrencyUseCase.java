@@ -44,9 +44,8 @@ public class CurrencyUseCase {
         for (ProductList wishlist: dataBaseController.getListOfWishlists(currUser.getName()).getListOfWishlist()){
             ProductList updatedWishlist = new Wishlist(wishlist.getName());
             for (Product item: wishlist.getProductList()){
-                Product updateItem = item;
-                updateProductCurrency(updateItem);
-                updatedWishlist.addProduct(updateItem);
+                updateProductCurrency(item);
+                updatedWishlist.addProduct(item);
             }
             updatedProductLists.addWishlist(updatedWishlist);
         }

@@ -162,11 +162,7 @@ public class HomePage extends JFrame {
                 dbc = new DataBaseController();
                 listOfWishlists = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
                 dbc.saveListOfWishlists(listOfWishlists, dbc.getCurrentUser());
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (ParseException ex) {
-                throw new RuntimeException(ex);
-            } catch (org.json.simple.parser.ParseException ex) {
+            } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
                 throw new RuntimeException(ex);
             }
             userCurrency = dbc.getCurrentUser().getCurrency();
@@ -184,13 +180,7 @@ public class HomePage extends JFrame {
                     dbc.saveListOfWishlists(listOfWishlists, dbc.getCurrentUser());
                     dbc = new DataBaseController();
                     listOfWishlists = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
-                } catch (FileNotFoundException ex) {
-                    throw new RuntimeException(ex);
-                } catch (ParseException ex) {
-                    throw new RuntimeException(ex);
-                } catch (org.json.simple.parser.ParseException ex) {
-                    throw new RuntimeException(ex);
-                } catch (IOException ex) {
+                } catch (ParseException | org.json.simple.parser.ParseException | IOException ex) {
                     throw new RuntimeException(ex);
                 }
                 generateListOfWishlists();
@@ -201,11 +191,7 @@ public class HomePage extends JFrame {
             AddWishlistPage addPage = null;
             try {
                 addPage = new AddWishlistPage();
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            } catch (ParseException ex) {
-                throw new RuntimeException(ex);
-            } catch (org.json.simple.parser.ParseException ex) {
+            } catch (FileNotFoundException | ParseException | org.json.simple.parser.ParseException ex) {
                 throw new RuntimeException(ex);
             }
             addPage.setContentPane(addPage.getMainPanel());
