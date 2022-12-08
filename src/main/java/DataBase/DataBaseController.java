@@ -127,7 +127,7 @@ public class DataBaseController {
         userObject.put("user", user.getName());
         userObject.put("password", user.getPassword());
         userObject.put("currency", user.getCurrency());
-        fileWriter.write(userObject.toJSONString() + '\n');
+        fileWriter.write('\n' + userObject.toJSONString());
         fileWriter.close();
     }
 

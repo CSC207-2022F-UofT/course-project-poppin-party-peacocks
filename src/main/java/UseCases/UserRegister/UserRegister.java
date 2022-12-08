@@ -1,5 +1,6 @@
 package UseCases.UserRegister;
 
+import DataBase.DataBase;
 import DataBase.DataBaseController;
 import org.json.simple.parser.ParseException;
 
@@ -34,6 +35,7 @@ public class UserRegister implements UserRegisterCreateUser {
             return status.showFailure("Password is too short. Password must have at least 3 characters.");
         }
         dataBaseController.addUser(inputs.getTempUser());
+        DataBase.createWishListFile(DataBase.getWishlistPath(inputs.getInputtedUsername()));
         return status.showSuccess(inputs);
     }
 }

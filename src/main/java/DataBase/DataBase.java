@@ -39,4 +39,12 @@ public class DataBase {
                 System.out.println("File created!");
         }
     }
+    public static void createWishListFile(String fileDirectory) throws IOException {
+        File file = new File(fileDirectory);
+        FileWriter fileWriter = new FileWriter(fileDirectory, true);
+        fileWriter.write("{}");
+        if (file.createNewFile()) {
+            System.out.println("File created!");
+        }
+    }
 }
