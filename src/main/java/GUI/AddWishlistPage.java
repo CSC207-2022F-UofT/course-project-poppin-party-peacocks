@@ -1,5 +1,6 @@
 package GUI;
 
+import Entities.ListOfProductLists;
 import Entities.ListOfWishlists;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ import Entities.Wishlist;
  */
 public class AddWishlistPage extends JFrame {
     private final JPanel mainPanel;
-    private ListOfWishlists lwl;
+    private ListOfProductLists lwl;
 
     /**
      * getter method for mainPanel
@@ -24,7 +25,7 @@ public class AddWishlistPage extends JFrame {
         return mainPanel;
     }
 
-    public AddWishlistPage(ListOfWishlists lwl) {
+    public AddWishlistPage(ListOfProductLists lwl) {
         super("Add Wishlist");
         this.lwl = lwl;
         setLayout(null);

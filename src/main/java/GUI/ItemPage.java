@@ -12,6 +12,7 @@ import java.util.Date;
 import Entities.ProductList;
 import Entities.Wishlist;
 import Entities.Product;
+import UseCases.Currency.CurrencyUseCase;
 
 /**
  * This ItemPage class is a JFrame that displays the attributes of a given item from a wishlist.
@@ -40,7 +41,6 @@ public class ItemPage extends JFrame {
         setLayout(null);
         setSize(360, 640);
         setResizable(false);
-
         this.item = item;
         this.wl = wl;
 
@@ -146,7 +146,7 @@ public class ItemPage extends JFrame {
         contentPanel.add(description);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        // price chance
+        // price change
         CustomJLabel priceChange = new CustomJLabel("Price Change: " + itemPriceChange + " " + currency, Color.WHITE, textFont);
         contentPanel.add(priceChange);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));

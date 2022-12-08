@@ -3,6 +3,7 @@ package GUI;
 import Entities.Product;
 import Entities.ProductList;
 import Entities.Wishlist;
+import UseCases.Currency.CurrencyUseCase;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
 

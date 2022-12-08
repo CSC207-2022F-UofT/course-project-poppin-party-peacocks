@@ -112,8 +112,6 @@ public class Item implements Product {
         switch (itemCurrency){
             case "USD":
                 priceString =  "$" + itemPrice;
-            case "YUAN":
-                priceString =  "¥" + itemPrice;
             default:
                 priceString =  "$" + itemPrice;
         }

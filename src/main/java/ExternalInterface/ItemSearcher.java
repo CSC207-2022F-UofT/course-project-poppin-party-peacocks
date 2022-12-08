@@ -1,7 +1,10 @@
 package ExternalInterface;
 
+import DataBase.DataBaseController;
 import Entities.Item;
 import Entities.Product;
+import Entities.User;
+import UseCases.Currency.CurrencyUseCase;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,13 +20,8 @@ import java.util.Objects;
 
 public class ItemSearcher {
 
-    private String userCurrency = "CAD";
-    private double currencyChange = 1.36;
-    public ItemSearcher(){
-    }
 
-    public ItemSearcher(String userCurrency){
-        this.userCurrency = userCurrency;
+    public ItemSearcher(){
     }
 
     /**
@@ -191,9 +189,6 @@ public class ItemSearcher {
 
                 sellingPrice = Double.parseDouble(sellingPriceStr);
 
-                if (!userCurrency.equals("CAD")){
-                    sellingPrice /= currencyChange;
-                }
             }
             if (htmlCountRating != null) {
                 countRating = Integer.parseInt(htmlCountRating.text().replace(",", "").split(" ")[0]);
@@ -210,7 +205,15 @@ public class ItemSearcher {
             if (htmlDescription != null) {
                 description = htmlDescription.text();
             }
-            return new Item(name, sellingPrice, sellingPrice, url, description, new String[]{}, countRating, starRating, imgUrl);
+
+            Product itemResult = new Item(name, sellingPrice, sellingPrice, url, description, new String[]{}, countRating, starRating, imgUrl, "CAD");
+
+            CurrencyUseCase currencyUseCase = new CurrencyUseCase();
+            currencyUseCase.updateProductCurrency(itemResult);
+
+
+
+            return itemResult;
 
     }
 }

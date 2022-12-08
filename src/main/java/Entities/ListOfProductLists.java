@@ -8,4 +8,8 @@ import java.util.ArrayList;
 public interface ListOfProductLists {
     ArrayList<ProductList> getListOfWishlist();
     void addWishlist(ProductList wishlist);
+    void removeWishlist(String name);
+
+
+    ArrayList<String> getWishlistNames();
 }
