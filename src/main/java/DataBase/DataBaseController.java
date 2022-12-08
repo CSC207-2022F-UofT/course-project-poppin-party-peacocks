@@ -137,7 +137,6 @@ public class DataBaseController {
      * @param userName username to delete from the database
      */
     // JSONArray's library has errors, can ignore
-    @SuppressWarnings("unchecked")
     public void deleteUser(String userName) throws IOException, ParseException {
         File tempUserFile = new File(DataBase.getTempUserFilePath());
         File userFile = new File(DataBase.getUserFilePath());
@@ -168,7 +167,9 @@ public class DataBaseController {
             System.out.println("File not deleted");
         }
 
-        tempUserFile.renameTo(userFile);
+        if (!tempUserFile.renameTo(userFile)) {
+            System.out.println("File not renamed");
+        }
     }
 
     /** Retrieves the current active user
@@ -178,3 +179,4 @@ public class DataBaseController {
         return DataBase.currentUser;
     }
 }
+

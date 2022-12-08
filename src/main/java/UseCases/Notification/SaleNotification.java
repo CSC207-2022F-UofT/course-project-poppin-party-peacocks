@@ -63,3 +63,4 @@ public class SaleNotification implements BaseNotification {
         return this.showNotification;
     }
 }
+

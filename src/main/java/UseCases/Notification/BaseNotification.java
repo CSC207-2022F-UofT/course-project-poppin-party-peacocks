@@ -15,3 +15,4 @@ interface BaseNotification {
      * @returns whether notification should be shown */
     boolean checkNotificationAction() throws IOException;
 }
+

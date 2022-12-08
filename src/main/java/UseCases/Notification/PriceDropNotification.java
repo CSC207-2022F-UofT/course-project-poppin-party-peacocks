@@ -62,3 +62,4 @@ public class PriceDropNotification implements BaseNotification {
         return this.showNotification;
     }
 }
+
