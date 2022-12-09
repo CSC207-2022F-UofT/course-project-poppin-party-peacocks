@@ -1,8 +1,13 @@
 package GUI;
 
+import Controller.UserRegisterController;
 import DataBase.*;
 import Entities.*;
 import UseCases.Currency.CurrencyUseCase;
+import UseCases.UserRegister.UserRegister;
+import UseCases.UserRegister.UserRegisterCreateUser;
+import UseCases.UserRegister.UserRegisterResponseFormatter;
+import UseCases.UserRegister.UserRegisterStatus;
 
 import javax.swing.*;
 import java.awt.*;
@@ -77,6 +82,11 @@ public class HomePage extends JFrame {
         titleLabel.setBounds(122,17,130,24);
         topPanel.add(titleLabel);
 
+        // log out button
+        BackButton backButton = new BackButton();
+        backButton.setBounds(10,17,24,21);
+        mainPanel.add(backButton);
+
         // currency indicator
 
         JButton currencyIcon = new JButton(new ImageIcon("src/main/java/Assets/cadIcon.png"));
@@ -123,6 +133,25 @@ public class HomePage extends JFrame {
 
         mainPanel.setComponentZOrder(titleLabel, 1);
         mainPanel.setComponentZOrder(topPanel, 2);
+
+
+        backButton.addActionListener(e -> {
+            WelcomePage welcomePage;
+            UserRegisterStatus presenter = new UserRegisterResponseFormatter();
+            UserRegisterCreateUser interactor = new UserRegister(presenter);
+            UserRegisterController userRegisterController = new UserRegisterController(
+                    interactor
+            );
+
+            welcomePage = new WelcomePage(userRegisterController);
+            welcomePage.setContentPane(welcomePage.getMainPanel());
+            welcomePage.setVisible(true);
+            welcomePage.setLocationRelativeTo(null);
+            welcomePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            dispose();
+        });
+
+
 
         currencyButton.addActionListener(e -> {
             mainPanel.remove(topPanel);
