@@ -46,3 +46,10 @@ support for other online retailers
 6. (Currently on a Wishlist Page): Click the "Add Item" button at the bottom right of the screen.
 7. (Currently on the Item Search Page): At the text bar on the top of the page, enter a desired keyword and click the "Go" Button (example: "mechanical keyboard")
 8. Wait up to 70 seconds for the search results to appear on screen. 
+
+### Testing Coverage 
+Link to drive: https://drive.google.com/drive/folders/1vBOrXq9PS0V2Lgpx0BiFhdVVPZ0tIobO?usp=sharing
+![image](https://user-images.githubusercontent.com/33236708/206597408-60bb1d4d-36ff-4e6b-8608-adabddd37b35.png)
+
+Note: Some tests fail with autograder, but work on some of our member's local machines. For user tests, Lina's machine runs it perfectly. For Database tests, Herman's machine runs it perfectly.
+
