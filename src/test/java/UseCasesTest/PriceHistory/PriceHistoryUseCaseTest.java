@@ -446,7 +446,7 @@ public class PriceHistoryUseCaseTest {
     @Test
     public void testUpdatePriceHistory() throws IOException {
         Item plushie = new Item("Plushie", 40.99, 30.00, "https://www.amazon.ca/Stuffed-Squishy-Stretchy-Adorable-Decoration/dp/B091L38GVG/ref=sr_1_7?gclid=CjwKCAiAs8acBhA1EiwAgRFdwzfy71GX4Lddrhmnd_oNd9lD86PsfT9WDZwFEQSN7xEsXn8PuS8XQRoCyq8QAvD_BwE&hvadid=588806782452&hvdev=c&hvlocphy=9061009&hvnetw=g&hvqmt=e&hvrand=12666777836464792089&hvtargid=kwd-381299933661&hydadcr=1758_13475692&keywords=amazon+plushies&qid=1670544714&sr=8-7&tag=googcana-20",
-                "Description from amazon (or you write your own)", new String[]{"toys"}, 0, 0, "www.amazonimage.com/keyboard");
+                "Description from amazon (or you write your own)", 0, 0, "www.amazonimage.com/keyboard");
         PriceHistoryUseCase ph = new PriceHistoryUseCase(plushie);
         ArrayList<Date> priceHistoryDatesTester = new ArrayList<>();
         priceHistoryDatesTester.add(new Date());
@@ -463,7 +463,6 @@ public class PriceHistoryUseCaseTest {
         testPrices = plushie.getPriceHistoryData();
         Assertions.assertEquals(testPrices.get(testPrices.size() - 1), priceTester);
     }
-
 
 }
 
