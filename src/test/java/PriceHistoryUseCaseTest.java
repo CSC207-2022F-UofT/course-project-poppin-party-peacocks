@@ -460,5 +460,6 @@ public class PriceHistoryUseCaseTest {
         testPrices = plushie.getPriceHistoryData();
         Assertions.assertEquals(testPrices.get(testPrices.size() - 1), priceTester);
     }
+
 }
 
