@@ -115,18 +115,20 @@ public class WishlistPage extends JFrame {
         }
         JLabel titleLabel = new JLabel(titleString);
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBounds(50,20,280,20);
+        titleLabel.setBounds(90,20,280,20);
         titleLabel.setFont(new Font("Montserrat", Font.PLAIN, 20));
         topPanel.add(titleLabel);
 
-        mainPanel.add(topPanel);
+
         RefreshButton refreshButton = new RefreshButton();
         refreshButton.setBounds(300,9,36,36);
-        mainPanel.add(refreshButton);
+        topPanel.add(refreshButton);
 
         BackButton backButton = new BackButton();
         backButton.setBounds(10,17,24,21);
-        mainPanel.add(backButton);
+        topPanel.add(backButton);
+
+        mainPanel.add(topPanel);
 
         SortButton sortButton = new SortButton();
         sortButton.setBounds(20, 515, 60 ,60);
