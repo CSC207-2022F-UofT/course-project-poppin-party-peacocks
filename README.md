@@ -2,7 +2,7 @@
 ## A wishlist app that keeps you updated on the items you want to buy!
 
 ### Project Description
-This program is designed to allow the user to search for things on online retailer websites (currently only amazon is supported) and add items to a wishlist. The program then updates the prices of the items and notifies the user when an item is below their desired price for the item.
+This program is designed to allow the user to search for things on online retailer websites (currently only amazon is supported) and add items to a wishlist. The program then updates the prices of the items and notifies the user when an item is below their desired price for the item. Users can also view items in more detail along with their price data gathered over time.
 
 ## Currently implemented features
 GUI features:
