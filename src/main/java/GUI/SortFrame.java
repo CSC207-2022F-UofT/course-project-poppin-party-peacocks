@@ -19,7 +19,7 @@ public class SortFrame extends JFrame {
     ProductList wl;
     // the wishlist page that the sorting frame is being called from.
     WishlistPage wlp;
-    // the font used for displaying the text in buttons anb labels.
+    // the font used for displaying the text in buttons and labels.
     Font textFont = new Font("Arial", Font.PLAIN, 12);
     // the list of buttons. Used to change the appearance of the selected one.
     ArrayList<CustomJButton> sortButtons;

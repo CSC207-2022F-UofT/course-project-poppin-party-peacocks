@@ -116,12 +116,7 @@ public class Item implements Product {
     }
     /** gets the price depending on if the currency is set to CAD or USD*/
     public String getProductPriceString(){
-        String priceString;
-        if ("USD".equals(itemCurrency)) {
-            priceString = "$" + itemPrice;
-        }
-        priceString = "$" + itemPrice;
-        return priceString;
+        return "$" + itemPrice;
     }
     public double getPriceChange(){
         return this.priceChange;

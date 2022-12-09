@@ -16,7 +16,7 @@ public class WelcomePage extends JFrame{
 
     /**
      * returns the main panel for setting content pane
-     * @return the maain panel, called by other classes
+     * @return the main panel, called by other classes
      */
     public JPanel getMainPanel() {
         return mainPanel;
