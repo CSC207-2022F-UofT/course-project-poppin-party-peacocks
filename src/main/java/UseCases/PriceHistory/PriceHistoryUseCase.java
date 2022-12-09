@@ -30,7 +30,7 @@ import java.util.TimerTask;
  * @author Chin Chin
  */
 public class PriceHistoryUseCase {
-    // item: the corresponding item that the price history will be based off of
+    /** item: the corresponding item that the price history will be based off of */
     public Product item;
     DecimalFormat formatter = new DecimalFormat("#.##");
 
@@ -49,7 +49,7 @@ public class PriceHistoryUseCase {
                 }
             }
         };
-        Scheduler scheduler = new Scheduler(t, 86400000);
+        new Scheduler(t, 86400000);
     }
 
     /**

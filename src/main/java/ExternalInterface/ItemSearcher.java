@@ -57,11 +57,12 @@ public class ItemSearcher {
     }
 
     /**
-     * Returns Arraylist of Item objects based on search results of the specified keyword on AMazon
+     * Returns Arraylist of Item objects based on search results of the specified keyword on Amazon
      *
      * @param keyword     string keyword to search in Amazon
      * @param marketplace specified marketplace (ex: "CA" for Canada) to search in Amazon
      */
+    @SuppressWarnings("unused")
     public ArrayList<Product> searchToList(String keyword, String marketplace) throws IOException, InterruptedException {
         String response = apiSearch(keyword, marketplace);
         response = cleanResponse(response);

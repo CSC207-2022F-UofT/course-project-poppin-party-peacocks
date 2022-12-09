@@ -3,8 +3,9 @@ package UseCases.LoginAction;
 import DataBase.*;
 import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
-import Entities.*;
 import java.util.Objects;
+
+import Entities.*;
 
 public class LoginAction {
     private final String inputtedUsername;
@@ -23,10 +24,7 @@ public class LoginAction {
     public boolean checkUsername() throws FileNotFoundException, ParseException {
         DataBaseController dataBaseController = new DataBaseController();
         User existingUser = dataBaseController.getUser(this.inputtedUsername);
-        if (existingUser.getName() == "Default User") {
-            return false;
-        }
-        return true;
+        return !Objects.equals(existingUser.getName(), "Default User");
     }
 
     /**

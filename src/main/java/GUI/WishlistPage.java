@@ -3,7 +3,6 @@ package GUI;
 import Entities.Product;
 import Entities.ProductList;
 import Entities.Wishlist;
-import UseCases.Currency.CurrencyUseCase;
 import Entities.*;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
@@ -13,7 +12,6 @@ import ExternalInterface.ItemUpdateChecker;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -40,7 +38,7 @@ public class WishlistPage extends JFrame {
     // the current ascending/descending setting for sorting
     boolean isSortedAscending;
     // database controller for reading and writing the wishlist and list of wishlist
-    private DataBaseController dbc;
+    private final DataBaseController dbc;
     // a temporary list of product list to save to the database after being mutated
     private final ListOfProductLists lwl;
 
@@ -156,9 +154,7 @@ public class WishlistPage extends JFrame {
             HomePage homePage;
             try {
                 homePage = new HomePage();
-            } catch (FileNotFoundException | org.json.simple.parser.ParseException | ParseException ex) {
-                throw new RuntimeException(ex);
-            } catch (IOException ex) {
+            } catch (org.json.simple.parser.ParseException | ParseException | IOException ex) {
                 throw new RuntimeException(ex);
             }
             homePage.setContentPane(homePage.getMainPanel());
@@ -217,15 +213,6 @@ public class WishlistPage extends JFrame {
             } catch (ParseException | org.json.simple.parser.ParseException | IOException ex) {
                 throw new RuntimeException(ex);
             }
-//            if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
-//                wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
-//                try {
-//                    generateListOfItems(false);
-//                } catch (IOException ex) {
-//                    throw new RuntimeException(ex);
-//                }
-//            }
-
         });
         addButton.addActionListener(e -> {
             AddItemPage addItemPage = new AddItemPage(wl);

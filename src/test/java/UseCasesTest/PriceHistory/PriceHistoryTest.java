@@ -199,22 +199,21 @@ public class PriceHistoryTest {
      * testing that the calculateHighestPrice method returns correct outputs with valid inputs (reaching
      * all valid input branches/lines of code)
      */
-//    @Test
-//    public void testCalculateHighestPriceValidInputs(){
-//        ArrayList<Double> priceHistoryDataTester = new ArrayList<>();
-//        for (double i = 0; i < 50; i++) {
-//            priceHistoryDataTester.add(i);
-//        }
-//        plushie.setPriceHistoryData(priceHistoryDataTester);
-//        ArrayList<Date> priceHistoryDatesTester = new ArrayList<>();
-//        for (int i = 0; i < 50; i++){
-//            priceHistoryDatesTester.add(new Date());
-//        }
-//        plushie.setPriceHistoryDates(priceHistoryDatesTester);
-//        Assertions.assertEquals(priceHistory.calculateHighestPrice("30 days"), 49);
-//        Assertions.assertEquals(priceHistory.calculateHighestPrice("All Time"), 49);
-//
-//    }
+    @Test
+    public void testCalculateHighestPriceValidInputs(){
+        ArrayList<Double> priceHistoryDataTester = new ArrayList<>();
+        for (double i = 0; i < 50; i++) {
+            priceHistoryDataTester.add(i);
+        }
+        plushie.setPriceHistoryData(priceHistoryDataTester);
+        ArrayList<Date> priceHistoryDatesTester = new ArrayList<>();
+        for (int i = 0; i < 50; i++){
+            priceHistoryDatesTester.add(new Date());
+        }
+        plushie.setPriceHistoryDates(priceHistoryDatesTester);
+        Assertions.assertEquals(priceHistory.calculateHighestPrice("30 days"), 49);
+        Assertions.assertEquals(priceHistory.calculateHighestPrice("All Time"), 49);
+    }
 
     /**
      * testing that the calculateHighestPrice method returns correct outputs with invalid inputs (reaching
