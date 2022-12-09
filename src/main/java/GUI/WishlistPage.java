@@ -12,6 +12,7 @@ import ExternalInterface.ItemUpdateChecker;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -161,7 +162,7 @@ public class WishlistPage extends JFrame {
             }
             homePage.setContentPane(homePage.getMainPanel());
             homePage.setVisible(true);
-            homePage.setLocationRelativeTo(null);
+            homePage.setLocationRelativeTo(this);
             homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
         });
@@ -187,6 +188,7 @@ public class WishlistPage extends JFrame {
             if(!isSortFrameOpen){
                 @SuppressWarnings("unused")
                 SortFrame sortFrame = new SortFrame(this, wl, currentSortingMethod, isSortedAscending);
+                sortFrame.setLocationRelativeTo(sortButton);
                 isSortFrameOpen = true;
             }
         });
@@ -220,17 +222,22 @@ public class WishlistPage extends JFrame {
             AddItemPage addItemPage = new AddItemPage(wl);
             addItemPage.setContentPane(addItemPage.getMainPanel());
             addItemPage.setVisible(true);
-            addItemPage.setLocationRelativeTo(null);
+            addItemPage.setLocationRelativeTo(this);
             addItemPage.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             dispose();
         });
         viewItemButton.addActionListener(e -> {
             if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
                 Product selectedItem = itemList.get(itemPanelJList.getSelectedIndex());
-                ItemPage itemPage = new ItemPage(selectedItem, wl);
+                ItemPage itemPage;
+                try {
+                    itemPage = new ItemPage(selectedItem, wl);
+                } catch (FileNotFoundException | ParseException | org.json.simple.parser.ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
                 itemPage.setContentPane(itemPage.getMainPanel());
                 itemPage.setVisible(true);
-                itemPage.setLocationRelativeTo(null);
+                itemPage.setLocationRelativeTo(this);
                 itemPage.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 dispose();
             }
@@ -274,7 +281,7 @@ public class WishlistPage extends JFrame {
         itemPanelJList = new JList<>(tempPanelList);
         itemPanelJList.setCellRenderer(new ItemPanelRenderer());
         itemPanelJList.setFixedCellHeight(100);
-        itemPanelJList.setFixedCellWidth(310);
+        itemPanelJList.setFixedCellWidth(250);
         itemPanelJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         itemPanelJList.setBackground(new Color(194, 234, 186));
         itemScrollPane = new JScrollPane(itemPanelJList);

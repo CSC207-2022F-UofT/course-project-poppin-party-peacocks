@@ -128,7 +128,7 @@ public class AddWishlistPage extends JFrame {
                     }
                     wlPage.setContentPane(wlPage.getMainPanel());
                     wlPage.setVisible(true);
-                    wlPage.setLocationRelativeTo(null);
+                    wlPage.setLocationRelativeTo(this);
                     wlPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     dispose();
                 }
@@ -145,7 +145,7 @@ public class AddWishlistPage extends JFrame {
             }
             listOfWL.setContentPane(listOfWL.getMainPanel());
             listOfWL.setVisible(true);
-            listOfWL.setLocationRelativeTo(null);
+            listOfWL.setLocationRelativeTo(this);
             listOfWL.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
         });

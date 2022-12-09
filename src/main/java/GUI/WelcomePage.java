@@ -67,7 +67,6 @@ public class WelcomePage extends JFrame{
         switchToLoginButton.addActionListener(wpal.getLoginActionListener());
         switchToSignupButton.addActionListener(wpal.getSignupActionListener());
 
-        // footer panel
         JPanel footerPanel = new JPanel(new FlowLayout());
         JButton gotoLoginPanelButton = new JButton("Login");
         JButton gotoSignupPanelButton = new JButton("Sign Up");

@@ -127,4 +127,14 @@ public class WishlistTest {
 
         Assertions.assertTrue(true, String.valueOf(christmasWishlist.removeProduct(animeFigure)));
     }
+
+    @Test
+    public void setProductTest() {
+        christmasWishlist.addProduct(myFavDrink);
+        Item myNewFavDrink = myFavDrink;
+        myNewFavDrink.setDesiredPrice(9.99);
+        christmasWishlist.setProduct(myNewFavDrink.getProductName(), myNewFavDrink);
+
+        Assertions.assertEquals(9.99, christmasWishlist.getProductList().get(0).getProductDesiredPrice());
+    }
 }

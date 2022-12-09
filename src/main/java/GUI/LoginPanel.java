@@ -60,7 +60,7 @@ public class LoginPanel extends JPanel{
                             HomePage homePage = new HomePage();
                             homePage.setContentPane(homePage.getMainPanel());
                             homePage.setVisible(true);
-                            homePage.setLocationRelativeTo(null);
+                            homePage.setLocationRelativeTo(currJFrame);
                             homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                             currJFrame.dispose();
                         }

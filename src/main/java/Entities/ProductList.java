@@ -26,4 +26,6 @@ public interface ProductList {
     boolean addProduct(Product product);
     /** removes a Product from ProductList and DisplayList*/
     boolean removeProduct(Product product);
+
+    void setProduct(String productName, Product newProduct);
 }

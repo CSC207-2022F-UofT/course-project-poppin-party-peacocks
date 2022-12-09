@@ -1,5 +1,7 @@
 package GUI;
 
+import DataBase.DataBaseController;
+import Entities.ListOfProductLists;
 import Entities.Product;
 import Entities.ProductList;
 
@@ -7,8 +9,10 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.json.simple.parser.ParseException;
@@ -35,7 +39,7 @@ public class ItemPage extends JFrame {
      * @param item item to display in this page.
      * @param wl that the item belongs to in order to return.
      */
-    public ItemPage(Product item, ProductList wl) {
+    public ItemPage(Product item, ProductList wl) throws FileNotFoundException, java.text.ParseException, ParseException {
 
         // JFrame setup
         super(item.getProductName());
@@ -45,11 +49,14 @@ public class ItemPage extends JFrame {
 
         this.item = item;
 
-        // constants
+        // constants and objects
         final Color color1 = new Color(194, 234, 186);
         final Color color2 = new Color(106, 189, 154);
         final Font textFont = new Font("Montserrat", Font.PLAIN, 14);
         final Font titleFont = new Font("Montserrat", Font.PLAIN, 20);
+        DecimalFormat df = new DecimalFormat("0.00");
+        DataBaseController dbc = new DataBaseController();
+        final ListOfProductLists lwl = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
 
         // main panel
         mainPanel = new GradientJPanel(null, color1, color2);
@@ -62,7 +69,7 @@ public class ItemPage extends JFrame {
         CustomJButton backButton = new CustomJButton("", 0, 0,
                 color2, color2, textFont);
         backButton.setIcon(new ImageIcon("src/main/java/Assets/backArrow.png"));
-        backButton.setBounds(15, 15, 25, 25);
+        backButton.setBounds(5, 15, 25, 25);
         headerPanel.add(backButton);
         String productName = item.getProductName();
         if (productName.length() > 24){
@@ -186,26 +193,46 @@ public class ItemPage extends JFrame {
             }
             wlPage.setContentPane(wlPage.getMainPanel());
             wlPage.setVisible(true);
-            wlPage.setLocationRelativeTo(null);
+            wlPage.setLocationRelativeTo(this);
             wlPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
         });
         // Opens up graph page alongside current ItemPage.
         graphButton.addActionListener(e -> {
-
             PriceHistoryPage priceHistoryPage = new PriceHistoryPage(item, wl);
             priceHistoryPage.setContentPane(priceHistoryPage.getMainPanel());
             priceHistoryPage.setVisible(true);
-            priceHistoryPage.setLocationRelativeTo(null);
+            priceHistoryPage.setLocationRelativeTo(this);
 
             priceHistoryPage.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             this.dispose();
         });
         // Button logic for desired price change.
+
         desiredPriceButton.addActionListener(e -> {
             String priceText = desiredPriceInput.getText();
-            double updatedDesiredPrice = Double.parseDouble(priceText);
-            this.item.setDesiredPrice(updatedDesiredPrice);
+            try{
+                double updatedDesiredPrice = Double.parseDouble(priceText);
+                this.item.setDesiredPrice(updatedDesiredPrice);
+
+                desiredPriceLabel.setText("Desired Price: " +
+                        df.format(item.getProductDesiredPrice()) + " " + currency);
+                desiredPriceLabel.repaint();
+                contentPanel.repaint();
+                scrollBar.repaint();
+                mainPanel.repaint();
+
+                wl.setProduct(item.getProductName(), item);
+                wl.removeProduct(item);
+                wl.addProduct(item);
+                lwl.setWishlist(lwl.getIndexByName(wl.getName()),wl);
+                dbc.saveListOfWishlists(lwl, dbc.getCurrentUser());
+            } catch (NumberFormatException e1){
+                JOptionPane.showMessageDialog(desiredPriceButton,
+                        "Please enter a valid price in the form of a double");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 }
