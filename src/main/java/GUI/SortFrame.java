@@ -1,7 +1,6 @@
 package GUI;
 
 import Entities.ProductList;
-import Entities.Wishlist;
 import Controller.ProductComparatorController;
 
 import javax.swing.*;
@@ -10,34 +9,64 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.*;
 
-
+/**
+ * the frame that contains the sorting methods that the user can choose from.
+ */
 public class SortFrame extends JFrame {
+    // the main panel that contains all the buttons and labels.
     JPanel mainPanel;
+    // the wishlist to sort.
     ProductList wl;
+    // the wishlist page that the sorting frame is being called from.
     WishlistPage wlp;
+    // the font used for displaying the text in buttons and labels.
     Font textFont = new Font("Arial", Font.PLAIN, 12);
-
+    // the list of buttons. Used to change the appearance of the selected one.
     ArrayList<CustomJButton> sortButtons;
+    // the current sorting method selected by the user that the list is using.
     String currentSortingMethod;
+    // the current ascending/descending sorting settings that the user selected.
     boolean isAscending;
+    // the sort by name button. When pressed, sorts the list by name in ascending/descending order.
     CustomJButton sortByName;
+    // the sort by price button. When pressed, sorts the list by price in ascending/descending order.
     CustomJButton sortByPrice;
+    // the sort by date button. When pressed, sorts the list by date in ascending/descending order.
     CustomJButton sortByDate;
+    // the sort by review stars button. When pressed, sorts the list by review stars in ascending/descending order.
     CustomJButton sortByReviewStars;
+    // the sort by review count button. When pressed, sorts the list by review count in ascending/descending order.
     CustomJButton sortByReviewCount;
+    // the ascending button. When pressed, makes all sorting methods sort in ascending order.
     CustomJButton ascending;
+    // the descending button. When pressed, makes all sorting methods sort in descending order.
     CustomJButton descending;
+    // the sort button. When pressed, sorts the list based on the current sorting method and order setting.
     CustomJButton sort;
+    // the text that displays the current sorting method and sorting order.
     JLabel sortingText;
-    public SortFrame(WishlistPage wlp, ProductList wl, String curSortMethod, boolean b){
+
+    /**
+     * constructor. Creates an instance of SortFrame that has references to the wishlist page it was opened from,
+     * the withlist to sort, the current sorting method, and the sorting order.
+     * @param wlp the wishlist page the sort frame was opened from
+     * @param wl the wishlist to sort
+     * @param curSortMethod the previously selected sorting method, as of opening the sort frame
+     * @param isAscending the previously selected sorting order, as of opening the sort frame
+     */
+    public SortFrame(WishlistPage wlp, ProductList wl, String curSortMethod, boolean isAscending){
         super("Sort");
         this.wl = wl;
         this.wlp = wlp;
         this.currentSortingMethod = curSortMethod;
-        this.isAscending = b;
+        this.isAscending = isAscending;
         initializeJFrame();
         initializeMainPanel();
     }
+
+    /**
+     * initialises the JFrame. Sets up its settings and initialises the main panel.
+     */
     public void initializeJFrame(){
         setLayout(null);
         setResizable(false);
@@ -48,8 +77,11 @@ public class SortFrame extends JFrame {
         setVisible(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
     }
+
+    /**
+     * initialises the main panel. Creates and adds all buttons and labels used. Adds the buttons' action listeners
+     */
     public void initializeMainPanel(){
         sortButtons = new ArrayList<>();
         sortByName = new CustomJButton("Sort By Name", 0 , 0,
@@ -167,6 +199,9 @@ public class SortFrame extends JFrame {
         updateSelection();
     }
 
+    /**
+     * updates the appearances of all the buttons so that the currently selected one is highlighted.
+     */
     public void updateSelection(){
         for (CustomJButton b:sortButtons){
             if (b.getText().equals(currentSortingMethod)){

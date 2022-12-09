@@ -12,13 +12,17 @@ import UseCases.Comparator.ProductComparatorFactory;
  * and sorts the wishlist using that comparator
  */
 public class ProductComparatorController {
+    /** field that contains the productList that we would like to use*/
     private final ProductList productList;
 
+    /**constructor*/
     public ProductComparatorController(ProductList wishlist){
         this.productList = wishlist;
     }
 
     /**
+     * the main method that we use to sort productList. creates a factory, then a corresponding comparator, then sorts
+     * using order and said comparator
      * @param order the String the user wants to sort by; "ascending" or "descending"
      * @param word the name of the productComparator the user wants to make;
      *             "name", "price", "date", "review count", "review star"
@@ -45,9 +49,5 @@ public class ProductComparatorController {
             default:
                 throw new IllegalArgumentException();
         }
-    }
-
-    public ProductList getProductList() {
-        return productList;
     }
 }

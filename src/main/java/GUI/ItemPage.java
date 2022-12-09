@@ -11,14 +11,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.json.simple.parser.ParseException;
 
 /**
  * This ItemPage class is a JFrame that displays the attributes of a given item from a wishlist.
  */
 public class ItemPage extends JFrame {
+    // main panel
     private final GradientJPanel mainPanel;
+    // item to be shown
     private final Product item;
-    private final ProductList wl;
 
     /**
      * mainPanel getter method.
@@ -30,18 +32,18 @@ public class ItemPage extends JFrame {
 
     /**
      * ItemPage constructor.
+     * @param item item to display in this page.
+     * @param wl that the item belongs to in order to return.
      */
-
     public ItemPage(Product item, ProductList wl) {
 
         // JFrame setup
-        super("Item name here");
+        super(item.getProductName());
         setLayout(null);
         setSize(360, 640);
         setResizable(false);
 
         this.item = item;
-        this.wl = wl;
 
         // constants
         final Color color1 = new Color(194, 234, 186);
@@ -67,10 +69,11 @@ public class ItemPage extends JFrame {
             productName = productName.substring(0,23) + "...";
         }
         CustomJLabel thisItemLabel = new CustomJLabel(productName, Color.WHITE, titleFont);
-        thisItemLabel.setBounds(75, 17, 230, 24);
+        thisItemLabel.setBounds(75, 17, 250, 24);
         headerPanel.add(thisItemLabel);
+
         CustomJButton graphButton = new CustomJButton("Details", 0, 0, color2, Color.WHITE, textFont);
-        graphButton.setBounds(130, 580, 90, 30);
+        graphButton.setBounds(130, 565, 90, 30);
 
         mainPanel.add(graphButton);
         mainPanel.add(headerPanel);
@@ -111,12 +114,6 @@ public class ItemPage extends JFrame {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String itemDateAddedFormatted = dateFormat.format(itemDateAdded);
         String url = item.getProductURL();
-        String[] tags = item.getTags();
-        StringBuilder totalTag = new StringBuilder();
-        for (String tag : tags) {
-            totalTag.append(tag);
-            totalTag.append(" ");
-        }
 
         String html = "<html><body style='width: %1spx'>%1s";
 
@@ -145,8 +142,7 @@ public class ItemPage extends JFrame {
         CustomJLabel description = new CustomJLabel(String.format(html, 130, "Description: " + itemDescription), Color.WHITE, textFont);
         contentPanel.add(description);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-
-        // price chance
+        // price change
         CustomJLabel priceChange = new CustomJLabel("Price Change: " + itemPriceChange + " " + currency, Color.WHITE, textFont);
         contentPanel.add(priceChange);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -154,10 +150,6 @@ public class ItemPage extends JFrame {
         CustomJLabel dateAdded = new CustomJLabel("Date Added: " + itemDateAddedFormatted, Color.WHITE, textFont);
         contentPanel.add(dateAdded);
         contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        // tags
-        CustomJLabel tagLabel = new CustomJLabel("Tags: " + totalTag, Color.WHITE, textFont);
-        contentPanel.add(tagLabel);
-
 
         // desired price
         CustomJLabel desiredPriceLabel = new CustomJLabel("Desired Price: " + desiredPrice + " " + currency, Color.WHITE, textFont);
@@ -176,11 +168,11 @@ public class ItemPage extends JFrame {
 
         // url
         CustomJLabel urlLabel = new CustomJLabel("URL:", Color.WHITE, textFont);
-        urlLabel.setBounds(160, 520, 100, 20);
+        urlLabel.setBounds(160, 510, 100, 20);
         mainPanel.add(urlLabel);
         JTextField urlField = new JTextField("URL:\n" + url);
         urlField.setEditable(false);
-        urlField.setBounds(75, 550, 200, 30);
+        urlField.setBounds(75, 530, 200, 30);
         mainPanel.add(urlField);
 
         // Button Logic
@@ -189,7 +181,7 @@ public class ItemPage extends JFrame {
             WishlistPage wlPage;
             try {
                 wlPage = new WishlistPage(wl);
-            } catch (IOException ex) {
+            } catch (IOException | ParseException | java.text.ParseException ex) {
                 throw new RuntimeException(ex);
             }
             wlPage.setContentPane(wlPage.getMainPanel());
@@ -200,18 +192,18 @@ public class ItemPage extends JFrame {
         });
         // Opens up graph page alongside current ItemPage.
         graphButton.addActionListener(e -> {
+
             PriceHistoryPage priceHistoryPage = new PriceHistoryPage(item, wl);
             priceHistoryPage.setContentPane(priceHistoryPage.getMainPanel());
             priceHistoryPage.setVisible(true);
             priceHistoryPage.setLocationRelativeTo(null);
-            priceHistoryPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            dispose();
-        });
 
-        // Button logic for desired price chnage
+            priceHistoryPage.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            this.dispose();
+        });
+        // Button logic for desired price change.
         desiredPriceButton.addActionListener(e -> {
             String priceText = desiredPriceInput.getText();
-
             double updatedDesiredPrice = Double.parseDouble(priceText);
             this.item.setDesiredPrice(updatedDesiredPrice);
         });

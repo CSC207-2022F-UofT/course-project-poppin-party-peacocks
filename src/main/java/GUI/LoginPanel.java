@@ -1,30 +1,32 @@
 package GUI;
-import GUI.Listeners.WelcomePageActionListenerNavigation;
 import UseCases.LoginAction.LoginAction;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
+/**
+ * the login panel displayed in the welcome page. Contains GUI components for logging in.
+ */
 public class LoginPanel extends JPanel{
-    private JFrame currJFrame;
-    private Color color1 = new Color(194, 234, 186);
-    private Color color2 = new Color(106, 189, 154);
-    private Font buttonFont = new Font("Sans Serif", Font.PLAIN, 12);
 
+    /**
+     * constructor. Creates an instance of login panel which has a reference to the JFrame it is added to.
+     * @param currJFrame the current JFrame the login panel is added to
+     */
     public LoginPanel(JFrame currJFrame){
         super(null);
         this.setBounds(0,80,360,460);
+        Color color2 = new Color(106, 189, 154);
         this.setBackground(color2);
-        this.currJFrame = currJFrame;
 
         JLabel logo = new JLabel();
         logo.setIcon(new ImageIcon("src/main/java/Assets/logo.png"));
         logo.setBounds(85,22,180,180);
         this.add(logo);
 
-        // login panel
         JLabel usernameLabel = new JLabel("Username");
         usernameLabel.setBounds(42,266,100,15);
 
@@ -37,13 +39,12 @@ public class LoginPanel extends JPanel{
         JPasswordField passwordField = new JPasswordField();
         passwordField.setBounds(38,341,274,30);
 
+        Font buttonFont = new Font("Sans Serif", Font.PLAIN, 12);
         CustomJButton loginButton = new CustomJButton("Login",
                 0,0,
                 Color.WHITE, Color.BLACK,
                 buttonFont);
         loginButton.setBounds(120,420,108,24);
-
-        WelcomePageActionListenerNavigation wpaln = new WelcomePageActionListenerNavigation(currJFrame);
 
         loginButton.addActionListener(e->{
             LoginAction login = new LoginAction(usernameField.getText(),
@@ -63,19 +64,14 @@ public class LoginPanel extends JPanel{
                             homePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                             currJFrame.dispose();
                         }
-                    } catch (FileNotFoundException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (ParseException ex) {
+                    } catch (ParseException | java.text.ParseException | IOException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            } catch (ParseException ex) {
+            } catch (FileNotFoundException | ParseException ex) {
                 throw new RuntimeException(ex);
             }
         });
-
         this.add(usernameLabel);
         this.add(usernameField);
         this.add(passwordLabel);

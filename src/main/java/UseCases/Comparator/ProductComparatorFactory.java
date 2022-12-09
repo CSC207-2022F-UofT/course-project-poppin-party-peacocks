@@ -6,9 +6,10 @@ import Entities.*;
  * a class that returns ProductComparators depending on word
  */
 public class ProductComparatorFactory {
+
     /**
-     * Returns the comparator type based on word
-     * @param word string name of  the comparators
+     * Returns the corresponding comparator type based on word
+     * @param word string name of the comparators
      * @return comparator based on user's word input
      */
     public ProductComparator createComparator (String word) {

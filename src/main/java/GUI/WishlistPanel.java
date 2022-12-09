@@ -8,11 +8,17 @@ import java.awt.*;
  * Contains the name of the wishlist.
  */
 public class WishlistPanel extends JPanel {
-
+    // the name of the wishlist to be displayed on the panel
     String wishlistName;
+    // the color of the border of the panel
     Color borderColor;
+    // the color of the background of the panel
     Color panelColor;
 
+    /**
+     * constructor
+     * @param wishlistName name of the wishlist, passed in when constructing the wishlist panel
+     */
     public WishlistPanel(String wishlistName) {
         super(null);
         if (wishlistName.length() > 20){
@@ -20,7 +26,7 @@ public class WishlistPanel extends JPanel {
         }else{
             this.wishlistName = wishlistName;
         }
-        this.setSize(300,75);
+        this.setSize(300,100);
         borderColor = Color.WHITE;
         panelColor = new Color(236, 236, 236);
     }
@@ -46,11 +52,9 @@ public class WishlistPanel extends JPanel {
         g2.fillRoundRect(0,0,getWidth()-1,getHeight()-1,20,20);
         g2.setColor(borderColor);
         g2.drawRoundRect(0,0,getWidth()-1,getHeight()-1,20,20);
-        g2.drawRect(8,8, getHeight()-17, getHeight()-17);
 
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("Montserrat", Font.PLAIN, 18));
-        g2.drawString(wishlistName, 100,25);
-        g2.setFont(new Font("Montserrat", Font.PLAIN, 12));
+        g2.drawString(wishlistName, 10,25);
     }
 }

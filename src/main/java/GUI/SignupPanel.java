@@ -4,21 +4,25 @@ import javax.swing.*;
 import java.awt.*;
 import Controller.UserRegisterController;
 
+/**
+ * The panel inlaid in the welcome page that contains the contents of the signup page.
+ */
 public class SignupPanel extends JPanel {
-    private final JFrame currJFrame;
-    private final Color color1 = new Color(194, 234, 186);
-    private final Color color2 = new Color(106, 189, 154);
-    private final Font buttonFont = new Font("Sans Serif", Font.PLAIN, 12);
+    // user registration controller containing logic for signing up
     UserRegisterController userRegisterController;
 
-    public SignupPanel(JFrame currJFrame, UserRegisterController userRegisterController) {
+    /**
+     * constructor. Creates an instance of the signup panel with a user registration controller.
+     * @param userRegisterController the controller containing logic for sign up.
+     */
+    public SignupPanel(UserRegisterController userRegisterController) {
         super(null);
 
         this.userRegisterController = userRegisterController;
 
         this.setBounds(0, 80, 360, 460);
+        Color color2 = new Color(106, 189, 154);
         this.setBackground(color2);
-        this.currJFrame = currJFrame;
 
         JLabel logo = new JLabel();
         logo.setIcon(new ImageIcon("src/main/java/Assets/logo.png"));
@@ -38,6 +42,7 @@ public class SignupPanel extends JPanel {
         JPasswordField createPasswordField = new JPasswordField();
         createPasswordField.setBounds(38, 341, 274, 30);
 
+        Font buttonFont = new Font("Sans Serif", Font.PLAIN, 12);
         JButton signupButton = new CustomJButton("Sign Up",
                 0, 0,
                 Color.WHITE, Color.BLACK,

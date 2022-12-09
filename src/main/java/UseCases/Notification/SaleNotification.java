@@ -8,8 +8,11 @@ import java.util.TimerTask;
 
 /** A sale notification use case that tells us if a product is on sale */
 public class SaleNotification implements BaseNotification {
+    /** A scheduler for timing tasks */
     private final Scheduler scheduler;
+    /** The product of the notification */
     private final Product product;
+    /** Whether notification should be shown or not */
     private boolean showNotification;
 
     public SaleNotification(Product product) {
@@ -60,3 +63,4 @@ public class SaleNotification implements BaseNotification {
         return this.showNotification;
     }
 }
+

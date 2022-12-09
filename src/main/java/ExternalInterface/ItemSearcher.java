@@ -2,6 +2,7 @@ package ExternalInterface;
 
 import Entities.Item;
 import Entities.Product;
+import UseCases.Currency.CurrencyUseCase;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,13 +18,8 @@ import java.util.Objects;
 
 public class ItemSearcher {
 
-    private String userCurrency = "CAD";
-    private double currencyChange = 1.36;
-    public ItemSearcher(){
-    }
 
-    public ItemSearcher(String userCurrency){
-        this.userCurrency = userCurrency;
+    public ItemSearcher(){
     }
 
     /**
@@ -61,11 +57,12 @@ public class ItemSearcher {
     }
 
     /**
-     * Returns Arraylist of Item objects based on search results of the specified keyword on AMazon
+     * Returns Arraylist of Item objects based on search results of the specified keyword on Amazon
      *
      * @param keyword     string keyword to search in Amazon
      * @param marketplace specified marketplace (ex: "CA" for Canada) to search in Amazon
      */
+    @SuppressWarnings("unused")
     public ArrayList<Product> searchToList(String keyword, String marketplace) throws IOException, InterruptedException {
         String response = apiSearch(keyword, marketplace);
         response = cleanResponse(response);
@@ -100,7 +97,7 @@ public class ItemSearcher {
         }
 
         for (int i = 0; i < titleList.size(); i++) {
-            Product newItem = new Item(titleList.get(i), Double.parseDouble(priceList.get(i)), Double.parseDouble(priceList.get(i)), urlList.get(i), titleList.get(i), new String[]{keyword}, Integer.parseInt(reviewCountList.get(i).replace(" ", "")), Double.parseDouble(reviewStarList.get(i).replace(" ", "")), imageUrlList.get(i));
+            Product newItem = new Item(titleList.get(i), Double.parseDouble(priceList.get(i)), Double.parseDouble(priceList.get(i)), urlList.get(i), titleList.get(i), Integer.parseInt(reviewCountList.get(i).replace(" ", "")), Double.parseDouble(reviewStarList.get(i).replace(" ", "")), imageUrlList.get(i));
             itemList.add(newItem);
         }
         return itemList;
@@ -136,7 +133,7 @@ public class ItemSearcher {
         ArrayList<Product> itemList = new ArrayList<>();
         ArrayList<String> listUrls = new ArrayList<>();
 
-        try {
+
             Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
             Elements productUrls = doc.select("h2.a-size-mini.a-spacing-none.a-color-base a");
             for (Element item : productUrls) {
@@ -155,9 +152,8 @@ public class ItemSearcher {
                 }
             }
             return itemList;
-        } catch (IOException e) {
-            return new ArrayList<>();
-        }
+
+
     }
 
     /**
@@ -166,7 +162,7 @@ public class ItemSearcher {
      * @param url url of amazon item
      */
     public Product searchItemUrl(String url, boolean searchByKeyword) throws IOException {
-        try {
+
             // This line specifies window type and layout of amazon page based on  Window Version and browser for webscraping
             Document doc = Jsoup.connect(url).timeout(10000).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36").get();
             Element htmlName = doc.select(".a-size-large.product-title-word-break").first();
@@ -177,7 +173,7 @@ public class ItemSearcher {
             Element htmlStarRating = doc.select("div.a-fixed-left-grid-col.aok-align-center.a-col-right").select("div.a-row").select("span.a-size-base.a-nowrap").first();
 
             if ((htmlName == null || price == null || htmlDescription == null || htmlCountRating == null || htmlImgUrl == null || htmlStarRating == null) && searchByKeyword) {
-                return new Item("", 0, 0, "", "", new String[]{}, 0, 0, "");
+                return new Item("", 0, 0, "", "", 0, 0, "");
             }
             double sellingPrice = 0;
             String description = "";
@@ -192,9 +188,6 @@ public class ItemSearcher {
 
                 sellingPrice = Double.parseDouble(sellingPriceStr);
 
-                if (!userCurrency.equals("CAD")){
-                    sellingPrice /= currencyChange;
-                }
             }
             if (htmlCountRating != null) {
                 countRating = Integer.parseInt(htmlCountRating.text().replace(",", "").split(" ")[0]);
@@ -211,9 +204,15 @@ public class ItemSearcher {
             if (htmlDescription != null) {
                 description = htmlDescription.text();
             }
-            return new Item(name, sellingPrice, sellingPrice, url, description, new String[]{}, countRating, starRating, imgUrl);
-        } catch (IOException e) {
-            return new Item("", 0, 0, "", "", new String[]{}, 0, 0, "", "CAD");
-        }
+
+            Product itemResult = new Item(name, sellingPrice, sellingPrice, url, description, countRating, starRating, imgUrl, "CAD");
+
+            CurrencyUseCase currencyUseCase = new CurrencyUseCase();
+            currencyUseCase.updateProductCurrency(itemResult);
+
+
+
+            return itemResult;
+
     }
 }

@@ -3,14 +3,15 @@ package GUI;
 import Entities.Product;
 import Entities.ProductList;
 import Entities.Wishlist;
+import Entities.*;
 import UseCases.Notification.PriceDropNotification;
 import UseCases.Notification.SaleNotification;
+import DataBase.*;
 
 import ExternalInterface.ItemUpdateChecker;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -20,29 +21,68 @@ import java.util.ArrayList;
  * for adding and deleting products from the list.
  */
 public class WishlistPage extends JFrame {
-
+    // the main panel that contains all the page's contents.
     private GradientJPanel mainPanel;
+    // the wishlist being loaded and displayed.
     private ProductList wl;
+    // a temporary item list loaded from the wishlist.
     private ArrayList<Product> itemList;
+    // the list of item panels created from the item list. Is displayed through the scroll pane.
     private JList<ItemPanel> itemPanelJList;
+    // the scroll pane that displays a section of the itemPanelJList.
     private JScrollPane itemScrollPane;
+    // a boolean to keep track of whether the sorting frame is already opened.
     private boolean isSortFrameOpen = false;
+    // the current sorting method selected from the sorting frame.
     String currentSortingMethod;
+    // the current ascending/descending setting for sorting
     boolean isSortedAscending;
+    // database controller for reading and writing the wishlist and list of wishlist
+    private final DataBaseController dbc;
+    // a temporary list of product list to save to the database after being mutated
+    private final ListOfProductLists lwl;
 
-    public WishlistPage(ProductList wishlist) throws IOException {
+
+    /**
+     * constructor.
+     * @param wishlist wishlist to be loaded
+     */
+    public WishlistPage(ProductList wishlist) throws IOException, ParseException, org.json.simple.parser.ParseException {
         super(wishlist.getName());
         wl = wishlist;
+        dbc = new DataBaseController();
+        lwl = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
         initialiseJFrame();
         initialiseMainPanel();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
+    /**
+     * sets current wishlist to be displayed.
+     * @param wl the new wishlist
+     */
     public void setWishlist(ProductList wl){
         this.wl = wl;
     }
+
+    /**
+     * sets isSortFrameOpen. Will not open another sorting frame if a current one is already open.
+     * @param isOpen the new boolean
+     */
     public void setSortFrameOpen(boolean isOpen){
         this.isSortFrameOpen = isOpen;
     }
+
+    /**
+     * saves sorting method to be loaded by the sorting frame
+     * @param s the new sorting method
+     */
     public void setCurrentSortingMethod(String s) {this.currentSortingMethod = s; }
+
+    /**
+     * sets the current ascending/descending setting to be loaded by the sorting frame
+     * @param b the new ascending/descending setting
+     */
     public void setIsAscending(boolean b) {this.isSortedAscending = b; }
     /**
      * @return the main panel for this JFrame
@@ -109,9 +149,14 @@ public class WishlistPage extends JFrame {
         isSortedAscending = true;
 
         generateListOfItems(false);
+
         backButton.addActionListener(e -> {
-            HomePage homePage = null;
-            homePage = new HomePage();
+            HomePage homePage;
+            try {
+                homePage = new HomePage();
+            } catch (org.json.simple.parser.ParseException | ParseException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
             homePage.setContentPane(homePage.getMainPanel());
             homePage.setVisible(true);
             homePage.setLocationRelativeTo(null);
@@ -145,13 +190,28 @@ public class WishlistPage extends JFrame {
         });
         deleteButton.addActionListener(e -> {
             mainPanel.remove(itemScrollPane);
-            if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
-                wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
-                try {
-                    generateListOfItems(false);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+            try {
+                ListOfProductLists updateList = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
+                ProductList updateWishList = new Wishlist(wl.getName());
+                updateList.removeWishlistByName(wl.getName());
+                if (itemList.size() > 0 & itemPanelJList.getSelectedIndex() >= 0){
+                    wl.removeProduct(itemList.get(itemPanelJList.getSelectedIndex()));
+                    try {
+                        generateListOfItems(false);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
+
+                for (Product item: wl.getDisplayedList()){
+                    updateWishList.addProduct(item);
+                }
+                updateList.addWishlist(updateWishList);
+                dbc.saveListOfWishlists(updateList, dbc.getCurrentUser());
+                wl = updateWishList;
+
+            } catch (ParseException | org.json.simple.parser.ParseException | IOException ex) {
+                throw new RuntimeException(ex);
             }
         });
         addButton.addActionListener(e -> {
@@ -174,6 +234,11 @@ public class WishlistPage extends JFrame {
             }
         });
     }
+
+    /**
+     * removes the current JScrollPane, updates the item list with the new wishlist, and adds a new JScrollPane
+     * in place of the old one.
+     */
     public void refreshMainPanel(){
         mainPanel.remove(itemScrollPane);
         try {
@@ -217,5 +282,15 @@ public class WishlistPage extends JFrame {
         mainPanel.add(itemScrollPane);
         mainPanel.revalidate();
         mainPanel.repaint();
+        saveWishlistData();
+    }
+
+    /**
+     * overwrites the wishlist in the list of wishlists and saves it to the database.
+     */
+    private void saveWishlistData() throws IOException {
+        int index = lwl.getIndexByName(wl.getName());
+        lwl.setWishlist(index, wl);
+        dbc.saveListOfWishlists(lwl, dbc.getCurrentUser());
     }
 }

@@ -1,21 +1,26 @@
 package GUI;
 
-import Entities.ListOfWishlists;
-
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.*;
-import Entities.Wishlist;
 
+import Entities.ListOfProductLists;
+import Entities.Wishlist;
+import DataBase.*;
 /**
  * A graphic user interface for the AddWishlistPage with the purpose of giving an opportunity to the user to customize
  * the name of their wishlist.
  */
 public class AddWishlistPage extends JFrame {
+    // main panel
     private final JPanel mainPanel;
-    private ListOfWishlists lwl;
-
+    // list of product lists from database
+    private final ListOfProductLists lwl;
+    // controller for the database
+    private final DataBaseController dbc;
     /**
      * getter method for mainPanel
      * @return mainPanel
@@ -24,12 +29,20 @@ public class AddWishlistPage extends JFrame {
         return mainPanel;
     }
 
-    public AddWishlistPage(ListOfWishlists lwl) {
+    /**
+     * AddWishlistPage constructor.
+     * @throws FileNotFoundException for when the user cancels and returns to the wishlist page.
+     * @throws ParseException when a wishlist is incorrectly parsed when creating a new wishlist.
+     * @throws org.json.simple.parser.ParseException more specific parse error for json structure.
+     */
+    public AddWishlistPage() throws FileNotFoundException, ParseException, org.json.simple.parser.ParseException {
         super("Add Wishlist");
-        this.lwl = lwl;
         setLayout(null);
         setSize(360, 640);
         setResizable(false);
+
+        dbc = new DataBaseController();
+        lwl = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
 
         Color color1 = new Color(194, 234, 186);
         Color color2 = new Color(106, 189, 154);
@@ -82,7 +95,7 @@ public class AddWishlistPage extends JFrame {
         mainPanel.add(middlePanel, BorderLayout.CENTER);
 
         createButton.addActionListener(e -> {
-            String wishlistName = "";
+            String wishlistName;
             try{
                 wishlistName = nameField.getText();
             }
@@ -99,11 +112,18 @@ public class AddWishlistPage extends JFrame {
                     middlePanel.add(errorWishlistExists);
                     mainPanel.repaint();
                 }else{
+                    Wishlist wl = new Wishlist(wishlistName);
+                    lwl.addWishlist(wl);
+                    try {
+                        dbc.saveListOfWishlists(lwl, dbc.getCurrentUser());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     Wishlist newWl = new Wishlist(wishlistName);
-                    WishlistPage wlPage = null;
+                    WishlistPage wlPage;
                     try {
                         wlPage = new WishlistPage(newWl);
-                    } catch (IOException ex) {
+                    } catch (IOException | ParseException | org.json.simple.parser.ParseException ex) {
                         throw new RuntimeException(ex);
                     }
                     wlPage.setContentPane(wlPage.getMainPanel());
@@ -114,8 +134,15 @@ public class AddWishlistPage extends JFrame {
                 }
             }
         });
+
+        // Cancel button logic: navigates back to the list of wishlists.
         cancelButton.addActionListener(e -> {
-            HomePage listOfWL = new HomePage();
+            HomePage listOfWL;
+            try {
+                listOfWL = new HomePage();
+            } catch (ParseException | org.json.simple.parser.ParseException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
             listOfWL.setContentPane(listOfWL.getMainPanel());
             listOfWL.setVisible(true);
             listOfWL.setLocationRelativeTo(null);
