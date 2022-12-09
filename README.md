@@ -23,8 +23,11 @@ ItemPage - from the wishlist page, users can view a specific item by clicking th
 PriceHistoryPage - from the ItemPage, users can view a detailed breakdown of an item's price history as a graph, as well as various comparisons between its current price and other metrics.
 
 Backend features:
-TODO
 
+Database - Users can create their own account which they can log back in for the app which saves their own wishlist data for future use. There can be multiple users per computer and each have their own associated wishlist data.
+
+Notifications - Users can be notified with a red border around their item if the desired price they want their item to be is higher than the current sale price. 
+They will also be notified if an item is on sale (cheaper than the time they added the item). The user must go back to the item page and refresh to see the changes.
 
 ## Planned features for future development
 support for other online retailers
