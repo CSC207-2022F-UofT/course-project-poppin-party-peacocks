@@ -37,15 +37,19 @@ support for other online retailers
 1. There is a .jar file in the src folder. To run the project, download the .jar file and run it with Java.
 2. Clone the project on Intellij IDEA and run main.java.
 
-### Sample Use Case (Making a new account, creating a new wishlist, and searching for an Amazon product)
+### Sample Use Case (Making a new account, creating a new wishlist, searching for an Amazon product, adding it to the wishlist, viewing product details)
 1. Launch the application
 2. (Currently on Welcome Page): Click "Sign Up" at the bottom right of the screen.
 3. Enter the required information and click large "Sign Up" button.
-4. (Currently on the List Of Wishlists Page): Click on the "Add Wishlist" button at the bottom of the screen.
-5. A window will open, prompting the user to enter a name for the new wishlist.
-6. (Currently on a Wishlist Page): Click the "Add Item" button at the bottom right of the screen.
-7. (Currently on the Item Search Page): At the text bar on the top of the page, enter a desired keyword and click the "Go" Button (example: "mechanical keyboard")
-8. Wait up to 70 seconds for the search results to appear on screen. 
+4. (Currently on Welcome page): Click "Log in" at the bottom left of the screen and log in with your newly created account
+5. (Currently on Home Page): Click on the "+" button at the bottom of the screen to add a new wishlist.
+6. (Currently on Add Wishlist Page): A window will open, prompting the user to enter a name for the new wishlist. Click the add button and the new wishlist will be opened
+7. (Currently on a Wishlist Page): Click the "+" button at the bottom right of the screen to search for a new item.
+8. (Currently on the Item Search Page): In the text bar on the top of the page, enter a desired keyword and click the "Go" Button (example: "mechanical keyboard"), or paste an amazon URL of a specific item you want to add to the wishlist.
+9. If searching via a keyword, wait up to 70 seconds for the search results to appear on screen. If searching via URL, the search result will appear on screen after a few seconds.
+10. Select the item you want to add by clicking on it in the displayed list and click the "Add Selected" button at the bottom of the window.
+11. (Currently on the Wishlist Page): Click on the item in the list and click on the "->" button at the bottom of the screen to view the item's details
+12. (Currently on the Item Page): Here, the user can view the details of the item by scrolling the green panel. The user can also click on the details button at the bottom of the screen to view price history details.
 
 ### Testing Coverage 
 Link to drive: https://drive.google.com/drive/folders/1vBOrXq9PS0V2Lgpx0BiFhdVVPZ0tIobO?usp=sharing
