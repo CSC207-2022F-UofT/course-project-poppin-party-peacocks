@@ -34,8 +34,8 @@ support for other online retailers
 
 ### How to run the project (Methods)
 
-1. There is a .jar file in the src folder. To run the project, download the .jar file and run it with Java.
-2. Clone the project on Intellij IDEA and run main.java.
+1. Clone the project on Intellij IDEA and run mainApp.java.
+2. There is a .jar file in the src folder. To run the project, download the .jar file and run it with Java. (NOTE: the jar is currently broken and will not be fixed before the presentation)
 
 ### Sample Use Case (Making a new account, creating a new wishlist, searching for an Amazon product, adding it to the wishlist, viewing product details)
 1. Launch the application
