@@ -8,7 +8,9 @@ import ExternalInterface.PriceHistoryInterface;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * This PriceHistoryPage is a JFrame that shows the price history chart and data of a product.
@@ -228,10 +230,15 @@ public class PriceHistoryPage extends JFrame {
 
         // button logic for back logic -> navigates to itemPage
         backButton.addActionListener((e) -> {
-            ItemPage itemPage = new ItemPage(this.item, this.wl);
+            ItemPage itemPage;
+            try {
+                itemPage = new ItemPage(this.item, this.wl);
+            } catch (FileNotFoundException | ParseException | org.json.simple.parser.ParseException ex) {
+                throw new RuntimeException(ex);
+            }
             itemPage.setContentPane(itemPage.getMainPanel());
             itemPage.setVisible(true);
-            itemPage.setLocationRelativeTo(null);
+            itemPage.setLocationRelativeTo(this);
             itemPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
         });

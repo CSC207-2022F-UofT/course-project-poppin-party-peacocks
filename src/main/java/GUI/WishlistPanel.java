@@ -26,7 +26,7 @@ public class WishlistPanel extends JPanel {
         }else{
             this.wishlistName = wishlistName;
         }
-        this.setSize(300,100);
+        this.setSize(290,100);
         borderColor = Color.WHITE;
         panelColor = new Color(236, 236, 236);
     }

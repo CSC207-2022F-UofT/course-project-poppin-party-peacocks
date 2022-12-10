@@ -29,7 +29,6 @@ public class SignupPanel extends JPanel {
         logo.setBounds(85, 22, 180, 180);
         this.add(logo);
 
-        // signup Panel
         JLabel createUsernameLabel = new JLabel("Create Username");
         createUsernameLabel.setBounds(42, 266, 100, 15);
 
@@ -57,14 +56,10 @@ public class SignupPanel extends JPanel {
                 JOptionPane.showMessageDialog(signupButton, message.getMessage());
             }
         });
-
         this.add(createUsernameLabel);
         this.add(createUsernameField);
         this.add(passwordLabel);
         this.add(createPasswordField);
         this.add(signupButton);
-
-
     }
-
 }

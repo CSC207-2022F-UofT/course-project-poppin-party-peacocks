@@ -41,10 +41,6 @@ public class HomePage extends JFrame {
         currencyUseCase.toggleCurrency();
         currencyUseCase.toggleCurrency();
         DataBaseController dbc = new DataBaseController();
-
-
-
-
         listOfWishlists = dbc.getListOfWishlists(dbc.getCurrentUser().getName());
         userCurrency = dbc.getCurrentUser().getCurrency();
         initialiseJFrame();
@@ -88,7 +84,6 @@ public class HomePage extends JFrame {
         mainPanel.add(backButton);
 
         // currency indicator
-
         JButton currencyIcon = new JButton(new ImageIcon("src/main/java/Assets/cadIcon.png"));
         if (!userCurrency.equals("CAD")) {
             currencyIcon = new JButton(new ImageIcon("src/main/java/Assets/usdIcon.png"));
@@ -101,24 +96,19 @@ public class HomePage extends JFrame {
 
         mainPanel.add(topPanel);
 
-        // welcome message
         JLabel welcomeLabel = new CustomJLabel("Welcome!", Color.white, headerFont);
         welcomeLabel.setBounds(137, 63, 118, 29);
         mainPanel.add(welcomeLabel);
 
-        // logo
         JLabel logo = new JLabel();
         logo.setIcon(new ImageIcon("src/main/java/Assets/smallerLogo.png"));
         logo.setBounds(130,60,180,180);
         mainPanel.add(logo);
 
-
-        // toggle currency button
         JButton currencyButton = new ToggleCurrencyButton();
         currencyButton.setBounds(20, 515, 60 ,60);
         mainPanel.add(currencyButton);
 
-        // buttons
         DeleteButton deleteButton = new DeleteButton();
         deleteButton.setBounds(102, 515, 60 ,60);
         mainPanel.add(deleteButton);
@@ -134,7 +124,6 @@ public class HomePage extends JFrame {
         mainPanel.setComponentZOrder(titleLabel, 1);
         mainPanel.setComponentZOrder(topPanel, 2);
 
-
         backButton.addActionListener(e -> {
             WelcomePage welcomePage;
             UserRegisterStatus presenter = new UserRegisterResponseFormatter();
@@ -146,13 +135,10 @@ public class HomePage extends JFrame {
             welcomePage = new WelcomePage(userRegisterController);
             welcomePage.setContentPane(welcomePage.getMainPanel());
             welcomePage.setVisible(true);
-            welcomePage.setLocationRelativeTo(null);
+            welcomePage.setLocationRelativeTo(this);
             welcomePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
         });
-
-
-
         currencyButton.addActionListener(e -> {
             mainPanel.remove(topPanel);
 
@@ -169,7 +155,6 @@ public class HomePage extends JFrame {
             newTopPanel.add(titleLabel);
 
             // currency indicator
-
             JButton newCurrencyIcon = new JButton(new ImageIcon("src/main/java/Assets/cadIcon.png"));
             if (!userCurrency.equals("CAD")) {
                 newCurrencyIcon = new JButton(new ImageIcon("src/main/java/Assets/usdIcon.png"));
@@ -184,7 +169,6 @@ public class HomePage extends JFrame {
             mainPanel.revalidate();
             mainPanel.repaint();
             CurrencyUseCase currencyUseCase = new CurrencyUseCase();
-
             try {
                 currencyUseCase.toggleCurrency();
                 dbc = new DataBaseController();
@@ -198,8 +182,6 @@ public class HomePage extends JFrame {
             mainPanel.remove(wishlistScrollPane);
             generateListOfWishlists();
         });
-
-
         deleteButton.addActionListener(e -> {
             mainPanel.remove(wishlistScrollPane);
             if (listOfWishlists.getListOfWishlist().size() > 0 & wishlistPanelJList.getSelectedIndex() >= 0){
@@ -214,7 +196,6 @@ public class HomePage extends JFrame {
                 generateListOfWishlists();
             }
         });
-
         addButton.addActionListener(e -> {
             AddWishlistPage addPage;
             try {
@@ -224,11 +205,10 @@ public class HomePage extends JFrame {
             }
             addPage.setContentPane(addPage.getMainPanel());
             addPage.setVisible(true);
-            addPage.setLocationRelativeTo(null);
+            addPage.setLocationRelativeTo(this);
             addPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
         });
-
         viewWishlistButton.addActionListener(e -> {
             if (listOfWishlists.getListOfWishlist().size() > 0 & wishlistPanelJList.getSelectedIndex() >= 0){
                 ProductList selectedWishlist = listOfWishlists.getListOfWishlist().get(wishlistPanelJList.getSelectedIndex());
@@ -240,13 +220,12 @@ public class HomePage extends JFrame {
                 }
                 wishlistPage.setContentPane(wishlistPage.getMainPanel());
                 wishlistPage.setVisible(true);
-                wishlistPage.setLocationRelativeTo(null);
+                wishlistPage.setLocationRelativeTo(this);
                 wishlistPage.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 dispose();
             }
         });
     }
-
     /**
      * creates a JScrollPane from a JList from a list from the wishlist
      * Configures the JScrollPane and adds it to the main panel
@@ -262,11 +241,11 @@ public class HomePage extends JFrame {
         wishlistPanelJList= new JList<>(tempPanelList);
         wishlistPanelJList.setCellRenderer(new WishlistPanelRenderer());
         wishlistPanelJList.setFixedCellHeight(100);
-        wishlistPanelJList.setFixedCellWidth(310);
+        wishlistPanelJList.setFixedCellWidth(250);
         wishlistPanelJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         wishlistPanelJList.setBackground(new Color(194, 234, 186));
         wishlistScrollPane = new JScrollPane(wishlistPanelJList);
-        wishlistScrollPane.setBounds(25,210,310,300);
+        wishlistScrollPane.setBounds(25,210,310,290);
         wishlistScrollPane.setHorizontalScrollBar(null);
         wishlistScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
         mainPanel.add(wishlistScrollPane);

@@ -66,4 +66,26 @@ public class Wishlist implements ProductList{
         displayedList.remove(product);
         return true;
     }
+
+    /**
+     * replaces a product in the wishlist with a new product that has the same name. Used for saving to DataBase.
+     * @param productName the name of the product to replace
+     * @param newProduct the new product to replace with
+     */
+    public void setProduct(String productName, Product newProduct){
+        int productListIndex = 0;
+        int displayedListIndex = 0;
+        for (Product p : productList) {
+            if (Objects.equals(p.getProductName(), productName)) {
+                productListIndex = productList.indexOf(p);
+            }
+        }
+        for (Product p : displayedList) {
+            if (Objects.equals(p.getProductName(), productName)) {
+                displayedListIndex = displayedList.indexOf(p);
+            }
+        }
+        productList.set(productListIndex, newProduct);
+        displayedList.set(displayedListIndex, newProduct);
+    }
 }
